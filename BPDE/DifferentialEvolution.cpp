@@ -1,7 +1,100 @@
 #include "DifferentialEvolution.h" 
 #include "stdlib.h"
+
+
+ int validate(Solution *sol, InputFunction *function){
+	if(function->getNEQConstraintNumberLW()>0){
+		double list[function->getNEQConstraintNumberLW()];
+		function->constraintsValueNEQLW(sol->vet,sol->vet+function->getDimensionUP(),list);
+		for(int i=0;i<function->getNEQConstraintNumberLW();i++){
+		      if(list[i]>10e-5){
+			  return 0;
+		      }
+		}
+        }
+        
+        if(function->getEQConstraintNumberLW()>0){
+		double list[function->getEQConstraintNumberLW()];
+		function->constraintsValueEQLW(sol->vet,sol->vet+function->getDimensionUP(),list);
+		for(int i=0;i<function->getEQConstraintNumberLW();i++){
+		      if(list[i]>10e-5){
+			  return 0;
+		      }
+		}
+        }
+        
+        
+        if(function->getNEQConstraintNumberUP()>0){
+		double list[function->getNEQConstraintNumberUP()];
+		function->constraintsValueNEQUP(sol->vet,sol->vet+function->getDimensionUP(),list);
+		for(int i=0;i<function->getNEQConstraintNumberUP();i++){
+		      if(list[i]>10e-5){
+			  return 0;
+		      }
+		}
+        }
+        
+        
+        if(function->getEQConstraintNumberUP()>0){
+		double list[function->getEQConstraintNumberUP()];
+		function->constraintsValueEQUP(sol->vet,sol->vet+function->getDimensionUP(),list);
+		for(int i=0;i<function->getEQConstraintNumberUP();i++){
+		      if(list[i]>10e-5){
+			  return 0;
+		      }
+		}
+        }
+
+        if(function->getKKTConstraintNumber()>0){
+		double list[function->getKKTConstraintNumber()];
+		function->constraintsValueKKT(sol->vet,sol->vet+function->getDimensionUP(),sol->vet+function->getDimensionUP()+function->getDimensionLW(),sol->vet+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),list);
+		for(int i=0;i<function->getKKTConstraintNumber();i++){
+		      if(list[i]<-10e-8 || list[i]>10e-8){
+			  return 0;
+		      }
+		}
+        }
+
+        if(function->getNEQConstraintNumberLW()>0){
+		double list[function->getNEQConstraintNumberLW()];
+		function->constraintsSlackness(sol->vet,sol->vet+function->getDimensionUP(),sol->vet+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),list);
+		for(int i=0;i<function->getNEQConstraintNumberLW();i++){
+		      if(list[i]<-10e-8 || list[i]>10e-8){
+			  return 0;
+		      }
+		}
+        }
+
+	return 1;
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       Solution **DifferentialEvolution::Population;
       Solution **DifferentialEvolution::nextPopulation;
+      Solution *DifferentialEvolution::best=NULL;
       int DifferentialEvolution::sizePopulation;
 
 
@@ -34,6 +127,13 @@
 	    for(int j=0;j<nextPopulation[i]->sizeVet;j++){    
 	        nextPopulation[i]->vet[j]=Population[r1]->vet[j] + F*(Population[r2]->vet[j] - Population[r3]->vet[j]);
 	    }
+	
+	/*	int rad=rand()%100;
+	    if(rad<10){
+			int rand2=rand()%4;
+			nextPopulation[i]->vet[2+rand2]=0;
+		}
+*/
 	}
 	
 	return 1;
@@ -54,15 +154,20 @@
 	return 1;
       }
       
+#include <iostream>
+using namespace std;
       int DifferentialEvolution::selectPopulation(InputFunction *function){
 	Solution *swap;
 	
 	for(int i=0;i<sizePopulation;i++){
-	      if(1){//avaliacao(Population[i]) > avaliacao(nextPopulation[i])){    //determinar avaliação
+	      int val=validate(Population[i],function);
+	      int valNext=validate(nextPopulation[i],function);
+	      if((!val && valNext) || ((val && valNext || !val) && Population[i]->calcScore(function) > nextPopulation[i]->calcScore(function))){//avaliacao(Population[i]) > avaliacao(nextPopulation[i])){    //determinar avaliação
 		swap=Population[i];
 		Population[i]=nextPopulation[i];
 		nextPopulation[i]=swap;
 	      }
+	      if(valNext || val && ( best==NULL || Population[i]->calcScore(function) < best->calcScore(function))) best=Population[i];
 	}
                
 	return 1;
@@ -75,3 +180,9 @@
 	
 	return 1;
       }
+
+
+
+
+
+    

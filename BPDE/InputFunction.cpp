@@ -66,16 +66,13 @@
        return 1;
     }
     
-#include <iostream>
-using namespace std;
+
     int InputFunction::constraintsSlackness(double x[], double y[], double  dualNeq[], double constraintValuesListReturn[]){
        if(!constraintsValueNEQLW(x,y,constraintValuesListReturn)) return 0;
 
 
        for(int i=0;i<countNeqConstraintLW;i++){
           constraintValuesListReturn[i]*=dualNeq[i];
-                    //cout<<constraintValuesListReturn[i]<<"\n";
-
        }
        
        return 1;
