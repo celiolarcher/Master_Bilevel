@@ -1,7 +1,6 @@
 #include "Solution.h"
-
-
 #include <stdlib.h>
+
       double fRand(double fMin, double fMax){
           double f = (double)rand() / RAND_MAX;
           return fMin + f * (fMax - fMin);
@@ -20,7 +19,6 @@
       }
       
       int Solution::initRandom(double bounds[]){
-        
           for(int i=0;i<sizeVec;i++){
 	  vectorCharacters[i]=fRand(bounds[2*i],bounds[2*i+1]);
           }

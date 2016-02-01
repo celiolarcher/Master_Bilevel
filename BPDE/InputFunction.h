@@ -15,8 +15,8 @@ class InputFunction{
 	 int countEqConstraintUP;
 	 int countNeqConstraintUP;
 	 int countEqConstraintLW;
-	 int countNeqConstraintLW;	
-    public:  const double *bounds;
+	 int countNeqConstraintLW;
+    public: const double *bounds;
     
     public: InputFunction(char *funcName);
     public: double getUPLevelFunction(double x[], double y[]);

@@ -66,6 +66,7 @@
        return 1;
     }
     
+
     int InputFunction::constraintsSlackness(double x[], double y[], double  dualNeq[], double constraintValuesListReturn[]){
        if(!constraintsValueNEQLW(x,y,constraintValuesListReturn)) return 0;
 

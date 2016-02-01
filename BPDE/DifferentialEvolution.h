@@ -4,8 +4,9 @@
 #include "Solution.h"
 
 class DifferentialEvolution{
-      public: static Solution **Population;
-      public: static Solution **nextPopulation;
+      private: static Solution **Population;
+      private: static Solution **nextPopulation;
+      public: static Solution *best;
       private: static int sizePopulation;
 
       public: static int initPopulation(InputFunction *function, int sizePop); 
