@@ -117,7 +117,7 @@ int main(){
   */
   
       DifferentialEvolution::initPopulation(function, 50);
-      for(int i=0;i<1000000;i++){      
+      for(int i=0;i<5;i++){      
 	DifferentialEvolution::mutatePopulation(0.5);
 	DifferentialEvolution::recombinePopulation(0.6);
 	DifferentialEvolution::selectPopulation(function);

@@ -9,28 +9,31 @@
 
 
       double Solution::calcScore(InputFunction *function){
-          return function->getUPLevelFunction(vet,vet+function->getDimensionUP());
+          return function->getUPLevelFunction(vectorCharacters,vectorCharacters+function->getDimensionUP());
       }
 
-      int Solution::initValue(double initVet[], InputFunction *function){
-          for(int i=0;i<function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW();i++){
-	  vet[i]=initVet[i];
+      int Solution::initValue(double initVec[]){
+          for(int i=0;i<sizeVec;i++){
+	  vectorCharacters[i]=initVec[i];
           }
           return 1;
       }
       
-      int Solution::initRandom(InputFunction *function){
+      int Solution::initRandom(double bounds[]){
         
-          for(int i=0;i<function->getDimensionUP()+function->getDimensionLW();i++){
-	  vet[i]=fRand(0,20);
-          }
-
-          
-          for(int i=function->getDimensionUP()+function->getDimensionLW();i<function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW();i++){
-	  vet[i]=fRand(0,100);
+          for(int i=0;i<sizeVec;i++){
+	  vectorCharacters[i]=fRand(bounds[2*i],bounds[2*i+1]);
           }
           
           return 1;
       }
       
       
+      std::ostream& operator<<(std::ostream &out, Solution &sol){
+          
+          for(int i=0;i<sol.sizeVec;i++) out<<sol.vectorCharacters[i]<<"\t";
+          
+          out<<"\n";
+          
+          return out;
+      }

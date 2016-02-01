@@ -9,8 +9,20 @@
 	Population=new Solution*[sizePop];
 	nextPopulation=new Solution*[sizePop];
 	sizePopulation=sizePop;
+	int sizeVector=function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW();
+      
+	double bounds[2*sizeVector];
+	for(int i=0;i<function->getDimensionUP()+function->getDimensionLW();i++){
+	    bounds[2*i]=function->bounds[2*i];
+	    bounds[2*i+1]=function->bounds[2*i+1];
+	}
 	
-	for(int i=0;i<sizePopulation; Population[i]=new Solution(function), nextPopulation[i]=new Solution(function), Population[i++]->initRandom(function));  //alterar initRandom com sizeVet e bounds
+	for(int i=function->getDimensionUP()+function->getDimensionLW();i<sizeVector;i++){
+	    bounds[2*i]=0;
+	    bounds[2*i+1]=20;
+	}
+	
+	for(int i=0;i<sizePopulation; Population[i]=new Solution(sizeVector), nextPopulation[i]=new Solution(sizeVector), Population[i++]->initRandom(bounds)); 
         
 	return 1;
       }
@@ -31,8 +43,8 @@
 	    if(r3>=r2) r3++;
 	     
 	    
-	    for(int j=0;j<nextPopulation[i]->sizeVet;j++){    
-	        nextPopulation[i]->vet[j]=Population[r1]->vet[j] + F*(Population[r2]->vet[j] - Population[r3]->vet[j]);
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j] + F*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
 	    }
 	}
 	
@@ -41,13 +53,13 @@
       
       int DifferentialEvolution::recombinePopulation(double CR){
 	for(int i=0;i<sizePopulation;i++){
-	    int jRand=rand() % nextPopulation[i]->sizeVet;
+	    int jRand=rand() % nextPopulation[i]->sizeVec;
 	    
-	    for(int j=0;j<nextPopulation[i]->sizeVet;j++){
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){
 	        int choice=rand() % 100;
 	        
 	        if(choice > CR && j != jRand)
-		nextPopulation[i]->vet[j]=Population[i]->vet[j];
+		nextPopulation[i]->vectorCharacters[j]=Population[i]->vectorCharacters[j];
 	    }
 	}
                
