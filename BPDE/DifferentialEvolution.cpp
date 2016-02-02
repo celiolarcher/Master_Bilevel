@@ -1,95 +1,6 @@
 #include "DifferentialEvolution.h" 
 #include "stdlib.h"
-
-
- int validate(Solution *sol, InputFunction *function){
-	if(function->getNEQConstraintNumberLW()>0){
-		double list[function->getNEQConstraintNumberLW()];
-		function->constraintsValueNEQLW(sol->vet,sol->vet+function->getDimensionUP(),list);
-		for(int i=0;i<function->getNEQConstraintNumberLW();i++){
-		      if(list[i]>10e-5){
-			  return 0;
-		      }
-		}
-        }
-        
-        if(function->getEQConstraintNumberLW()>0){
-		double list[function->getEQConstraintNumberLW()];
-		function->constraintsValueEQLW(sol->vet,sol->vet+function->getDimensionUP(),list);
-		for(int i=0;i<function->getEQConstraintNumberLW();i++){
-		      if(list[i]>10e-5){
-			  return 0;
-		      }
-		}
-        }
-        
-        
-        if(function->getNEQConstraintNumberUP()>0){
-		double list[function->getNEQConstraintNumberUP()];
-		function->constraintsValueNEQUP(sol->vet,sol->vet+function->getDimensionUP(),list);
-		for(int i=0;i<function->getNEQConstraintNumberUP();i++){
-		      if(list[i]>10e-5){
-			  return 0;
-		      }
-		}
-        }
-        
-        
-        if(function->getEQConstraintNumberUP()>0){
-		double list[function->getEQConstraintNumberUP()];
-		function->constraintsValueEQUP(sol->vet,sol->vet+function->getDimensionUP(),list);
-		for(int i=0;i<function->getEQConstraintNumberUP();i++){
-		      if(list[i]>10e-5){
-			  return 0;
-		      }
-		}
-        }
-
-        if(function->getKKTConstraintNumber()>0){
-		double list[function->getKKTConstraintNumber()];
-		function->constraintsValueKKT(sol->vet,sol->vet+function->getDimensionUP(),sol->vet+function->getDimensionUP()+function->getDimensionLW(),sol->vet+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),list);
-		for(int i=0;i<function->getKKTConstraintNumber();i++){
-		      if(list[i]<-10e-8 || list[i]>10e-8){
-			  return 0;
-		      }
-		}
-        }
-
-        if(function->getNEQConstraintNumberLW()>0){
-		double list[function->getNEQConstraintNumberLW()];
-		function->constraintsSlackness(sol->vet,sol->vet+function->getDimensionUP(),sol->vet+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),list);
-		for(int i=0;i<function->getNEQConstraintNumberLW();i++){
-		      if(list[i]<-10e-8 || list[i]>10e-8){
-			  return 0;
-		      }
-		}
-        }
-
-	return 1;
-     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#include "OptLangrageMultp.h"
 
 
       Solution **DifferentialEvolution::Population;
@@ -103,7 +14,8 @@
 	nextPopulation=new Solution*[sizePop];
 	sizePopulation=sizePop;
 	int sizeVector=function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW();
-      
+	int sizeConstraints=function->getEQConstraintNumberUP()+function->getNEQConstraintNumberUP()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW()+function->getKKTConstraintNumber()+function->getNEQConstraintNumberLW();
+	
 	double bounds[2*sizeVector];
 	for(int i=0;i<function->getDimensionUP()+function->getDimensionLW();i++){
 	    bounds[2*i]=function->bounds[2*i];
@@ -115,8 +27,14 @@
 	    bounds[2*i+1]=20;
 	}
 	
-	for(int i=0;i<sizePopulation; Population[i]=new Solution(sizeVector), nextPopulation[i]=new Solution(sizeVector), Population[i++]->initRandom(bounds)); 
+	for(int i=0;i<sizePopulation; Population[i]=new Solution(sizeVector,sizeConstraints), nextPopulation[i]=new Solution(sizeVector,sizeConstraints), Population[i++]->initRandom(bounds)); 
         
+	for(int i=0;i<sizePopulation;i++){
+	    validateSolution(Population[i],function);
+	    if(Population[i]->feasible && (best==NULL || compareSolutions(Population[i],best,function)))
+	        best=Population[i];
+	}
+	
 	return 1;
       }
       
@@ -171,15 +89,18 @@ using namespace std;
       int DifferentialEvolution::selectPopulation(InputFunction *function){
 	Solution *swap;
 	
+	updateAPM(Population,sizePopulation,function);
+	
 	for(int i=0;i<sizePopulation;i++){
-	      int val=validate(Population[i],function);
-	      int valNext=validate(nextPopulation[i],function);
-	      if((!val && valNext) || ((val && valNext || !val) && Population[i]->calcScore(function) > nextPopulation[i]->calcScore(function))){//avaliacao(Population[i]) > avaliacao(nextPopulation[i])){    //determinar avaliação
+	      validateSolution(nextPopulation[i],function);
+	      if(!compareAPM(Population[i],nextPopulation[i],function)){
 		swap=Population[i];
 		Population[i]=nextPopulation[i];
 		nextPopulation[i]=swap;
+			
+		if(Population[i]->feasible && (best==NULL || compareSolutions(Population[i],best,function)))
+		      best=Population[i];
 	      }
-	      if(valNext || val && ( best==NULL || Population[i]->calcScore(function) < best->calcScore(function))) best=Population[i];
 	}
                
 	return 1;
@@ -192,9 +113,7 @@ using namespace std;
 	
 	return 1;
       }
+      
 
-
-
-
-
+      
     
