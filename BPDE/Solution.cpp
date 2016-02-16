@@ -53,7 +53,7 @@ vectorCharacters[5]=0;
       
       std::ostream& operator<<(std::ostream &out, Solution &sol){
 
-	  out<<"\n Solution Score:"<<sol.score<<"\n";
+	  out<<"\n Solution Score:"<<sol.score<<"   Level UP:"<<sol.upLevelFunction<<"\n";
           
           for(int i=0;i<sol.sizeVec;i++) out<<sol.vectorCharacters[i]<<"\t";
           

@@ -11,18 +11,15 @@ int main(){
       SolutionDecoder *decoder=new LagrangeMultpAPMSmooth();
       decoder->initInstance(function);
    
-      DifferentialEvolution::initPopulation(decoder,100);
-      for(int i=0;i<1;i++){      
-	DifferentialEvolution::mutatePopulation(0.5);
-	DifferentialEvolution::recombinePopulation(0.6);
+      DifferentialEvolution::initPopulation(decoder,15);
+      for(int i=0;i<200000;i++){      
+	DifferentialEvolution::mutatePopulation(0.8);
+	DifferentialEvolution::recombinePopulation(0.8);
 	DifferentialEvolution::selectPopulation();
       }
 	
       if (DifferentialEvolution::best!=NULL){ 
-	cout<<DifferentialEvolution::best->calcScore(function)<<"\n";
-	for(int i=0;i<DifferentialEvolution::best->sizeVec;i++){
-		cout<<DifferentialEvolution::best->vectorCharacters[i]<<"\t";
-	}
+		cout<<*DifferentialEvolution::best;
       }else{
           cout<<"no feasible solution\n";
       }

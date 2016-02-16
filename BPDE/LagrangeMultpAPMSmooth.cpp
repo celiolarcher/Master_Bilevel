@@ -1,7 +1,7 @@
 #include "LagrangeMultpAPMSmooth.h"
-#define TOL_EQ_CONST 10e-8
-#define TOL_NEQ_CONST 10e-8
-#define EPISILON 10e-8
+#define TOL_EQ_CONST 10e-10
+#define TOL_NEQ_CONST 10e-10
+#define EPISILON 0
 
 
 
@@ -25,7 +25,7 @@
 	
 	for(int i=function->getDimensionUP()+function->getDimensionLW();i<solutionSize;i++){
 	    boundAttributes[2*i]=0;
-	    boundAttributes[2*i+1]=20;
+	    boundAttributes[2*i+1]=10e2;
 	}	
 
 
@@ -105,12 +105,14 @@
   	  return 1;
     }
 
+#include <iostream>
+using namespace std;
     int LagrangeMultpAPMSmooth::updatePenalty(Solution **population, Solution **newPopulation, int sizePop, int sizeNewPop){
           levelUPMean=0;
           
           double violationMean[population[0]->countConstraint];
           if(!kWeight)
-	kWeight=new double[population[0]->countConstraint];
+		kWeight=new double[population[0]->countConstraint];
           
           for(int j=0;j<population[0]->countConstraint;violationMean[j]=0, j++);
 	  
@@ -154,9 +156,10 @@
           
           for(int j=0;j<population[0]->countConstraint;j++){
 	  	 kWeight[j]=(violationMean[j]*fabs(levelUPMean))/violationSumSquare;
+	//	cout<<kWeight[j]<<"\t";
           }
-          
-          
+          //cout<<endl;
+     //     cout<<levelUPMean<<"\n";
           return 1;
      }
 
@@ -164,7 +167,7 @@
          if(sol1->feasible) sol1->score=sol1->upLevelFunction;
           else{
 	    sol1->score=0;
-	    for(int j=0;j<sol1->countConstraint-function->getNEQConstraintNumberLW();j++){
+	    for(int j=0;j<sol1->countConstraint;j++){
 	          if(j < function->getNEQConstraintNumberUP()){
 			  if(sol1->constraintValues[j]>0)
 			      sol1->score+=kWeight[j]*sol1->constraintValues[j];
@@ -173,15 +176,15 @@
 	          }
 	    }
 
-	  //  if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
-	  //  else sol1->score+=levelUPMean;
+	    if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
+	    else sol1->score+=levelUPMean;
           }
           
       
           if(sol2->feasible) sol2->score=sol2->upLevelFunction;
           else{
 	    sol2->score=0;
-	    for(int j=0;j<sol2->countConstraint-function->getNEQConstraintNumberLW();j++){
+	    for(int j=0;j<sol2->countConstraint;j++){
 	          if(j < function->getNEQConstraintNumberUP()){
 			  if(sol2->constraintValues[j]>0)
 			      sol2->score+=kWeight[j]*sol2->constraintValues[j];
@@ -189,8 +192,8 @@
 		      sol2->score+=kWeight[j]*fabs(sol2->constraintValues[j]);
 	          }
 	    }
-	 //   if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
-	 //   else sol2->score+=levelUPMean;
+	    if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
+	    else sol2->score+=levelUPMean;
           }
 	
           if(sol1->score < sol2->score) return 1;
