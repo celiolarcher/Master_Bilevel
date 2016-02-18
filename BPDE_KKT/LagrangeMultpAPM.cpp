@@ -9,7 +9,7 @@
 	this->function=function;
 
 	solutionSize=function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW();
-	constraintsNumber=function->getEQConstraintNumberUP()+function->getNEQConstraintNumberUP()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW()+function->getKKTConstraintNumber()+function->getNEQConstraintNumberLW();
+	constraintsNumber=function->getEQConstraintNumberUP()+function->getNEQConstraintNumberUP()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW()+function->getKKTConstraintNumber();//+function->getNEQConstraintNumberLW();
 
 	boundAttributes=new double[2*solutionSize];
 	for(int i=0;i<function->getDimensionUP()+function->getDimensionLW();i++){
@@ -36,6 +36,8 @@
           
           int offset=0;
 
+          double lambda[function->getNEQConstraintNumberLW()];
+          
           if(function->getNEQConstraintNumberUP()>0){
 		  function->constraintsValueNEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getNEQConstraintNumberUP();i++){
@@ -51,7 +53,12 @@
 		  function->constraintsValueNEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){
 		        if(sol->constraintValues[i]>TOL_NEQ_CONST){
-		          sol->feasible=0;
+			sol->feasible=0;
+		        }
+		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
+			lambda[i-offset]=sol->vectorCharacters[function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+(i-offset)];
+		        }else{
+			lambda[i-offset]=0;
 		        }
 		  }
           }
@@ -82,7 +89,7 @@
           offset+=function->getEQConstraintNumberLW();
           
           if(function->getKKTConstraintNumber()>0){
-		  function->constraintsValueKKT(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),sol->constraintValues+offset);
+		  function->constraintsValueKKT(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW(),lambda,sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getKKTConstraintNumber();i++){
 		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
 		          sol->feasible=0;
@@ -91,7 +98,7 @@
           }
           
           offset+=function->getKKTConstraintNumber();
-
+/*
           if(function->getNEQConstraintNumberLW()>0){  //usar função q considera restrições ja calculadas
 		  function->constraintsSlackness(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){
@@ -100,7 +107,7 @@
 		        }
 		  }
           }
-
+*/
         
 	return 1;
     }
@@ -172,8 +179,8 @@
 		      sol1->score+=kWeight[j]*fabs(sol1->constraintValues[j]);
 	          }
 	    }
-	  //  if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
-	  //  else sol1->score+=levelUPMean;
+	    if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
+	    else sol1->score+=levelUPMean;
           }
           
       
@@ -188,8 +195,8 @@
 		      sol2->score+=kWeight[j]*fabs(sol2->constraintValues[j]);
 	          }
 	    }
-	 //   if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
-	   // else sol2->score+=levelUPMean;
+	    if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
+	    else sol2->score+=levelUPMean;
           }
 	
           if(sol1->score < sol2->score) return 1;

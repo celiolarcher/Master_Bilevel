@@ -42,6 +42,8 @@
           
           int offset=0;
 
+          double lambda[function->getNEQConstraintNumberLW()];
+          
           if(function->getNEQConstraintNumberUP()>0){
 		  function->constraintsValueNEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getNEQConstraintNumberUP();i++){
@@ -52,7 +54,8 @@
           }
           
           offset+=function->getNEQConstraintNumberUP();
-          
+
+          /*
           if(function->getNEQConstraintNumberLW()>0){
 		  function->constraintsValueNEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){	
@@ -60,6 +63,26 @@
 			int multpLam=i-function->getNEQConstraintNumberUP();	
 		
 		  	sol->constraintValues[i]=(getLambda(sol,multpLam,function)-sol->constraintValues[i]) - sqrt((getLambda(sol,multpLam,function)+sol->constraintValues[i])*(getLambda(sol,multpLam,function)+sol->constraintValues[i])+4*EPISILON*EPISILON);
+
+		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
+		               sol->feasible=0;
+		        }
+		  }
+          }
+          */
+          
+          if(function->getNEQConstraintNumberLW()>0){
+		  function->constraintsValueNEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
+		  
+		  for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){
+		    
+		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
+			lambda[i-offset]=sol->vectorCharacters[function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+(i-offset)];
+		        }else{
+			lambda[i-offset]=0;
+		        }
+		    		
+		        sol->constraintValues[i]=(lambda[i-offset]-sol->constraintValues[i]) - sqrt((lambda[i-offset]+sol->constraintValues[i])*(lambda[i-offset]+sol->constraintValues[i])+4*EPISILON*EPISILON);
 
 		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
 		               sol->feasible=0;
@@ -93,7 +116,7 @@
           offset+=function->getEQConstraintNumberLW();
           
           if(function->getKKTConstraintNumber()>0){
-		  function->constraintsValueKKT(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW(),sol->constraintValues+offset);
+		  function->constraintsValueKKT(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->vectorCharacters+function->getDimensionUP()+function->getDimensionLW(),lambda,sol->constraintValues+offset);
 		  for(int i=offset;i<offset+function->getKKTConstraintNumber();i++){
 		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
 		          sol->feasible=0;

@@ -11,10 +11,10 @@ int main(){
       SolutionDecoder *decoder=new LagrangeMultpAPMSmooth();
       decoder->initInstance(function);
    
-      DifferentialEvolution::initPopulation(decoder,15);
-      for(int i=0;i<200000;i++){      
+      DifferentialEvolution::initPopulation(decoder,30);
+      for(int i=0;i<500;i++){      
 	DifferentialEvolution::mutatePopulation(0.8);
-	DifferentialEvolution::recombinePopulation(0.8);
+	DifferentialEvolution::recombinePopulation(0.1);
 	DifferentialEvolution::selectPopulation();
       }
 	

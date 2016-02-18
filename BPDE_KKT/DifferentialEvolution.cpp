@@ -50,10 +50,10 @@ using namespace std;
 	    
 	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
 	        nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j] + F*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
-/*
-		if(nextPopulation[i]->vectorCharacters[j]<decoder->boundAttributes[2*j]) nextPopulation[i]->vectorCharacters[j]=decoder->boundAttributes[2*j];
-		if(nextPopulation[i]->vectorCharacters[j]>decoder->boundAttributes[2*j+1]) nextPopulation[i]->vectorCharacters[j]=decoder->boundAttributes[2*j+1];
-*/
+
+		if(nextPopulation[i]->vectorCharacters[j]<decoder->boundAttributes[2*j]) nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j];
+		if(nextPopulation[i]->vectorCharacters[j]>decoder->boundAttributes[2*j+1]) nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j];
+
 	    }
 
 	}
@@ -80,12 +80,12 @@ using namespace std;
 int c=0;
       int DifferentialEvolution::selectPopulation(){
 	Solution *swap;
-	//cout<<"Iteracao  "<< c++<<"\n";
+	cout<<"Iteracao  "<< c++<<"\n";
 	for(int i=0;i<sizePopulation;i++){
 	      decoder->decodifySolution(nextPopulation[i]);
-//	cout<<Population[i]->vectorCharacters[0]<<"\t"<<Population[i]->vectorCharacters[1]<<"\t"<<Population[i]->score<<"\n";
+	cout<<Population[i]->vectorCharacters[0]<<"\t"<<Population[i]->vectorCharacters[1]<<"\t"<<Population[i]->score<<"\n";
 	}
-//	cout<<"\n----------------------------------------------------------\n";
+	cout<<"\n----------------------------------------------------------\n";
 	decoder->updatePenalty(Population,nextPopulation,sizePopulation,sizePopulation);
 	for(int i=0;i<sizePopulation;i++){
 	      if(!decoder->compareSolutions(Population[i],nextPopulation[i])){
