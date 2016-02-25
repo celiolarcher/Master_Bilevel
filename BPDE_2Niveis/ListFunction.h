@@ -14,6 +14,7 @@ typedef struct functionPrototype{
     int (*funcCTREQLW)(double x[], double y[], double constraintValuesListReturn[]);
     int (*funcCTRNEQLW)(double x[], double y[], double constraintValuesListReturn[]);
     int (*funcCTRKKT)(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]);
+    int (*funcSimplexTableauKKT)(double x[], double y[],double tableau[]);
     char name[10];
 } Function;
 
@@ -58,6 +59,15 @@ inline int func1CTRNEQLW(double x[], double y[], double constraintValuesListRetu
 inline int func1CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
     constraintValuesListReturn[0]=1+(dualNeq[0]*(1) + dualNeq[1]*(5) + dualNeq[2]*(-3)-dualNeq[3]);
     return 1;						
+}
+
+inline int func1SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+	tableau[0]=1;
+	tableau[1]=5;
+	tableau[2]=-3;
+	tableau[3]=-1;
+	tableau[4]=-1;
+	return 1;
 }
 
 const double bound1[4]={0,10e5,0,10e5};  //Bounds x, y
@@ -107,6 +117,19 @@ inline int func2CTKKT(double x[], double y[], double dualEq[], double  dualNeq[]
     return 1;						
 }
 
+inline int func2SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+	tableau[0]=-2;
+	tableau[1]=-2;
+	tableau[2]=-1;
+	tableau[3]=2;
+	tableau[4]=2;
+	tableau[5]=0;
+	tableau[6]=-1;
+	tableau[7]=-3;
+	return 1;
+}
+
+
 const double bound2[4]={0,10e5,0,10e5};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -153,15 +176,29 @@ inline int func3CTKKT(double x[], double y[], double dualEq[], double  dualNeq[]
     return 1;						
 }
 
+inline int func3SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+	tableau[0]=-2;
+	tableau[1]=-1;
+	tableau[2]=4;
+	tableau[3]=7;
+	tableau[4]=5;
+	tableau[5]=-4;
+	tableau[6]=0;
+	tableau[7]=-1;
+	tableau[8]=-3;
+	return 1;
+}
+
 const double bound3[4]={0,10e5,0,10e5};  //Bounds x, y
+
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,bound1,func1UP,func1LW,func1CTREQUP,func1CTRNEQUP, func1CTREQLW,func1CTRNEQLW,func1CTKKT,"func1"},
-						     {1,1,0,0,0,7,bound2,func2UP,func2LW,func2CTREQUP,func2CTRNEQUP, func2CTREQLW,func2CTRNEQLW,func2CTKKT,"func2"},
-						     {1,1,0,0,0,8,bound3,func3UP,func3LW,func3CTREQUP,func3CTRNEQUP, func3CTREQLW,func3CTRNEQLW,func3CTKKT,"func3"}};
+const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,bound1,func1UP,func1LW,func1CTREQUP,func1CTRNEQUP, func1CTREQLW,func1CTRNEQLW,func1CTKKT,func1SimplexTableauKKT,"func1"},
+						     {1,1,0,0,0,7,bound2,func2UP,func2LW,func2CTREQUP,func2CTRNEQUP, func2CTREQLW,func2CTRNEQLW,func2CTKKT,func2SimplexTableauKKT,"func2"},
+						     {1,1,0,0,0,8,bound3,func3UP,func3LW,func3CTREQUP,func3CTRNEQUP, func3CTREQLW,func3CTRNEQLW,func3CTKKT,func3SimplexTableauKKT,"func3"}};
 
 
 

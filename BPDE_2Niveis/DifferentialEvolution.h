@@ -4,6 +4,7 @@
 #include "Solution.h"
 #include "LagrangeMultpAPM.h"
 #include "LagrangeMultpAPMSmooth.h"
+#include "LagrangeMultpAPMSimplex.h"
 
 class DifferentialEvolution{
       private: static Solution **Population;

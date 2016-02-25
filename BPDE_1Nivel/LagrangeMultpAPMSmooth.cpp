@@ -1,6 +1,6 @@
 #include "LagrangeMultpAPMSmooth.h"
-#define TOL_EQ_CONST 10e-10
-#define TOL_NEQ_CONST 10e-10
+#define TOL_EQ_CONST 10e-8
+#define TOL_NEQ_CONST 10e-8
 #define EPISILON 0
 
 
@@ -25,7 +25,7 @@
 	
 	for(int i=function->getDimensionUP()+function->getDimensionLW();i<solutionSize;i++){
 	    boundAttributes[2*i]=0;
-	    boundAttributes[2*i+1]=10e2;
+	    boundAttributes[2*i+1]=20;//10e2;
 	}	
 
 
@@ -76,11 +76,11 @@
 		  
 		  for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){
 		    
-		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
+		     //   if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
 			lambda[i-offset]=sol->vectorCharacters[function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+(i-offset)];
-		        }else{
-			lambda[i-offset]=0;
-		        }
+		      //  }else{
+			//lambda[i-offset]=0;
+		       // }
 		    		
 		        sol->constraintValues[i]=(lambda[i-offset]-sol->constraintValues[i]) - sqrt((lambda[i-offset]+sol->constraintValues[i])*(lambda[i-offset]+sol->constraintValues[i])+4*EPISILON*EPISILON);
 
@@ -153,32 +153,38 @@ using namespace std;
           }
           
           if(newPopulation){
-	  for(int i=0;i<sizePop;i++){
-		      levelUPMean+=newPopulation[i]->upLevelFunction;
-		      for(int j=0;j<newPopulation[0]->countConstraint;j++){
-			    if(j < function->getNEQConstraintNumberUP()){
-				    if(newPopulation[i]->constraintValues[j]>0){
-				        violationMean[j]+=newPopulation[i]->constraintValues[j];
-				    } 
-			    }else{
-				    violationMean[j]+=fabs(newPopulation[i]->constraintValues[j]);
-			    }
-		      }
-	  }
+		  for(int i=0;i<sizePop;i++){
+			      levelUPMean+=newPopulation[i]->upLevelFunction;
+			      for(int j=0;j<newPopulation[0]->countConstraint;j++){
+				    if(j < function->getNEQConstraintNumberUP()){
+					    if(newPopulation[i]->constraintValues[j]>0){
+						violationMean[j]+=newPopulation[i]->constraintValues[j];
+					    } 
+				    }else{
+					    violationMean[j]+=fabs(newPopulation[i]->constraintValues[j]);
+				    }
+			      }
+		  }
           }
           
           
           double violationSumSquare=0;
           for(int j=0;j<population[0]->countConstraint;j++){
+		if(newPopulation)
 		 violationMean[j]/=(2*sizePop);
-		   
+		else
+		    violationMean[j]/=(sizePop);
+
 		 violationSumSquare+=violationMean[j]*violationMean[j];
           }
-          
+        if(newPopulation)
           levelUPMean/=(2*sizePop);
+	else
+	  levelUPMean/=(sizePop);
           
           for(int j=0;j<population[0]->countConstraint;j++){
-	  	 kWeight[j]=(violationMean[j]*fabs(levelUPMean))/violationSumSquare;
+	  	 //kWeight[j]=(violationMean[j]*fabs(levelUPMean))/violationSumSquare;
+	  	 kWeight[j]=(violationMean[j])/violationSumSquare;
 	//	cout<<kWeight[j]<<"\t";
           }
           //cout<<endl;

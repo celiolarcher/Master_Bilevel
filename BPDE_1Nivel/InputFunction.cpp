@@ -22,6 +22,7 @@
 	    countEqConstraintLW=listFunction[i].numEqConstrLW;
 	    countNeqConstraintLW=listFunction[i].numNeqConstrLW;
 	    bounds=listFunction[i].boundsVar;
+	    simplexTableauKKT=listFunction[i].funcSimplexTableauKKT;
 	    return 1;
 	}
       }
@@ -56,6 +57,10 @@
     
     int InputFunction::constraintsValueKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){
         return (*constrKKT)(x,y,dualEq, dualNeq, constraintValuesListReturn);
+    }
+
+    int InputFunction::getSimplexTableauKKT(double x[], double y[], double tableau[]){
+        return (*simplexTableauKKT)(x,y,tableau);
     }
     
      int InputFunction::constraintsSlackness(double  dualNeq[], double constraintNeqValueList[], double constraintValuesListReturn[]){

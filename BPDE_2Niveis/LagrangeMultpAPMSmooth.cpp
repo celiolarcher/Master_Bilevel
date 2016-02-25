@@ -25,7 +25,7 @@
 	
 	for(int i=function->getDimensionUP()+function->getDimensionLW();i<solutionSize;i++){
 	    boundAttributes[2*i]=0;
-	    boundAttributes[2*i+1]=10e2;
+	    boundAttributes[2*i+1]=10e5;
 	}	
 
 

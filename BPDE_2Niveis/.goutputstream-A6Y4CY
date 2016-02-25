@@ -8,13 +8,13 @@ using namespace std;
 int main(){
       srand(111111);
       InputFunction *function=new InputFunction("func1");
-      SolutionDecoder *decoder=new LagrangeMultpAPMSmooth();
+      SolutionDecoder *decoder=new LagrangeMultpAPMSimplex();
       decoder->initInstance(function);
    
-      DifferentialEvolution::initPopulation(decoder,30);
+      DifferentialEvolution::initPopulation(decoder,500);
       for(int i=0;i<500;i++){      
 	DifferentialEvolution::mutatePopulation(0.8);
-	DifferentialEvolution::recombinePopulation(0.1);
+	DifferentialEvolution::recombinePopulation(0.8);
 	DifferentialEvolution::selectPopulation();
       }
 	

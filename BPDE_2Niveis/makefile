@@ -1,8 +1,8 @@
 flag=-O2
 
 all: BPDE
-BPDE: InputFunction.o Solution.o DifferentialEvolution.o LagrangeMultpAPM.o LagrangeMultpAPMSmooth.o LagrangeMultpFeasibilityComparison.o main.o 
-	g++ -o BPDE main.o Solution.o InputFunction.o LagrangeMultpAPM.o LagrangeMultpAPMSmooth.o LagrangeMultpFeasibilityComparison.o DifferentialEvolution.o $(flag)
+BPDE: InputFunction.o Solution.o DifferentialEvolution.o LagrangeMultpAPM.o LagrangeMultpAPMSmooth.o LagrangeMultpFeasibilityComparison.o LagrangeMultpAPMSimplex.o main.o 
+	g++ -o BPDE main.o Solution.o InputFunction.o LagrangeMultpAPM.o LagrangeMultpAPMSmooth.o LagrangeMultpFeasibilityComparison.o DifferentialEvolution.o LagrangeMultpAPMSimplex.o $(flag)
 
 Solution.o: Solution.cpp Solution.h 
 	g++ -c Solution.cpp $(flag)
@@ -25,6 +25,9 @@ LagrangeMultpAPMSmooth.o: LagrangeMultpAPMSmooth.cpp LagrangeMultpAPMSmooth.h So
 LagrangeMultpFeasibilityComparison.o: LagrangeMultpFeasibilityComparison.cpp LagrangeMultpFeasibilityComparison.h SolutionDecoder.h
 	g++ -c LagrangeMultpFeasibilityComparison.cpp $(flag)
 	
+LagrangeMultpAPMSimplex.o: LagrangeMultpAPMSimplex.cpp LagrangeMultpAPMSimplex.h SolutionDecoder.h
+	g++ -c LagrangeMultpAPMSimplex.cpp $(flag)
+
 clean: 	
 	rm *.o
 	rm BPDE

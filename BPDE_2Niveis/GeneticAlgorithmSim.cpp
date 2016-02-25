@@ -1,17 +1,42 @@
-#include "DifferentialEvolution.h" 
+#include "GeneticAlgorithmSim.h" 
 #include "stdlib.h"
 
 
 #include <iostream>
 using namespace std;
-      Solution **DifferentialEvolution::Population;
-      Solution **DifferentialEvolution::nextPopulation;
-      Solution *DifferentialEvolution::best=NULL;
-      int DifferentialEvolution::sizePopulation;
-      SolutionDecoder *DifferentialEvolution::decoder;
+      Solution **GeneticAlgorithmSimilarity::Population;
+      Solution **GeneticAlgorithmSimilarity::nextPopulation;
+      Solution **GeneticAlgorithmSimilarity::eliteSet;
+
+      int GeneticAlgorithmSimilarity::sizePopulation;
+      SolutionDecoder *GeneticAlgorithmSimilarity::decoder;
 
 
-      int DifferentialEvolution::initPopulation(SolutionDecoder *decoder, int sizePop){
+
+      int GeneticAlgorithmSimilarity::selectPopulation(){
+		double roulette[sizePopulation];
+		double sum=0;
+		for(int i=0;i<sizePopulation;i++){
+			for(int j=0;j<sizePopulation;j++){
+				roulete[j]=diff(Population[i],eliteSet[j]);//Definir
+				sum+=roulete[j];
+			}
+
+			int sort=random(sum);//Definir
+			double point=0;
+			
+			int select=0;
+			for(;point<sort;point+=roulete[select++]);
+
+			if(select)select--;
+
+			inserirLista//Definir
+		}
+		return 1;
+      }
+
+
+      int GeneticAlgorithmSimilarity::initPopulation(SolutionDecoder *decoder, int sizePop){
 	Population=new Solution*[sizePop];
 	nextPopulation=new Solution*[sizePop];
 	sizePopulation=sizePop;
@@ -22,17 +47,19 @@ using namespace std;
 	for(int i=0;i<sizePopulation;i++){
 	    decoder->decodifySolution(Population[i]);
 		//cout<<*Population[i];
+/*
 	    if(Population[i]->feasible && (best==NULL || decoder->compareSolutions(Population[i],best))){
 	        if(!best) delete best;
 	        best=Population[i]->clone();
 	    }
+*/
 	}
 	
 	return 1;
       }
       
       
-      int DifferentialEvolution::mutatePopulation(double F){
+      int GeneticAlgorithmSimilarity::mutatePopulation(double F){
 	for(int i=0;i<sizePopulation;i++){    
 	    int r1=rand() % (sizePopulation-1);
 	    if(r1>=i) r1++;
@@ -61,7 +88,7 @@ using namespace std;
 	return 1;
       }
       
-      int DifferentialEvolution::recombinePopulation(double CR){
+      int GeneticAlgorithmSimilarity::recombinePopulation(double CR){
 	for(int i=0;i<sizePopulation;i++){
 	    int jRand=rand() % nextPopulation[i]->sizeVec;
 	    
@@ -78,7 +105,7 @@ using namespace std;
       }
       
 int c=0;
-      int DifferentialEvolution::selectPopulation(){
+      int GeneticAlgorithmSimilarity::selectPopulation(){
 	Solution *swap;
 	//cout<<"Iteracao  "<< c++<<"\n";
 	for(int i=0;i<sizePopulation;i++){
