@@ -1,6 +1,6 @@
 #include "LagrangeMultpAPMSmooth.h"
-#define TOL_EQ_CONST 10e-10
-#define TOL_NEQ_CONST 10e-10
+#define TOL_EQ_CONST 10e-3
+#define TOL_NEQ_CONST 10e-3
 #define EPISILON 0
 
 
@@ -176,8 +176,8 @@ using namespace std;
 	          }
 	    }
 
-	    if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
-	    else sol1->score+=levelUPMean;
+	//    if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
+	  //  else sol1->score+=levelUPMean;
           }
           
       
@@ -192,8 +192,8 @@ using namespace std;
 		      sol2->score+=kWeight[j]*fabs(sol2->constraintValues[j]);
 	          }
 	    }
-	    if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
-	    else sol2->score+=levelUPMean;
+	  //  if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
+	  //  else sol2->score+=levelUPMean;
           }
 	
           if(sol1->score < sol2->score) return 1;

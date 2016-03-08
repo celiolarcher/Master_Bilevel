@@ -9,20 +9,22 @@ using namespace std;
       Solution *DifferentialEvolution::best=NULL;
       int DifferentialEvolution::sizePopulation;
       SolutionDecoder *DifferentialEvolution::decoder;
+      PenaltySolution *DifferentialEvolution::penalty;
 
 
-      int DifferentialEvolution::initPopulation(SolutionDecoder *decoder, int sizePop){
+      int DifferentialEvolution::initPopulation(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop){
 	Population=new Solution*[sizePop];
 	nextPopulation=new Solution*[sizePop];
 	sizePopulation=sizePop;
 	DifferentialEvolution::decoder=decoder;
+	DifferentialEvolution::penalty=penalty;
 	
 	for(int i=0;i<sizePopulation; Population[i]=new Solution(decoder->solutionSize,decoder->constraintsNumber), nextPopulation[i]=new Solution(decoder->solutionSize,decoder->constraintsNumber), Population[i++]->initRandom(decoder->boundAttributes)); 
         
 	for(int i=0;i<sizePopulation;i++){
 	    decoder->decodifySolution(Population[i]);
 		//cout<<*Population[i];
-	    if(Population[i]->feasible && (best==NULL || decoder->compareSolutions(Population[i],best))){
+	    if(Population[i]->feasible && (best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
 	        if(!best) delete best;
 	        best=Population[i]->clone();
 	    }
@@ -51,8 +53,8 @@ using namespace std;
 	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
 	        nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j] + F*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
 
-		if(nextPopulation[i]->vectorCharacters[j]<decoder->boundAttributes[2*j]) nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j];
-		if(nextPopulation[i]->vectorCharacters[j]>decoder->boundAttributes[2*j+1]) nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j];
+		//if(nextPopulation[i]->vectorCharacters[j]<decoder->boundAttributes[2*j]) nextPopulation[i]->vectorCharacters[j]=decoder->boundAttributes[2*j];//Population[r1]->vectorCharacters[j];
+		//if(nextPopulation[i]->vectorCharacters[j]>decoder->boundAttributes[2*j+1]) nextPopulation[i]->vectorCharacters[j]=decoder->boundAttributes[2*j+1];//Population[r1]->vectorCharacters[j];
 
 	    }
 
@@ -80,21 +82,21 @@ using namespace std;
 int c=0;
       int DifferentialEvolution::selectPopulation(){
 	Solution *swap;
-	cout<<"Iteracao  "<< c++<<"\n";
+	//cout<<"Iteracao  "<< c++<<"\n";
 	for(int i=0;i<sizePopulation;i++){
 	      decoder->decodifySolution(nextPopulation[i]);
-	cout<<Population[i]->vectorCharacters[0]<<"\t"<<Population[i]->vectorCharacters[1]<<"\t"<<Population[i]->score<<"\n";
+	//cout<<Population[i]->vectorCharacters[0]<<"\t"<<Population[i]->vectorCharacters[1]<<"\t"<<Population[i]->score<<"\n";
 	}
-	cout<<"\n----------------------------------------------------------\n";
-	decoder->updatePenalty(Population,nextPopulation,sizePopulation,sizePopulation);
+	//cout<<"\n----------------------------------------------------------\n";
+	penalty->updatePenalty(Population,nextPopulation,sizePopulation,sizePopulation,decoder);
 	for(int i=0;i<sizePopulation;i++){
-	      if(!decoder->compareSolutions(Population[i],nextPopulation[i])){
+	      if(!penalty->compareSolutions(Population[i],nextPopulation[i],decoder)){
 		swap=Population[i];
 		Population[i]=nextPopulation[i];
 		nextPopulation[i]=swap;
 			
-		//cout<<*Population[i];
-		if(Population[i]->feasible && (best==NULL || decoder->compareSolutions(Population[i],best))){
+	//		cout<<*Population[i];
+		if(Population[i]->feasible && (best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
 		      if(!best) delete best;
 		      best=Population[i]->clone();
 		}

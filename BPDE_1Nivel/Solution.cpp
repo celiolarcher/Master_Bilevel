@@ -23,6 +23,18 @@
 	  vectorCharacters[i]=fRand(bounds[2*i],bounds[2*i+1]);
           }
 
+
+/*
+vectorCharacters[0]=0.5;
+vectorCharacters[1]=0.8;
+vectorCharacters[2]=0;
+vectorCharacters[3]=0.2;
+vectorCharacters[4]=0.8;
+*/
+
+
+//(0,2.44,10,0,10,8.74,5.25,10,0,10,3.73,10,10,10,0,0)
+
 /*
 vectorCharacters[0]=19;
 vectorCharacters[1]=14;

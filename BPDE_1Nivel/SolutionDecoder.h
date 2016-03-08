@@ -8,13 +8,13 @@ class SolutionDecoder{
   public:
       int solutionSize;
       int constraintsNumber;
+      int constraintsEQNumber;
+      int constraintsNEQNumber;
       double *boundAttributes;
       InputFunction *function;
   public:
       virtual int initInstance(InputFunction *function)=0;
       virtual int decodifySolution(Solution *sol)=0;
-      virtual int updatePenalty(Solution **population, Solution **newPop, int sizePop, int sizeNewPop)=0;
-      virtual int compareSolutions(Solution *sol1, Solution *sol2)=0;
 }; 
 
 #endif

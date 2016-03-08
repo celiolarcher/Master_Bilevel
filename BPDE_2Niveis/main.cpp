@@ -7,8 +7,8 @@
 using namespace std;
 int main(){
       srand(111111);
-      InputFunction *function=new InputFunction("func3");
-      SolutionDecoder *decoder=new LagrangeMultpAPMSimplex();
+      InputFunction *function=new InputFunction("func2");
+      SolutionDecoder *decoder=new LagrangeMultpAPMSmooth();
       decoder->initInstance(function);
    
       DifferentialEvolution::initPopulation(decoder,50);

@@ -1,6 +1,9 @@
 #ifndef SOLUTION_INCLUDED
 #define SOLUTION_INCLUDED
 
+#define TOL_EQ_CONST 10e-5
+#define TOL_NEQ_CONST 10e-5
+
 #include "InputFunction.h"
 #include <iostream>
 

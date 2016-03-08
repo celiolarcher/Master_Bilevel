@@ -1,8 +1,8 @@
 flag=-O2
 
 all: BPDE
-BPDE: InputFunction.o Solution.o DifferentialEvolution.o LagrangeMultpAPM.o LagrangeMultpAPMSmooth.o LagrangeMultpFeasibilityComparison.o LagrangeMultpAPMSimplex.o main.o 
-	g++ -o BPDE main.o Solution.o InputFunction.o LagrangeMultpAPM.o LagrangeMultpAPMSmooth.o LagrangeMultpFeasibilityComparison.o DifferentialEvolution.o LagrangeMultpAPMSimplex.o $(flag)
+BPDE: InputFunction.o Solution.o DifferentialEvolution.o  LagrangeMultp.o LagrangeMultpSimplex.o LagrangeMultpSmooth.o APMPenalty.o APMDEBPenalty.o DEBPenalty.o main.o 
+	g++ -o BPDE main.o Solution.o InputFunction.o LagrangeMultp.o LagrangeMultpSimplex.o LagrangeMultpSmooth.o DifferentialEvolution.o APMPenalty.o APMDEBPenalty.o DEBPenalty.o  $(flag)
 
 Solution.o: Solution.cpp Solution.h 
 	g++ -c Solution.cpp $(flag)
@@ -16,18 +16,24 @@ DifferentialEvolution.o: DifferentialEvolution.cpp DifferentialEvolution.h
 main.o: main.cpp
 	g++ -c main.cpp $(flag)
 
-LagrangeMultpAPM.o: LagrangeMultpAPM.cpp LagrangeMultpAPM.h SolutionDecoder.h
-	g++ -c LagrangeMultpAPM.cpp $(flag)
-	
-LagrangeMultpAPMSmooth.o: LagrangeMultpAPMSmooth.cpp LagrangeMultpAPMSmooth.h SolutionDecoder.h
-	g++ -c LagrangeMultpAPMSmooth.cpp $(flag)
-	
-LagrangeMultpFeasibilityComparison.o: LagrangeMultpFeasibilityComparison.cpp LagrangeMultpFeasibilityComparison.h SolutionDecoder.h
-	g++ -c LagrangeMultpFeasibilityComparison.cpp $(flag)
+LagrangeMultp.o: LagrangeMultp.cpp LagrangeMultp.h SolutionDecoder.h
+	g++ -c LagrangeMultp.cpp $(flag)
 
-LagrangeMultpAPMSimplex.o: LagrangeMultpAPMSimplex.cpp LagrangeMultpAPMSimplex.h SolutionDecoder.h
-	g++ -c LagrangeMultpAPMSimplex.cpp $(flag)
-	
+LagrangeMultpSimplex.o: LagrangeMultpSimplex.cpp LagrangeMultpSimplex.h SolutionDecoder.h
+	g++ -c LagrangeMultpSimplex.cpp $(flag)
+
+LagrangeMultpSmooth.o: LagrangeMultpSmooth.cpp LagrangeMultpSmooth.h SolutionDecoder.h
+	g++ -c LagrangeMultpSmooth.cpp $(flag)
+
+APMPenalty.o: APMPenalty.cpp APMPenalty.h Penalty.h
+	g++ -c APMPenalty.cpp $(flag)
+
+APMDEBPenalty.o: APMDEBPenalty.cpp APMDEBPenalty.h Penalty.h
+	g++ -c APMDEBPenalty.cpp $(flag)
+
+DEBPenalty.o: DEBPenalty.cpp DEBPenalty.h Penalty.h
+	g++ -c DEBPenalty.cpp $(flag)
+
 clean: 	
 	rm *.o
 	rm BPDE

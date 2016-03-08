@@ -1,34 +1,28 @@
-#include "LagrangeMultpAPMSimplex.h"
-#define TOL_EQ_CONST 10e-8
-#define TOL_NEQ_CONST 10e-8
-
+#include "LagrangeMultpSimplex.h"
 
 #include <cmath>
 #include <iostream>
 using namespace std;
 
-    int LagrangeMultpAPMSimplex::initInstance(InputFunction *function){
+    int LagrangeMultpSimplex::initInstance(InputFunction *function){
 	this->function=function;
 
 	solutionSize=function->getDimensionUP()+function->getDimensionLW();
 	constraintsNumber=function->getEQConstraintNumberUP()+function->getNEQConstraintNumberUP()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW()+1;
+
+	constraintsNEQNumber=function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW();
+	constraintsEQNumber=constraintsNumber-constraintsNEQNumber;
 
 	boundAttributes=new double[2*solutionSize];
 	for(int i=0;i<function->getDimensionUP()+function->getDimensionLW();i++){
 	    boundAttributes[2*i]=function->bounds[2*i];
 	    boundAttributes[2*i+1]=function->bounds[2*i+1];
 	}
-	/*
-	for(int i=function->getDimensionUP()+function->getDimensionLW();i<solutionSize;i++){
-	    boundAttributes[2*i]=0;
-	    boundAttributes[2*i+1]=20;
-	}	
-*/
 
 	return 1;
     }
 
-    int LagrangeMultpAPMSimplex::decodifySolution(Solution *sol){
+    int LagrangeMultpSimplex::decodifySolution(Solution *sol){
 
           sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
       
@@ -90,102 +84,9 @@ using namespace std;
 	  return 1;
     }
 
-    int LagrangeMultpAPMSimplex::updatePenalty(Solution **population, Solution **newPopulation, int sizePop, int sizeNewPop){
-          levelUPMean=0;
-          
-          double violationMean[population[0]->countConstraint];
-          if(!kWeight)
-	kWeight=new double[population[0]->countConstraint];
-          
-          for(int j=0;j<population[0]->countConstraint;violationMean[j]=0, j++);
-	  
-          for(int i=0;i<sizePop;i++){
-	  levelUPMean+=population[i]->upLevelFunction;
-	  for(int j=0;j<population[0]->countConstraint;j++){
-	        if(j < function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW()){
-			if(population[i]->constraintValues[j]>0){
-			    violationMean[j]+=population[i]->constraintValues[j];
-			} 
-	        }else{
-		        violationMean[j]+=fabs(population[i]->constraintValues[j]);
-	        }
-	  }
-          }
-          
-          if(newPopulation){
-	  for(int i=0;i<sizeNewPop;i++){
-	      levelUPMean+=newPopulation[i]->upLevelFunction;
-	      for(int j=0;j<newPopulation[0]->countConstraint;j++){
-		if(j < function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW()){
-			    if(newPopulation[i]->constraintValues[j]>0){
-			        violationMean[j]+=newPopulation[i]->constraintValues[j];
-			    } 
-		}else{
-			violationMean[j]+=fabs(newPopulation[i]->constraintValues[j]);
-		}
-	      }
-	  }
-          }
-          
-          
-          double violationSumSquare=0;
-          for(int j=0;j<population[0]->countConstraint;j++){
-	     violationMean[j]/=(2*sizePop);
-	   
-	     violationSumSquare+=violationMean[j]*violationMean[j];
-          }
-          
-          levelUPMean/=(2*sizePop);
-          
-          for(int j=0;j<population[0]->countConstraint;j++){
-	     kWeight[j]=(violationMean[j]*fabs(levelUPMean))/violationSumSquare;
-          }
-          
-          
-          return 1;
-     }
-
-     int LagrangeMultpAPMSimplex::compareSolutions(Solution *sol1, Solution *sol2){   //1 se sol1 melhor que sol2, 0 caso contrário
-          if(sol1->feasible) sol1->score=sol1->upLevelFunction;
-          else{
-	    sol1->score=0;
-	    for(int j=0;j<sol1->countConstraint;j++){
-	          if(j < function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW()){
-		  if(sol1->constraintValues[j]>0)
-		      sol1->score+=kWeight[j]*sol1->constraintValues[j];
-	          }else{
-		      sol1->score+=kWeight[j]*fabs(sol1->constraintValues[j]);
-	          }
-	    }
-	    if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
-	    else sol1->score+=levelUPMean;
-          }
-          
-      
-          if(sol2->feasible) sol2->score=sol2->upLevelFunction;
-          else{
-	    sol2->score=0;
-	    for(int j=0;j<sol2->countConstraint;j++){
-	          if(j < function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW()){
-		  if(sol2->constraintValues[j]>0)
-		      sol2->score+=kWeight[j]*sol2->constraintValues[j];
-	          }else{
-		      sol2->score+=kWeight[j]*fabs(sol2->constraintValues[j]);
-	          }
-	    }
-	    if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
-	    else sol2->score+=levelUPMean;
-          }
-	
-          if(sol1->score < sol2->score) return 1;
-          
-          return 0;
-     }
-
-
 #include <iostream>
 using namespace std;
-     int LagrangeMultpAPMSimplex::simplexLagrangeMultipliers(double x[], double y[], double h[],double *opt){
+     int LagrangeMultpSimplex::simplexLagrangeMultipliers(double x[], double y[], double h[],double *opt){
 		int mark[function->getNEQConstraintNumberLW()];
 		int countMultp=0;
 		for(int i=0;i<function->getNEQConstraintNumberLW();i++){
@@ -203,8 +104,20 @@ using namespace std;
 		function->getSimplexTableauKKT(x,y,tableau);		
 
 		int endCol=countMultp+2*function->getDimensionLW()+1;
+/*
+		for(int i=0;i<function->getDimensionLW()+1;i++){
+			for(int j=0;j<sizeCol;j++) cout<<tableau[i*sizeCol+j]<<"\t";
+			cout<<"\n";
+		}
+		cout<<"\n\n";
+*/
+		int swapPoint=(function->getNEQConstraintNumberLW()+1)*function->getDimensionLW()-1;
+		for(int i=function->getDimensionLW()-1;i>=0+1;i--){
+			for(int j=function->getNEQConstraintNumberLW()+1-1;j>=0;j--) tableau[i*sizeCol+j]=tableau[swapPoint--];
 
+		}
 
+		
 		for(int posMark=0,j=0;j<countMultp;j++,posMark++){
 			
 			for(;!mark[posMark];posMark++);
@@ -212,7 +125,6 @@ using namespace std;
 				tableau[i*sizeCol+j]=tableau[i*sizeCol+posMark];
 			}
 		}
-
 
 		for(int i=0;i<function->getDimensionLW();i++){
 			tableau[i*sizeCol+endCol-1]=tableau[i*sizeCol+function->getNEQConstraintNumberLW()];
@@ -248,12 +160,15 @@ using namespace std;
 		
 /*
 		for(int i=0;i<function->getDimensionLW()+1;i++){
-			for(int j=0;j<endCol;j++) cout<<tableau[i][j]<<"\t";
+			for(int j=0;j<endCol;j++) cout<<tableau[i*sizeCol+j]<<"\t";
 			cout<<"\n";
 		}
 		cout<<"\n\n";
-*/
+*/		
+
 		int loop=1;
+
+//if(countMultp==0)cout<<"+";	
 		while(loop++){
 			double valueRef=-1;
 			int pivot=-1;
