@@ -14,6 +14,10 @@ using namespace std;
           if(sol1->feasible && (!sol2->feasible || sol1->upLevelFunction < sol2->upLevelFunction)) return 1;
           else{
 		  sol1->score=0;
+		  sol2->score=0;
+
+		  if(sol2->feasible) return 0;
+
 		  for(int j=0;j<sol1->countConstraint;j++){
 	          	  if(j < decoder->constraintsNEQNumber){
 				  if(sol1->constraintValues[j]>0)
@@ -23,7 +27,6 @@ using namespace std;
 		          }
 		  }
 
-		  sol2->score=0;
 		  for(int j=0;j<sol2->countConstraint;j++){
 	          	  if(j < decoder->constraintsNEQNumber){
 				  if(sol2->constraintValues[j]>0)

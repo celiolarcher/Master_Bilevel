@@ -1,8 +1,8 @@
 #ifndef LISTFUNCTION_INCLUDED
 #define LISTFUNCTION_INCLUDED  
-#define DEFINEfunctionListSize 9
+#define DEFINEfunctionListSize 14
 #include <float.h>
-
+#include <cmath>
 
 typedef struct functionPrototype{
     int dimensionUP, dimensionLW, numEqConstrUP, numNeqConstrUP, numEqConstrLW, numNeqConstrLW;
@@ -23,7 +23,7 @@ typedef struct functionPrototype{
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 1 - solucao (19,14,0,0.333,0)*/
+/* Função A1 - solucao (19,14,0,0.333,0)*/
 
 inline double func1UP(double x[], double y[]){  //F(x,y)
   return x[0]-4*y[0];
@@ -77,7 +77,7 @@ const double bound1[4]={0,10e5,0,10e5};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 2 - solucao (16,11,0,0,3,0,0,0,0)*/
+/* Função A2 - solucao (16,11,0,0,3,0,0,0,0)*/
 
 inline double func2UP(double x[], double y[]){  //F(x,y)
   return -x[0]-3*y[0];
@@ -135,7 +135,7 @@ const double bound2[4]={0,10e5,0,10e5};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 3 - solucao (17.45,10.91)*/
+/* Função A3 - solucao (17.45,10.91)*/
 
 inline double func3UP(double x[], double y[]){  //F(x,y)
   return 2*x[0]-11*y[0];
@@ -197,7 +197,7 @@ const double bound3[4]={0,10e5,0,10e5};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 4 - solucao (0,0.9,0,0.6,0.4)*/
+/* Função A4 - solucao (0,0.9,0,0.6,0.4)*/
 
 inline double func4UP(double x[], double y[]){  //F(x,y)
   return -8*x[0]-4*x[1]+4*y[0]-40*y[1]-4*y[2];
@@ -273,7 +273,7 @@ const double bound4[10]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 5 - solucao (1,9,0)*/
+/* Função A5 - solucao (1,9,0)*/
 
 inline double func5UP(double x[], double y[]){  //F(x,y)
   return -x[0]-2*y[0]-3*y[1];
@@ -338,7 +338,7 @@ const double bound5[6]={0,8,0,9,0,7};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 6 - solucao (2,0,1.5,0)*/
+/* Função A6 - solucao (2,0,1.5,0)*/
 
 inline double func6UP(double x[], double y[]){  //F(x,y)
   return -2*x[0]+x[1]+0.5*y[0];
@@ -401,7 +401,7 @@ const double bound6[8]={0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 7 - solucao (0.5,0.8,0,0.2,0.8)*/
+/* Função A7 - solucao (0.5,0.8,0,0.2,0.8)*/
 
 inline double func7UP(double x[], double y[]){  //F(x,y)
   return -8*x[0]-4*x[1]+4*y[0]-40*y[1]-4*y[2];
@@ -478,7 +478,7 @@ const double bound7[10]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-/* Função 8 - solucao (1.55,0.78,0.16,2.21,1.89,0)*/
+/* Função A8 - solucao (1.55,0.78,0.16,2.21,1.89,0)*/
 
 inline double func8UP(double x[], double y[]){  //F(x,y)
   return -4*x[0]+8*x[1]+x[2]-x[3]+9*y[0]-9*y[1];
@@ -554,7 +554,7 @@ const double bound8[12]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
-/* Função 9 - solucao (0,2.44,10,0,10,8.74,5.25,10,0,10,3.73,10,10,10,0,0)*/
+/* Função A9 - solucao (0,2.44,10,0,10,8.74,5.25,10,0,10,3.73,10,10,10,0,0)*/
 
 inline double func9UP(double x[], double y[]){  //F(x,y)
   return 12*x[0]-x[1]-12*x[2]+13*x[3]+2*x[5]-5*x[7]+6*x[8]-11*x[9]-5*y[0]-6*y[1]-4*y[2]-7*y[3];
@@ -667,20 +667,496 @@ inline int func9SimplexTableauKKT(double x[], double y[], double tableau[]){  //
 
 const double bound9[32]={0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10};  //Bounds x, y
 
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Função B1 - solucao (0,30,-10,10)*/
+
+inline double funcB1UP(double x[], double y[]){  //F(x,y)
+  return 2*x[0] + 2*x[1] - 3*y[0] - 3*y[1] - 60;
+}
+
+inline double funcB1LW(double x[], double y[]){  //f(x,y)
+  return (y[0]-x[0]+20)*(y[0]-x[0]+20) + (y[1]-x[1]+20)*(y[1]-x[1]+20);
+}
+
+inline int funcB1CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcB1CTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=x[0]+x[1]+y[0]-2*y[1]-40;
+  constraintValuesListReturn[1]=-x[0];
+  constraintValuesListReturn[2]=x[0]-50;
+  constraintValuesListReturn[3]=-x[1];
+  constraintValuesListReturn[4]=x[1]-50;
+
+  return 1;
+}
+
+inline int funcB1CTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcB1CTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=2*y[0]-x[0]+10;
+  constraintValuesListReturn[1]=2*y[1]-x[1]+10;
+  constraintValuesListReturn[2]=-y[0]-10;
+  constraintValuesListReturn[3]=y[0]-20;
+  constraintValuesListReturn[4]=-y[1]-10;
+  constraintValuesListReturn[5]=y[1]-20;
+
+  return 1;
+}
+
+
+inline int funcB1CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
+    constraintValuesListReturn[0]=2*(y[0]-x[0]+20)+(dualNeq[0]*(2) + dualNeq[1]*(0) + dualNeq[2]*(-1) + dualNeq[3]*(1) + dualNeq[4]*(0) + dualNeq[5]*(0));
+    constraintValuesListReturn[1]=2*(y[1]-x[1]+20)+(dualNeq[0]*(0) + dualNeq[1]*(2) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(-1) + dualNeq[5]*(1));
+  
+    return 1;						
+}
+
+inline int funcB1SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+    tableau[0]=2;
+    tableau[1]=0;
+    tableau[2]=-1;
+    tableau[3]=1;
+    tableau[4]=0;
+    tableau[5]=0;
+    tableau[6]=-2*(y[0]-x[0]+20);
+
+    tableau[7]=0;
+    tableau[8]=2;
+    tableau[9]=0;
+    tableau[10]=0;
+    tableau[11]=-1;
+    tableau[12]=1;
+    tableau[13]=-2*(y[1]-x[1]+20);
+	
+
+    return 1;
+}
+
+const double boundB1[8]={0,50,0,50,-10,20,-10,20};  //Bounds x, y
+
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Função B2 - solucao (0,30,-10,10)*/
+
+inline double funcB2UP(double x[], double y[]){  //F(x,y)
+  return -x[0]*x[0] - 3*x[1]*x[1] - 4*y[0] + y[1]*y[1];
+}
+
+inline double funcB2LW(double x[], double y[]){  //f(x,y)
+  return 2*x[0]*x[0]+y[0]*y[0]-5*y[1];
+}
+
+inline int funcB2CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcB2CTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=x[0]*x[0]+2*x[1]-4;
+  constraintValuesListReturn[1]=-x[0];
+  constraintValuesListReturn[2]=-x[1];
+
+  return 1;
+}
+
+inline int funcB2CTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcB2CTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=-(x[0]*x[0]-2*x[0]+x[1]*x[1]-2*y[0]+y[1]+3);
+  constraintValuesListReturn[1]=-(x[1]+3*y[0]-4*y[1]-4);
+  constraintValuesListReturn[2]=-y[0];
+  constraintValuesListReturn[3]=-y[1];
+
+
+  return 1;
+}
+
+
+inline int funcB2CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
+    constraintValuesListReturn[0]=2*y[0]+(dualNeq[0]*(2) + dualNeq[1]*(-3) + dualNeq[2]*(-1) + dualNeq[3]*(0));
+    constraintValuesListReturn[1]=-5+(dualNeq[0]*(-1) + dualNeq[1]*(4) + dualNeq[2]*(0) + dualNeq[3]*(-1));
+  
+    return 1;						
+}
+
+inline int funcB2SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+    tableau[0]=2;
+    tableau[1]=-3;
+    tableau[2]=-1;
+    tableau[3]=0;
+    tableau[4]=-2*(y[0]);
+
+
+    tableau[5]=-1;
+    tableau[6]=4;
+    tableau[7]=0;
+    tableau[8]=-1;
+    tableau[9]=5;
+
+    return 1;
+}
+
+const double boundB2[8]={0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,bound1,func1UP,func1LW,func1CTREQUP,func1CTRNEQUP, func1CTREQLW,func1CTRNEQLW,func1CTKKT,func1SimplexTableauKKT,"func1"},
-						     {1,1,0,0,0,7,bound2,func2UP,func2LW,func2CTREQUP,func2CTRNEQUP, func2CTREQLW,func2CTRNEQLW,func2CTKKT,func2SimplexTableauKKT,"func2"},
-						     {1,1,0,0,0,8,bound3,func3UP,func3LW,func3CTREQUP,func3CTRNEQUP, func3CTREQLW,func3CTRNEQLW,func3CTKKT,func3SimplexTableauKKT,"func3"},
-						     {2,3,0,2,0,6,bound4,func4UP,func4LW,func4CTREQUP,func4CTRNEQUP, func4CTREQLW,func4CTRNEQLW,func4CTKKT,func4SimplexTableauKKT,"func4"},
-						     {1,2,0,2,0,5,bound5,func5UP,func5LW,func5CTREQUP,func5CTRNEQUP, func5CTREQLW,func5CTRNEQLW,func5CTKKT,func5SimplexTableauKKT,"func5"},
-						     {2,2,0,3,0,4,bound6,func6UP,func6LW,func6CTREQUP,func6CTRNEQUP, func6CTREQLW,func6CTRNEQLW,func6CTKKT,func6SimplexTableauKKT,"func6"},
-						     {2,3,0,3,0,6,bound7,func7UP,func7LW,func7CTREQUP,func7CTRNEQUP, func7CTREQLW,func7CTRNEQLW,func7CTKKT,func7SimplexTableauKKT,"func7"},
-						     {4,2,0,10,0,6,bound8,func8UP,func8LW,func8CTREQUP,func8CTRNEQUP, func8CTREQLW,func8CTRNEQLW,func8CTKKT,func8SimplexTableauKKT,"func8"},
-						     {10,6,0,22,0,19,bound9,func9UP,func9LW,func9CTREQUP,func9CTRNEQUP, func9CTREQLW,func9CTRNEQLW,func9CTKKT,func9SimplexTableauKKT,"func9"}};
+/* Função B3 - solucao (7.02, 3.03, 11.98, 17.97, 0.05, 10.00, 29.95, 0)*/
+
+inline double funcB3UP(double x[], double y[]){  //F(x,y)
+  return - ( (y[0]+y[2])*(200 - y[0] - y[2]) + (y[1]+y[3])*(160-y[1]-y[3]) ); //MAX=-MIN
+}
+
+inline double funcB3LW(double x[], double y[]){  //f(x,y)
+  return (y[0]-4)*(y[0]-4)+(y[1]-13)*(y[1]-13)+(y[2]-35)*(y[2]-35)+(y[3]-2)*(y[3]-2);  //MIN= MIN f1 + MIN f2
+}
+
+inline int funcB3CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcB3CTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=x[0]+x[1]+x[2]+x[3]-40;
+  constraintValuesListReturn[1]=-x[0];
+  constraintValuesListReturn[2]=x[0]-10;
+  constraintValuesListReturn[3]=-x[1];
+  constraintValuesListReturn[4]=x[1]-5;
+  constraintValuesListReturn[5]=-x[2];
+  constraintValuesListReturn[6]=x[2]-15;
+  constraintValuesListReturn[7]=-x[3];
+  constraintValuesListReturn[8]=x[3]-20;
+
+  return 1;
+}
+
+inline int funcB3CTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcB3CTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0         
+  constraintValuesListReturn[0]=0.4*y[0] +0.7*y[1] -x[0];
+  constraintValuesListReturn[1]=0.6*y[0] +0.3*y[1] -x[1];
+  constraintValuesListReturn[2]=0.4*y[2] +0.7*y[3] -x[2];
+  constraintValuesListReturn[3]=0.6*y[2] +0.3*y[3] -x[3];
+  constraintValuesListReturn[4]=-y[0];
+  constraintValuesListReturn[5]=y[0]-20;
+  constraintValuesListReturn[6]=-y[1];
+  constraintValuesListReturn[7]=y[1]-20;
+  constraintValuesListReturn[8]=-y[2];
+  constraintValuesListReturn[9]=y[2]-40;
+  constraintValuesListReturn[10]=-y[3];
+  constraintValuesListReturn[11]=y[3]-40;
+
+  return 1;
+}
+
+
+inline int funcB3CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
+
+    constraintValuesListReturn[0]=2*y[0]+(dualNeq[0]*(0.4) + dualNeq[1]*(0.6) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(-1) + dualNeq[5]*(1) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(0) + dualNeq[11]*(0));
+
+    constraintValuesListReturn[1]=2*y[1]+(dualNeq[0]*(0.7) + dualNeq[1]*(0.3) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(-1) + dualNeq[7]*(1) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(0) + dualNeq[11]*(0));
+
+    constraintValuesListReturn[2]=2*y[2]+(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(0.4) + dualNeq[3]*(0.6) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(-1) + dualNeq[9]*(1) + dualNeq[10]*(0) + dualNeq[11]*(0));
+
+    constraintValuesListReturn[3]=2*y[3]+(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(0.7) + dualNeq[3]*(0.3) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(-1) + dualNeq[11]*(1));
+  
+    return 1;						
+}
+
+inline int funcB3SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+    tableau[0]=0.4;
+    tableau[1]=0.6;
+    tableau[2]=0;
+    tableau[3]=0;
+    tableau[4]=-1;
+    tableau[5]=1;
+    tableau[6]=0;
+    tableau[7]=0;
+    tableau[8]=0;
+    tableau[9]=0;
+    tableau[10]=0;
+    tableau[11]=0;
+    tableau[12]=-2*(y[0]-4);
+
+    tableau[13]=0.7;
+    tableau[14]=0.3;
+    tableau[15]=0;
+    tableau[16]=0;
+    tableau[17]=0;
+    tableau[18]=0;
+    tableau[19]=-1;
+    tableau[20]=1;
+    tableau[21]=0;
+    tableau[22]=0;
+    tableau[23]=0;
+    tableau[24]=0;
+    tableau[25]=-2*(y[1]-13);
+
+
+    tableau[26]=0;
+    tableau[27]=0;
+    tableau[28]=0.4;
+    tableau[29]=0.6;
+    tableau[30]=0;
+    tableau[31]=0;
+    tableau[32]=0;
+    tableau[33]=0;
+    tableau[34]=-1;
+    tableau[35]=1;
+    tableau[36]=0;
+    tableau[37]=0;
+    tableau[38]=-2*(y[2]-35);
+
+    tableau[39]=0;
+    tableau[40]=0;
+    tableau[41]=0.7;
+    tableau[42]=0.3;
+    tableau[43]=0;
+    tableau[44]=0;
+    tableau[45]=0;
+    tableau[46]=0;
+    tableau[47]=0;
+    tableau[48]=0;
+    tableau[49]=-1;
+    tableau[50]=1;
+    tableau[51]=-2*(y[3]-2);
+
+    return 1;
+}
+
+const double boundB3[16]={0,10,0,5,0,15,0,20,0,20,0,20,0,40,0,40};  //Bounds x, y
+
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Função B4 - solucao (1.95, 8.05, 0.00, 0.97, 0.97, 1.31, 6.74, 0, 0)*/
+
+inline double funcB4UP(double x[], double y[]){  //F(x,y)
+  return -(y[0] * y[1] *sin(x[0]) + y[2] * y[3] * sin(x[1]) + y[4] * y[5] * sin(x[2])); //MIN=-MAX
+}
+
+inline double funcB4LW(double x[], double y[]){  //f(x,y)
+  return - (y[0]*sin(y[1])+y[1]*sin(y[0]))-(y[2]*sin(y[3])+y[3]*sin(y[2])) -(y[4]*sin(y[5])+y[5]*sin(y[4]));  //MIN= -MAX f1 - MAX f2 - MAX f3
+}
+
+inline int funcB4CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcB4CTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=x[0] + x[1] + x[2] -10;
+  constraintValuesListReturn[1]=-x[0];
+  constraintValuesListReturn[2]=-x[1];
+  constraintValuesListReturn[3]=-x[2];
+
+
+  return 1;
+}
+
+inline int funcB4CTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcB4CTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0       
+  constraintValuesListReturn[0]=y[0]+y[1]-x[0];
+  constraintValuesListReturn[1]=y[2]+y[3]-x[1];
+  constraintValuesListReturn[2]=y[4]+y[5]-x[2];
+  constraintValuesListReturn[3]=- y[0];
+  constraintValuesListReturn[4]=- y[1];
+  constraintValuesListReturn[5]=- y[2];
+  constraintValuesListReturn[6]=- y[3];
+  constraintValuesListReturn[7]=- y[4];
+  constraintValuesListReturn[8]=- y[5];
+
+  return 1;
+}
+
+
+inline int funcB4CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)  MAX f(x,y)
+
+    constraintValuesListReturn[0]=(sin(y[1])+y[1]*cos(y[0]))-(dualNeq[0]*(1) + dualNeq[1]*(0) + dualNeq[2]*(0) + dualNeq[3]*(-1) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0));
+
+    constraintValuesListReturn[1]=(sin(y[0])+y[0]*cos(y[1]))-(dualNeq[0]*(1) + dualNeq[1]*(0) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(-1) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0));
+
+    constraintValuesListReturn[2]=(sin(y[3])+y[3]*cos(y[2]))-(dualNeq[0]*(0) + dualNeq[1]*(1) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(-1) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0));
+
+    constraintValuesListReturn[3]=(sin(y[2])+y[2]*cos(y[3]))-(dualNeq[0]*(0) + dualNeq[1]*(1) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(-1) + dualNeq[7]*(0) + dualNeq[8]*(0));
+
+    constraintValuesListReturn[4]=(sin(y[5])+y[5]*cos(y[4]))-(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(1) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(-1) + dualNeq[8]*(0));
+
+    constraintValuesListReturn[5]=(sin(y[4])+y[4]*cos(y[5]))-(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(1) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(-1));
+  
+    return 1;						
+}
+
+inline int funcB4SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = grad(f(x,y))  MAX f(x,y)
+    tableau[0]=1;
+    tableau[1]=0;
+    tableau[2]=0;
+    tableau[3]=-1;
+    tableau[4]=0;
+    tableau[5]=0;
+    tableau[6]=0;
+    tableau[7]=0;
+    tableau[8]=0;
+    tableau[9]=(sin(y[1])+y[1]*cos(y[0]));
+
+    tableau[10]=1;
+    tableau[11]=0;
+    tableau[12]=0;
+    tableau[13]=0;
+    tableau[14]=-1;
+    tableau[15]=0;
+    tableau[16]=0;
+    tableau[17]=0;
+    tableau[18]=0;
+    tableau[19]=(sin(y[0])+y[0]*cos(y[1]));
+
+    tableau[20]=0;
+    tableau[21]=1;
+    tableau[22]=0;
+    tableau[23]=0;
+    tableau[24]=0;
+    tableau[25]=-1;
+    tableau[26]=0;
+    tableau[27]=0;
+    tableau[28]=0;
+    tableau[29]=(sin(y[3])+y[3]*cos(y[2]));
+
+    tableau[30]=0;
+    tableau[31]=1;
+    tableau[32]=0;
+    tableau[33]=0;
+    tableau[34]=0;
+    tableau[35]=0;
+    tableau[36]=-1;
+    tableau[37]=0;
+    tableau[38]=0;
+    tableau[39]=(sin(y[2])+y[2]*cos(y[3]));
+
+    tableau[40]=0;
+    tableau[41]=0;
+    tableau[42]=1;
+    tableau[43]=0;
+    tableau[44]=0;
+    tableau[45]=0;
+    tableau[46]=0;
+    tableau[47]=-1;
+    tableau[48]=0;
+    tableau[49]=(sin(y[5])+y[5]*cos(y[4]));
+
+    tableau[50]=0;
+    tableau[51]=0;
+    tableau[53]=1;
+    tableau[54]=0;
+    tableau[55]=0;
+    tableau[56]=0;
+    tableau[57]=0;
+    tableau[58]=-1;
+    tableau[59]=(sin(y[4])+y[4]*cos(y[5]));
+
+    return 1;
+}
+
+const double boundB4[18]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Função B5 - solucao (1.95, 8.05, 0.00, 0.97, 0.97, 1.31, 6.74, 0, 0)*/
+
+inline double funcB5UP(double x[], double y[]){  //F(x,y)
+  return - ( (x[0] +y[0] )*(x[1] +y[1] )/(1+x[0] *y[0] +x[1] *y[1] )) ; //MIN=-MAX
+}
+
+inline double funcB5LW(double x[], double y[]){  //f(x,y)
+  return - ( - (x[0] +y[0] )*(x[1] +y[1] )/(1+x[0] *y[0] +x[1] *y[1] ));  //MIN= - MAX (-UP)
+}
+
+inline int funcB5CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcB5CTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=x[0] *x[0] +x[1] *x[1] -100;
+  constraintValuesListReturn[1]=-x[0];
+  constraintValuesListReturn[2]=-x[1];
+
+  return 1;
+}
+
+inline int funcB5CTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcB5CTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0    
+  constraintValuesListReturn[0]=-y[0];
+  constraintValuesListReturn[1]=y[0]-x[0];
+  constraintValuesListReturn[2]=-y[1];
+  constraintValuesListReturn[3]=y[1]-x[1];
+
+  return 1;
+}
+
+
+inline int funcB5CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)  MAX f(x,y)
+    constraintValuesListReturn[0]=((x[1]+y[1])*(x[1]*y[1]-x[0]*x[0]+1))/((x[0]*y[0]+x[1]*y[1]+1)*(x[0]*y[0]+x[1]*y[1]+1))-(dualNeq[0]*(-1) + dualNeq[1]*(1) + dualNeq[2]*(0) + dualNeq[3]*(0));
+    constraintValuesListReturn[1]=((x[0]+y[0])*(x[0]*y[0]-x[1]*x[1]+1))/((x[0]*y[0]+x[1]*y[1]+1)*(x[0]*y[0]+x[1]*y[1]+1))-(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(-1) + dualNeq[3]*(1));
+ 
+    return 1;						
+}
+
+inline int funcB5SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = grad(f(x,y))  MAX f(x,y)
+    tableau[0]=-1;
+    tableau[1]=1;
+    tableau[2]=0;
+    tableau[3]=0;
+    tableau[4]=-((x[1]+y[1])*(x[1]*y[1]-x[0]*x[0]+1))/((x[0]*y[0]+x[1]*y[1]+1)*(x[0]*y[0]+x[1]*y[1]+1));
+
+    tableau[5]=0;
+    tableau[6]=0;
+    tableau[7]=-1;
+    tableau[8]=1;
+    tableau[9]=-((x[0]+y[0])*(x[0]*y[0]-x[1]*x[1]+1))/((x[0]*y[0]+x[1]*y[1]+1)*(x[0]*y[0]+x[1]*y[1]+1));
+
+    return 1;
+}
+
+const double boundB5[8]={0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,bound1,func1UP,func1LW,func1CTREQUP,func1CTRNEQUP, func1CTREQLW,func1CTRNEQLW,func1CTKKT,func1SimplexTableauKKT,"funcA1"},
+						     {1,1,0,0,0,7,bound2,func2UP,func2LW,func2CTREQUP,func2CTRNEQUP, func2CTREQLW,func2CTRNEQLW,func2CTKKT,func2SimplexTableauKKT,"funcA2"},
+						     {1,1,0,0,0,8,bound3,func3UP,func3LW,func3CTREQUP,func3CTRNEQUP, func3CTREQLW,func3CTRNEQLW,func3CTKKT,func3SimplexTableauKKT,"funcA3"},
+						     {2,3,0,2,0,6,bound4,func4UP,func4LW,func4CTREQUP,func4CTRNEQUP, func4CTREQLW,func4CTRNEQLW,func4CTKKT,func4SimplexTableauKKT,"funcA4"},
+						     {1,2,0,2,0,5,bound5,func5UP,func5LW,func5CTREQUP,func5CTRNEQUP, func5CTREQLW,func5CTRNEQLW,func5CTKKT,func5SimplexTableauKKT,"funcA5"},
+						     {2,2,0,3,0,4,bound6,func6UP,func6LW,func6CTREQUP,func6CTRNEQUP, func6CTREQLW,func6CTRNEQLW,func6CTKKT,func6SimplexTableauKKT,"funcA6"},
+						     {2,3,0,3,0,6,bound7,func7UP,func7LW,func7CTREQUP,func7CTRNEQUP, func7CTREQLW,func7CTRNEQLW,func7CTKKT,func7SimplexTableauKKT,"funcA7"},
+						     {4,2,0,10,0,6,bound8,func8UP,func8LW,func8CTREQUP,func8CTRNEQUP, func8CTREQLW,func8CTRNEQLW,func8CTKKT,func8SimplexTableauKKT,"funcA8"},
+						     {10,6,0,22,0,19,bound9,func9UP,func9LW,func9CTREQUP,func9CTRNEQUP, func9CTREQLW,func9CTRNEQLW,func9CTKKT,func9SimplexTableauKKT,"funcA9"},
+						     {2,2,0,5,0,6,boundB1,funcB1UP,funcB1LW,funcB1CTREQUP,funcB1CTRNEQUP, funcB1CTREQLW,funcB1CTRNEQLW,funcB1CTKKT,funcB1SimplexTableauKKT,"funcB1"},
+						     {2,2,0,3,0,4,boundB2,funcB2UP,funcB2LW,funcB2CTREQUP,funcB2CTRNEQUP, funcB2CTREQLW,funcB2CTRNEQLW,funcB2CTKKT,funcB2SimplexTableauKKT,"funcB2"},
+						     {4,4,0,9,0,12,boundB3,funcB3UP,funcB3LW,funcB3CTREQUP,funcB3CTRNEQUP, funcB3CTREQLW,funcB3CTRNEQLW,funcB3CTKKT,funcB3SimplexTableauKKT,"funcB3"},
+						     {3,6,0,4,0,9,boundB4,funcB4UP,funcB4LW,funcB4CTREQUP,funcB4CTRNEQUP, funcB4CTREQLW,funcB4CTRNEQLW,funcB4CTKKT,funcB4SimplexTableauKKT,"funcB4"},
+						     {2,2,0,3,0,4,boundB5,funcB5UP,funcB5LW,funcB5CTREQUP,funcB5CTRNEQUP, funcB5CTREQLW,funcB5CTRNEQLW,funcB5CTKKT,funcB5SimplexTableauKKT,"funcB5"}};
 
 
 
