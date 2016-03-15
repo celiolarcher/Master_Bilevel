@@ -1,0 +1,11 @@
+
+    for F in {"funcA1","funcA2","funcA3","funcA4","funcA5","funcA6","funcA7","funcA8","funcA9","funcB1","funcB2","funcB3","funcB4","funcB5","funcB7","funcB8","funcB9"}
+    do
+    	echo $F >> OUT.txt
+	for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423}
+	do
+	    ./BPDE $seed $F >> OUT.txt
+	    echo >> OUT.txt
+	done
+    done
+

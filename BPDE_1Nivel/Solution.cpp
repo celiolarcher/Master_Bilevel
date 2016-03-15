@@ -24,6 +24,7 @@
           }
 	
 
+	
 /*
 vectorCharacters[0]=1.95;
 vectorCharacters[1]=8.05;

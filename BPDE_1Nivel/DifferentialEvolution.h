@@ -20,6 +20,9 @@ class DifferentialEvolution{
       public: static int initPopulation(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop); 
       public: static int mutatePopulation(double F);
       public: static int mutatePopulationBounded(double F);
+      public: static int mutatePopulationBestBounded(double F1, double F2);
+      public: static int mutatePopulationTargetBestBounded(double F1, double F2);
+      public: static int mutatePopulationTargetBounded(double F1, double F2);
       public: static int recombinePopulation(double CR);
       public: static int selectPopulation();     
       

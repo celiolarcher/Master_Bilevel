@@ -22,10 +22,15 @@ using namespace std;
 	
 	for(int i=0;i<sizePopulation; Population[i]=new Solution(decoder->solutionSize,decoder->constraintsNumber), nextPopulation[i]=new Solution(decoder->solutionSize,decoder->constraintsNumber), Population[i++]->initRandom(decoder->boundAttributes)); 
         
+	
 	for(int i=0;i<sizePopulation;i++){
 	    decoder->decodifySolution(Population[i]);
+	}
+	
+	penalty->updatePenalty(Population,NULL,sizePopulation,0,decoder);
+	for(int i=0;i<sizePopulation;i++){
 		//cout<<*Population[i];
-	    if(Population[i]->feasible && (best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
+	    if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
 	        if(!best) delete best;
 	        best=Population[i]->clone();
 	    }
@@ -63,7 +68,7 @@ using namespace std;
 	
 	return 1;
       }
-
+      
       int DifferentialEvolution::mutatePopulationBounded(double F){
 	for(int i=0;i<sizePopulation;i++){    
 	    int r1=rand() % (sizePopulation-1);
@@ -83,15 +88,17 @@ using namespace std;
 	    double minF=F;
 
 	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
-	        nextPopulation[i]->vectorCharacters[j]=(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
+	            nextPopulation[i]->vectorCharacters[j]=(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
 
 		if(nextPopulation[i]->vectorCharacters[j]<0 && (Population[r1]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])<decoder->boundAttributes[2*j]){
 			minF=((decoder->boundAttributes[2*j]-Population[r1]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
-			minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
 		}
 		else if(nextPopulation[i]->vectorCharacters[j]>0 && (Population[r1]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])>decoder->boundAttributes[2*j+1]){
 			minF=((decoder->boundAttributes[2*j+1]-Population[r1]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
-			minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
 		}
 	
 if(minF<0)cout<<"a";	
@@ -115,6 +122,147 @@ if(minF<0)cout<<"a";
 	return 1;
       }
       
+
+      int DifferentialEvolution::mutatePopulationBestBounded(double F1, double F2){
+	for(int i=0;i<sizePopulation;i++){    
+	    int r1=rand() % (sizePopulation-1);
+	    if(r1>=i) r1++;
+	    
+	    int r2=rand() % (sizePopulation-2);
+	    if(r2>=i) r2++;
+	    if(r2>=r1) r2++;
+	    
+	    int r3=rand() % (sizePopulation-3);
+	    if(r3>=i) r3++;
+	    if(r3>=r1) r3++;
+	    if(r3>=r2) r3++;
+	     
+		//cout<<r1<<"\t"<<r2<<"\t"<<r3<<"\n";
+
+	    double minF=1;
+
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+		nextPopulation[i]->vectorCharacters[j]=F1*(best->vectorCharacters[j] - Population[r1]->vectorCharacters[j])+F2*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
+
+		if(nextPopulation[i]->vectorCharacters[j]<0 && (Population[r1]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])<decoder->boundAttributes[2*j]){
+			minF=((decoder->boundAttributes[2*j]-Population[r1]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
+			//cout<<minF<<"\t";
+		}
+		else if(nextPopulation[i]->vectorCharacters[j]>0 && (Population[r1]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])>decoder->boundAttributes[2*j+1]){
+			minF=((decoder->boundAttributes[2*j+1]-Population[r1]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
+		}
+	
+if(minF<0)cout<<"a";	
+
+	    }
+	    
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=Population[r1]->vectorCharacters[j] + minF*nextPopulation[i]->vectorCharacters[j];
+	    }
+
+	}
+	
+	return 1;
+      }
+      
+      int DifferentialEvolution::mutatePopulationTargetBounded(double F1, double F2){
+	for(int i=0;i<sizePopulation;i++){    
+	    int r1=rand() % (sizePopulation-1);
+	    if(r1>=i) r1++;
+	    
+	    int r2=rand() % (sizePopulation-2);
+	    if(r2>=i) r2++;
+	    if(r2>=r1) r2++;
+	    
+	    int r3=rand() % (sizePopulation-3);
+	    if(r3>=i) r3++;
+	    if(r3>=r1) r3++;
+	    if(r3>=r2) r3++;
+	     
+		//cout<<r1<<"\t"<<r2<<"\t"<<r3<<"\n";
+
+	    double minF=1;
+
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=F1*(Population[r1]->vectorCharacters[j] - Population[i]->vectorCharacters[j])+F2*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
+
+		if(nextPopulation[i]->vectorCharacters[j]<0 && (Population[i]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])<decoder->boundAttributes[2*j]){
+			minF=((decoder->boundAttributes[2*j]-Population[i]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
+			//cout<<minF<<"\t";
+		}
+		else if(nextPopulation[i]->vectorCharacters[j]>0 && (Population[i]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])>decoder->boundAttributes[2*j+1]){
+			minF=((decoder->boundAttributes[2*j+1]-Population[i]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
+		}
+	
+if(minF<0)cout<<"a";	
+
+	    }
+	    
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=Population[i]->vectorCharacters[j] + minF*nextPopulation[i]->vectorCharacters[j];
+	    }
+
+
+	}
+	
+	return 1;
+      }
+      
+      
+        int DifferentialEvolution::mutatePopulationTargetBestBounded(double F1, double F2){
+	for(int i=0;i<sizePopulation;i++){    
+	    int r1=rand() % (sizePopulation-1);
+	    if(r1>=i) r1++;
+	    
+	    int r2=rand() % (sizePopulation-2);
+	    if(r2>=i) r2++;
+	    if(r2>=r1) r2++;
+	    
+	    int r3=rand() % (sizePopulation-3);
+	    if(r3>=i) r3++;
+	    if(r3>=r1) r3++;
+	    if(r3>=r2) r3++;
+	     
+		//cout<<r1<<"\t"<<r2<<"\t"<<r3<<"\n";
+
+	    double minF=1;
+
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=F1*(best->vectorCharacters[j] - Population[i]->vectorCharacters[j])+F2*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
+
+		if(nextPopulation[i]->vectorCharacters[j]<0 && (Population[i]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])<decoder->boundAttributes[2*j]){
+			minF=((decoder->boundAttributes[2*j]-Population[i]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
+			//cout<<minF<<"\t";
+		}
+		else if(nextPopulation[i]->vectorCharacters[j]>0 && (Population[i]->vectorCharacters[j] + minF * nextPopulation[i]->vectorCharacters[j])>decoder->boundAttributes[2*j+1]){
+			minF=((decoder->boundAttributes[2*j+1]-Population[i]->vectorCharacters[j]) / nextPopulation[i]->vectorCharacters[j]);
+			//minF=floor(minF*TRUNCCASE)/TRUNCCASE;
+			minF=nexttoward(minF,0L);
+		}
+	
+if(minF<0)cout<<"a";	
+
+	    }
+	    
+	    for(int j=0;j<nextPopulation[i]->sizeVec;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=Population[i]->vectorCharacters[j] + minF*nextPopulation[i]->vectorCharacters[j];
+
+	    }
+	}
+	
+	return 1;
+      }
+            
       int DifferentialEvolution::recombinePopulation(double CR){
 	for(int i=0;i<sizePopulation;i++){
 	    int jRand=rand() % nextPopulation[i]->sizeVec;
@@ -148,7 +296,7 @@ int c=0;
 		nextPopulation[i]=swap;
 			
 			//cout<<*Population[i];
-		if(Population[i]->feasible && (best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
+		if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
 		      if(!best) delete best;
 		      best=Population[i]->clone();
 		}
