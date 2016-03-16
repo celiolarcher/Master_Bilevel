@@ -1,7 +1,7 @@
 #ifndef SOLUTION_INCLUDED
 #define SOLUTION_INCLUDED
 
-#define TOL_EQ_CONST 10e-2
+#define TOL_EQ_CONST 10e-3
 #define TOL_NEQ_CONST 10e-5
 
 #include "InputFunction.h"

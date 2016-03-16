@@ -23,8 +23,6 @@ using namespace std;
     }
 
     int LagrangeMultpSimplex::decodifySolution(Solution *sol){
-
-          sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
       
           sol->feasible=1;
           
@@ -81,7 +79,10 @@ using namespace std;
           
           offset+=function->getEQConstraintNumberLW();
 
-	  return 1;
+          if(sol->feasible)
+	 sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
+          
+          return 1;
     }
 
 #include <iostream>

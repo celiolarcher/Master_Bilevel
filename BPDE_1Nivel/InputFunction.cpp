@@ -2,6 +2,7 @@
 #include <string.h>
     InputFunction::InputFunction(char *funcName){
          setFunction(funcName);
+         upLevelCalls=0;
     }
     
     
@@ -30,6 +31,7 @@
     }
     
     double InputFunction::getUPLevelFunction(double x[], double y[]){
+        upLevelCalls++;
         return (*objFuncUPLevel)(x,y);
     }
     

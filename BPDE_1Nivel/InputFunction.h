@@ -17,6 +17,7 @@ class InputFunction{
 	 int countNeqConstraintUP;
 	 int countEqConstraintLW;
 	 int countNeqConstraintLW;
+	 int upLevelCalls;
     public: const double *bounds;
     
     public: InputFunction(char *funcName);
@@ -62,6 +63,10 @@ class InputFunction{
     
     public: inline int getKKTConstraintNumber(){  //Dimensão do KKT equivale ao número de variáveis na função em baixo nivel
         return dimensionLW;
+    }
+    
+    public: inline int getUPLevelCalls(){  //Dimensão do KKT equivale ao número de variáveis na função em baixo nivel
+        return upLevelCalls;
     }
 };
 
