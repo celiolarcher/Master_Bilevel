@@ -13,7 +13,7 @@ InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h
 DifferentialEvolution.o: DifferentialEvolution.cpp DifferentialEvolution.h
 	g++ -c DifferentialEvolution.cpp $(flag)
 
-main.o: main.cpp
+main.o: main.cpp DefaultParameters.h
 	g++ -c main.cpp $(flag)
 
 LagrangeMultp.o: LagrangeMultp.cpp LagrangeMultp.h SolutionDecoder.h

@@ -4,7 +4,7 @@
     	echo $F >> OUT.txt
 	for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423}
 	do
-	    ./BPDE $seed $F >> OUT.txt
+	    ./BPDE  --populationSearch 60 --populationImprov 17 --mutTargetRate 0.83 --mutBestRate 0.97 --mutFind1 0.54 --mutFind2 0.38 --seed $seed --maxUPCalls 20000 -i $F >> OUT.txt
 	    echo >> OUT.txt
 	done
     done
