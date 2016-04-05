@@ -1,0 +1,354 @@
+irace   version: 1.07.1202
+********************************************************************************
+* irace: An implementation in R of Iterated Race                               *
+* Copyright (C) 2010-2014                                                      *
+* Manuel Lopez-Ibanez     <manuel.lopez-ibanez@ulb.ac.be>                      *
+* Jeremie Dubois-Lacoste  <jeremie.dubois-lacoste@ulb.ac.be>                   *
+*                                                                              *
+* This is free software, and you are welcome to redistribute it under certain  *
+* conditions.  See the GNU General Public License for details. There is NO     *
+* warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  *
+*                                                                              *
+* irace builds upon previous code from the race package                        *
+* Copyright (C) 2003 Mauro Birattari                                           *
+********************************************************************************
+Warning: A default configuration file './tune-conf' has been found and will be read
+# 2 initial configuration(s) read from '/media/Data/Git/BilevelProgramming/tuning/candidates'
+# 2016-03-26 13:26:46 BRT: Initialization
+# nbIterations: 6                                                                                                                    
+# minNbSurvival: 6                                                                                                                   
+# nbParameters: 16                                                                                                                   
+# seed: 454296549                                                                                                                    
+# confidence level: 0.95                                                                                                             
+# remainingBudget: 5000                                                                                                              
+# mu: 5                                                                                                                              
+                                                                                                                                     
+# 2016-03-26 13:26:46 BRT: Iteration 1 of 6                                                                                          
+# experimentsUsedSoFar: 0                                                                                                            
+# timeUsedSoFar: 0                                                                                                                   
+# timeEstimate: 0                                                                                                                    
+# remainingBudget: 5000                                                                                                              
+# currentBudget: 833                                                                                                                 
+# nbCandidates: 138                                                                                                                  
+                                                                                                                                     
+                            Markers:                                                                                                 
+                               x No test is performed.                                                                               
+                               - The test is performed and                                                                           
+                                 some candidates are discarded.                                                                      
+                               = The test is performed but                                                                           
+                                 no candidate is discarded.                                                                          
+                                                                                                                                     
++-+-----------+-----------+-----------+-----------+-----------+--------+                                                             
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|                                                             
++-+-----------+-----------+-----------+-----------+-----------+--------+                                                             
+|x|          1|        138|        114|      -6600|        138|00:34:09|                                                             
+|x|          2|        138|        114|      -3537|        276|00:30:23|                                                             
+|x|          3|        138|        114|      -2374|        414|00:00:48|                                                             
+|x|          4|        138|        114|      -1777|        552|00:04:55|
+|-|          5|         41|        114|      -1425|        690|00:09:04|
+|=|          6|         41|        114|      -1188|        731|00:00:02|
+|=|          7|         41|        114|      -1020|        772|00:00:12|
+|=|          8|         41|          1|     -879.4|        813|00:01:32|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:           1 mean value:     -879.4
+
+Description of the selected candidate:
+  .ID. PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov .PARENT.
+1    1              167               27        1.06     0.65           3      0.8            2          3            2              1              3          0.96     0.04     0.25              NA              NA       NA
+
+
+# Elite candidates:
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+1                167               27        1.06     0.65           3     0.80            2          3            2              1              3          0.96     0.04     0.25              NA              NA
+114              171               34        1.46     1.82           0     1.48            1          1            4              2              1          0.37     1.95       NA            0.89              NA
+56               174               17        0.18     0.99           3     0.77            2          2            5              3              1            NA       NA     0.98              NA              NA
+64               151               27        1.49     0.03           2     0.21            4          2            4              3              1          1.80       NA     1.23              NA              NA
+12               173               25        0.24     0.58           1     0.36            2          1            4              2              1          0.49     0.18     0.99            0.04              NA
+120               81               39        1.93     1.71           7     0.31            2          2            1              2              1          1.78       NA     0.70            0.74              NA
+# 2016-03-26 14:47:57 BRT: Iteration 2 of 6
+# experimentsUsedSoFar: 813
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 4187
+# currentBudget: 837
+# nbCandidates: 119
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|        119|         19|          0|        119|00:00:41|
+|x|          2|        119|         48|      -14.6|        238|00:02:24|
+|x|          3|        119|         48|      -2210|        357|00:32:56|
+|x|          4|        119|         48|      -1654|        476|00:03:05|
+|-|          5|         27|         48|      -1416|        595|00:17:49|
+|=|          6|         27|         48|      -1183|        622|00:01:07|
+|=|          7|         27|         48|      -1021|        649|00:00:01|
+|=|          8|         27|         48|     -895.7|        676|00:00:01|
+|=|          9|         27|         48|     -796.2|        703|00:00:03|
+|=|         10|         27|         48|     -717.1|        730|00:01:05|
+|=|         11|         27|         48|     -651.9|        757|00:00:02|
+|-|         12|          9|         48|       -600|        784|00:00:01|
+|=|         13|          9|         48|     -554.3|        793|00:00:19|
+|=|         14|          9|         48|     -513.7|        802|00:00:03|
+|=|         15|          9|         48|     -481.4|        811|00:00:00|
+|-|         16|          4|         48|     -451.3|        820|00:00:01|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:          48 mean value:     -451.3
+
+Description of the selected candidate:
+    .ID. PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov .PARENT.
+180  180              180               24        1.29     1.16           0     0.98            2          2            4              2              1          0.68       NA     0.37             0.3              NA      114
+
+
+# Elite candidates:
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+180              180               24        1.29     1.16           0     0.98            2          2            4              2              1          0.68       NA     0.37             0.3              NA
+146              153               25        1.04     1.41           2     1.11            2          3            4              3              1          0.91     0.36     0.36              NA              NA
+1                167               27        1.06     0.65           3     0.80            2          3            2              1              3          0.96     0.04     0.25              NA              NA
+193              189               29        0.57     0.88           1     1.24            1          3            1              1              3          0.89     0.75       NA              NA              NA
+# 2016-03-26 15:47:42 BRT: Iteration 3 of 6
+# experimentsUsedSoFar: 1633
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 3367
+# currentBudget: 841
+# nbCandidates: 105
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|        105|          3|        -49|        105|00:00:42|
+|x|          2|        105|         43|     -35.05|        210|00:02:15|
+|x|          3|        105|          3|      -2222|        315|00:30:18|
+|x|          4|        105|          3|      -1671|        420|00:05:33|
+|-|          5|         43|         71|      -1435|        525|00:17:49|
+|=|          6|         43|         67|      -1195|        568|00:00:03|
+|=|          7|         43|         67|      -1027|        611|00:01:54|
+|=|          8|         43|         67|     -959.9|        654|00:00:23|
+|=|          9|         43|         67|     -858.7|        697|00:00:03|
+|-|         10|         28|         67|     -772.8|        740|00:00:03|
+|=|         11|         28|         71|     -703.3|        768|00:01:01|
+|=|         12|         28|         88|     -640.8|        796|00:00:11|
+|=|         13|         28|         71|      -1102|        824|00:08:42|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:          71 mean value:      -1102
+
+Description of the selected candidate:
+    .ID. PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov .PARENT.
+318  318              156               38        1.42      1.3           1     1.18            3          3            4              2              1          0.63     0.96     0.52            0.31              NA      180
+
+
+# Elite candidates:
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+318              156               38        1.42     1.30           1     1.18            3          3            4              2              1          0.63     0.96     0.52            0.31              NA
+180              180               24        1.29     1.16           0     0.98            2          2            4              2              1          0.68       NA     0.37            0.30              NA
+335              144               29        0.97     1.86           1     0.84            2          3            4              3              1          0.59     0.01     0.37              NA              NA
+332              200               31        1.19     0.36           5     0.83            2          2            4              1              1          0.54       NA     0.29              NA              NA
+1                167               27        1.06     0.65           3     0.80            2          3            2              1              3          0.96     0.04     0.25              NA              NA
+263              146               29        1.14     0.92           1     1.24            2          1            4              2              1          0.78     0.53     1.33            0.56              NA
+# 2016-03-26 16:56:44 BRT: Iteration 4 of 6
+# experimentsUsedSoFar: 2457
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 2543
+# currentBudget: 847
+# nbCandidates: 94
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|         94|          2|          0|         94|00:00:32|
+|x|          2|         94|         34|     -9.596|        188|00:02:22|
+|x|          3|         94|         21|     -16.19|        282|00:02:44|
+|x|          4|         94|         21|     -16.94|        376|00:02:24|
+|-|          5|         30|         21|     -13.55|        470|00:00:17|
+|=|          6|         30|         21|     -8.838|        500|00:00:17|
+|=|          7|         30|         21|     -950.2|        530|00:08:52|
+|=|          8|         30|         21|     -832.1|        560|00:01:28|
+|=|          9|         30|         21|     -741.7|        590|00:01:03|
+|-|         10|         10|         21|     -716.4|        620|00:02:54|
+|=|         11|         10|         21|       -654|        630|00:00:00|
+|=|         12|         10|         21|     -599.5|        640|00:00:00|
+|=|         13|         10|         21|     -557.1|        650|00:00:00|
+|=|         14|         10|         21|     -517.3|        660|00:00:00|
+|=|         15|         10|         21|     -481.9|        670|00:00:03|
+|=|         16|         10|         21|     -453.6|        680|00:00:00|
+|=|         17|         10|         21|     -455.7|        690|00:00:06|
+|=|         18|         10|         21|     -431.4|        700|00:00:13|
+|=|         19|         10|         21|     -409.7|        710|00:00:00|
+|=|         20|         10|         21|     -389.5|        720|00:00:23|
+|=|         21|         10|         21|       -371|        730|00:00:00|
+|=|         22|         10|         21|     -356.3|        740|00:00:00|
+|=|         23|         10|         21|     -627.7|        750|00:02:34|
+|=|         24|         10|         21|     -602.3|        760|00:00:13|
+|=|         25|         10|         21|     -577.6|        770|00:00:03|
+|-|         26|          2|         21|     -556.6|        780|00:00:00|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:          21 mean value:     -556.6
+
+Description of the selected candidate:
+    .ID. PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov .PARENT.
+367  367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA      335
+
+
+# Elite candidates:
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA
+180              180               24        1.29     1.16           0     0.98            2          2            4              2              1          0.68       NA     0.37             0.3              NA
+# 2016-03-26 17:23:25 BRT: Iteration 5 of 6
+# experimentsUsedSoFar: 3237
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 1763
+# currentBudget: 881
+# nbCandidates: 88
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|         88|         88|     -21.11|         88|00:00:15|
+|x|          2|         88|          6|     -255.1|        176|00:03:01|
+|x|          3|         88|          6|     -170.1|        264|00:00:04|
+|x|          4|         88|          1|      -1777|        352|00:26:39|
+|-|          5|         53|          1|      -1421|        440|00:00:06|
+|=|          6|         53|          1|      -1193|        493|00:00:08|
+|=|          7|         53|          1|      -1023|        546|00:03:17|
+|=|          8|         53|          1|     -898.8|        599|00:00:02|
+|=|          9|         53|          1|     -799.5|        652|00:03:17|
+|=|         10|         53|          1|     -768.5|        705|00:01:01|
+|-|         11|         19|          1|     -697.3|        758|00:00:15|
+|=|         12|         19|          1|      -1189|        777|00:04:53|
+|=|         13|         19|          1|      -1099|        796|00:01:11|
+|=|         14|         19|          1|      -1021|        815|00:00:00|
+|=|         15|         19|          1|     -955.7|        834|00:00:00|
+|=|         16|         19|          1|     -897.2|        853|00:00:01|
+|=|         17|         19|          1|     -844.4|        872|00:00:00|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:           1 mean value:     -844.4
+
+Description of the selected candidate:
+    .ID. PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov .PARENT.
+367  367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA      335
+
+
+# Elite candidates:
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA
+509              167               18        1.02     1.89           1     0.76            2          3            4              3              1          0.39     0.31     0.78              NA              NA
+180              180               24        1.29     1.16           0     0.98            2          2            4              2              1          0.68       NA     0.37            0.30              NA
+464              172               24        1.18     1.78           2     0.38            2          3            4              3              1          0.87     0.35     0.81              NA              NA
+470              160               25        1.05     1.74           1     1.16            2          3            4              3              1          0.61     0.43     0.73              NA              NA
+512              191               23        1.11     1.72           1     0.76            2          2            4              2              1          0.53       NA     0.53            0.16              NA
+# 2016-03-26 18:07:44 BRT: Iteration 6 of 6
+# experimentsUsedSoFar: 4109
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 891
+# currentBudget: 891
+# nbCandidates: 89
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|         89|          1|      -18.7|         89|00:05:51|
+|x|          2|         89|          3|     -1.987|        178|00:00:59|
+|x|          3|         89|          1|     -11.12|        267|00:00:20|
+|x|          4|         89|          3|     -8.294|        356|00:00:08|
+|-|          5|         47|         84|     -8.611|        445|00:06:44|
+|=|          6|         47|         39|     -9.672|        492|00:00:16|
+|=|          7|         47|         39|     -8.291|        539|00:00:02|
+|=|          8|         47|          3|     -831.9|        586|00:14:04|
+|=|          9|         47|          1|       -745|        633|00:00:02|
+|=|         10|         47|          1|     -719.4|        680|00:01:15|
+|=|         11|         47|          1|     -658.5|        727|00:00:02|
+|-|         12|         27|          1|     -603.6|        774|00:00:02|
+|=|         13|         27|          1|     -594.8|        801|00:00:37|
+|=|         14|         27|          1|     -551.3|        828|00:00:06|
+|=|         15|         27|          1|     -515.8|        855|00:00:01|
+|=|         16|         27|          1|     -484.7|        882|00:01:48|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:           1 mean value:     -484.7
+
+Description of the selected candidate:
+    .ID. PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov .PARENT.
+367  367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA      335
+
+
+# Elite candidates:
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA
+554              196               21        1.05     1.85           5     0.79            2          3            4              3              1          1.21     0.15     0.65              NA              NA
+547              192               24        1.13     1.14           2     1.31            3          2            4              2              1          0.60       NA     0.43             0.2              NA
+532              174               24        0.96     1.47           2     0.93            2          3            4              3              1          1.16     0.19     0.90              NA              NA
+464              172               24        1.18     1.78           2     0.38            2          3            4              3              1          0.87     0.35     0.81              NA              NA
+588              141               22        0.93     1.69           0     0.72            2          3            4              3              1          1.00     0.04     1.08              NA              NA
+# 2016-03-26 18:40:08 BRT: Stopped because there is no enough budget left to race newly sampled configurations
+# Iteration: 7
+# nbIterations: 7
+# experimentsUsedSoFar: 4991
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 9
+# currentBudget: 9
+# number of elites: 6
+# nbCandidates: 0
+# mu: 5
+# Best candidates
+    PopulationSearch PopulationImprov mutBestRate mutBest1 mutBestSize mutFind1 mutOptSearch mutOptBest mutOptImprov crossOptSearch crossOptImprov mutTargetRate mutBest2 mutFind2 crossRateSearch crossRateImprov
+367              186               21        0.95     1.81           1     0.88            2          3            4              3              1          1.02     0.15     0.78              NA              NA
+554              196               21        1.05     1.85           5     0.79            2          3            4              3              1          1.21     0.15     0.65              NA              NA
+547              192               24        1.13     1.14           2     1.31            3          2            4              2              1          0.60       NA     0.43             0.2              NA
+532              174               24        0.96     1.47           2     0.93            2          3            4              3              1          1.16     0.19     0.90              NA              NA
+464              172               24        1.18     1.78           2     0.38            2          3            4              3              1          0.87     0.35     0.81              NA              NA
+588              141               22        0.93     1.69           0     0.72            2          3            4              3              1          1.00     0.04     1.08              NA              NA
+# Best candidates (as commandlines)
+1  --populationSearch 186 --populationImprov 21 --mutTargetRate 1.02 --mutBestRate 0.95 --mutBest1 1.81 --mutBest2 0.15 --mutBestSize 1 --mutFind1 0.88 --mutFind2 0.78 --mutOptSearch 2 --mutOptBest 3 --mutOptImprov 4 --crossOptSearch 3 --crossOptImprov 1
+2  --populationSearch 196 --populationImprov 21 --mutTargetRate 1.21 --mutBestRate 1.05 --mutBest1 1.85 --mutBest2 0.15 --mutBestSize 5 --mutFind1 0.79 --mutFind2 0.65 --mutOptSearch 2 --mutOptBest 3 --mutOptImprov 4 --crossOptSearch 3 --crossOptImprov 1
+3  --populationSearch 192 --populationImprov 24 --mutTargetRate 0.6 --mutBestRate 1.13 --mutBest1 1.14 --mutBestSize 2 --mutFind1 1.31 --mutFind2 0.43 --mutOptSearch 3 --mutOptBest 2 --mutOptImprov 4 --crossRateSearch 0.2 --crossOptSearch 2 --crossOptImprov 1
+4  --populationSearch 174 --populationImprov 24 --mutTargetRate 1.16 --mutBestRate 0.96 --mutBest1 1.47 --mutBest2 0.19 --mutBestSize 2 --mutFind1 0.93 --mutFind2 0.9 --mutOptSearch 2 --mutOptBest 3 --mutOptImprov 4 --crossOptSearch 3 --crossOptImprov 1
+5  --populationSearch 172 --populationImprov 24 --mutTargetRate 0.87 --mutBestRate 1.18 --mutBest1 1.78 --mutBest2 0.35 --mutBestSize 2 --mutFind1 0.38 --mutFind2 0.81 --mutOptSearch 2 --mutOptBest 3 --mutOptImprov 4 --crossOptSearch 3 --crossOptImprov 1
+6  --populationSearch 141 --populationImprov 22 --mutTargetRate 1 --mutBestRate 0.93 --mutBest1 1.69 --mutBest2 0.04 --mutBestSize 0 --mutFind1 0.72 --mutFind2 1.08 --mutOptSearch 2 --mutOptBest 3 --mutOptImprov 4 --crossOptSearch 3 --crossOptImprov 1
+Warning message:
+In read.table(fileName, header = TRUE, colClasses = "character",  :
+  incomplete final line found by readTableHeader on '/media/Data/Git/BilevelProgramming/tuning/candidates'

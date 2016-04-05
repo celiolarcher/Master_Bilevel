@@ -1,6 +1,8 @@
 #ifndef INPUTFUNCTION_INCLUDED
 #define INPUTFUNCTION_INCLUDED
 #include "ListFunction.h"
+#include "ListFunctionSMD.h"
+#include "ListFunctionJaq.h"
 
 class InputFunction{
     private: double (*objFuncUPLevel)(double x[], double y[]);
@@ -18,9 +20,11 @@ class InputFunction{
 	 int countEqConstraintLW;
 	 int countNeqConstraintLW;
 	 int upLevelCalls;
+	 int lwSimplexCalls;
     public: const double *bounds;
     
     public: InputFunction(char *funcName);
+    public: InputFunction(char *funcName,int P, int Q, int R, int S);
     public: double getUPLevelFunction(double x[], double y[]);
     public: double getLWLevelFunction(double x[], double y[]);
     public: int constraintsValueEQUP(double x[], double y[], double constraintValuesListReturn[]);  //Válida se =0
@@ -32,7 +36,7 @@ class InputFunction{
     public: int constraintsSlackness(double x[], double y[], double  dualNeq[], double constraintValuesListReturn[]); //Válida se =0
     public: int getSimplexTableauKKT(double x[], double y[], double tableau[]);
     public: int setFunction(char *nameFunc);    
-  
+    public: int setFunctionSMD(char *nameFunc,int P, int Q, int R, int S);
     
     public: inline int getDimensionUP(){
         return dimensionUP;
@@ -67,6 +71,10 @@ class InputFunction{
     
     public: inline int getUPLevelCalls(){  //Dimensão do KKT equivale ao número de variáveis na função em baixo nivel
         return upLevelCalls;
+    }
+    
+    public: inline int getLWLevelSimplexCalls(){  //Dimensão do KKT equivale ao número de variáveis na função em baixo nivel
+        return lwSimplexCalls;
     }
 };
 

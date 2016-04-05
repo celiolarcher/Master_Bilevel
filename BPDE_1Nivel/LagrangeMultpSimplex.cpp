@@ -4,6 +4,13 @@
 #include <iostream>
 using namespace std;
 
+#define TOL_ACT_CONST 10e-3
+
+extern double TOL_EQ_CONST;
+extern double TOL_NEQ_CONST;
+
+extern bool InfeasibleAvaliation;
+
     int LagrangeMultpSimplex::initInstance(InputFunction *function){
 	this->function=function;
 
@@ -79,7 +86,7 @@ using namespace std;
           
           offset+=function->getEQConstraintNumberLW();
 
-          if(sol->feasible)
+          if(sol->feasible)// || InfeasibleAvaliation)
 	 sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
           
           return 1;
@@ -91,7 +98,7 @@ using namespace std;
 		int mark[function->getNEQConstraintNumberLW()];
 		int countMultp=0;
 		for(int i=0;i<function->getNEQConstraintNumberLW();i++){
-		        if(h[i]<-TOL_EQ_CONST || h[i]>TOL_EQ_CONST) mark[i]=0;
+		        if(h[i]<-TOL_ACT_CONST || h[i]>TOL_ACT_CONST) mark[i]=0;
 			else{ 	
 				mark[i]=1;
 				countMultp++;

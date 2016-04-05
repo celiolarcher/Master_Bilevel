@@ -25,11 +25,20 @@
 ##    other parameters. This expression must return TRUE if the 
 ##    condition is satisfied, FALSE otherwise.
 
-# 1:           			 	2:          		3: 		4:     		 5:
-PopulationSearch       			"--populationSearch "	i   	   (50, 100) 
-PopulationImprov       			"--populationImprov "	i   	   (5, 50) 
-mutTargetRate	       			"--mutTargetRate "	r          (0, 1)
-mutBestRate   				"--mutBestRate "       	r   	   (0, 1)
-mutFind1   				"--mutFind1 "       	r   	   (0, 1)
-mutFind2   				"--mutFind2 "       	r   	   (0, 1)
-
+# 1:           			 	2:          	3: 		4:     		 5:
+PopulationSearch       			"--populationSearch "	i   	(150, 300) 
+PopulationImprov       			"--populationImprov "	i   	(15, 80) 
+mutImprov1	       			"--mutImprov1 "	r           (0, 1)	
+mutImprov2   			"--mutImprov2 "       	r   	(0, 1)	
+#mutBest1    			"--mutBest1 "	r   	(0, 1)
+#mutBest2				"--mutBest2 "	r   	(0, 1)	| mutOptBest %in% c(1,3)
+#mutBestSize			"--mutBestSize "	i	(0,15)
+mutFind1   				"--mutFind1 "       	r   	(0, 1)
+mutFind2   				"--mutFind2 "       	r   	(0, 1)
+mutOptSearch			"--mutOptSearch "	i	(1,3)
+#mutOptBest				"--mutOptBest "	i	(1,3)
+mutOptImprov			"--mutOptImprov "	i	(1,7)
+crossRateSearch    			"--crossRateSearch "	r   	(0,1)	| crossOptSearch %in% c(2,4)
+crossRateImprov    			"--crossRateImprov "	r   	(0,1)	| crossOptImprov %in% c(2,4)
+crossOptSearch			"--crossOptSearch "	i	(1,4)
+crossOptImprov			"--crossOptImprov "	i	(1,4)

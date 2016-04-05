@@ -7,7 +7,7 @@ BPDE: InputFunction.o Solution.o DifferentialEvolution.o  LagrangeMultp.o Lagran
 Solution.o: Solution.cpp Solution.h 
 	g++ -c Solution.cpp $(flag)
 	
-InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h 
+InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h ListFunctionSMD.h ListFunctionJaq.h
 	g++ -c InputFunction.cpp $(flag)
 
 DifferentialEvolution.o: DifferentialEvolution.cpp DifferentialEvolution.h

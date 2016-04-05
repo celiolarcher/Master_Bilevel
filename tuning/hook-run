@@ -17,8 +17,8 @@
 # This hook should print one numerical value: the cost that must be minimized.
 # Exit with 0 if no error, with 1 in case of error
 ###############################################################################
-EXE=./BPDE
-FIXED_PARAMS="--maxUPCalls 20000"
+EXE=./repeat3Times
+FIXED_PARAMS="--maxUPCalls 6000"
 INSTANCE=$1
 CANDIDATE=$2
 shift 2 || exit 1

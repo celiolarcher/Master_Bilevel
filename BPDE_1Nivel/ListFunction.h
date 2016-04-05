@@ -416,7 +416,7 @@ inline double funcA7UP(double x[], double y[]){  //F(x,y)
 }
 
 inline double funcA7LW(double x[], double y[]){  //f(x,y)
-  return 2*y[0]+y[1]+y[2];
+  return 2*y[0]+y[1]+2*y[2];
 }
 
 inline int funcA7CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
@@ -449,7 +449,7 @@ inline int funcA7CTRNEQLW(double x[], double y[], double constraintValuesListRet
 inline int funcA7CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
     constraintValuesListReturn[0]=2+(dualNeq[0]*(-1) + dualNeq[1]*(-2) + dualNeq[2]*(4) + dualNeq[3]*(-1) + dualNeq[4]*(0) + dualNeq[5]*(0));
     constraintValuesListReturn[1]=1+(dualNeq[0]*(1) + dualNeq[1]*(4) + dualNeq[2]*(-2) + dualNeq[3]*(0) + dualNeq[4]*(-1) + dualNeq[5]*(0));
-    constraintValuesListReturn[2]=1+(dualNeq[0]*(1) + dualNeq[1]*(-1) + dualNeq[2]*(-1) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(-1));
+    constraintValuesListReturn[2]=2+(dualNeq[0]*(1) + dualNeq[1]*(-1) + dualNeq[2]*(-1) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(-1));
     return 1;						
 }
 
@@ -476,7 +476,7 @@ inline int funcA7SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	tableau[17]=0;
 	tableau[18]=0;
 	tableau[19]=-1;
-	tableau[20]=-1;
+	tableau[20]=-2;
 
 	return 1;
 }
@@ -760,7 +760,7 @@ const double boundB1[8]={0,50,0,50,-10,20,-10,20};  //Bounds x, y
 /* Função B2 - solucao (0,2,1.88,0.91)*/
 
 inline double funcB2UP(double x[], double y[]){  //F(x,y)
-  return -x[0]*x[0] - 3*x[1]*x[1] - 4*y[0] + y[1]*y[1];
+  return -x[0]*x[0] - 3*x[1] - 4*y[0] + y[1]*y[1];
 }
 
 inline double funcB2LW(double x[], double y[]){  //f(x,y)

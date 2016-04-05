@@ -9,5 +9,7 @@
 ## then the configuration is discarded.
 ##
 ## Examples of valid logical operators are: ==  !=  >=  <=  >  <  &  |  !  %in%
-#ANTS*ITERATIONS>30000
-frequencePathRelink/maxExecutionsPR<10
+
+mutImprov1+mutImprov2>1
+
+mutFind1+mutFind2>1

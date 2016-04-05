@@ -3,8 +3,14 @@
     InputFunction::InputFunction(char *funcName){
          setFunction(funcName);
          upLevelCalls=0;
+         lwSimplexCalls=0;
     }
     
+    InputFunction::InputFunction(char *funcName, int P, int Q, int R, int S){
+         setFunctionSMD(funcName,P,Q,R,S);
+         upLevelCalls=0;
+         lwSimplexCalls=0;
+    }
     
     int InputFunction::setFunction(char* nameFunc){
       for(int i=0;i<DEFINEfunctionListSize;i++){
@@ -24,6 +30,55 @@
 	    countNeqConstraintLW=listFunction[i].numNeqConstrLW;
 	    bounds=listFunction[i].boundsVar;
 	    simplexTableauKKT=listFunction[i].funcSimplexTableauKKT;
+	    return 1;
+	}
+      }
+      
+      for(int i=0;i<DEFINEfunctionListSizeJaq;i++){
+	if(!strcmp(nameFunc,listFunctionJaq[i].name)){
+	    objFuncUPLevel=listFunctionJaq[i].funcUP;
+	    objFuncLWLevel=listFunctionJaq[i].funcLW;
+	    constrEqUP=listFunctionJaq[i].funcCTREQUP;
+	    constrNeqUP=listFunctionJaq[i].funcCTRNEQUP;
+	    constrEqLW=listFunctionJaq[i].funcCTREQLW;
+	    constrNeqLW=listFunctionJaq[i].funcCTRNEQLW;
+	    constrKKT=listFunctionJaq[i].funcCTRKKT;
+	    dimensionUP=listFunctionJaq[i].dimensionUP;
+	    dimensionLW=listFunctionJaq[i].dimensionLW;
+	    countEqConstraintUP=listFunctionJaq[i].numEqConstrUP;
+	    countNeqConstraintUP=listFunctionJaq[i].numNeqConstrUP;
+	    countEqConstraintLW=listFunctionJaq[i].numEqConstrLW;
+	    countNeqConstraintLW=listFunctionJaq[i].numNeqConstrLW;
+	    bounds=listFunctionJaq[i].boundsVar;
+	    simplexTableauKKT=listFunctionJaq[i].funcSimplexTableauKKT;
+	    return 1;
+	}
+      }
+      return 0;
+    }
+    
+    
+    int inputP, inputQ,inputR,inputS;
+
+    int InputFunction::setFunctionSMD(char* nameFunc, int P, int Q, int R, int S){
+      for(int i=0;i<DEFINEfunctionListSizeSMD;i++){
+	if(!strcmp(nameFunc,listFunctionSMD[i].name)){
+	    objFuncUPLevel=listFunctionSMD[i].funcUP;
+	    objFuncLWLevel=listFunctionSMD[i].funcLW;
+	    constrEqUP=listFunctionSMD[i].funcCTREQUP;
+	    constrNeqUP=listFunctionSMD[i].funcCTRNEQUP;
+	    constrEqLW=listFunctionSMD[i].funcCTREQLW;
+	    constrNeqLW=listFunctionSMD[i].funcCTRNEQLW;
+	    constrKKT=listFunctionSMD[i].funcCTRKKT;
+	    dimensionUP=listFunctionSMD[i].dimensionUP;
+	    dimensionLW=listFunctionSMD[i].dimensionLW;
+	    countEqConstraintUP=listFunctionSMD[i].numEqConstrUP;
+	    countNeqConstraintUP=listFunctionSMD[i].numNeqConstrUP;
+	    countEqConstraintLW=listFunctionSMD[i].numEqConstrLW;
+	    countNeqConstraintLW=listFunctionSMD[i].numNeqConstrLW;
+	    bounds=listFunctionSMD[i].boundsVar;
+	    simplexTableauKKT=listFunctionSMD[i].funcSimplexTableauKKT;
+	    inputP=P,inputQ=Q,inputR=R,inputS=S;
 	    return 1;
 	}
       }
@@ -62,6 +117,7 @@
     }
 
     int InputFunction::getSimplexTableauKKT(double x[], double y[], double tableau[]){
+        lwSimplexCalls++;
         return (*simplexTableauKKT)(x,y,tableau);
     }
     

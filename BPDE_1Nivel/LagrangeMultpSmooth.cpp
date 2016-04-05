@@ -2,6 +2,10 @@
 #define EPISILON 0
 
 #include <cmath>
+
+extern double TOL_EQ_CONST;
+extern double TOL_NEQ_CONST;
+
     double getLambda(Solution *sol, int pos, InputFunction *function){
 	return sol->vectorCharacters[function->getDimensionUP()+function->getDimensionLW()+function->getEQConstraintNumberLW()+pos];
     }

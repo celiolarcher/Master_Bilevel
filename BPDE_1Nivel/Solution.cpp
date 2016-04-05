@@ -1,5 +1,9 @@
 #include "Solution.h"
 #include <stdlib.h>
+#include <cmath>
+
+extern double TOL_EQ_CONST=10e-5;
+extern double TOL_NEQ_CONST=10e-5;
 
       double fRand(double fMin, double fMax){
           double f = (double)rand() / RAND_MAX;
@@ -22,9 +26,27 @@
           for(int i=0;i<sizeVec;i++){
 	  vectorCharacters[i]=fRand(bounds[2*i],bounds[2*i+1]);
           }
-	
-
-	
+          
+          
+/*          
+vectorCharacters[0]=1.95;
+vectorCharacters[1]=8.05;
+vectorCharacters[2]=0;
+vectorCharacters[3]=0.97;
+vectorCharacters[4]=0.97;
+vectorCharacters[5]=1.31;
+vectorCharacters[6]=6.74;
+vectorCharacters[7]=0;
+vectorCharacters[8]=0;
+*/
+/*
+         vectorCharacters[0]=0.5;
+vectorCharacters[1]=0.8;
+vectorCharacters[2]=0;
+vectorCharacters[3]=0.2;
+vectorCharacters[4]=0.8;
+         */
+         
 /*
 vectorCharacters[0]=1.95;
 vectorCharacters[1]=8.05;
@@ -80,4 +102,40 @@ vectorCharacters[5]=0;
           out<<"\n";
 
           return out;
+      }
+
+      
+      double Solution::diffZeroSolution(Solution *sol){
+          double diff=0;
+          
+          for(int i=0;i<sizeVec;i++){
+	  diff+=fabs(this->vectorCharacters[i]-sol->vectorCharacters[i]);
+          }
+          
+          return diff;
+      }
+      
+      double Solution::diffSquareSolution(Solution *sol){
+          double diff=0;
+          
+          for(int i=0;i<sizeVec;i++){
+	  diff+=(this->vectorCharacters[i]-sol->vectorCharacters[i])*(this->vectorCharacters[i]-sol->vectorCharacters[i]);
+          }
+          
+          return diff;
+      }
+      
+      
+            
+      double Solution::diffMaxSolution(Solution *sol){
+          double diff=0;
+          
+          for(int i=0;i<sizeVec;i++){
+	
+	  double aux=fabs(this->vectorCharacters[i]-sol->vectorCharacters[i]);
+	  
+	  if(diff<aux)  diff=aux;
+          }
+          
+          return diff;
       }

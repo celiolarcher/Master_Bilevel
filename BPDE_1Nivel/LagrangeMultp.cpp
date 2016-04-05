@@ -2,6 +2,9 @@
 
 #include <cmath>
 
+extern double TOL_EQ_CONST;
+extern double TOL_NEQ_CONST;
+
     int LagrangeMultp::initInstance(InputFunction *function){
 	this->function=function;
 
