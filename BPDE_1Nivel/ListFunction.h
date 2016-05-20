@@ -3,6 +3,7 @@
 #define DEFINEfunctionListSize 17
 #include <float.h>
 #include <cmath>
+#include <stdlib.h>
 
 typedef struct functionPrototype{
     int dimensionUP, dimensionLW, numEqConstrUP, numNeqConstrUP, numEqConstrLW, numNeqConstrLW;
@@ -15,6 +16,7 @@ typedef struct functionPrototype{
     int (*funcCTRNEQLW)(double x[], double y[], double constraintValuesListReturn[]);
     int (*funcCTRKKT)(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]);
     int (*funcSimplexTableauKKT)(double x[], double y[],double tableau[]);
+    int (*funcLemkeMatrix)(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
     char name[10];
 } Function;
 
@@ -70,9 +72,30 @@ inline int funcA1SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
+inline int funcA1LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=0;							  //(f)  - (-A  0 )(l1)= (-b)  
+      
+      matrixA[0]=1;
+      
+      matrixA[1]=5;
+      
+      matrixA[2]=-3;
+      
+      matrixA[3]=-1;
+      
+      matrixCB[0]=1;
+      matrixCB[1]=2*x[0];
+      matrixCB[2]=108-2*x[0];
+      matrixCB[3]=-4-2*x[0];
+      matrixCB[4]=0;
+
+      
+      return 1;
+}
+
 const double boundA1[4]={0,54,0,18};  //Bounds x, y
 
-//const double boundA1[4]={0,10e5,0,10e5};  //Bounds x, y
+//const double boundA1[4]={0,1e3,0,1e3};  //Bounds x, y
 
 
 
@@ -132,7 +155,7 @@ inline int funcA2SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 }
 
 
-//const double boundA2[4]={0,10e5,0,10e5};  //Bounds x, y
+//const double boundA2[4]={0,1e3,0,1e3};  //Bounds x, y
 
 const double boundA2[4]={0,16,0,14};  //Bounds x, y
 
@@ -194,7 +217,7 @@ inline int funcA3SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
-//const double boundA3[4]={0,10e5,0,10e5};  //Bounds x, y
+//const double boundA3[4]={0,1e3,0,1e3};  //Bounds x, y
 
 const double boundA3[4]={0,18,0,18};  //Bounds x, y
 
@@ -273,8 +296,61 @@ inline int funcA4SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
-//const double boundA4[10]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
-const double boundA4[10]={0,0.75,0,1.5,0,10e5,0,1.5,0,2};  //Bounds x, y
+
+
+inline int funcA4LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=0;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=0;
+      matrixQ[4]=0;
+      matrixQ[5]=0;
+      matrixQ[6]=0;
+      matrixQ[7]=0;
+      matrixQ[8]=0;
+      
+      matrixA[0]=-1;
+      matrixA[1]=1;
+      matrixA[2]=1;
+      
+      matrixA[3]=-1;
+      matrixA[4]=2;
+      matrixA[5]=-0.5;
+      
+      matrixA[6]=2;
+      matrixA[7]=-1;
+      matrixA[8]=-0.5;
+      
+      matrixA[9]=-1;
+      matrixA[10]=0;
+      matrixA[11]=0;
+      
+      matrixA[12]=0;
+      matrixA[13]=-1;
+      matrixA[14]=0;
+      
+      matrixA[15]=0;
+      matrixA[16]=0;
+      matrixA[17]=-1;
+      
+      
+      matrixCB[0]=1;
+      matrixCB[1]=1;
+      matrixCB[2]=2;
+      matrixCB[3]=1;
+      matrixCB[4]=-2*x[0]+1;
+      matrixCB[5]=-2*x[1]+1;
+      matrixCB[6]=0;
+      matrixCB[7]=0;
+      matrixCB[8]=0;
+
+      
+      return 1;
+}
+
+
+//const double boundA4[10]={0,1e3,0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+const double boundA4[10]={0,0.75,0,1.5,0,1e3,0,1.5,0,2};  //Bounds x, y
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -402,7 +478,7 @@ inline int funcA6SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
-//const double boundA6[8]={0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+//const double boundA6[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
 const double boundA6[8]={0,2,0,2,0,5.5,0,8};  //Bounds x, y
 
 
@@ -481,7 +557,63 @@ inline int funcA7SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
-//const double boundA7[10]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+
+inline int funcA7LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=0;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=0;
+      matrixQ[4]=0;
+      matrixQ[5]=0;
+      matrixQ[6]=0;
+      matrixQ[7]=0;
+      matrixQ[8]=0;
+
+      
+      matrixA[0]=-1;
+      matrixA[1]=1;
+      matrixA[2]=1;
+      
+      matrixA[3]=-2;
+      matrixA[4]=4;
+      matrixA[5]=-1;
+      
+      matrixA[6]=4;
+      matrixA[7]=-2;
+      matrixA[8]=-1;
+      
+      
+      matrixA[9]=-1;
+      matrixA[10]=0;
+      matrixA[11]=0;
+      
+      
+      matrixA[12]=0;
+      matrixA[13]=-1;
+      matrixA[14]=0;
+      
+      
+      matrixA[15]=0;
+      matrixA[16]=0;
+      matrixA[17]=-1;
+      
+      matrixCB[0]=2;
+      matrixCB[1]=1;
+      matrixCB[2]=2;
+      matrixCB[3]=1;
+      matrixCB[4]=-4*x[0]+2;
+      matrixCB[5]=-4*x[1]+2;
+      matrixCB[6]=0;
+      matrixCB[7]=0;
+      matrixCB[8]=0;
+
+      
+      return 1;
+}
+
+
+
+//const double boundA7[10]={0,1e3,0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 const double boundA7[10]={0,1.5,0,1,0,1.5,0,1.5,0,2};  //Bounds x, y
 
@@ -560,9 +692,49 @@ inline int funcA8SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
+
+inline int funcA8LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=0;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=0;
+      
+      matrixA[0]=-9;
+      matrixA[1]=-7;
+      
+      matrixA[2]=0;
+      matrixA[3]=0;
+      
+      matrixA[4]=-5;
+      matrixA[5]=-4;
+      
+      matrixA[6]=1;
+      matrixA[7]=5;
+      
+      matrixA[8]=-1;
+      matrixA[9]=-0;
+      
+      matrixA[10]=0;
+      matrixA[11]=-1;
+      
+   
+      matrixCB[0]=-9;
+      matrixCB[1]=9;
+      matrixCB[2]=6*x[0]-x[1]-x[2]+3*x[3]-15;
+      matrixCB[3]=-(4*x[1]+5*x[2]+10*x[3]-26);
+      matrixCB[4]=9*x[0]-9*x[1]+9*x[2]-5*x[3]-5;
+      matrixCB[5]=-5*x[0]-3*x[1]-x[2]-9*x[3]+32;
+      matrixCB[6]=0;
+      matrixCB[7]=0;
+
+      
+      return 1;
+}
+
+
 const double boundA8[12]={0,5,0,6,0,4,0,3,0,7,0,4};  //Bounds x, y
 
-//const double boundA8[12]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+//const double boundA8[12]={0,1e3,0,1e3,0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -677,6 +849,51 @@ inline int funcA9SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 
     return 1;
 }
+
+
+
+inline int funcA9LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      								  //(f)  - (-A  0 )(l1)= (-b)  
+      for(int i=0;i<36;i++)
+          matrixQ[i]=0;
+      
+      double D[7][6]={{10,-9,-6,4,6,-3},{-5,-7,1,1,-6,4},{10,5,6,-4,3,-1},{-4,-3,-4,-4,1,1},{-10,-7,7,7,2,7},{2,-5,10,1,4,5},{-5,-5,-6,-5,1,-12}};
+
+      for(int i=0;i<7;i++)
+          for(int j=0;j<6;j++)
+	  matrixA[i*6+j]=D[i][j];
+      
+      for(int i=7;i<19;i+=2){
+          for(int j=0;j<12;j++)
+	  matrixA[i*6+j]=0;
+          
+          matrixA[i*6 + (i-7)/2]=-1;
+          matrixA[(i+1)*6 + (i-7)/2]=1;
+      }
+	      
+      double gradf[6]={3,-2,-3,-3,1,6};
+      
+      for(int i=0;i<6;i++)   matrixCB[i]=gradf[i];
+      
+      
+      double C[7][10]={{-5,7,4,-2,3,-9,9,-1,-3,11},{6,-5,-3,-2,8,5,8,-3,7,3},{-6,-4,2,0,-2,3,-3,2,2,4},{5,6,0,-4,3,-8,1,0,2,-3},{11,-11,4,5,-10,-6,14,-7,-11,-3},{9,-12,-4,-10,2,8,5,-11,-4,1},{7,-2,-6,0,-11,1,-2,-2,-1,-2}};
+      double r2[7]={83,92,168,-96,-133,89,-192};
+
+      for(int i=0;i<7;i++){
+          matrixCB[i+6]=r2[i];
+          for(int j=0;j<10;j++)
+	  matrixCB[i+6]-=C[i][j]*x[j];
+      }
+      
+      for(int i=13;i<25;i+=2){
+          matrixCB[i]=0;
+          matrixCB[i+1]=10;
+      } 
+      
+      return 1;
+}
+
+
 
 const double boundA9[32]={0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10};  //Bounds x, y
 
@@ -819,7 +1036,7 @@ inline int funcB2SimplexTableauKKT(double x[], double y[], double tableau[]){  /
     return 1;
 }
 
-//const double boundB2[8]={0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+//const double boundB2[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 const double boundB2[8]={0,2,0,2,0,6,0,4};  //Bounds x, y - Analise Indireta (Não Linear)
 
@@ -881,13 +1098,13 @@ inline int funcB3CTRNEQLW(double x[], double y[], double constraintValuesListRet
 
 inline int funcB3CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
 
-    constraintValuesListReturn[0]=2*y[0]+(dualNeq[0]*(0.4) + dualNeq[1]*(0.6) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(-1) + dualNeq[5]*(1) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(0) + dualNeq[11]*(0));
+    constraintValuesListReturn[0]=2*(y[0]-4)+(dualNeq[0]*(0.4) + dualNeq[1]*(0.6) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(-1) + dualNeq[5]*(1) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(0) + dualNeq[11]*(0));
 
-    constraintValuesListReturn[1]=2*y[1]+(dualNeq[0]*(0.7) + dualNeq[1]*(0.3) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(-1) + dualNeq[7]*(1) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(0) + dualNeq[11]*(0));
+    constraintValuesListReturn[1]=2*(y[1]-13)+(dualNeq[0]*(0.7) + dualNeq[1]*(0.3) + dualNeq[2]*(0) + dualNeq[3]*(0) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(-1) + dualNeq[7]*(1) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(0) + dualNeq[11]*(0));
 
-    constraintValuesListReturn[2]=2*y[2]+(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(0.4) + dualNeq[3]*(0.6) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(-1) + dualNeq[9]*(1) + dualNeq[10]*(0) + dualNeq[11]*(0));
+    constraintValuesListReturn[2]=2*(y[2]-35)+(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(0.4) + dualNeq[3]*(0.6) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(-1) + dualNeq[9]*(1) + dualNeq[10]*(0) + dualNeq[11]*(0));
 
-    constraintValuesListReturn[3]=2*y[3]+(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(0.7) + dualNeq[3]*(0.3) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(-1) + dualNeq[11]*(1));
+    constraintValuesListReturn[3]=2*(y[3]-2)+(dualNeq[0]*(0) + dualNeq[1]*(0) + dualNeq[2]*(0.7) + dualNeq[3]*(0.3) + dualNeq[4]*(0) + dualNeq[5]*(0) + dualNeq[6]*(0) + dualNeq[7]*(0) + dualNeq[8]*(0) + dualNeq[9]*(0) + dualNeq[10]*(-1) + dualNeq[11]*(1));
   
     return 1;						
 }
@@ -952,6 +1169,113 @@ inline int funcB3SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 
     return 1;
 }
+
+
+inline int funcB3LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=2;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=0;
+      
+      matrixQ[4]=0;
+      matrixQ[5]=2;
+      matrixQ[6]=0;
+      matrixQ[7]=0;
+      
+      matrixQ[8]=0;
+      matrixQ[9]=0;
+      matrixQ[10]=2;
+      matrixQ[11]=0;
+      
+      matrixQ[12]=0;
+      matrixQ[13]=0;
+      matrixQ[14]=0;
+      matrixQ[15]=2;
+      
+      
+      matrixA[0]=0.4;
+      matrixA[1]=0.7;
+      matrixA[2]=0;
+      matrixA[3]=0;
+      
+      matrixA[4]=0.6;
+      matrixA[5]=0.3;
+      matrixA[6]=0;
+      matrixA[7]=0;
+      
+      matrixA[8]=0;
+      matrixA[9]=0;
+      matrixA[10]=0.4;
+      matrixA[11]=0.7;
+      
+      matrixA[12]=0;
+      matrixA[13]=0;
+      matrixA[14]=0.6;
+      matrixA[15]=0.3;
+      
+      matrixA[16]=-1;
+      matrixA[17]=0;
+      matrixA[18]=0;
+      matrixA[19]=0;
+      
+      matrixA[20]=1;
+      matrixA[21]=0;
+      matrixA[22]=0;
+      matrixA[23]=0;
+      
+      matrixA[24]=0;
+      matrixA[25]=-1;
+      matrixA[26]=0;
+      matrixA[27]=0;
+      
+      matrixA[28]=0;
+      matrixA[29]=1;
+      matrixA[30]=0;
+      matrixA[31]=0;
+      
+      matrixA[32]=0;
+      matrixA[33]=0;
+      matrixA[34]=-1;
+      matrixA[35]=0;
+      
+      matrixA[36]=0;
+      matrixA[37]=0;
+      matrixA[38]=1;
+      matrixA[39]=0;
+      
+      matrixA[40]=0;
+      matrixA[41]=0;
+      matrixA[42]=0;
+      matrixA[43]=-1;
+      
+      matrixA[44]=0;
+      matrixA[45]=0;
+      matrixA[46]=0;
+      matrixA[47]=1;
+      
+      
+      
+      matrixCB[0]=-8;
+      matrixCB[1]=-26;
+      matrixCB[2]=-70;
+      matrixCB[3]=-4;
+      matrixCB[4]=x[0];
+      matrixCB[5]=x[1];
+      matrixCB[6]=x[2];
+      matrixCB[7]=x[3];
+      matrixCB[8]=0;
+      matrixCB[9]=20;
+      matrixCB[10]=0;
+      matrixCB[11]=20;
+      matrixCB[12]=0;
+      matrixCB[13]=40;
+      matrixCB[14]=0;
+      matrixCB[15]=40;
+
+      
+      return 1;
+}
+
 
 const double boundB3[16]={0,10,0,5,0,15,0,20,0,20,0,20,0,40,0,40};  //Bounds x, y
 
@@ -1090,7 +1414,7 @@ inline int funcB4SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 
 const double boundB4[18]={0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10,0,10};  //Bounds x, y
 
-//const double boundB4[18]={0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+//const double boundB4[18]={0,1e3,0,1e3,0,1e3,0,1e3,0,1e3,0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1156,7 +1480,7 @@ inline int funcB5SimplexTableauKKT(double x[], double y[], double tableau[]){  /
     return 1;
 }
 
-//const double boundB5[8]={0,10e5,0,10e5,0,10e5,0,10e5};  //Bounds x, y
+//const double boundB5[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 const double boundB5[8]={0,10,0,10,0,10,0,10};  //Bounds x, y  - Analise Indireta (Não Linear)
 
@@ -1240,6 +1564,47 @@ inline int funcB7SimplexTableauKKT(double x[], double y[], double tableau[]){  /
     return 1;
 }
 
+
+/*Problema y negativo LEMKE*/
+inline int funcB7LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=2;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=2;
+
+      
+      matrixA[0]=2;
+      matrixA[1]=0;
+      
+      matrixA[2]=0;
+      matrixA[3]=2;
+       
+      matrixA[4]=-1;
+      matrixA[5]=0;
+      
+      matrixA[6]=1;
+      matrixA[7]=0;
+      
+      matrixA[8]=0;
+      matrixA[9]=-1;
+      
+      matrixA[10]=0;
+      matrixA[11]=1;
+      
+      
+      matrixCB[0]=-2*x[0]+40;
+      matrixCB[1]=-2*x[1]+40;
+      matrixCB[2]=x[0]-10;
+      matrixCB[3]=x[1]-10;
+      matrixCB[4]=10;
+      matrixCB[5]=20;
+      matrixCB[6]=10;
+      matrixCB[7]=20;
+      
+      return 1;
+}
+
+
 const double boundB7[8]={0,50,0,50,-10,20,-10,20};  //Bounds x, y
 
 
@@ -1308,7 +1673,40 @@ inline int funcB8SimplexTableauKKT(double x[], double y[], double tableau[]){  /
     return 1;
 }
 
-//const double boundB8[8]={-10e5,10e5,-10e5,15,0,10,0,10};  //Bounds x, y
+
+inline int funcB8LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=2;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=2;
+
+      
+      matrixA[0]=-1;
+      matrixA[1]=0;
+      
+      matrixA[2]=1;
+      matrixA[3]=0;
+       
+      matrixA[4]=0;
+      matrixA[5]=-1;
+      
+      matrixA[6]=0;
+      matrixA[7]=1;
+      
+      
+      matrixCB[0]=-2*x[0];
+      matrixCB[1]=-2*x[1];
+      matrixCB[2]=0;
+      matrixCB[3]=10;
+      matrixCB[4]=0;
+      matrixCB[5]=10;
+      
+      return 1;
+}
+
+
+
+//const double boundB8[8]={-1e3,1e3,-1e3,15,0,10,0,10};  //Bounds x, y
 
 const double boundB8[8]={0,20,5,15,0,10,0,10};  //Bounds x, y
 
@@ -1381,7 +1779,47 @@ inline int funcB9SimplexTableauKKT(double x[], double y[], double tableau[]){  /
     return 1;
 }
 
-//const double boundB9[8]={0,10e5,0,10e5,0,10e5};  //Bounds x, y
+
+inline int funcB9LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=4;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=4;
+
+      
+      matrixA[0]=5;
+      matrixA[1]=4;
+      
+      matrixA[2]=-5;
+      matrixA[3]=4;
+       
+      matrixA[4]=-4;
+      matrixA[5]=5;
+      
+      matrixA[6]=4;
+      matrixA[7]=5;
+      
+      matrixA[8]=-1;
+      matrixA[9]=0;
+      
+      matrixA[10]=0;
+      matrixA[11]=-1;
+      
+      
+      matrixCB[0]=x[0]-8;
+      matrixCB[1]=-2;
+      matrixCB[2]=-4*x[0]+12;
+      matrixCB[3]=4*x[0]-4;
+      matrixCB[4]=-4*x[0]+4;
+      matrixCB[5]=4*x[0]-4;
+      matrixCB[6]=0;
+      matrixCB[7]=0;
+      
+      return 1;
+}
+
+
+//const double boundB9[8]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 const double boundB9[6]={0,2,0,2,0,1};  //Bounds x, y
 
@@ -1389,23 +1827,23 @@ const double boundB9[6]={0,2,0,2,0,1};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,boundA1,funcA1UP,funcA1LW,funcA1CTREQUP,funcA1CTRNEQUP, funcA1CTREQLW,funcA1CTRNEQLW,funcA1CTKKT,funcA1SimplexTableauKKT,"funcA1"},
-						     {1,1,0,0,0,7,boundA2,funcA2UP,funcA2LW,funcA2CTREQUP,funcA2CTRNEQUP, funcA2CTREQLW,funcA2CTRNEQLW,funcA2CTKKT,funcA2SimplexTableauKKT,"funcA2"},
-						     {1,1,0,0,0,8,boundA3,funcA3UP,funcA3LW,funcA3CTREQUP,funcA3CTRNEQUP, funcA3CTREQLW,funcA3CTRNEQLW,funcA3CTKKT,funcA3SimplexTableauKKT,"funcA3"},
-						     {2,3,0,2,0,6,boundA4,funcA4UP,funcA4LW,funcA4CTREQUP,funcA4CTRNEQUP, funcA4CTREQLW,funcA4CTRNEQLW,funcA4CTKKT,funcA4SimplexTableauKKT,"funcA4"},
-						     {1,2,0,2,0,5,boundA5,funcA5UP,funcA5LW,funcA5CTREQUP,funcA5CTRNEQUP, funcA5CTREQLW,funcA5CTRNEQLW,funcA5CTKKT,funcA5SimplexTableauKKT,"funcA5"},
-						     {2,2,0,3,0,4,boundA6,funcA6UP,funcA6LW,funcA6CTREQUP,funcA6CTRNEQUP, funcA6CTREQLW,funcA6CTRNEQLW,funcA6CTKKT,funcA6SimplexTableauKKT,"funcA6"},
-						     {2,3,0,3,0,6,boundA7,funcA7UP,funcA7LW,funcA7CTREQUP,funcA7CTRNEQUP, funcA7CTREQLW,funcA7CTRNEQLW,funcA7CTKKT,funcA7SimplexTableauKKT,"funcA7"},
-						     {4,2,0,10,0,6,boundA8,funcA8UP,funcA8LW,funcA8CTREQUP,funcA8CTRNEQUP, funcA8CTREQLW,funcA8CTRNEQLW,funcA8CTKKT,funcA8SimplexTableauKKT,"funcA8"},
-						     {10,6,0,22,0,19,boundA9,funcA9UP,funcA9LW,funcA9CTREQUP,funcA9CTRNEQUP, funcA9CTREQLW,funcA9CTRNEQLW,funcA9CTKKT,funcA9SimplexTableauKKT,"funcA9"},
-						     {2,2,0,5,0,6,boundB1,funcB1UP,funcB1LW,funcB1CTREQUP,funcB1CTRNEQUP, funcB1CTREQLW,funcB1CTRNEQLW,funcB1CTKKT,funcB1SimplexTableauKKT,"funcB1"},
-						     {2,2,0,3,0,4,boundB2,funcB2UP,funcB2LW,funcB2CTREQUP,funcB2CTRNEQUP, funcB2CTREQLW,funcB2CTRNEQLW,funcB2CTKKT,funcB2SimplexTableauKKT,"funcB2"},
-						     {4,4,0,9,0,12,boundB3,funcB3UP,funcB3LW,funcB3CTREQUP,funcB3CTRNEQUP, funcB3CTREQLW,funcB3CTRNEQLW,funcB3CTKKT,funcB3SimplexTableauKKT,"funcB3"},
-						     {3,6,0,4,0,9,boundB4,funcB4UP,funcB4LW,funcB4CTREQUP,funcB4CTRNEQUP, funcB4CTREQLW,funcB4CTRNEQLW,funcB4CTKKT,funcB4SimplexTableauKKT,"funcB4"},
-						     {2,2,0,3,0,4,boundB5,funcB5UP,funcB5LW,funcB5CTREQUP,funcB5CTRNEQUP, funcB5CTREQLW,funcB5CTRNEQLW,funcB5CTKKT,funcB5SimplexTableauKKT,"funcB5"},
-						     {2,2,0,5,0,6,boundB7,funcB7UP,funcB7LW,funcB7CTREQUP,funcB7CTRNEQUP, funcB7CTREQLW,funcB7CTRNEQLW,funcB7CTKKT,funcB7SimplexTableauKKT,"funcB7"},
-						     {2,2,0,3,0,4,boundB8,funcB8UP,funcB8LW,funcB8CTREQUP,funcB8CTRNEQUP, funcB8CTREQLW,funcB8CTRNEQLW,funcB8CTKKT,funcB8SimplexTableauKKT,"funcB8"},
-						     {1,2,0,1,0,6,boundB9,funcB9UP,funcB9LW,funcB9CTREQUP,funcB9CTRNEQUP, funcB9CTREQLW,funcB9CTRNEQLW,funcB9CTKKT,funcB9SimplexTableauKKT,"funcB9"}
+const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,boundA1,funcA1UP,funcA1LW,funcA1CTREQUP,funcA1CTRNEQUP, funcA1CTREQLW,funcA1CTRNEQLW,funcA1CTKKT,funcA1SimplexTableauKKT,funcA1LemkeMatrix,"funcA1"},
+				    {1,1,0,0,0,7,boundA2,funcA2UP,funcA2LW,funcA2CTREQUP,funcA2CTRNEQUP, funcA2CTREQLW,funcA2CTRNEQLW,funcA2CTKKT,funcA2SimplexTableauKKT,NULL,"funcA2"},
+				    {1,1,0,0,0,8,boundA3,funcA3UP,funcA3LW,funcA3CTREQUP,funcA3CTRNEQUP, funcA3CTREQLW,funcA3CTRNEQLW,funcA3CTKKT,funcA3SimplexTableauKKT,NULL,"funcA3"},
+				    {2,3,0,2,0,6,boundA4,funcA4UP,funcA4LW,funcA4CTREQUP,funcA4CTRNEQUP, funcA4CTREQLW,funcA4CTRNEQLW,funcA4CTKKT,funcA4SimplexTableauKKT,funcA4LemkeMatrix,"funcA4"},
+				    {1,2,0,2,0,5,boundA5,funcA5UP,funcA5LW,funcA5CTREQUP,funcA5CTRNEQUP, funcA5CTREQLW,funcA5CTRNEQLW,funcA5CTKKT,funcA5SimplexTableauKKT,NULL,"funcA5"},
+				    {2,2,0,3,0,4,boundA6,funcA6UP,funcA6LW,funcA6CTREQUP,funcA6CTRNEQUP, funcA6CTREQLW,funcA6CTRNEQLW,funcA6CTKKT,funcA6SimplexTableauKKT,NULL,"funcA6"},
+				    {2,3,0,3,0,6,boundA7,funcA7UP,funcA7LW,funcA7CTREQUP,funcA7CTRNEQUP, funcA7CTREQLW,funcA7CTRNEQLW,funcA7CTKKT,funcA7SimplexTableauKKT,funcA7LemkeMatrix,"funcA7"},
+				    {4,2,0,10,0,6,boundA8,funcA8UP,funcA8LW,funcA8CTREQUP,funcA8CTRNEQUP, funcA8CTREQLW,funcA8CTRNEQLW,funcA8CTKKT,funcA8SimplexTableauKKT,funcA8LemkeMatrix,"funcA8"},
+				    {10,6,0,22,0,19,boundA9,funcA9UP,funcA9LW,funcA9CTREQUP,funcA9CTRNEQUP, funcA9CTREQLW,funcA9CTRNEQLW,funcA9CTKKT,funcA9SimplexTableauKKT,funcA9LemkeMatrix,"funcA9"},
+				    {2,2,0,5,0,6,boundB1,funcB1UP,funcB1LW,funcB1CTREQUP,funcB1CTRNEQUP, funcB1CTREQLW,funcB1CTRNEQLW,funcB1CTKKT,funcB1SimplexTableauKKT,NULL,"funcB1"},
+				    {2,2,0,3,0,4,boundB2,funcB2UP,funcB2LW,funcB2CTREQUP,funcB2CTRNEQUP, funcB2CTREQLW,funcB2CTRNEQLW,funcB2CTKKT,funcB2SimplexTableauKKT,NULL,"funcB2"},
+				    {4,4,0,9,0,12,boundB3,funcB3UP,funcB3LW,funcB3CTREQUP,funcB3CTRNEQUP, funcB3CTREQLW,funcB3CTRNEQLW,funcB3CTKKT,funcB3SimplexTableauKKT,funcB3LemkeMatrix,"funcB3"},
+				    {3,6,0,4,0,9,boundB4,funcB4UP,funcB4LW,funcB4CTREQUP,funcB4CTRNEQUP, funcB4CTREQLW,funcB4CTRNEQLW,funcB4CTKKT,funcB4SimplexTableauKKT,NULL,"funcB4"},
+				    {2,2,0,3,0,4,boundB5,funcB5UP,funcB5LW,funcB5CTREQUP,funcB5CTRNEQUP, funcB5CTREQLW,funcB5CTRNEQLW,funcB5CTKKT,funcB5SimplexTableauKKT,NULL,"funcB5"},
+				    {2,2,0,5,0,6,boundB7,funcB7UP,funcB7LW,funcB7CTREQUP,funcB7CTRNEQUP, funcB7CTREQLW,funcB7CTRNEQLW,funcB7CTKKT,funcB7SimplexTableauKKT,funcB7LemkeMatrix,"funcB7"},
+				    {2,2,0,3,0,4,boundB8,funcB8UP,funcB8LW,funcB8CTREQUP,funcB8CTRNEQUP, funcB8CTREQLW,funcB8CTRNEQLW,funcB8CTKKT,funcB8SimplexTableauKKT,funcB8LemkeMatrix,"funcB8"},
+				    {1,2,0,1,0,6,boundB9,funcB9UP,funcB9LW,funcB9CTREQUP,funcB9CTRNEQUP, funcB9CTREQLW,funcB9CTRNEQLW,funcB9CTKKT,funcB9SimplexTableauKKT,funcB9LemkeMatrix,"funcB9"}
 };
 
 

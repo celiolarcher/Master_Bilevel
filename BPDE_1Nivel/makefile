@@ -1,4 +1,4 @@
-flag=-O2
+flag=-O2 
 
 all: BPDE
 BPDE: InputFunction.o Solution.o DifferentialEvolution.o  LagrangeMultp.o LagrangeMultpSimplex.o LagrangeMultpSmooth.o APMPenalty.o APMDEBPenalty.o DEBPenalty.o main.o 
@@ -7,7 +7,7 @@ BPDE: InputFunction.o Solution.o DifferentialEvolution.o  LagrangeMultp.o Lagran
 Solution.o: Solution.cpp Solution.h 
 	g++ -c Solution.cpp $(flag)
 	
-InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h ListFunctionSMD.h ListFunctionJaq.h
+InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h ListFunctionSMD.h ListFunctionJaq.h ListFunctionOthers.h
 	g++ -c InputFunction.cpp $(flag)
 
 DifferentialEvolution.o: DifferentialEvolution.cpp DifferentialEvolution.h

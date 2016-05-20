@@ -57,6 +57,9 @@ class DifferentialEvolution{
       public: static int improveInitSet(int sizePopSearch, int sizePopNextStep, double find1, double find2);
       public: static int improveInitSetSimilarity(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest);
       
+      public: static int improveInitSetDispersion(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest);
+      
+      
       public: static int clearPopulation();
       
       

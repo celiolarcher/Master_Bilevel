@@ -1,8 +1,8 @@
 #ifndef SOLUTION_INCLUDED
 #define SOLUTION_INCLUDED
 
-//#define TOL_EQ_CONST 10e-3
-//#define TOL_NEQ_CONST 10e-5
+//#define TOL_EQ_CONST 1e-2
+//#define TOL_NEQ_CONST 1e-4
 
 #include "InputFunction.h"
 #include <iostream>
@@ -19,6 +19,10 @@ class Solution{
     public: bool feasible;
     public: double upLevelFunction;
     public: double score;
+    
+    
+    public: double penaltyValue;
+    
     
     public: double calcScore(InputFunction *function);
     public: int initValue(double initVec[]);

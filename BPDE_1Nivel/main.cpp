@@ -5,9 +5,9 @@
 #include <fstream>
 #include "DefaultParameters.h"
 
-#define PENALTY_VALUE 10e3
+#define PENALTY_VALUE 1e4
 
-void parseOptions(double *options, int argc,char *argv[],char **file,long int *seed){ //Traduz os parâmetros recebidos pelo programa
+void parseOptions(double *options, int dim[], int argc,char *argv[],char **file,long int *seed){ //Traduz os parâmetros recebidos pelo programa
     int i=0;
     while(i<argc){
          if(!strcmp(argv[i],"-i")){
@@ -20,10 +20,10 @@ void parseOptions(double *options, int argc,char *argv[],char **file,long int *s
 
             i+=2;
         }
-	else if(!strcmp(argv[i],"--seed")){
+        else if(!strcmp(argv[i],"--seed")){
             (*seed)=atoi(argv[i+1]);
             i+=2;
-	}
+        }
         else if(!strcmp(argv[i],"--populationSearch")){
             options[0]=atoi(argv[i+1]);
             i+=2;
@@ -76,6 +76,12 @@ void parseOptions(double *options, int argc,char *argv[],char **file,long int *s
         }else if(!strcmp(argv[i],"--crossRateSearch")){
             options[16]=atof(argv[i+1]);
             i+=2;
+        }else if(!strcmp(argv[i],"--dim")){
+            dim[0]=atoi(argv[i+1]);
+	dim[1]=atoi(argv[i+2]);
+	dim[2]=atoi(argv[i+3]);
+	dim[3]=atoi(argv[i+4]);
+            i+=5;
         }
         
         else i++;
@@ -98,8 +104,8 @@ using namespace std;
 int main(int argc, char *argv[]){
       if(argc<2){
           srand(8990192031);
-          //InputFunction *function=new InputFunction("funcSMD1",3,2,2,0);
-          InputFunction *function=new InputFunction("funcJ2");
+          InputFunction *function=new InputFunction("funcSMD1",3,2,2,0);
+          //InputFunction *function=new InputFunction("funcJ2");
           SolutionDecoder *decoder=new LagrangeMultpSimplex();
           PenaltySolution *penalty=new APMDEBPenalty();
           decoder->initInstance(function);
@@ -163,54 +169,66 @@ int main(int argc, char *argv[]){
       }else{
 
 
-
-
           double *options=new double[COUNTPARAMETERS];
           for(int i=0;i<COUNTPARAMETERS;i++)options[i]=-1;
 
           long int seed=911123193131;
           char *file;
-
-          parseOptions(options,argc,argv,&file,&seed);
+          int dim[4]={-1,-1,-1,-1};
+          
+          
+          parseOptions(options,dim,argc,argv,&file,&seed);
           for(int i=0;i<COUNTPARAMETERS;i++){
 	        if(options[i]==-1)options[i]=defaultParameters[i];
           }
 
           srand(seed);
-          InputFunction *function=new InputFunction(file);
-
+          
+          InputFunction *function;
+          if(dim[0]<0)
+	function=new InputFunction(file);
+          else
+	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
+          
 
           SolutionDecoder *decoder=new LagrangeMultpSimplex();
           PenaltySolution *penalty=new APMDEBPenalty();
           decoder->initInstance(function);
 
-          TOL_EQ_CONST=10e-5;
-          TOL_NEQ_CONST=10e-5;
+          TOL_EQ_CONST=1e-4;
+          TOL_NEQ_CONST=1e-4;
           
           InfeasibleAvaliation=0;
           
-          DifferentialEvolution::initPopulation(decoder,penalty,options[0]);
-        //  DifferentialEvolution::initPopulationNelderMeadMethod(decoder,penalty,options[0]);
+          DifferentialEvolution::initPopulation(decoder,penalty,options[0]);  
+          
+          //DifferentialEvolution::initPopulation(decoder,penalty,options[1]);  //Versão sem aprimoramento inicial
+          
+          //DifferentialEvolution::initPopulationNelderMeadMethod(decoder,penalty,options[0]);
           
           
-          DifferentialEvolution::improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11]);
+       //   DifferentialEvolution::improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11]);          
+          DifferentialEvolution::improveInitSetDispersion(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11]);
 
-          Solution *bestTurn=DifferentialEvolution::best->clone();
+         // TOL_EQ_CONST=1e-4;
+//          // TOL_NEQ_CONST=1e-4;
+          
+         // Solution *bestTurn=DifferentialEvolution::best->clone();
                     
 //          DifferentialEvolution::decodifyPopulation();
           
-          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<10e7;i++){      
+          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<1e7;i++){      
 	  /*
 	          if(function->getUPLevelCalls()>1500){
-		  //TOL_EQ_CONST=10e-4;
-		  TOL_NEQ_CONST=10e-4;
+		  //TOL_EQ_CONST=1e-4;
+		  TOL_NEQ_CONST=1e-4;
 		  DifferentialEvolution::decodifyPopulation();
 	          }
 	
 	/*
 	          if(function->getUPLevelCalls()>2500){
-		  TOL_EQ_CONST=10e-4;
-		  TOL_NEQ_CONST=10e-4;
+		  TOL_EQ_CONST=1e-4;
+		  TOL_NEQ_CONST=1e-4;
 		  DifferentialEvolution::decodifyPopulation();
 	          }*/
 	          
@@ -233,6 +251,21 @@ int main(int argc, char *argv[]){
 		else if(options[13]==7)  
 		  DifferentialEvolution::mutatePopulation_Target_2(options[3]+rd,options[3]+rd,0,options[1]);
 		
+		//versão bounded 
+		else if(options[13]==8)
+		  DifferentialEvolution::mutatePopulation_TargetToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]); 
+		else if(options[13]==9)
+		  DifferentialEvolution::mutatePopulation_TargetToRand_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
+		else if(options[13]==10)
+		  DifferentialEvolution::mutatePopulation_Target_1_Bounded(options[3]+rd,0,options[1]);
+		else if(options[13]==11)
+		  DifferentialEvolution::mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
+		else if(options[13]==12)
+		  DifferentialEvolution::mutatePopulation_Rand_1_Bounded(options[3]+rd,0,options[1]);
+		else if(options[13]==13)
+		  DifferentialEvolution::mutatePopulation_Rand_2_Bounded(options[3]+rd,0,options[1]);
+		else if(options[13]==14)  
+		  DifferentialEvolution::mutatePopulation_Target_2_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
 		
 	/*
 		if(options[13]==1)
@@ -266,7 +299,7 @@ int main(int argc, char *argv[]){
 		
 		DifferentialEvolution::selectPopulation();
 		/*
-		if(bestTurn->diffMaxSolution(DifferentialEvolution::best)>10e-4){
+		if(bestTurn->diffMaxSolution(DifferentialEvolution::best)>1e-4){
 		    cout<<"it "<<i<<"\n";
 		      delete bestTurn;
 		      bestTurn=DifferentialEvolution::best->clone();

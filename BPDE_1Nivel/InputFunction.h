@@ -3,6 +3,7 @@
 #include "ListFunction.h"
 #include "ListFunctionSMD.h"
 #include "ListFunctionJaq.h"
+#include "ListFunctionOthers.h"
 
 class InputFunction{
     private: double (*objFuncUPLevel)(double x[], double y[]);
@@ -13,6 +14,7 @@ class InputFunction{
     private: int (*constrNeqLW)(double x[], double y[], double constraintValuesListReturnt[]);
     private: int (*constrKKT)(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]);
     private: int (*simplexTableauKKT)(double x[], double y[], double tableau[]);
+    private: int (*lemkeMatrix)(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
     private: int dimensionUP;
 	 int dimensionLW;
 	 int countEqConstraintUP;
@@ -35,6 +37,7 @@ class InputFunction{
     public: int constraintsSlackness(double  dualNeq[], double constraintNeqValueList[], double constraintValuesListReturn[]); //Válida se =0
     public: int constraintsSlackness(double x[], double y[], double  dualNeq[], double constraintValuesListReturn[]); //Válida se =0
     public: int getSimplexTableauKKT(double x[], double y[], double tableau[]);
+    public: int getLemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
     public: int setFunction(char *nameFunc);    
     public: int setFunctionSMD(char *nameFunc,int P, int Q, int R, int S);
     

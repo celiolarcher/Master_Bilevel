@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <cmath>
 
-extern double TOL_EQ_CONST=10e-5;
-extern double TOL_NEQ_CONST=10e-5;
+extern double TOL_EQ_CONST=1e-4;
+extern double TOL_NEQ_CONST=1e-4;
 
       double fRand(double fMin, double fMax){
           double f = (double)rand() / RAND_MAX;
@@ -19,6 +19,7 @@ extern double TOL_NEQ_CONST=10e-5;
           for(int i=0;i<sizeVec;i++){
 	  vectorCharacters[i]=initVec[i];
           }
+          penaltyValue=0;
           return 1;
       }
       
@@ -26,8 +27,13 @@ extern double TOL_NEQ_CONST=10e-5;
           for(int i=0;i<sizeVec;i++){
 	  vectorCharacters[i]=fRand(bounds[2*i],bounds[2*i+1]);
           }
-          
-          
+
+          /*
+vectorCharacters[0]=15;
+vectorCharacters[1]=7.5;
+vectorCharacters[2]=15;
+vectorCharacters[3]=7.5;
+
 /*          
 vectorCharacters[0]=1.95;
 vectorCharacters[1]=8.05;
@@ -39,6 +45,10 @@ vectorCharacters[6]=6.74;
 vectorCharacters[7]=0;
 vectorCharacters[8]=0;
 */
+  //       vectorCharacters[0]=0.5;
+//vectorCharacters[1]=0.8;
+
+         
 /*
          vectorCharacters[0]=0.5;
 vectorCharacters[1]=0.8;
@@ -69,6 +79,8 @@ vectorCharacters[3]=1;
 vectorCharacters[4]=2;
 vectorCharacters[5]=0;
 */
+          penaltyValue=0;
+
           return 1;
       }
 

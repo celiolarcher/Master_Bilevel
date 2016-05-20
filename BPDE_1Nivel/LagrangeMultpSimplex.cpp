@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-#define TOL_ACT_CONST 10e-3
+#define TOL_ACT_CONST 1e-2
 
 extern double TOL_EQ_CONST;
 extern double TOL_NEQ_CONST;
@@ -187,7 +187,7 @@ using namespace std;
 				}
 			}
 
-			if(valueRef<=0) break;
+			if(valueRef<=1e-10) break;  //tolerancia
 
 			int line=-1;
 			valueRef=-1;
@@ -199,7 +199,7 @@ using namespace std;
 			}
 
 			if(valueRef<0) {
-				tableau[function->getDimensionLW()*sizeCol+endCol-1]=10e5;
+				tableau[function->getDimensionLW()*sizeCol+endCol-1]=1e5;cout<<"erro";
 				break;
 			}
 
@@ -219,20 +219,72 @@ using namespace std;
 			}
 
 			if(loop>20) {
-				tableau[function->getDimensionLW()*sizeCol+endCol-1]=10e5;cout<<"erro";
+				tableau[function->getDimensionLW()*sizeCol+endCol-1]=1e5;cout<<"erro";
 				break;
 			}
 		}
 
 		(*opt)=tableau[function->getDimensionLW()*sizeCol+endCol-1];
 /*
-		if((*opt)==0){
+		//if((*opt)==0){
 			for(int i=0;i<function->getDimensionLW()+1;i++){
-					for(int j=0;j<endCol;j++) cout<<tableau[i][j]<<"\t";
+					for(int j=0;j<endCol;j++) cout<<tableau[i*sizeCol+j]<<"\t";
 					cout<<"\n";
 				}
-		}else{cout<<(*opt);}
-*/
+			*/	
+		
+/*
+		double wVec[function->getDimensionLW()];
+		
+		for(int j=endCol-1-2*function->getDimensionLW(), wCount=0;j<endCol-1-function->getDimensionLW();j++,wCount++){
+		    int flag=-2;
+		  
+		    wVec[wCount]=0;
+		    for(int i=0;i<function->getDimensionLW()+1;i++){
+		        if(tableau[i*sizeCol+j]!=0 && flag!=-2) flag=-1;
+		        if(tableau[i*sizeCol+j]!=0 && flag==-2) flag=i;
+		    }
+		    
+		    if(flag>=0) wVec[wCount]=tableau[flag*sizeCol+endCol-1];
+		    else{
+		        flag=-2;
+		        for(int i=0;i<function->getDimensionLW()+1;i++){
+		          if(tableau[i*sizeCol+j+function->getDimensionLW()]!=0 && flag!=-2) flag=-1;
+		          if(tableau[i*sizeCol+j+function->getDimensionLW()]!=0 && flag==-2) flag=i;
+		        }
+		        if(flag>=0) wVec[wCount]=tableau[flag*sizeCol+endCol-1];	
+		    }
+		}
+		     */
+	
+		 /*
+		double aux=0;
+		for(int i=0;i<function->getDimensionLW();i++) aux+=wVec[i];*/
+		/*
+		 
+		if(aux+1e-10<(*opt) || aux-1e-10>(*opt)){
+		  
+		  			for(int i=0;i<function->getDimensionLW()+1;i++){
+					for(int j=0;j<endCol;j++) cout<<tableau[i*sizeCol+j]<<"\t";
+					cout<<"\n";
+				}
+		    cout<<aux<<"\t"<<(*opt)<<"\n";
+		 
+		}*/
+		/*
+		aux=0;
+		for(int i=0;i<function->getDimensionLW();i++) aux+=wVec[i]*wVec[i];
+		
+		(*opt)=sqrt(aux);*/
+	//	}else{cout<<(*opt);}
+	/*
+		aux=wVec[0];
+		for(int i=1;i<function->getDimensionLW();i++) {
+		  if(aux<wVec[i])
+		      aux=wVec[i];
+		}
+		(*opt)=aux;
+	        */
 		return 1;
      }
 

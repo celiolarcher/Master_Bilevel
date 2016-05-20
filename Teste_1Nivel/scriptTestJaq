@@ -1,0 +1,11 @@
+
+    for F in {"funcJ1","funcJ2","funcJ3","funcJ4","funcJ5","funcJ6","funcJ7","funcJ8","funcJ9","funcJ10","funcJ11","funcJ12","funcJ13","funcJ14","funcJ15","funcJ16","funcJ17","funcJ18"}
+    do
+    	echo $F >> OUT.txt
+	for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+	do
+	    ./BPDE   --populationSearch 269 --populationImprov 64 --mutImprov1 0.7 --mutImprov2 0.3 --mutFind1 0.4 --mutFind2 0.1 --mutOptSearch 2 --mutOptImprov 4 --crossRateImprov 0.9 --crossOptSearch 3 --crossOptImprov 4 --seed $seed --maxUPCalls 6000 -i $F >> OUT.txt
+	    echo >> OUT.txt
+	done
+    done
+

@@ -1,0 +1,1431 @@
+\documentclass[conference]{IEEEtran}
+
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+  \graphicspath{figures/}
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % \usepackage[dvips]{graphicx}
+  % \graphicspath{{../eps/}}
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+
+\usepackage[cmex10]{amsmath}
+\usepackage{algorithmic}
+\usepackage[latin1]{inputenc}
+\usepackage[ruled,vlined,resetcount,linesnumbered]{algorithm2e}
+%\usepackage[tight,footnotesize]{subfigure}
+
+%\usepackage{cite}
+\usepackage[nospace, noadjust]{cite}
+
+\usepackage{supertabular}
+
+%\hyphenation{op-tical net-works semi-conduc-tor}
+\hyphenpenalty = 100000
+
+
+
+
+\begin{document}
+
+\title{Differential Evolution for Bilevel Programming}
+
+
+%\author{
+%\IEEEauthorblockN{Jaqueline S. Angelo}
+%\IEEEauthorblockA{Laborat\'orio Nacional de Computa\c c\~ao Cient\'ifica,\\ Petr\'opolis - RJ, Brazil}
+%\and
+%\IEEEauthorblockN{Eduardo Krempser}
+%\IEEEauthorblockA{Laborat\'orio Nacional de Computa\c c\~ao Cient\'ifica,\\ Petr\'opolis - RJ, Brazil}
+%\and
+%\IEEEauthorblockN{Helio J. C. Barbosa}
+%\IEEEauthorblockA{Laborat\'orio Nacional de Computa\c c\~ao Cient\'ifica,\\ Petr\'opolis - RJ, Brazil}
+%}
+\author{\IEEEauthorblockN{Jaqueline S. Angelo\IEEEauthorrefmark{1},
+Eduardo Krempser\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
+Helio J.C. Barbosa\IEEEauthorrefmark{1}\IEEEauthorrefmark{3}}
+\IEEEauthorblockA{
+	\IEEEauthorrefmark{1}Laborat\'orio Nacional de Computa\c c\~ao Cient\'ifica,
+Petr\'opolis - RJ, Brazil\\}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Faculdade de Educa\c c\~ao Tecnol\'ogica do Estado do Rio de Janeiro (FAETERJ-Petr\'opolis)}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Universidade Federal de Juiz de Fora, Juiz de Fora, MG, Brazil\\
+Email: \{jsangelo, krempser, hcbm\}@lncc.br}
+}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+\maketitle
+
+%--------------------------------------------------------------------
+\begin{abstract}
+%--------------------------------------------------------------------
+%\boldmath
+
+
+Bilevel programming problems are characterized by two optimization 
+problems which are hierarchically related, where
+to each feasible upper level solution an optimal solution 
+in the lower level problem must be associated.
+%
+These problems  appear in many practical applications, and 
+a variety of solution techniques can be found in the literature.
+%
+In this paper, an algorithm is proposed which uses differential evolution  to solve
+both the upper and lower level optimization problems.
+%
+Several test problems from the literature are solved in order to assess the performance
+of the proposed method.
+
+
+\end{abstract}
+
+
+% no keywords
+
+%--------------------------------------------------------------------
+\section{Introduction}
+%--------------------------------------------------------------------
+
+The Bilevel programming problem (BLP) is characterized as an optimization 
+problem that has in its constraints another optimization problem.
+% 
+In this hierarchical structure each level of the hierarchy seeks to 
+optimize an objective function, controlling a set of variables subject
+to certain constraints. 
+%
+One can think of a leader (upper level) that optimizes an objective 
+function considering both his constraints and the reaction of the 
+follower (lower level), which in turn makes his decision to optimize 
+its objective function taking into account what has been imposed by 
+the leader.
+
+
+Due to this hierarchical structure, even bilevel problems where all functions
+involved are linear are, in general, quite difficult to be solved, and were shown to be NP-hard by 
+Hansen et. al \cite{Hansen92}.
+%
+A variety of exact methods have been developed,  involving the use of enumerative schemes,
+application of a penalty function, or gradient methods, among others.
+%
+The most used exact method investigate 
+the properties of the so-called inducible region to obtain (necessary 
+and sufficient) conditions to replace the follower's problem with
+its Karush-Kunh-Tucker (KKT) conditions, appending the resultant system
+to the leader's problem, transforming the bilevel problem into a 
+standard single-level programming problem.
+%
+However, those approaches assume (explicit) knowledge of the 
+analytical form of the objective function and the constraints of 
+the problem and, sometimes, the transformed problem is not
+equivalent to the original bilevel problem.
+
+
+The investigations in multilevel programming problems are strongly 
+motivated by real-world applications found in economics, engineering, 
+transportation, networks, planning, etc \cite{Dempe03}.
+%
+Due to the complexity of those applications, intelligent heuristics
+such as evolutionary computation, become attractive and 
+even enable the resolution of such problems.
+%
+Although these techniques cannot guarantee to find the optimal 
+solution, but only a good approximation to it, they can help overcome 
+the challenges of bilevel programming problems, such as nonconvexity and 
+nondifferentiability, large number of variables and/or constraints,
+and non-unique optimal solution for the follower's problem.
+%
+Heuristic methods, can also deal with cases where it is not possible 
+to make strong assumptions about the objective function and/or constraints of the 
+problem. Those cases, known as ``black box'' optimization,  occur often in practice, for example, 
+when the computation of the objective functions and/or constraints  require a potentially expensive
+computer simulation.
+
+
+Differential Evolution (DE) is an evolutionary algorithm, 
+proposed by Storn and Price (1997), aimed at solving continuous 
+optimization problems. 
+%
+It is a simple, stochastic, population-based technique that was 
+initially formulated to deal with unconstrained problems, but
+which can be efficiently applied to constrained problems 
+\cite{Suganthan11,Krempser11}.
+%
+In this paper, a DE algorithm (BlDE) for solving general BLPs  is proposed,
+and its performance is assessed using a collection of well known 
+test-problems  from the literature.
+%
+%Each level of the BLP is solved by a different population, trying
+%to find the optimal solution for the test problems considered.
+
+
+The paper is organized as follows: Section \ref{sec:BLP} describes
+the structure of a general bilevel optimization problem; Section
+\ref{sec:review} presents a brief literature review on related
+work emphasizing some evolutionary methods already proposed.
+The DE technique is summarized
+in Section \ref{sec:DE}, while in Section \ref{sec:BlDE} the
+proposed solution method BlDE is presented.
+The description of each test problem and the results of the computational experiments 
+are presented in Section \ref{sec:experiments}; the
+conclusions are left for Section \ref{sec:conclusion}.
+
+
+
+%--------------------------------------------------------------------
+\section{The Bilevel Programming Problem}\label{sec:BLP}
+%--------------------------------------------------------------------
+
+The bilevel programming problem was initially proposed by
+the economist Von Stackelberg in 1934 to describe oligopoly 
+situations in economy markets.
+%
+The Stackelberg's model describes a competitive game between two 
+companies that make decisions sequentially.
+
+
+In the BLP, two decision makers, the leader in the upper level and the 
+follower in the lower level, are hierarchically related, where
+the  leader's decisions affect both the follower's payoff 
+function and allowable actions, and vice-versa.
+%
+Each decision maker has control over a set of variables, seeking 
+to optimize its own objective function.
+%
+Once the leader chooses the value of its variables, the follower reacts 
+by choosing the value of its own variables in order to optimize its 
+objective function.
+
+
+The bilevel programming problem can be written as:
+%
+\begin{equation}\label{equ:bilevel}
+\begin{array}{lll}
+	(L) & \min_{x \in X}   & f_{1}(x,y(x)) \\
+		  & \text{subject to} & g_{1}(x,y(x)) \leq 0 \\ 
+		  & \hfill (F)     & y(x) \in {\text{arg}\min}_{y \in Y} f_{2}(x,y) \\
+		  &                  & \text{subject to} \quad g_{2}(x,y) \leq 0
+\end{array}
+\end{equation}
+%
+The higher level decision maker ($L$) --the leader-- has control over 
+the $x$ variables, and makes his decision first, fixing $x$.
+%
+The lower level decision maker ($F$) --the follower-- controls the $y$ variables. 
+Reacting to the decision of the leader, the $y$ variables are set in response to the given $x$.
+
+In the experiments performed here, it is assumed that $X = R^{n_1}$
+and $Y = R^{n_2}$, $n_1$ and $n_2$ being the number of upper and lower level
+variables, respectively.
+
+In problem (\ref{equ:bilevel}) the reaction set of the follower, 
+namely $R(x)$ such that $y(x) \in R(x)$, defines the follower's response 
+given an $x$ fixed by the leader.
+%
+One difficulty that arises in solving BLP is that, if $R(x)$ is not 
+single-valued for all possible $x$, the leader may not achieve 
+his minimum payoff, since the follower has multiple minimum 
+solutions to choose.
+%
+In this case, there is no guarantee that the follower's choice is the 
+best for the leader, leading to sub-optimal solutions in the 
+leader's problem.
+
+
+Another challenge lies in the fact that unless a solution is optimal 
+for the lower level problem, it cannot be feasible for the overall 
+problem.
+%
+This suggests that approximate optimization methods
+cannot be used to solve the lower level problem, as they do not guarantee 
+that the optimal solution is actually found.
+%
+However, from the practical point of view near-optimal solutions are 
+often acceptable \cite{Deb09}, especially when the lower level 
+problem is too costly to be exactly solved thus rendering the use of exact methods impractical.
+
+
+%Next section, a brief overview of existing methods for solving BLP
+%are presented.
+
+
+%--------------------------------------------------------------------
+\section{Literature Review}\label{sec:review}
+%--------------------------------------------------------------------
+
+There have been numerous  methods proposed for solving bilevel
+programming problems.
+%
+Most of them are specialized to the linear case, where all functions 
+involved are linear.
+%
+In general, for solving the BLP one can find three different approaches: 
+enumerative schemes, mainly for the linear BLP 
+\cite{Candler82, Bialas82, Onal93, Campelo00}, 
+penalty methods \cite{Shimizu81, Anandalingam90, Ishizuka92, Zheng12},
+and methods based on the KKT conditions
+\cite{FortunyAmat81, Bard90, Hansen92, Judice92, Shi06}.
+%
+All of these methods are very time consuming, especially 
+when dealing with large sized problems.
+%
+For this reason, the use of intelligent heuristics is growing, as they are capable of finding good solutions 
+for complex single-level optimization problems in reasonable computer times.
+
+
+Mathieu et al. \cite{Mathieu94} firstly developed a genetic algorithm (GA) to solve linear BLP. 
+%
+In their proposal, the leader's decision variables are generated using
+a modified GA, which only used the mutation operation, while the follower's decision 
+variables are obtained using an algorithm based on the simplex method.
+%
+The algorithm proposed presented better results when compared to 
+Bard's grid search technique \cite{Bard83} in randomly generated test-problems
+with different sizes.
+%
+However, the time consumed was higher, varying between 24.82s and 
+3281.59s against 4.23 and 63.99 provided by the grid search technique.
+%
+%The authors pointed that the reasons for the slowness could be related
+%to the fact that they did not exploit crossover and that the stopping 
+%criteria was more stringent than for the grid search method.
+%
+The same happens with a simulated annealing algorithm (SA) when applied to
+the same test-problems \cite{Anandalingam89}.
+%
+SA presented better results than the grid search technique--however,
+worse than those produced by the GA--in a higher computational time.
+
+
+Hejazi et al. \cite{Hejazi02} proposed a GA for the linear BLP.
+%
+The second level problem was replaced by the KKT optimality 
+conditions yielding a single-level optimization problem which was 
+solved by the GA.
+%
+The proposed method was compared to a hybrid tabu-ascent algorithm
+\cite{Gendreau96} in randomly generated problems of different sizes.
+%
+The proposed GA was faster than the tabu-ascent algorithm in all 
+test problems, except for one.
+%
+However, for the largest problems, the quality of the solutions obtained
+by the tabu-ascent algorithm was superior to that achieved by the GA proposed.
+
+
+
+Oduguwa and Roy \cite{Oduguwa02} proposed a coevolutionary GA for
+solving the general BLP.
+%
+The proposed method implemented two populations, one to solve the 
+leader's problem, and another to solve the follower's problem.
+%
+A coevolutionary operator synchronizes one population with the 
+fittest members of the other population.
+%
+Hence, the leader's variables $x$ are optimized with a subset of 
+the best follower's variables, and the follower's variables $y$ 
+are optimized with all $x$ variables fixed.
+%
+An additional elite population was maintained to identify the 
+elite members from both populations, and was updated in every
+generation with the best members from the current generation.
+%
+The algorithm proposed presented similar solutions when compared 
+to different methods for solving four test problems available in 
+literature \cite{Bard98}.
+%
+%Computational time was not reported.
+
+
+In \cite{Zhu06}, Zhu et. al proposed a DE algorithm combined with
+an interior point method for solving nonlinear problems with linear
+constraints.
+%----- (DE/best/2/exp) Pop=10, F1=F2=0.8, CR=0.9, MaxG=100.
+%
+The DE algorithm was designed to operate in the leader's problem
+while the interior point method was responsible for solving the 
+follower's problem.
+%
+The DE was used to generate and modify the leader's variables.
+%
+For each individual with a fixed $x$, $y$ is obtained by solving
+the follower's problem using the interior point method.
+%
+The algorithm was capable of finding the same results reported in the
+original references for the six problems tested.
+
+
+The DE was also used by Koh \cite{Koh07} to solve a transportation 
+BLP, where a gradient based algorithm was used to solve the lower
+level problem.
+%----- (DE/best/1/bin) Pop=20, F=0.8, CR=0.8, MaxG=40, runs=30.
+%
+The algorithm is similar to the one proposed in \cite{Zhu06}: 
+the DE operates in the upper level, evolving $x$, while the gradient
+based method generates the optimal $y$ for each $x$ fixed by the 
+upper level problem.
+%
+Seven BLPs taken from the literature, as well as specific applications
+in transportation problems, were used to assess the quality of the
+algorithm proposed.
+%
+The algorithm was capable of finding  solutions identical to the ones
+reported in the original references for most test problem, and provided
+better solutions in two of them.
+%
+For the transportation problems tested the algorithm generated
+competitive results.
+
+
+
+
+%--------------------------------------------------------------------
+\section{Differential Evolution}\label{sec:DE}
+%--------------------------------------------------------------------
+
+DE was originally proposed by Storm and Price \cite{Storn97} and has been shown 
+to be a simple and effective algorithm for global optimization, specially for continuous variables.
+%A pseudo-code is presented in Algorithm \ref{alg:de}. 
+
+The basic operation performed is the addition to each design variable in a given candidate
+solution of a term which is the scaled difference between the values of such variable in other
+candidate solutions in the population. 
+The number of differences applied, the way in which the individuals are selected, and the 
+distribution of recombination determine the DE variant.
+%
+As with other evolutionary algorithms, DE performance is influenced by its 
+particular parameters, namely, the chosen variant, and the scale factor ($F$) adopted. 
+
+%\rever{
+%Here, the basic mutation operator of the DE (DE/rand/1/bin) was applied. 
+%This variant  select randomly the individuals in the population, leading to:
+%\begin{equation}
+% 	u_{i,j,G+1} = x_{r_1, j, G} + F.(x_{r_2, j, G}-x_{r_3, j, G})
+%\end{equation}
+%where $r_1, r_2$ and $r_3$ are randomly selected individuals. 
+%}
+
+
+Here, the DE variant DE/target-to-rand/1/bin was adopted. 
+%
+In preliminary experiments this strategy presented the best results to 
+the overall test problems considered in this paper.
+%(DE/mecanismo-de-selecao/numero-de-diferencas/modelo-de-recombinacao)
+%
+This variant uses randomly selected individuals ($r_1, r_2, r_3$) of the population
+and the target individual $x_i$ (the one that will be used in the comparison after
+the mutation, also called current individual), leading to:
+%
+\begin{equation}\nonumber
+ 	u_{i,j,G+1} = x_{i,j,G} + F.(x_{r_3,j,G}-x_{i,j,G}) + F.(x_{r_1,j,G}-x_{r_2,j,G})
+\end{equation}
+
+In addition, a crossover operation is performed, using the parameter CR.
+%, as explained in Algorithm \ref{alg:de}. 
+%
+%\rever{
+%We consider to $F$ and $CR$ parameters the values: $F=0.7$ and $CR=0.9$.
+%}
+
+For each design variable, lower and upper bounds are assumed, 
+and whenever a given component $x_{i,j}$ of a candidate solution $x_i$ is generated outside its prescribed range,
+a standard projection operation is performed:
+\begin{eqnarray*} 
+\mbox{If\ } x_{i,j} > x_{j}^U \mbox{\ then\ } x_{i,j} = x_{j}^U \mbox{\ and\ }
+\mbox{if\ } x_{i,j} < x_{j}^L \mbox{\ then\ } x_{i,j} = x_{j}^L .
+\end{eqnarray*}
+
+
+
+%--------------------------------------------------------------------
+\section{The Proposed Solution Method}\label{sec:BlDE}
+%--------------------------------------------------------------------
+
+In the proposed Bilevel Differential Evolution algorithm (BlDE), the 
+lower level problem is solved for each upper level point.
+%
+The solution method uses a DE to generate and evolve the upper level 
+variables. For each upper level point, another DE is used to solve the
+lower level problem, by generating and evolving the lower level
+variables.
+%
+Algorithms \ref{alg:de} and \ref{alg:deFollower} describe the proposed
+method.
+%
+\begin{algorithm}[!ht]
+ \caption{Algorithm DE Leader.}
+ \label{alg:de}
+ \SetKwData{POP}{np}\SetKwData{GEN}{gen}\SetKwData{F}{F}\SetKwData{CR}{CR}\SetKwData{G}{G}
+ \SetKwData{N}{n}
+ \SetKwFunction{Evaluate}{Evaluate $f_1$}\SetKwFunction{Create}{CreateRandomInitialPopulation}
+ \SetKwFunction{Select}{SelectRandomly}
+ \SetKwFunction{RandInt}{RandInt}
+ \SetKwFunction{Rand}{Rand}
+ \SetKwFunction{DEFollower}{DEFollower}
+ \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+ \Input{\POP (population size), \GEN (\# of generations), \\ \F (mutation scaling), \CR (crossover rate)}
+ \BlankLine
+ \G$\leftarrow$ $0$\;
+ \Create{\POP}\;
+ \For{$i\leftarrow 1$ \KwTo \POP}{
+  $\overrightarrow{y}$ = \DEFollower{npf, genf, F, CR, $\overrightarrow{x}_{i, G}$}\;
+  \Evaluate{$\overrightarrow{x}_{i,\G}$, $\overrightarrow{y}$} \tcc*{$\overrightarrow{x}_{i,\G}$ is an individual in the population}
+ }
+ \For{\G$\leftarrow 1$ \KwTo \GEN}{
+   \For{$i\leftarrow 1$ \KwTo \POP}{
+      \Select{$r_1, r_2, r_3$} \tcc*{$r_1 \neq r_2 \neq r_3 \neq i$}
+      $jRand \leftarrow$\RandInt{1, \N} \tcc*{\N is the number of variables of the leader problem}
+      \For{$j\leftarrow 1$ \KwTo \N}{
+        \eIf{
+	  \Rand{$0, 1$} $<$ \CR or $j = jRand$
+	}{ 
+	  %$u_{i, j,G+1}$ = $x_{r_3,j,G} + F.(x_{r_1,j,G} - x_{r_2, j, G})$\;\label{lineVariant}
+	   $u_{i,j,G+1}$ = $x_{i,j,G} + F.(x_{r_3,j,G}-x_{i,j,G}) + $\\
+		   \quad\quad\quad\quad$F.(x_{r_1,j,G}-x_{r_2,j,G})$\;\label{lineVariant}
+	}{
+	  $u_{i, j, G+1}$ = $x_{i, j, G}$\;
+	}
+      }
+      $\overrightarrow{y}$ = \DEFollower{npf, genf, F, CR, $\overrightarrow{u}_{i, G+1}$}\;
+      \eIf{$ f_1(\overrightarrow{u}_{i, G+1}, \overrightarrow{y}) \leq f_1(\overrightarrow{x}_{i,G}, \overrightarrow{y})$}{
+	$\overrightarrow{x}_{i,G+1}$ = $\overrightarrow{u}_{i,G+1}$\;
+      }{
+	$\overrightarrow{x}_{i,G+1}$ = $\overrightarrow{x}_{i,G}$\;
+      }
+   }
+ }
+\end{algorithm}
+%
+\begin{algorithm}[!ht]
+ \caption{Algorithm DE Follower.}
+ \label{alg:deFollower}
+ \SetKwData{POP}{npf}\SetKwData{GEN}{genf}\SetKwData{F}{F}\SetKwData{CR}{CR}\SetKwData{G}{G}
+ \SetKwData{N}{nf}
+ \SetKwData{V}{v}
+ \SetKwFunction{Evaluate}{Evaluate $f_2$}\SetKwFunction{Create}{CreateRandomInitialPopulation}
+ \SetKwFunction{Select}{SelectRandomly}
+ \SetKwFunction{RandInt}{RandInt}
+ \SetKwFunction{Rand}{Rand}
+ \SetKwFunction{SelectBest}{SelectBestIndividual}
+ \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+ \Input{\POP (follower population size), \GEN (\# of generations to follower DE), \F (mutation scaling), \CR (crossover rate), $\overrightarrow{\V}$ (leader variables)}
+ \BlankLine
+ \G$\leftarrow$ $0$\;
+ \Create{\POP}\;
+ \For{$i\leftarrow 1$ \KwTo \POP}{
+  \Evaluate{$\overrightarrow{\V}$, $\overrightarrow{x}_{i,\G}$} \tcc*{$\overrightarrow{x}_{i,\G}$ is an individual in the population}
+ }
+ \For{\G$\leftarrow 1$ \KwTo \GEN}{
+   \For{$i\leftarrow 1$ \KwTo \POP}{
+      \Select{$r_1, r_2, r_3$} \tcc*{$r_1 \neq r_2 \neq r_3 \neq i$}
+      $jRand \leftarrow$\RandInt{1, \N} \tcc*{\N is the number of variables in the follower problem}
+      \For{$j\leftarrow 1$ \KwTo \N}{
+        \eIf{
+	  \Rand{$0, 1$} $<$ \CR or $j = jRand$
+	}{ 
+	  %$u_{i, j,G+1}$ = $x_{r_3,j,G} + F.(x_{r_1,j,G} - x_{r_2, j, G})$\;\label{lineVariant}
+	   $u_{i,j,G+1}$ = $x_{i,j,G} + F.(x_{r_3,j,G}-x_{i,j,G}) + $\\
+		   \quad\quad\quad\quad$F.(x_{r_1,j,G}-x_{r_2,j,G})$\;
+	}{
+	  $u_{i, j, G+1}$ = $x_{i, j, G}$\;
+	}
+      }
+      \eIf{$ f_2(\overrightarrow{\V}, \overrightarrow{u}_{i, G+1}) \leq f_2(\overrightarrow{\V}, \overrightarrow{x}_{i,G})$}{
+	$\overrightarrow{x}_{i,G+1}$ = $\overrightarrow{u}_{i,G+1}$\;
+      }{
+	$\overrightarrow{x}_{i,G+1}$ = $\overrightarrow{x}_{i,G}$\;
+      }
+   }
+ }
+ \Return \SelectBest
+\end{algorithm}
+
+The main steps of the algorithm are summarized as follows:
+
+{\it Step 0: Initialization.} The algorithm starts with a
+population, of size $np$, of vectors containing the
+upper level variables $x \in R^{n_1}$.
+%
+The upper level variables are initialized with random values 
+and the lower level variables are determined by executing the 
+lower level procedure (Algorithm \ref{alg:deFollower}), 
+which generates the vector $y \in R^{n_2}$ of lower level variables.
+
+
+{\it Step 1: Evolution at the upper level.} Following the basic 
+DE algorithm described in Algorithm \ref{alg:de}, the upper level individuals  are 
+mutated and recombined. 
+
+{\it Step 2: Evaluation of each upper level individual.} 
+To evaluate the individuals in the upper level, where fitness is 
+assigned based on the upper level function and constraints,
+the lower level procedure is performed.
+The solution returned, that is, the best individual obtained in the 
+lower level procedure, is used to evaluate the upper level individual.
+
+{\it Step 3: Evolution at lower level.} For fixed upper level variables, 
+a new DE algorithm is executed, as described in Algorithm \ref{alg:deFollower}.
+The individuals are evaluated based on the lower level function 
+and constraints. 
+Finally, the procedure returns the best value of the lower level problem.
+
+
+In order to handle the constraints, the method proposed by Deb in 
+\cite{Deb00} was applied, which enforces the following criteria:
+(i) any feasible solution is preferred to any infeasible solution,
+(ii) among two feasible solutions, the one having better objective 
+function value is preferred, and
+(iii) among two infeasible solutions, the one having smaller constraint 
+violation is preferred.
+
+
+%--------------------------------------------------------------------
+\section{Computational Experiments}\label{sec:experiments}
+%--------------------------------------------------------------------
+
+
+In this section, eighteen test-problems taken from different sources in the literature 
+are used in order to assess the performance of the proposed algorithm.
+%
+The BlDE algorithm was also tested in a set of six unconstrained
+test problems proposed in \cite{Sinha12}.
+%
+The test-collection (SMD1 to SMD6) in \cite{Sinha12} aims to induce difficulties at
+both levels of the BLP, independently and collectively, such that the 
+performance of the algorithms could be better evaluated when handling the two
+levels.
+
+
+For the BlDE algorithm, parameters $F$ and $CR$ were set to $F=0.7$ 
+and $CR=0.9$. 
+%
+For all test-problems, the population size was set to 30 individuals 
+and 30 independent runs were performed.
+
+%--------------------------------------------------------------------
+\subsection{Test problems}
+
+The eighteen test problems initially considered are:
+%
+\begin{enumerate}
+%
+\footnotesize{
+
+\item Shimizu and Aiyoshi (1981) \cite{Shimizu81}: % 1
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) =  x^2 + (y - 10)^2 \\
+\text{s.t. } \hspace{0.3cm} -x + y \leq 0 \\
+	\hspace{0.8cm} x \in [0,15] \\
+	\hspace{0.8cm} \min_{y} f_2 (x,y) = (x + 2y -30)^2 \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} x + y - 20 \leq 0 \\
+	\hspace{1.5cm} y \in [0,20]
+%(x*, y*) = (10, 10). f1=100, f2=0
+\end{array}
+\end{equation}
+
+
+\item Shimizu and Aiyoshi (1981) \cite{Shimizu81}: % 2
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = (x_1-30)^2 + (x_2-20)^2 -20y_1 + 20y_2 \\
+\text{s.t. } \hspace{0.3cm} x_1+2x_2 \geq 30 \\
+	\hspace{0.8cm} x_1+x_2 \leq 25 \\
+	\hspace{0.8cm} x_2 \leq 15 \\
+	\hspace{0.8cm} \min_{y} (x_1-y_1)^2 + (x_2-y_2)^2 \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} y_1, y_2 \in [0,20] 
+%(x*, y*) = (20,5,10,5). f1=225, f2=100 
+\end{array}
+\end{equation}
+
+
+\item Candler and Townsley (1982) \cite{Candler82}: % 3
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\max_{x} f_{1}(x,y) = 8x_1 + 4x_2 - 4y_1 + 40y_2 + 4y_3  \\
+\text{s.t. } \hspace{0.3cm} \max_{y} f_2 (x,y)  = -x_1 - 2x_2 - y_1 - y_2 - 2y_3 \\
+	\hspace{0.8cm} \text{s.t } \hspace{0.3cm} -y_1 + y_2 + y_3 \leq 1 \\
+		\hspace{1.6cm} 2x_1 - y_1 + 2y_2 - 0.5y_3 \leq 1 \\
+    	\hspace{1.6cm} 2x_2 + 2y_1 - y_2 - 0.5y_3 \leq 1 \\
+    	\hspace{1.6cm} x , y \geq 0
+%(x*, y*) = (0, 0.6, 0.4, 0, 0.9). f1=29.2, f2=-3.2
+\end{array}
+\end{equation}
+
+
+\item Bard and Falk (1982) \cite{Bard82}: % 4
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\max_{x} f_{1}(x,y) = 2x_1 - x_2 - 0.5y_1 \\
+\text{s.t. } \hspace{0.3cm} \max_{y} f_2 (x,y) = -x_1 - x_2 + 4y_1 - y_2\\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} 2x_1 - y_1 + y_2 \geq 2.5 \\
+	    \hspace{1.6cm} -x_1 + 3x_2 - y_2 \geq -2 \\
+    	\hspace{1.6cm} -x_1 - x_2 \geq -2 \\
+    	\hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (1, 0, 0.5, 1). f1=1.75, f2=0
+\end{array}
+\end{equation}
+
+
+\item Aiyoshi and Shimizu (1984) \cite{Aiyoshi84}: % 5
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = 2x_1 + 2x_2 - 3y_1 - 3y_2 - 60 \\
+\text{s.t. } \hspace{0.3cm} x_1 + x_2 + y_1 - 2y_2 - 40 \leq 0 \\
+	\hspace{0.8cm} \min_{y} f_2 (x,y) = (y_1 - x_1 + 20)^2 + (y_2 - x_2 + 20)^2\\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm}  2y_1 - x_1 + 10 \leq 0 \\
+		\hspace{1.6cm} 2y_2 - x_2 + 10 \leq 0 \\
+		\hspace{1.6cm} x \in [0,50], y \in [-10,20]
+%(x*, y*) = (25, 30, 5, 10). f1=5, f2=0
+\end{array}
+\end{equation}
+
+
+\item Bard (1988) \cite{Bard88}: % 6
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = (x-5)^2 + (2y+1)^2 \\
+\text{s.t. } \hspace{0.3cm} \min_{y} f_2 (x,y) = (y-1)^2 -1.5xy \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} 3x-y \geq 3 \\
+	    \hspace{1.6cm} -x+0.5y \geq -4 \\
+    	\hspace{1.6cm} -x-y \geq -7 \\
+      	\hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (1.778 , 2.333). f1=42.5, f2=-4.445
+\end{array}
+\end{equation}
+
+
+\item Bard (1988) \cite{Bard88}: % 7
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = -x_1^2 -3x_2 -4y_1 + y_2^2 \\
+\text{s.t. } \hspace{0.3cm} x_1^2 +2x_2 \leq 4 \\
+	\hspace{0.8cm} \min_{y} f_2 (x,y) = 2x_1^2 +y_1^2 -5y_2 \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm}  x_1^2 -2x_1 +x_2^2 -2y_1 + y_2 \geq 3 \\
+		\hspace{1.6cm} x_2 +3y_1 -4y_2 \geq 4 \\
+		\hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (0,2,4,1). f1=-21, f2=11
+\end{array}
+\end{equation}
+
+
+\item Anandalingam and White (1990) \cite{Anandalingam90}: % 8
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\max_{x} f_{1}(x,y) = x + 3y \\
+\text{s.t. } \hspace{0.3cm} \max_{y} f_2 (x,y) = x - 3y \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm}  -x - 2y \leq -10 \\
+	    \hspace{1.6cm} x - 2y \leq 6  \\
+    	\hspace{1.6cm} 2x - y \leq 21  \\
+    	\hspace{1.6cm} x + 2y \leq 38 \\
+    	\hspace{1.6cm} -x + 2y \leq 18 \\
+		\hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (16, 11). f1=49, f2=-17
+\end{array}
+\end{equation}
+
+
+\item Savard and Gauvin (1994) \cite{Savard94}: % 9
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = (x-1)^2 + 2y_{1}^{2} - 2x \\
+\text{s.t. } \hspace{0.3cm} \min_{y} f_2 (x,y) = (2y_1-4)^2 + (2y_2-1)^2 + xy_1 \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} 4x + 5y_1 + 4y_2 \leq 12 \\
+	    \hspace{1.6cm} -4x - 5y_1 + 4y_2 \leq -4 \\
+    	\hspace{1.6cm} 4x - 4y_1 + 5y_2 \leq 4 \\
+	    \hspace{1.6cm} -4x + 4y_1 + 5y_2 \leq 4 \\
+	    \hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (1.889, 0.889, 0). f1=-1.21, f2=7.61
+\end{array}
+\end{equation}
+
+
+\item Falk and Liu (1995) \cite{Falk95}: % 10
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = x_1^2 -2x_1 +x_2^2 -2x_2 +y_1^2 + y_2^2\\
+\text{s.t. } \hspace{0.3cm} \min_{y} f_2 (x,y) = (y_1 -x_1)^2 + (y_2 -x_2)^2 \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} x \geq 0, y \in [0.5,1.5]
+%(x*, y*) = (.5, .5, .5, .5). f1=-1, f2=0
+\end{array}
+\end{equation}
+
+
+\item Shimizu and Lu (1995) \cite{Shimizu95} % 11
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = 16x^2 + 9y^2 \\
+\text{s.t. }  \hspace{0.3cm} -4x + y \leq 0 \\ 
+	\hspace{0.8cm} \min_{y} f_2 (x,y) = (x + y -10)^4\\
+	\hspace{0.8cm} \text{s.t. }  \hspace{0.3cm} 4x + y - 50 \leq 0 \\
+		\hspace{1.6cm} x,y \geq 0 
+%(x*, y*) = (11.25,5). f1=2250, f2=197.75
+\end{array}
+\end{equation}
+
+
+\item Bard (1998) \cite{Bard98}: % 12 (pag. 197)
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = x-4y \\
+\text{s.t. } \hspace{0.3cm} \min_{y} f_2 (y)  = y \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} -x-y \leq -3 \\
+	    \hspace{1.6cm} -2x + y \leq 0 \\
+    	\hspace{1.6cm} 2x + y \leq 12 \\
+	    \hspace{1.6cm} -3x + 2y \geq -4 \\
+    	\hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (4,4). 
+\end{array}
+\end{equation}
+
+
+\item Bard (1998) \cite{Bard98}: % 13 (pag. 263) 
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = x + y \\
+\text{s.t. }  \hspace{0.3cm} \min_{y} f_2 (x,y) = -5x -y \\
+	\hspace{0.8cm} \text{s.t. }  \hspace{0.3cm} -x-y/2 \leq -2 \\
+		\hspace{1.6cm} -x/4 + y \leq 2 \\
+		\hspace{1.6cm}  x+y/2 \leq 8 \\
+		\hspace{1.6cm}  x -2y \leq 4 \\
+		\hspace{1.6cm} x,y \geq 0
+%(x*, y*) = (0.888,2.222). f1=3.111, f2=-6.662
+\end{array}
+\end{equation}
+
+
+\item Bard (1998) \cite{Bard98}: % 14 (pag. 306)
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = (x-1)^2 + (y-1)^2  \\
+\text{s.t. } \hspace{0.3cm} \min_{y} f_2 (x,y) = 0.5y^2 + 500y -50xy \\
+       	\hspace{0.8cm} x,y \geq 0
+%(x^{*}, y^{*}) = (10.02,0.82). f1=81.33, f2=-0.4838
+\end{array}
+\end{equation}
+
+
+\item Oduguwa and Roy (2002) \cite{Oduguwa02}: % 15 (Ex1) $P(x) \neq 1$
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\max_{x} f_{1}(x,y) = 100x + 1000y_1 \\
+\text{s.t. } \hspace{0.3cm} \max_{y} f_2 (x,y) = y_1 + y_2\\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm}  x + y_1 - y_2 \leq 1\\
+	\hspace{1.6cm} y_1 + y_2 \leq 1 \\
+	\hspace{1.6cm}	x \in [0,1], y \in [0,1]
+%(x*, y*) = (?,?). f1=1000, f2=1
+\end{array}
+\end{equation}
+
+
+\item Rajesh et. al (2003) \cite{Rajesh03}: % 16 (Ex2)
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = (x-3)^2 + (y-2)^2 \\
+\text{s.t. }  \hspace{0.3cm} \min_{y} f_2 (x,y) = (y-5)^2 \\
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm}  2x-y \geq -1 \\
+		\hspace{1.6cm} -x+2y \geq 2 \\
+		\hspace{1.6cm} -x-2y \geq -14 \\		
+		\hspace{1.6cm} x \in [0,8], y \geq 0
+%(x*, y*) = (1,3). f1=5, f2=4.
+\end{array}
+\end{equation}
+
+
+\item Rajesh et. al (2003) \cite{Rajesh03}: % 17 (Ex3)
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\min_{x} f_{1}(x,y) = (x-3)^2 + (y-2)^2 \\
+\text{s.t. } \hspace{0.3cm} 2x-y \geq -1 \\
+	\hspace{0.8cm} -x+2y \geq 2 \\
+	\hspace{0.8cm} -x-2y \geq -14 \\	
+	\hspace{0.8cm} \text{s.t. } \hspace{0.3cm} \min_{y} f_2 (x,y) = (y-5)^2 \\
+		\hspace{1.6cm} x \in [0,8], y \geq 0
+%(x*, y*) = (3,5). f1=9
+\end{array}
+\end{equation}
+
+
+\item Rajesh et. al (2003) \cite{Rajesh03}: % 18 (Ex4)
+%
+\begin{equation}\nonumber
+\begin{array}{l}
+\max_{x} f_{1}(x,y) = -2x+11y \\
+\text{s.t. }  \hspace{0.3cm} \max_{y} f_2 (x,y) = -x-3y \\
+	\hspace{0.8cm} \text{s.t. }  \hspace{0.3cm} x-2y \leq 4 \\
+		\hspace{1.6cm} 2x-y \leq 24 \\
+		\hspace{1.6cm} 3x+4y \leq 96 \\
+		\hspace{1.6cm} x+4y \leq 126 \\			
+		\hspace{1.6cm} -4x+5y \leq 65 \\
+		\hspace{1.6cm} x+4y \geq 8 \\
+		\hspace{1.6cm} x,y \leq 0
+%(x*, y*) = (17.4545,10.90909). f1=85.0909
+\end{array}
+\end{equation}
+
+} %end footnotesize
+\end{enumerate}
+
+
+The second part of the experiments consists in solving the 
+test-collection (SMD1 to SMD6) proposed in \cite{Sinha12}.
+%
+For those tests, the upper and the lower level functions 
+$F(x,y)$ and $f(x,y)$, respectively, are split into three components, as
+%
+\begin{eqnarray}
+F(x,y) = F1(x_1) + F2(y_1) + F3(x_2, y_2)\\
+f(x,y) = f1(x_1,x_2) + f2(y_1) + f3(x_2, y_2)
+\end{eqnarray}
+where
+$x=(x_1,x_2)$ and $y=(y_1,y_2)$.
+The dimensions of the variables are set to 
+$dim(x_1)=p$, $dim(x_2)=r$, $dim(y_1)=q$ and
+$dim(y_2)=r$. For SMD6, $dim(y_1)=q+s$.
+%where $p,q,r$ and $s$ values define a
+%specific problem.
+
+
+The test problems are described as:
+
+%--------------------------------------
+
+\begin{flushleft}
+\begin{tabular}{ll}
+SMD1: 	& $F1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $F2 = \sum_{i=1}^{q} (y_{1}^{i})^2 $ \\
+		& $F3 = \sum_{i=1}^{r} (x_{2}^{i})^2 + \sum_{i=1}^{r} (x_{2}^{i} - \tan y_{2}^{i})^2 $\\ 
+		& $f1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $\\
+		& $f2 = \sum_{i=1}^{q} (y_{1}^{i})^2 $\\
+		& $f3 = \sum_{i=1}^{r} (x_{2}^{i} - \tan y_{2}^{i})^2 $\\
+\end{tabular}
+\end{flushleft}
+%
+\noindent The ranges of the variables are:
+\\
+$x_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,p\} $\\
+$x_{2}^{i} \in [-5,10], \forall i \in \{1,2,...,r\} $\\
+$y_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,q\} $\\
+$y_{2}^{i} \in (\frac{-\pi}{2},\frac{\pi}{2}), \forall i \in \{1,2,...,r\} $\\
+\\
+\noindent The optimal values are $x=0$ and $y$ given by:
+$y_{1}^{i} = 0, \forall i \in \{1,2,...,q\}$ and
+$y_{2}^{i} = \tan^{-1}x_{2}^{i}, \forall i \in \{1,2,...,r\}$.
+The upper and lower level functions are equal to 0 at the optimum.
+
+
+%--------------------------------------
+
+\begin{flushleft}
+\begin{tabular}{ll}
+SMD2: 	& $F1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $F2 = -\sum_{i=1}^{q} (y_{1}^{i})^2 $ \\
+		& $F3 = \sum_{i=1}^{r} (x_{2}^{i})^2 - \sum_{i=1}^{r} (x_{2}^{i} - \log y_{2}^{i})^2 $ \\
+		& $f1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $\\
+		& $f2 = \sum_{i=1}^{q} (y_{1}^{i})^2 $\\
+		& $f3 = \sum_{i=1}^{r} (x_{2}^{i} - \log y_{2}^{i})^2 $\\
+\end{tabular}
+\end{flushleft}
+%
+\noindent The ranges of the variables are:
+\\
+$x_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,p\} $\\
+$x_{2}^{i} \in [-5,1], \forall i \in \{1,2,...,r\} $\\
+$y_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,q\} $\\
+$y_{2}^{i} \in (0,e], \forall i \in \{1,2,...,r\} $\\
+\\
+\noindent The optimal values are $x=0$ and $y$ given by:
+$y_{1}^{i} = 0, \forall i \in \{1,2,...,q\}$ and
+$y_{2}^{i} = \log^{-1}x_{2}^{i}, \forall i \in \{1,2,...,r\}$.
+The upper and lower level functions are equal to 0 at the optimum.
+
+
+%--------------------------------------
+
+\begin{flushleft}
+\begin{tabular}{ll}
+SMD3:	& $F1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $F2 = \sum_{i=1}^{q} (y_{1}^{i})^2 $ \\ 
+		& $F3 = \sum_{i=1}^{r} (x_{2}^{i})^2 + \sum_{i=1}^{r} ((x_{2}^{i})^2 - \tan y_{2}^{i})^2 $ \\
+		& $f1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $f2 = q + \sum_{i=1}^{q} ( (y_{1}^{i})^2 - \cos 2 \pi y_{1}^{i} ) $ \\
+		& $f3 = \sum_{i=1}^{r} ( (x_{2}^{i})^2 - \tan y_{2}^{i} )^2 $ \\
+\end{tabular}
+\end{flushleft}
+%
+\noindent The ranges of the variables are:
+\\
+$x_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,p\} $\\
+$x_{2}^{i} \in [-5,10], \forall i \in \{1,2,...,r\} $\\
+$y_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,q\} $\\
+$y_{2}^{i} \in (\frac{-\pi}{2},\frac{\pi}{2}), \forall i \in \{1,2,...,r\} $\\
+\\
+\noindent The optimal values are $x=0$ and $y$ given by: 
+$y_{1}^{i} = 0, \forall i \in \{1,2,...,q\}$ and
+$y_{2}^{i} = \tan^{-1}x_{2}^{i}, \forall i \in \{1,2,...,r\}$.
+The upper and lower level functions are equal to 0 at the optimum.
+
+
+%--------------------------------------
+
+\begin{flushleft}
+\begin{tabular}{ll}
+SMD4:	& $F1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $F2 = - \sum_{i=1}^{q} (y_{1}^{i})^2 $ \\
+		& $F3 = \sum_{i=1}^{r} (x_{2}^{i})^2 - \sum_{i=1}^{r} ( |x_{2}^{i}| - \log (1 + y_{2}^{i}) )^2 $ \\
+		& $f1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $\\
+		& $f2 = q + \sum_{i=1}^{q} ( (y_{1}^{i})^2 - \cos 2 \pi y_{1}^{i} ) $\\
+		& $f3 = \sum_{i=1}^{r} ( |x_{2}^{i}| - \log (1+y_{2}^{i}) )^2 $\\
+\end{tabular}
+\end{flushleft}
+%
+\noindent The ranges of the variables are:
+\\
+$x_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,p\} $\\
+$x_{2}^{i} \in [-1,1], \forall i \in \{1,2,...,r\} $\\
+$y_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,q\} $\\
+$y_{2}^{i} \in [0,e], \forall i \in \{1,2,...,r\} $\\
+\\
+\noindent The optimal values are $x=0$ and $y$ given by:
+$y_{1}^{i} = 0, \forall i \in \{1,2,...,q\}$ and
+$y_{2}^{i} = \log^{-1}|x_{2}^{i}|-1, \forall i \in \{1,2,...,r\}$.
+The upper and lower level functions are equal to 0 at the optimum.
+
+
+%--------------------------------------
+
+\begin{flushleft}
+\begin{tabular}{ll}
+SMD5:	& $F1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $F2 = - \sum_{i=1}^{q-1} ( ( y_{1}^{i+1} - (y_{1}^{i})^2 )^2 + ( y_{1}^{i} - 1 )^2 ) $ \\
+		& $F3 = \sum_{i=1}^{r} (x_{2}^{i})^2 - \sum_{i=1}^{r} ( |x_{2}^{i}| - (y_{2}^{i})^2 )^2 $ \\
+		& $f1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $f2 = \sum_{i=1}^{q-1} ( ( y_{1}^{i+1} - (y_{1}^{i})^2 )^2 + ( y_{1}^{i} - 1 )^2 ) $ \\
+		& $f3 = \sum_{i=1}^{r} ( |x_{2}^{i}| - (y_{2}^{i})^2 )^2 $ \\
+\end{tabular}
+\end{flushleft}
+%
+\noindent The ranges of the variables are:
+\\
+$x_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,p\} $\\
+$x_{2}^{i},y_{2}^{i} \in [-5,10], \forall i \in \{1,2,...,r\} $\\
+$y_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,q\} $\\
+%$y_{2}^{i} \in [-5,10], \forall i \in \{1,2,...,r\} $\\
+\\
+\noindent The optimal values are $x=0$ and $y$ given by:
+$y_{1}^{i} = 1, \forall i \in \{1,2,...,q\}$ and
+$y_{2}^{i} = \sqrt{|x_{2}^{i}|}, \forall i \in \{1,2,...,r\}$.
+The upper and lower level functions are equal to 0 at the optimum.
+
+
+%--------------------------------------
+\begin{flushleft}
+\begin{tabular}{ll}
+SMD6:	& $F1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $F2 = - \sum_{i=1}^{q} ( y_{1}^{i} )^2 + \sum_{i=q+1}^{q+s} ( y_{1}^{i} )^2 $ \\
+		& $F3 = \sum_{i=1}^{r} (x_{2}^{i})^2 - \sum_{i=1}^{r} ( x_{2}^{i} - y_{2}^{i} )^2 $ \\
+		& $f1 = \sum_{i=1}^{p} (x_{1}^{i})^2 $ \\
+		& $f2 = \sum_{i=1}^{q} ( y_{1}^{i} )^2 + \sum_{i=q+1}^{q+s-1} ( y_{1}^{i+1} - y_{1}^{i} )^2 $ \\
+		& $f3 = \sum_{i=1}^{r} ( x_{2}^{i} - y_{2}^{i} )^2 $ \\
+\end{tabular}
+\end{flushleft}
+%		
+\noindent The ranges of the variables are:
+\\
+$x_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,p\} $\\
+$x_{2}^{i},y_{2}^{i} \in [-5,10], \forall i \in \{1,2,...,r\} $\\
+$y_{1}^{i} \in [-5,10], \forall i \in \{1,2,...,q+s\} $\\
+%$y_{2}^{i} \in [-5,10], \forall i \in \{1,2,...,r\} $\\
+\\
+\noindent The optimal values are $x=0$ and $y$ given by:
+$y_{1}^{i} = 0, \forall i \in \{1,2,...,q\}$ and
+$y_{2}^{i} = x_{2}^{i}, \forall i \in \{1,2,...,r\}$.
+The upper and lower level functions are equal to 0 at the optimum.
+
+
+For the test-collection (SMD1 to SMD6) the instances considered 
+have 10 dimensions and correspond to setting $p=3$, $q=2$, and $r=2$ 
+for problems SMD1 to SMD5, and $p=3$, $q=1$, $r=2$ and $s=2$ for 
+problem SMD6.
+
+
+%--------------------------------------------------------------------
+\subsection{Results}
+
+Table \ref{tab:results} presents the results obtained from solving
+the eighteen test-problems, showing the best solutions $(x^*,y^*)$,
+and the corresponding values $f^{*}_{1}$ and $f^{*}_{2}$ attained at the upper
+and lower levels, respectively, obtained by BlDE and other methods in different sources
+of the literature.
+%
+Table \ref{tab:summary18} summarizes the statistics for BlDE in the 30 independent runs
+performed in the same test problems.
+The column headers denoted by ``Min'', ``Median'', ``Mean'', ``Max'', and ``std''
+denote the minimum, median, average, maximum, and standard deviation values.
+%
+The number of function evaluations for the upper and lower levels 
+were 6000 and 18000000, respectively.
+
+
+For those test-problems the proposed method was capable of reaching
+the optimal solution, or very close to the optimal, in all problems 
+tested, and found better solutions for problem 4.
+%
+As demonstrated in Table \ref{tab:summary18} the algorithm 
+presented a stable behavior, since for most problems tested the
+algorithm was able to reach the optimal solution in all 
+30 executions.
+
+The results for the test-problems SMD1 to SMD6
+are reported in Table \ref{tab:resultsDeb}, which
+presents the median values of function evaluations for each level, 
+and the accuracy achieved for both BlDE and the GA adopted in the paper~\cite{Sinha12}
+where the problems were proposed.
+%
+Table \ref{tab:summaryDeb} summarizes the results obtained by 
+BlDE in the SMD's problems.
+%
+For those tests the number of function evaluations for the upper and 
+lower levels were 2400 and 7200000, respectively.
+
+
+The results described in Table  \ref{tab:resultsDeb},
+demonstrate that BlDE generates the optimal solution
+for all test problems, and reaches a better accuracy on both levels
+in all SMD's problems.
+%
+For those test problems, the algorithm stability was 
+also observed, as shown in Table \ref{tab:summaryDeb} 
+by the standard deviation values very close to zero in all problems tested.
+
+
+
+
+\begin{table}[h!]
+\centering
+\caption{Comparison of best solutions obtained by BlDE and other methods.
+A question mark ``?'' indicates a value not provided in the reference.}
+\label{tab:results}
+\begin{tabular}{p{0.3cm}cccc}
+\hline
+Pr. & Ref & $(x^*,y^*)$ & $f^{*}_{1}$ & $f^{*}_{2}$ \\
+\hline
+1	 	& \cite{Shimizu81, Aiyoshi84, Visweswaran96} & (10, 10)       & 100      & 0 \\
+		& \cite{Bard98, Rajesh03, Koh07} 			 & (10, 10)	      &	100      & 0 \\
+		& \cite{Oduguwa02} 							 & (10.03, 9.969) & 100.58   & 0.001 \\
+		& \cite{Zhu06} 								 & (10.01, 9.93)  & 100.2050 & 0.0169 \\
+		& BlDE 										 & (10, 10) 	  & 100      & 0 \\
+\hline	
+2	 	& \cite{Shimizu81, Visweswaran96, Zhu06} & (20, 5, 10, 5) 		& 225     & 100 \\
+		& BlDE 									 & (19.9999, 5.00004,   & 224.988 & 99.9987 \\
+		&      									 &  10,  4.99941)       &         &        \\
+\hline	
+3       & \cite{Candler82, Bard82, Bard98}	& (0, 0.9, 0, 0.6, 0.4) 		& 29.2 	  & -3.2 \\
+%		& \cite{Onal93} 				 	& (?, 0.9, ?, 0.6, 0.4) 	 	& 7.3 	  & ? \\		
+		& \cite{Wang03} 					& (0, 0.899, 0, 0.06, 0.394) 	& 29.172  & -3.186 \\
+		& \cite{GuangMin05} 				& (0, 0.898, 0, 0.599, 0.399)	& 29.148  & -3.193 \\
+		& \cite{Zhu06} 						& (0, 0.9, 0, 0.6, 0.3999)   	& 29.198  & -3.2 \\
+		& \cite{Wang07} 					& (0, 0.8993, 0, 0.5995, 0.3981)& 29.1709 & -3.1805 \\
+		& BlDE 								& (0, 0.899998,  2.15e-6,  		&  29.2   & -3,2\\
+		&      								&  0.600001, 0.4000001)      	&         &        \\
+\hline
+4		& \cite{Bard82, GuangMin05} 	& (1, 0, 0.5, 1) 				& 1.75 	  & 0 \\
+%		& \cite{Onal93} 				& (1, ?, 0.5, 1) 				& 1.75 	  & ? \\
+		& \cite{Wang07}					& (0.9993, 0, 0.4993, 1.0008) 	& 1.7488  & -0.0028 \\
+		& BlDE 							& (2, 0, 1.5, 0)				& 3.25    & 4 \\
+\hline
+5		& \cite{Aiyoshi84, Bard98, Li12}	& (25, 30, 5, 10) 			& 5 		& 0 \\
+		& \cite{Ishizuka92, Visweswaran96} 	& (0, 0, -10, -10) 			& 0 		& 200 \\
+		& \cite{Facchinei99} 				& (25.00125, 30, ?, ?) 		& 4.999375 	& ? \\
+		& \cite{Zhu06} 						& (24.87, 29.98, 5.1, 10.31)& 3.47 		& 0.1618 \\				
+		& \cite{Koh07} 						& (0, 30, 10, -10) 			& 0 		& 100 \\
+		& BlDE 								& (0, 0, -10, -10) 			& 0 		& 200 \\
+\hline
+6		& \cite{Bard88, Bard98} 					& (1.778, 2.333) 	& 42.5 	& -4.445 \\
+		& \cite{Visweswaran96, Rajesh03, Koh07} 	& (1, 0) 			& 17 	& 1 \\
+		& BlDE 										& (1, 0) 			& 17 	& 1 \\						
+\hline
+7		%& \cite{Bard88} 			& (1.45, 0.95, 1.88, 0.64) 	& -12.0629	& 11 \\
+		& \cite{Facchinei99} 		& (0, 2, ?, ?) 		 		& -12.67871 & ? \\
+		& BlDE 						& (0, 1.99996,       		& -12.6799  & -1.01557\\
+		&      						& 1.87549, 0.906606) 		&           & \\
+\hline
+8		& \cite{Anandalingam90, Radjef10} 	& (16, 11) 			& 49 	  & -17 \\	
+		& \cite{Wang03} 					& (15.959, 10.972) 	& 48.875  & -16.957 \\
+		& \cite{GuangMin05} 				& (15.9972, 10.9945)& 48.9806 & -16.9863 \\
+		& \cite{Wang07} 					& (15.9966, 10.9933)& 48.9764 & -16.9833 \\
+		& BlDE 								& (16, 11) 			& 49 	  & -17 \\						
+\hline
+9	 	& \cite{Savard94, Bard98} 	& (1.889, 0.889, 0) 	& -1.21 		& 7.61 \\
+		& \cite{Oduguwa02} 			& (?, ?, ?) 			& 3.57 			& 2.4 \\		
+		& \cite{Zhu06} 				& (1.87, 0.89, 0) 		& -1.2031 		& 7.5927 \\
+		& BlDE 						& (1.88889, 0.888889, 0)& -1.209876568 	& 7.61728 \\ 
+		%por arredondamento o valor de F fica −1,209876568, o calculado foi -1.40741
+\hline
+10		& \cite{Falk95, Facchinei99, Koh07} & (0.5, 0.5, 0.5, 0.5) & -1 & 0 \\
+		& BlDE 								& (0.5, 0.5, 0.5, 0.5) & -1 & 0 \\		
+\hline
+11		& \cite{Shimizu95, Bard98} 			& (11.25, 5)	& 2250 & 197.75  \\
+		& BlDE 								& (11.25, 5) 	& 2250 & 197.754 \\		
+\hline
+12		& \cite{Bard98, Radjef10} 	& (4, 4) & -12 & 4 \\ % (pg.197)
+		& BlDE 						& (4, 4) & -12 & 4 \\
+\hline
+13)		& \cite{Bard98, Rajesh03, Zhu06} 	& (0.889, 2.222) 		& 3.111	  & -6.667 \\ %(pg.263)
+		& BlDE 								& (0.888889, 2.22222) 	& 3.11111 & -6.66667\\
+\hline
+14		& \cite{Bard98}  	& (1, 0) 			& 1 	& 0 \\%(10.02, 0.82) & 81.33 & ? \\ %(pg.306)
+		& \cite{Oduguwa02} 	& (10.04, 0.1429) 	& 82.44 & -0.271 \\
+		& \cite{Koh09} 		& (?, ?) 			& 81.33 & 0.34 \\
+		& BlDE 				& (1, 0) 			& 1 	& 0\\
+\hline
+15		& \cite{Oduguwa02} 	& (?, ?, ?) 				 & 1000 	& 1 \\
+		& \cite{Li12} 		& (1, 0, 1) 				 & 1000 	& 1 \\
+		& BlDE 				& (0, 0.999657, 0.000342909) & 999.657 	& 1 \\
+\hline
+16		& \cite{Rajesh03} 	& (1, 3) & 5 & 4 \\ % (Ex.2)
+		& \cite{Koh07} 		& (4, 3) & 2 & 4 \\
+		& BlDE 				& (1, 3) & 5 & 4 \\		
+\hline
+17		& \cite{Rajesh03, Koh07} 	& (3, 5) & 9 & 0 \\ % (Ex.3)
+		& BlDE 						& (3, 5) & 9 & 0 \\
+\hline
+18		& \cite{Rajesh03} 	& (17.4545, 10.90909) 	& 85.0909 	& ? \\ % (Ex.4)		
+		& BlDE 				& (17.4545, 10.9091)	& 85.0909  	& -50.1818 \\
+\hline	
+\end{tabular}
+\end{table}
+%
+%
+\begin{table}[h!]
+\centering
+\caption{Summary of results obtained by BlDE for test-problems 1 to 18.}
+\label{tab:summary18}
+\begin{tabular}{p{0.3cm}ccccccc}
+\hline
+Pr. & Level & Min           & Median       & Mean         & Max           & std \\\hline
+ 1      & UL    & 100         & 100        & 100        & 100         & 0   \\   
+        & LL    & 0           & 0          & 0          & 0           & 0   \\   
+\hline
+ 2      & UL    & 224.9880    & 224.9920   & 224.9919   & 224.9940    & 1.6e-03   \\   
+        & LL    &  99.9808    &  99.9976   & 99.9967    &  99.9994    & 3.4e-03   \\   
+\hline
+ 3      & UL    & 16          & 29.2       & 28.7600    & 29.2002     & 2.4   \\   
+        & LL    & -6.5        & -3.2       & -3.3100    & -3.1999     & 6.0e-01   \\   
+\hline
+ 4      & UL    & 3.25        & 3.6142     & 3.6247     & 3.9892      & 2.6e-01   \\   
+        & LL    & -1.9141     &  0.9842    &  0.9863    &  4          & 2.1   \\   
+\hline
+ 5      & UL    & -7.38e-08   &  0         & -2.64e-09  &  0          & 1.3e-08   \\   
+        & LL    & 100         & 200        & 193.3333   & 200         & 2.53e+01   \\   
+\hline
+ 6      & UL    & 16.8612     & 17         & 16.995417  & 17.0023     & 2.5e-02   \\   
+        & LL    & 0.9939      & 1          & 0.9997993  & 1           & 1.0e-03   \\   
+\hline
+ 7      & UL    & -12.6905    & -12.6795   & -12.6800   & -12.6792    & 20e-03   \\   
+        & LL    & -1.0156     & -1.01545   & -1.0153    & -1.0133     & 4.1e-04   \\   
+\hline
+ 8      & UL    & 49          & 49         & 49         & 49          & 0   \\   
+        & LL    & -17         & -17        & -17        & -17         & 0   \\   
+\hline
+ 9      & UL    & -1.4074     & -1.4074    & -1.4074    & -1.4074     & 0   \\   
+        & LL    & 7.6172      & 7.6172     & 7.6172     & 7.6172      & 0   \\   
+\hline
+ 10     & UL    & -1          & -1         & -1         & -1          & 1.8e-06   \\   
+        & LL    & 1.09e-12    & 4.00e-12   & 1.21e-11   & 1.44e-10    & 2.9e-11   \\   
+\hline
+ 11     & UL    & 2250        & 2250       & 2250       & 2250        & 0   \\   
+        & LL    & 197.754     & 197.754    & 197.754    & 197.754     & 0   \\   
+\hline
+ 12     & UL    & -12         & -12        & -12        & -12         & 0   \\   
+        & LL    & 4           & 4          & 4          & 4           & 0   \\   
+\hline
+ 13     & UL    & 3.1111      & 3.1111     & 3.1111     & 3.1111      & 0   \\   
+        & LL    & -6.6666     & -6.6666    & -6.6666    & -6.6666     & 0   \\   
+\hline
+ 14     & UL    & 1           & 1          & 1          & 1           & 0   \\   
+        & LL    & 0           & 0          & 0          & 0           & 0   \\   
+\hline
+ 15     & UL    & 980.1060    & 993.6590   & 993.2020   & 999.6570    & 4.6   \\   
+        & LL    & 1           & 1          & 1          & 1           & 0   \\   
+\hline
+ 16     & UL    & 5           & 5          & 5          & 5           & 0   \\   
+        & LL    & 4           & 4          & 4          & 4           & 0   \\   
+\hline
+ 17     & UL    & 9           & 9          & 9          & 9           & 0   \\   
+        & LL    & 0           & 0          & 0          & 0           & 0   \\   
+\hline
+ 18     & UL    & 79.8455     & 85.0909    & 84.4802    & 85.0909     & 1.5   \\   
+        & LL    & -50.1818    & -50.1818   & -49.9680   & -48.3459    & 5.2e-01   \\   
+
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{Median values for function evaluations (FE) and 
+accuracy (Acc) for the upper and lower levels.}
+\label{tab:resultsDeb}
+\begin{tabular}{c|cccc|cc}
+\hline
+	    & \multicolumn{4}{c}{GA \cite{Sinha12}} & \multicolumn{2}{c}{BlDE} \\
+Pr. & UL FE & LL FE & UL Acc & LL Acc   & UL Acc    & LL Acc \\
+\hline
+%SMD1 & 2644 & 1724241 & 0.000034 & 0.000016 & 3.491e-06 & 1.935e-06 \\
+SMD1 & 2644 & 1724241 & 3.4e-05 & 1.6e-05  & 3.491e-06 & 1.935e-06 \\
+%SMD2 & 2404 & 1568099 & 0.000005 & 0.000005 & 1.294e-06 & 6.514e-07\\
+SMD2 & 2404 & 1568099 & 5.0e-06  & 5.0e-06 & 1.294e-06 & 6.514e-07\\
+%SMD3 & 2338 & 1483884 & 0.000059 & 0.000026 & 4.096e-06 & 2.917e-06\\
+SMD3 & 2338 & 1483884 & 5.9e-05 & 2.6e-05 & 4.096e-06 & 2.917e-06\\
+%SMD4 & 1720 & 1187981 & 0.000026 & 0.000027 & -2.296e-05& 5.140e-05\\
+SMD4 & 1720 & 1187981 & 2.6e-05 & 2.7e-05 & 2.296e-05& 5.140e-05\\
+%SMD5 & 3010 & 2093391 & 0.000004 & 0.000003 & 1.581e-06 & 1.379e-06\\
+SMD5 & 3010 & 2093391 & 4.0e-06 & 3.0e-06 & 1.581e-06 & 1.379e-06\\
+%SMD6 & 3212 & 2429352 & 0.000145 & 0.000071 & 3.470e-06 & 2.067e-06\\
+SMD6 & 3212 & 2429352 & 1.45e-04 & 7.1e-05 & 3.470e-06 & 2.067e-06\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{Summary of results obtained by BlDE for test-collection SMD1 to SMD6.}
+\label{tab:summaryDeb}
+\begin{tabular}{p{0.3cm}ccccccc}%p{0.4cm}ccccccc
+\hline
+Pr. & Level& Min              & Median           & Mean             & Max              & std \\\hline
+%\multicolumn{6}{c}{SMD1}\\\hline
+SMD1 & UL   & 3.73e-07       & 3.49e-06       & 3.83e-06       & 1.23e-05       & 3.05e-06   \\   
+     & LL   & 2.46e-07       & 1.93e-06       & 2.59e-06       & 8.00e-06       & 2.36e-06 \\   
+\hline
+%\multicolumn{6}{c}{SMD2}\\\hline
+SMD2 & UL   & 2.32e-07       & 1.29e-06       & 1.68e-06       & 8.18e-06       & 1.50e-06   \\   
+     & LL   & 1.57e-07       & 6.51e-07       & 9.43e-07       & 2.74e-06       & 7.09e-07   \\   
+\hline
+%\multicolumn{6}{c}{SMD3}\\\hline
+SMD3 & UL   & 1.06e-06       & 4.09e-06       & 4.78e-06       & 9.90e-06       & 2.56e-06   \\   
+     & LL   & 4.59e-07       & 2.91e-06       & 3.93e-06       & 1.62e-05       & 3.62e-06   \\   
+\hline
+%\multicolumn{6}{c}{SMD4}\\\hline
+SMD4 & UL   & -4.01e-04      & -2.29e-05      & -4.76e-05       & 1.24e-06      & 8.14e-05   \\   
+     & LL   & 2.4e-07        & 5.10e-05         & 1.0e-04       & 7.76e-04      & 1.60e-04   \\   
+\hline
+%\multicolumn{6}{c}{SMD5}\\\hline
+SMD5 & UL   & 2.97e-07       & 1.58e-06       & 2.93e-06       & 1.10e-05       & 2.67e-06   \\   
+     & LL   & 1.61e-07       & 1.37e-06       & 2.06e-06       & 6.50e-06       & 1.93e-06   \\   
+\hline
+%\multicolumn{6}{c}{SMD6}\\\hline
+SMD6 & UL   & 3.90e-07       & 3.47e-06       & 3.77e-06       & 1.24e-05       & 3.08e-06   \\   
+     & LL   & 2.81e-07       & 2.06e-06       & 2.62e-06       & 8.07e-06       & 2.39e-06   \\  
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Discussion}
+It is important to mention that different DE variants
+as well as different parameter values for F, CR, population size, and number of generations could be
+adopted in the different levels of the optimization.
+%
+In fact, a more efficient algorithm would probably arise by adapting the values of the DE
+parameters as well as by closely monitoring the convergence process in both populations
+in order to save function evaluations by stopping the iterations earlier.
+
+Furthermore, since the algorithmic idea proposed used two DE algorithms
+independently, other evolutionary methods
+could be incorporated in different levels of the BLP, e.g., by using 
+DE on the upper level and an ant colony algorithm on the lower level, 
+or vice-versa.
+%
+The implementation of different algorithms in different levels of the BLP could
+be interesting when, for instance, the lower level problem can be more efficiently solved by an existing 
+problem specific technique.
+
+%--------------------------------------------------------------------
+\section{Conclusion}\label{sec:conclusion}
+%--------------------------------------------------------------------
+
+
+In this paper a simple method using the differential evolution technique 
+was proposed for solving general bilevel programming problems in continuous variables.
+%
+The algorithm uses two DE algorithms, one responsible for 
+optimizing the upper level problem, and another for optimizing the 
+lower level problem.
+%
+The algorithm was tested in a variety of test-problems taken from the
+literature  including linear, nonlinear, constrained, and 
+unconstrained optimization problems.
+%
+Although no tuning procedure for the DE parameters has been attempted
+in the experiments, the results demonstrated that the proposed algorithm 
+successfully solved the test problems considered.
+
+For future work, it is intended to extend this research in order to propose ways of reducing
+the number of function evaluations required by the algorithm, specially in the lower level
+problem.
+%
+
+
+
+% conference papers do not normally have an appendix
+% use section* for acknowledgement
+%--------------------------------------------------------------------
+\section*{Acknowledgment}
+%--------------------------------------------------------------------
+
+The authors would like to thank the support from CNPq 
+(grants 141519/2010-0, 140785/2009-4, 308317/2009-2).
+
+%\clearpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}
+
+

@@ -1,0 +1,14 @@
+      average=0
+      for seed in {841824891249219412,7534656236572352,3424335727523}
+      do
+          result=$(./BPDE_2Niveis --seed $seed $@)
+          result=$(echo $result | cut -d' ' -f1)
+                   
+          average=`echo - | awk -v res="$result" -v av="$average" '{print res + av}'`
+          
+      done
+          
+      average=`echo - | awk -v av="$average" '{print av/3}'`
+      
+      echo $average
+
