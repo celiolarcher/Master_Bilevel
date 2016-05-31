@@ -192,7 +192,7 @@ int main(int argc, char *argv[]){
           
 
           SolutionDecoder *decoder=new LemkeLW();
-          PenaltySolution *penalty=new DEBPenalty();
+          PenaltySolution *penalty=new APMDEBPenalty();
           decoder->initInstance(function);
 
           TOL_EQ_CONST=1e-4;

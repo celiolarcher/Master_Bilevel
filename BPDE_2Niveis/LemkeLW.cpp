@@ -16,9 +16,9 @@ extern bool InfeasibleAvaliation;
 	this->function=function;
 
 	solutionSize=function->getDimensionUP()+function->getDimensionLW();
-	constraintsNumber=function->getEQConstraintNumberUP()+function->getNEQConstraintNumberUP()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW()+1;
+	constraintsNumber=function->getEQConstraintNumberUP()+function->getNEQConstraintNumberUP()+function->getEQConstraintNumberLW()+function->getNEQConstraintNumberLW();
 
-	constraintsNEQNumber=function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW() + 1; //Lemke é executado no início do teste de restrições e considerado de não igualdade
+	constraintsNEQNumber=function->getNEQConstraintNumberUP()+function->getNEQConstraintNumberLW(); //Lemke é executado no início do teste de restrições e considerado de não igualdade
 	constraintsEQNumber=constraintsNumber-constraintsNEQNumber;
 	editBegin=0;
 	editSize=function->getDimensionUP();
@@ -35,6 +35,7 @@ extern bool InfeasibleAvaliation;
     int LemkeLW::decodifySolution(Solution *sol){
       
           sol->feasible=1;
+	  sol->completeSolution=1;
           
           if(sol->countConstraint==0) return 1;
           
@@ -42,58 +43,66 @@ extern bool InfeasibleAvaliation;
         
           getYLemke(sol->vectorCharacters, sol->vectorCharacters+function->getDimensionUP(), sol->constraintValues+offset);
           
-          offset++;
+          //offset++;
 
 	//cout<<sol->constraintValues[offset-1]<<"\t";
-          if(sol->constraintValues[offset-1]>TOL_EQ_CONST) sol->feasible=0;
-          
-          if(function->getNEQConstraintNumberUP()>0){
-		  function->constraintsValueNEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
-		  for(int i=offset;i<offset+function->getNEQConstraintNumberUP();i++){
-		        if(sol->constraintValues[i]>TOL_NEQ_CONST){
-		          sol->feasible=0;
-		        }
-		  }
-          }
-          
-          offset+=function->getNEQConstraintNumberUP();
-          
-          if(function->getNEQConstraintNumberLW()>0){
-	    function->constraintsValueNEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
-	    for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){
-	          if(sol->constraintValues[i]>TOL_NEQ_CONST){
+          //if(sol->constraintValues[offset-1]>TOL_EQ_CONST) sol->feasible=0;
+	  if(sol->constraintValues[offset]>TOL_EQ_CONST){ 
+		sol->completeSolution=0;
 		sol->feasible=0;
-	          }
-	    }
-          }
+	  }
           
-          offset+=function->getNEQConstraintNumberLW();
-          
-          if(function->getEQConstraintNumberUP()>0){
-		  function->constraintsValueEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
-		  for(int i=offset;i<offset+function->getEQConstraintNumberUP();i++){
-		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
-			  sol->feasible=0;
-		        }
+	  if(sol->completeSolution){
+		  if(function->getNEQConstraintNumberUP()>0){
+			  function->constraintsValueNEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
+			  for(int i=offset;i<offset+function->getNEQConstraintNumberUP();i++){
+				if(sol->constraintValues[i]>TOL_NEQ_CONST){
+				  sol->feasible=0;
+				}
+			  }
 		  }
-          }
-          
-          offset+=function->getEQConstraintNumberUP();
-          
-          if(function->getEQConstraintNumberLW()>0){
-		  function->constraintsValueEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
-		  for(int i=offset;i<offset+function->getEQConstraintNumberLW();i++){
-		        if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
-		          sol->feasible=0;
-		        }
+		  
+		  offset+=function->getNEQConstraintNumberUP();
+		  
+		  if(function->getNEQConstraintNumberLW()>0){
+		    function->constraintsValueNEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
+		    for(int i=offset;i<offset+function->getNEQConstraintNumberLW();i++){
+			  if(sol->constraintValues[i]>TOL_NEQ_CONST){
+				sol->feasible=0;
+			  }
+		    }
 		  }
-          }
-          
-          offset+=function->getEQConstraintNumberLW();
+		  
+		  offset+=function->getNEQConstraintNumberLW();
+		  
+		  if(function->getEQConstraintNumberUP()>0){
+			  function->constraintsValueEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
+			  for(int i=offset;i<offset+function->getEQConstraintNumberUP();i++){
+				if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
+				  sol->feasible=0;
+				}
+			  }
+		  }
+		  
+		  offset+=function->getEQConstraintNumberUP();
+		  
+		  if(function->getEQConstraintNumberLW()>0){
+			  function->constraintsValueEQLW(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
+			  for(int i=offset;i<offset+function->getEQConstraintNumberLW();i++){
+				if(sol->constraintValues[i]<-TOL_EQ_CONST || sol->constraintValues[i]>TOL_EQ_CONST){
+				  sol->feasible=0;
+				}
+			  }
+		  }
+		  
+		  offset+=function->getEQConstraintNumberLW();
 
-          if(sol->feasible)// || InfeasibleAvaliation)
-	 sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
-          
+		  if(sol->feasible)// || InfeasibleAvaliation)
+		 	sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
+	  }else{
+		for(int i=0;i<constraintsNumber;i++)sol->constraintValues[i]=0;
+	  }
+
           return 1;
     }
 

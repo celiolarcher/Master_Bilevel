@@ -2,6 +2,7 @@
 #define INPUTFUNCTION_INCLUDED
 #include "ListFunction.h"
 #include "ListFunctionSMD.h"
+#include "ListFunctionNewSMD.h"
 #include "ListFunctionJaq.h"
 #include "ListFunctionOthers.h"
 

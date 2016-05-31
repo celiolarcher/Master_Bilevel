@@ -115,6 +115,38 @@
 	    return 1;
 	}
       }
+
+      for(int i=0;i<DEFINEfunctionListSizeNewSMD;i++){
+	if(!strcmp(nameFunc,listFunctionNewSMD[i].name)){
+	    FunctionNewSMD *functionSelected;
+	    
+	    inputP=P,inputQ=Q,inputR=R,inputS=S;	    
+	    
+	    listFunctionNewSMD[i].setFuncSMD(&functionSelected);
+	    
+	    objFuncUPLevel=functionSelected->funcUP;
+	    objFuncLWLevel=functionSelected->funcLW;
+	    constrEqUP=functionSelected->funcCTREQUP;
+	    constrNeqUP=functionSelected->funcCTRNEQUP;
+	    constrEqLW=functionSelected->funcCTREQLW;
+	    constrNeqLW=functionSelected->funcCTRNEQLW;
+	    constrKKT=functionSelected->funcCTRKKT;
+	    dimensionUP=functionSelected->dimensionUP;
+	    dimensionLW=functionSelected->dimensionLW;
+	    countEqConstraintUP=functionSelected->numEqConstrUP;
+	    countNeqConstraintUP=functionSelected->numNeqConstrUP;
+	    countEqConstraintLW=functionSelected->numEqConstrLW;
+	    countNeqConstraintLW=functionSelected->numNeqConstrLW;
+	    bounds=functionSelected->boundsVar;
+	    simplexTableauKKT=functionSelected->funcSimplexTableauKKT;
+	    lemkeMatrix=functionSelected->funcLemkeMatrix;
+
+	    delete functionSelected;
+	    
+	    return 1;
+	}
+      }
+
       return 0;
     }
     

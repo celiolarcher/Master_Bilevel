@@ -17,6 +17,7 @@ class Solution{
     public: int sizeVec;
     public: int countConstraint;
     public: bool feasible;
+    public: bool completeSolution;
     public: double upLevelFunction;
     public: double score;
     
@@ -27,7 +28,7 @@ class Solution{
     public: double calcScore(InputFunction *function);
     public: int initValue(double initVec[]);
     public: int initRandom(double bounds[]);
-    public:	Solution *clone();
+    public: Solution *clone();
     public: double diffZeroSolution(Solution *sol);
     public: double diffSquareSolution(Solution *sol);
     public: double diffMaxSolution(Solution *sol);

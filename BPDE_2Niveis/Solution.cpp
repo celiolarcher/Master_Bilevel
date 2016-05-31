@@ -141,12 +141,13 @@ vectorCharacters[5]=0;
               clone->score=this->score;
               clone->upLevelFunction=this->upLevelFunction;
               clone->feasible=this->feasible;
+              clone->completeSolution=this->completeSolution;
               return clone;
       }
       
       std::ostream& operator<<(std::ostream &out, Solution &sol){
 
-	  out<<"\n Solution Score:"<<sol.score<<"   Level UP:"<<sol.upLevelFunction<<"\n";
+	  out<<"\n Solution Score:"<<sol.score<<"   Level UP:"<<sol.upLevelFunction<<"    Complete Solution:"<<sol.completeSolution<<"    Feasible Solution:"<<sol.feasible<<"\n";
           
           for(int i=0;i<sol.sizeVec;i++) out<<sol.vectorCharacters[i]<<"\t";
           

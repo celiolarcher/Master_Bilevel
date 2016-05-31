@@ -42,16 +42,18 @@ using namespace std;
 		  }
           }
           
-          
+//          cout<<"\n--------------------------------------------------------------------------\n";
           double violationSumSquare=0;
           for(int j=0;j<population[0]->countConstraint;j++){
 		if(newPopulation)
-		 violationMean[j]/=(2*sizePop);
+		    violationMean[j]/=(2*sizePop);
 		else
 		    violationMean[j]/=(sizePop);
 	   
-	     violationSumSquare+=violationMean[j]*violationMean[j];
+	        violationSumSquare+=violationMean[j]*violationMean[j];
+  //        cout<<"\t"<<violationSumSquare;                    
           }
+//cout<<"\n";
           
         if(newPopulation)
           levelUPMean/=(2*sizePop);
@@ -61,15 +63,18 @@ using namespace std;
           for(int j=0;j<population[0]->countConstraint;j++){
 //	     kWeight[j]=(violationMean[j]*fabs(levelUPMean))/violationSumSquare;
 	     kWeight[j]=(violationMean[j])/violationSumSquare;
-	//	cout<<kWeight[j]<<"\t";
+		//cout<<kWeight[j]<<"\t";
           }
           
-         // cout<<endl;
-         // cout<<levelUPMean<<"\t"<<violationSumSquare<<"\n";          
+          //cout<<endl;
+          //cout<<levelUPMean<<"\t"<<violationSumSquare<<"\n";          
           return 1;
      }
 
      int APMDEBPenalty::compareSolutions(Solution *sol1, Solution *sol2, SolutionDecoder *decoder){   //1 se sol1 melhor que sol2, 0 caso contrário
+	  if(!sol1->completeSolution) return 0;
+	  if(!sol2->completeSolution) return 1;
+
           if(sol1->feasible) sol1->score=sol1->upLevelFunction;
           else{
 	    sol1->score=0;

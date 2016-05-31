@@ -7,7 +7,7 @@ BPDE_2Niveis: InputFunction.o Solution.o DifferentialEvolution.o  LagrangeMultp.
 Solution.o: Solution.cpp Solution.h 
 	g++ -c Solution.cpp $(flag)
 	
-InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h ListFunctionSMD.h ListFunctionJaq.h ListFunctionOthers.h
+InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h ListFunctionSMD.h ListFunctionJaq.h ListFunctionOthers.h ListFunctionNewSMD.h 
 	g++ -c InputFunction.cpp $(flag)
 
 DifferentialEvolution.o: DifferentialEvolution.cpp DifferentialEvolution.h

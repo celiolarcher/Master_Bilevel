@@ -34,6 +34,7 @@ extern bool InfeasibleAvaliation;
     int LagrangeMultpSimplex::decodifySolution(Solution *sol){
       
           sol->feasible=1;
+	  sol->completeSolution=1;
           
           if(sol->countConstraint==0) return 1;
           
