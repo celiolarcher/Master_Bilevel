@@ -1,0 +1,225 @@
+\begin{thebibliography}{35}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+
+\bibitem[Bankman(2008)]{bankman2008handbook}
+I.~Bankman.
+\newblock {\em {Handbook of medical image processing and analysis}}.
+\newblock Academic Press, 2008.
+
+\bibitem[Bayraktar et~al.()Bayraktar, Bernas, Robinson, e
+  Rajwa]{bayraktar-image}
+B.~Bayraktar, T.~Bernas, J.P. Robinson, e B.~Rajwa.
+\newblock {Image reconstruction from discrete Chebyshev moments via formation
+  of lookup tables (Proceedings Paper)}.
+
+\bibitem[Blot e Zwiggelaar(2002)]{blot2002synthesis}
+L.~Blot e R.~Zwiggelaar.
+\newblock {Synthesis and analysis of solid texture: application in medical
+  imaging}.
+\newblock In: {\em 2 nd International Workshop on Texture Analysis and
+  Synthesis. Copenhagen, Denmark}. Citeseer, 2002.
+
+\bibitem[Bo et~al.()Bo, Jian-zhong, Feng, Wen-qing, e Jing]{bo-image}
+FU~Bo, Z.~Jian-zhong, L.~Feng, C.~Wen-qing, e YU~Jing.
+\newblock {Image Analysis by Fourier-Chebyshev Moments}.
+
+\bibitem[Cootes et~al.(1994)Cootes, Hill, Taylor, e Haslam]{cootes1994use}
+T.F. Cootes, A.~Hill, C.J. Taylor, e J.~Haslam.
+\newblock {The use of active shape models for locating structures in medical
+  images}.
+\newblock {\em Image and vision computing}, 12\penalty0 (6):\penalty0 355--366,
+  1994.
+
+\bibitem[Cootes e Taylor(2001)]{cootes2001statistical}
+T.F. Cootes e C.J. Taylor.
+\newblock {Statistical models of appearance for medical image analysis and
+  computer vision}.
+\newblock In: {\em Proc. SPIE Medical Imaging}, volume 4322, p\'aginas
+  236--248. Citeseer, 2001.
+
+\bibitem[Dai e Khorram(1999)]{dai1999feature}
+X.~Dai e S.~Khorram.
+\newblock {A feature-based image registration algorithm using improved
+  chain-code representation combined with invariant moments}.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 37\penalty0
+  (5):\penalty0 2351--2362, 1999.
+
+\bibitem[Drummond(1998)]{drummond1998computed}
+GB~Drummond.
+\newblock {Computed tomography and pulmonary measurements}.
+\newblock {\em British Journal of Anaesthesia}, 80\penalty0 (5):\penalty0 665,
+  1998.
+
+\bibitem[Due~Trier et~al.(1996)Due~Trier, Jain, e Taxt]{due1996feature}
+{\O}.~Due~Trier, A.K. Jain, e T.~Taxt.
+\newblock {Feature extraction methods for character recognition-a survey}.
+\newblock {\em Pattern recognition}, 29\penalty0 (4):\penalty0 641--662, 1996.
+
+\bibitem[Duncan e Ayache(2000)]{duncan2000medical}
+J.S. Duncan e N.~Ayache.
+\newblock {Medical image analysis: Progress over two decades and the challenges
+  ahead}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  p\'aginas 85--106, 2000.
+
+\bibitem[F.N.I.H.()]{fnih}
+F.N.I.H.
+\newblock {Foundation for the National Institutes of Health}.
+\newblock URL \url{http://www.fnih.org/}.
+
+\bibitem[Fukunaga(1990)]{Fukunaga:90}
+K.~Fukunaga.
+\newblock {\em {Introduction to Statistical Patterns Recognition.}}, volume~18.
+\newblock Academic Press, New York, 1990.
+
+\bibitem[Giraldi(2000)]{giraldi2000t}
+G.A. Giraldi.
+\newblock {\em {T-Snakes Duais e Inicializa{\c{c}}{\~a}o de Modelos
+  Deform{\'a}veis}}.
+\newblock Tese de Doutorado, Ph. D. thesis, Departamento de Engenharia de
+  Sistemas e Computa{\c{c}}ao--COPPE--UFRJ. Web Site (In portuguese. Abstract
+  in English): http://virtual01. 1ncc. br/giraldi/Tese/index. html, 2000.
+
+\bibitem[Giraldi et~al.()Giraldi, Strauss, e Oliveira]{giraldi1boundary}
+G.A. Giraldi, E.~Strauss, e A.A. Oliveira.
+\newblock {A boundary extraction method based on dual-t-snakes and dynamic
+  programming}.
+\newblock {\em sign}, 1:\penalty0 1.
+
+\bibitem[Godbole e Amin(1995)]{godbole1995mathematical}
+S.~Godbole e A.~Amin.
+\newblock {Mathematical morphology for edge and overlap detection for medical
+  images}.
+\newblock {\em Real-Time Imaging}, 1\penalty0 (3):\penalty0 191--201, 1995.
+
+\bibitem[Han e Kamber(2006)]{han2006data}
+J.~Han e M.~Kamber.
+\newblock {\em {Data mining: concepts and techniques}}.
+\newblock Morgan Kaufmann, 2006.
+
+\bibitem[HARALICK(1983)]{haralick1983image}
+R.M. HARALICK.
+\newblock {Image texture survey}.
+\newblock {\em Fundamentals in computer vision: an advanced course}, p\'agina
+  145, 1983.
+
+\bibitem[Jain et~al.(1999)Jain, Murty, e Flynn]{jain1999}
+A.~K. Jain, M.~N. Murty, e P.~J. Flynn.
+\newblock Data clustering: A review.
+\newblock {\em ACM Computing Surveys}, 31\penalty0 (3):\penalty0 264--323,
+  1999.
+
+\bibitem[Jain e Chen(2004)]{Jain:04}
+A.K. Jain e H.~Chen.
+\newblock {Matching of Dental X-Ray Images for Human Identification.}
+\newblock {\em Pattern Recognition}, 37\penalty0 (7):\penalty0 1519--1532,
+  2004.
+
+\bibitem[Lehmann et~al.(1999)Lehmann, Gonner, Spitzer,
+  et~al.]{lehmann1999survey}
+T.M. Lehmann, C.~Gonner, K.~Spitzer, et~al.
+\newblock {Survey: Interpolation methods in medical image processing}.
+\newblock {\em IEEE Transactions on medical imaging}, 18\penalty0
+  (11):\penalty0 1049--1075, 1999.
+
+\bibitem[Maintz e Viergever(1998)]{maintz1998survey}
+J.B.A. Maintz e M.A. Viergever.
+\newblock {A survey of medical image registration}.
+\newblock {\em Medical image analysis}, 2\penalty0 (1):\penalty0 1--36, 1998.
+
+\bibitem[McInerney e Terzopoulos(1996)]{mcinerney1996deformable}
+T.~McInerney e D.~Terzopoulos.
+\newblock {Deformable models in medical image analysis: a survey}.
+\newblock {\em Medical image analysis}, 1\penalty0 (2):\penalty0 91--108, 1996.
+
+\bibitem[Moura et~al.(2009)Moura, Lima, Faria, e Gutfilen]{moura2009rapid}
+P.M. Moura, L.V. Lima, M.D.B. Faria, e B.~Gutfilen.
+\newblock {Rapid maxillary expansion: evaluation of two methods of 3D
+  reconstruction by means of a laboratorial model}.
+\newblock {\em Revista Dental Press de Ortodontia e Ortopedia Facial},
+  14:\penalty0 90--93, 2009.
+
+\bibitem[Murase e Nayar(1995)]{murase95}
+H.~Murase e S.~Nayar.
+\newblock Visual learning and recognition of 3d objects from appearance.
+\newblock {\em International Journal of Computer Vision}, 14:\penalty0 5--24,
+  1995.
+
+\bibitem[N.C.I.()]{ncbic}
+N.C.I.
+\newblock {National Cancer Institute}.
+\newblock URL \url{http://www.cancer.gov/}.
+
+\bibitem[Nomir e Abdel-Mottaleb(2005)]{nomir2005shi}
+O.~Nomir e M.~Abdel-Mottaleb.
+\newblock {A system for human identification from X-ray dental radiographs}.
+\newblock {\em Pattern Recognition}, 38\penalty0 (8):\penalty0 1295--1305,
+  2005.
+
+\bibitem[Pluim et~al.(2003)Pluim, Maintz, e Viergever]{pluim2003mutual}
+J.P.W. Pluim, J.B.A. Maintz, e M.A. Viergever.
+\newblock {Mutual-information-based registration of medical images: a survey}.
+\newblock {\em IEEE transactions on medical imaging}, 22\penalty0 (8):\penalty0
+  986--1004, 2003.
+
+\bibitem[Stratemann et~al.(2008)Stratemann, Huang, Maki, Miller, e
+  Hatcher]{stratemann2008comparison}
+SA~Stratemann, JC~Huang, K.~Maki, AJ~Miller, e DC~Hatcher.
+\newblock {Comparison of cone beam computed tomography imaging with physical
+  measures}.
+\newblock {\em Dentomaxillofacial Radiology}, 37\penalty0 (2):\penalty0 80,
+  2008.
+
+\bibitem[Suri et~al.(2002)Suri, Liu, Singh, Laxminarayan, Zeng, e
+  Reden]{Suri:02}
+J.S. Suri, K.~Liu, S.~Singh, S.~Laxminarayan, X.~Zeng, e L.~Reden.
+\newblock {Shape Recovery Algorithms using level sets in 2-d/3-d Medical
+  Imagery: a Stateof- the-art Review}.
+\newblock {\em IEEE Transactions on Information Technology in Biomedicine},
+  6\penalty0 (1):\penalty0 8--28, 2002.
+
+\bibitem[Suri et~al.(2005)Suri, Wilson, e Laxminarayan]{Suri:05}
+J.S. Suri, D.~Wilson, e S.~Laxminarayan.
+\newblock {\em {Handbook of Biomedical Image Analysis: Volume 3: Registration
+  Models }}.
+\newblock Springer-Verlag New York, Inc, 2005.
+
+\bibitem[Swennen e Schutyser(2006)]{swennen2006three}
+G.R.J. Swennen e F.~Schutyser.
+\newblock {Three-dimensional cephalometry: spiral multi-slice vs cone-beam
+  computed tomography}.
+\newblock {\em American Journal of Orthodontics \& Dentofacial Orthopedics},
+  130\penalty0 (3):\penalty0 410--416, 2006.
+
+\bibitem[Van~Ginneken et~al.(2001)Van~Ginneken, ter Haar~Romeny, e
+  Viergever]{van2001computer}
+B.~Van~Ginneken, B.M. ter Haar~Romeny, e M.A. Viergever.
+\newblock {Computer-aided diagnosis in chest radiography: a survey}.
+\newblock {\em IEEE Transactions on medical imaging}, 20\penalty0
+  (12):\penalty0 1228--1241, 2001.
+
+\bibitem[Wood et~al.(1995)Wood, Zerhouni, Hoford, Hoffman, e
+  Mitzner]{wood1995measurement}
+SA~Wood, EA~Zerhouni, JD~Hoford, EA~Hoffman, e W.~Mitzner.
+\newblock {Measurement of three-dimensional lung tree structures by using
+  computed tomography}.
+\newblock {\em Journal of Applied Physiology}, 79\penalty0 (5):\penalty0 1687,
+  1995.
+
+\bibitem[Zana e Klein(2001)]{zana2001segmentation}
+F.~Zana e J.C. Klein.
+\newblock {Segmentation of vessel-like patterns using mathematical morphology
+  and curvature evaluation}.
+\newblock {\em IEEE Transactions on Image Processing}, 10\penalty0
+  (7):\penalty0 1010--1019, 2001.
+
+\bibitem[Zhou e Abdel-Mottaleb(2005)]{zhou2005cbs}
+J.~Zhou e M.~Abdel-Mottaleb.
+\newblock {A content-based system for human identification based on bitewing
+  dental X-ray images}.
+\newblock {\em Pattern Recognition}, 38\penalty0 (11):\penalty0 2132--2142,
+  2005.
+
+\end{thebibliography}

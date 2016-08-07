@@ -1,0 +1,75 @@
+\chapter{Introdução}
+
+Imagens radiológicas são ferramentas de fundamental importância no auxílio a procedimentos médicos como
+diagnósticos, identificação de cadáveres, tratamento de fraturas, análise de crescimento corporal e etc. Este
+tipo de imagem ganhou muita popularidade devido a boa qualidade na visualização das estruturas do corpo humano
+sem intervenção cirúrgica no paciente. Neste grupo estão inclusas imagens de raio-X, tomografia
+computadorizada, ressonância magnética e ultra-sonografia.
+
+%??Imagens de raio-x, imagens de tomografia e ressonância magnética.??
+
+A automatização do processo de análise destas imagens, em especial das estruturas ósseas, vêm sido estudado
+como alternativa na melhoria da acurácia e praticidade dos diagnósticos médicos
+(\cite{van2001computer,lehmann1999survey,duncan2000medical}). Neste contexto, técnicas em Processamento de
+Imagem (PI) e Visão Computacional (VC) têm contribuído na identificação e extração automática das estruturas de
+interesse (\cite{Suri:02,Suri:05,due1996feature,maintz1998survey}). A partir de agora o termo Processamento
+Digital de Imagem (PDI) será designado à união das áreas PI e VC. Em geral, do ponto de vista de PDI, existem
+três problemas básicos: segmentação, extração de características e classificação.
+
+No processo de segmentação existem várias abordagens aplicadas à área médica. Dentre elas podem ser citadas
+entropia  (\cite{pluim2003mutual}), morfologia matemática
+(\cite{godbole1995mathematical,zana2001segmentation}), textura (\cite{haralick1983image,blot2002synthesis}) e
+contornos ativos (\cite{mcinerney1996deformable,giraldi2000t,giraldi1boundary}). A escolha do método está
+associada diretamente com o tipo de imagem e estrutura associadas. O objetivo da segmentação é delimitar
+automaticamente, na imagem, a estrutura de interesse.
+
+Durante a etapa de extração de características, dentre as técnicas mais utilizadas, podem ser aplicados modelos
+baseados em análise de forma (\cite{cootes1994use,cootes2001statistical}), momentos
+(\cite{bo-image,dai1999feature,bayraktar-image}), PCA (\cite{murase95}). Nesta etapa são extraídas informações
+essenciais para o diagnóstico médico assim como características que auxiliam na classificação da estrutura
+analisada.
+
+Em muitos casos há interesse na atribuição dos objetos segmentados às suas respectivas classes ou até mesmo a
+eliminação de objetos que foram segmentados incorretamente. Para lidar com este tipo de problema são utilizadas
+técnicas de classificação para auxiliar na identificação automática do tipo do objeto segmentado. Aliado à
+extração de característica, técnicas como SVM, PCA, Bayes, Redes Neurais
+(\cite{jain1999,Fukunaga:90,han2006data}) têm sido usadas na identificação de classes de objetos
+(??citações??).
+
+%??preprocessamento de imagens médicas: suavização, eliminação de ruído??
+
+Neste trabalho são abordados métodos em Processamento Digital de Imagem para análise de imagens radiológicas. O
+principal objetivo é automatizar o processo de aquisição de características, a partir de imagens radiológicas,
+que auxiliam o diagnóstico médico. Dentre as imagens utilizadas neste estudo estão imagens de raio-x
+odontológicos e tomografia computadorizada.
+
+Em imagens odontológicas têm sido aplicadas técnicas visando a segmentação e medição automática dos dentes
+(\cite{Jain:04,nomir2005shi,zhou2005cbs}). Em geral, para estas imagens é necessário um pré-processamento para
+eliminação de ruído. O próximo passo é a segmentação e a extração de característica dos dentes na imagem. Esta
+característica é composta por medições ao longo do corpo do dente que possui 3 partes: coroa, polpa e raiz
+(??citações??). Existem duas consequências diretas no sucesso da extração destas características: viabilização
+de um sistema final de trabalho para o dentista e a validação das metologias de segmentação implementadas neste
+trabalho.
+
+A Tomografia é um procedimento comum na análise do crânio humano em busca de fraturas, no estudo atropológico e
+no crescimento do corpo. Este exame revela com eficiência a anatomia tridimensional de partes do corpo e suas
+respectivas densidades. Neste sentido, PDI pode viabilizar a automatização das medições destas estruturas
+(\cite{wood1995measurement,drummond1998computed}) assim como a comparação dos tipos de tomografia
+computadorizadas existentes (\cite{swennen2006three,stratemann2008comparison}). Nesta dissertação são
+desenvolvidas metodologias para a avaliação de duas tecnologias para tomografia computadorizada: Cone-Beam e
+Multislice. Essa metodologia é constituída por métodos de registro e medições automáticas na estrutura de
+interesse (??citações??).
+
+%??Este trabalho está organizado da seguinte forma... (aguardar a evolucao do trabalho) ??
+
+Este trabalho está organizado da seguinte forma:
+
+\begin{itemize}
+	\item \textbf{Capitulo \ref{medicalimages}}: Descreve os principais tipos de imagens e suas particulares para PDI;
+	\item \textbf{Capitulo \ref{theoricfundamentation}}: Apresenta fundamentações teóricas das técnicas de PDI utilizadas nesta dissertação;
+	\item \textbf{Capitulo \ref{texture_classification}}: Aborda técnicas para processamento e classificação de imagens radiológicas;
+	\item \textbf{Capitulo \ref{developedmetodologies}}: Sumariza as metodologias desenvolvidas nesta dissertação;
+	\item \textbf{Capitulo \ref{results}}: Mostra os resultados obtidos com as metologias utilizadas;
+	\item \textbf{Capitulo \ref{analisys_discution}}: Analisa, compara e discute os resultados;
+	\item \textbf{Capitulo \ref{conclusion_futureworks}}: Apresenta a conclusão do trabalho e trabalhos futuros.
+\end{itemize}

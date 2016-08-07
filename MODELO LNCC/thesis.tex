@@ -1,0 +1,298 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% SERVICO DE ANALISE E APOIO A FORMACAO DE RECURSOS HUMANOS-SAAFRH/LNCC-MCT
+%%%%% Modelo thesis.tex utilizando thesis.cls
+%%%%% Usada para MSc, DSc and PhD thesis
+%%%%% Contribuicao da aluna Priscila V. S. Z. Capriles, 2005
+%%%%% Reeditado por Leandro Gazoni - CFRH/LNCC
+%%%%% ULTIMA ATUALIZACAO quarta-feira, maio 30, 2007 at 19:23 by gazoni@lncc.br
+%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,a4paper]{thesis}
+
+
+\newcommand{\exinput}[1]{
+	\input{#1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% DEFININDO GRAU A SER OBTIDO %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% MESTRADO OU DOUTORADO, DESCOMENTE O GRAU QUE VOCE ESTA CURSANDO %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MESTRADO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tipo}{Disserta\c c\~ao}
+\newcommand{\tipoeng}{Dissertation}
+\newcommand{\grau}{Mestre}
+\newcommand{\graueng}{Master}
+\newcommand{\abrevi}{M.Sc.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOUTORADO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\tipo}{Dissertação}
+%\newcommand{\tipoeng}{Dissertation}
+%\newcommand{\grau}{Mestre}
+%\newcommand{\graueng}{Master}
+%\newcommand{\abrevi}{M.Sc.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%CONFIGURACAO PARA CONVERSAO AUTOMATICA DE FIGURAS .EPS PARA .PDF, CASO NAO QUEIRA
+% UTILIZAR ESTA CONFIGURACAO, COMENTE O CODIGO ABAIXO, LEMBRADO QUE QUANDO DA INCLUSAO
+% DE UMA FIGURA .EPS, DEVE-SE DECLARAR POR COMPLETO O NOME E EXTENSAO DA FIGURA.
+% EX: \includegraphics{logo/lncc.eps}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ifpdf}
+%\usepackage{ifpdf,psfrag,ps4pdf,thumbpdf} %para inclusao de figuras (png, jpg, gif, bmp)
+\usepackage{times,epstopdf,ifpdf,latexsym,graphics,psfrag,thumbpdf}
+\usepackage{epstopdf}
+\usepackage{subfig}
+
+
+\newif
+  \ifpdf
+  \ifx
+    \pdfoutput \undefined \pdffalse
+    \usepackage{graphicx}
+  \else
+     % we are running pdflatex, so convert .eps files to .pdf
+      \usepackage[pdftex]{graphicx} %para inclusao de figuras (png, jpg, gif, bmp)
+
+      \usepackage{epstopdf}
+      \pdfcompresslevel=9
+      \pdfoutput=1
+      \pdftrue
+    \fi
+\newcommand{\pdfgraphics}{
+\ifpdf
+   \usepackage{graphicx,latexsym,pdftex,graphics}%para incluso de figuras(png,jpg,pdf,bmp)
+   \pdfcompresslevel=9
+   \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.mps}
+\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Definindo o uso de outros pacotes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[round]{natbib}     % Suporte para as referencias bibliograficas
+\usepackage{sty/identfirst}    % Faz a Identaï¿½ï¿½o dos primeiros parï¿½grafos
+\usepackage{sty/datetime}      % Inserir datas no texto
+\usepackage{sty/ulem}          % Para escrever textos sublinhados{\uline,\uuline,\sout}
+\usepackage{sty/rotating}      % Para Rotacionar texto e tabelas de ponta cabeï¿½a
+\usepackage[T1]{fontenc}       % Define uma codificaï¿½ï¿½o para os acentos sï¿½o digitados pelo teclado
+\usepackage[latin1]{inputenc}  % Oferece suporte para caracteres especiais como acentos e cedilha
+\usepackage[brazil]{babel}     % Oferece suporte para os termos na lingua portuguesa do Brasil
+\usepackage{ae}                % Oferece qualidade na geracao do PDF, melhorando as fontes
+\usepackage{color}             % para letras coloridas
+\usepackage{colortbl}          % para caixas coloridas
+\usepackage{lscape}            % gira 90 graus: \landscape . . . \endlandscape
+\usepackage{caption}           % auxilia na inclusao de legendas a figuras e tabelas
+\usepackage{footnote}          % auxilio para a inclusao de notas de rodape
+\usepackage{verbatim}          % para escrever conforme digitado
+\usepackage{epsfig}            % incorporaï¿½ï¿½o de um material na linguagem PostScript, ou seja, figuras em PostScript
+\usepackage{textcomp}          % Colecao de fontes que implementam varios simbolos especiais.
+\usepackage{amssymb,amsmath,amsfonts}% %pacotes para escrita matemï¿½tica
+
+%%%%%%%%%%%%% PARA O LATEX  Nï¿½O SEPARAR Sï¿½LABAS (TEXTO JUSTIFICADO) %%%%%%%%%
+%\sloppy%
+%\hyphenpenalty = 100000%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% CASO HAJA A NECESSIDADE DE INCLUIR NOVOS PACOTES, %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% INSIRA-OS LOGO ABAIXO:                            %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%########################################################################################
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%       ALL THE PREAMBLE MATERIAL:       %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%########################### CAPA ######################################################
+
+%%%% LOGO DA INSTITUICAO %%%%%%
+\logo{\includegraphics{logo/lncc}}
+
+
+%%%% TITULO DE SUA TESE OU DISSERTACAO - PORTUGUES %%%%%%%%%%%%%%%%%
+\title{Otimização Dois Níveis}
+
+%%%% TITULO DE SUA TESE OU DISSERTACAO - INGLES %%%%%%%%%%%%%%%%%%%%
+\titleeng{Bilevel Optimization}
+
+%%%%% NOME DO AUTOR %%%%%%%%%%%%%
+%\author{Nome Completo}{Sobrenome}
+\author{Celio Henrique Nogueira}{Larcher Jr.}
+
+
+%THE DEGREE THAT WILL OBTAIN WITH THIS THESIS
+
+\degree{\grau{} em Ciências em Modelagem Computacional }  %  #1 {long descr.}
+       {\abrevi{}}                            %  #2 {short descr.}
+
+%########################## NOME DA INSTITUICAO #############################################
+%%%\dept{INSTITUICAO}{DEPARTAMENTO}% %%%%%
+
+\dept{Laborat\'orio Nacional de Computa\c c\~ao Cient\'ifica}{}%  #1 {designation}
+
+%###########################################################################################
+
+%%%% YOUR ADVISOR (ORIENTADOR(ES))%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\advisor {,Ph.D.}{Helio José Corrêa}{Barbosa}  %  Orientador de sua Tese/Dissertaï¿½ï¿½o
+
+%############################################################################################################
+% OBSERVAï¿½AO: CASO VOCE NAO POSSUA CO-ORIENTADOR, FAVOR COMETAR A TAG \COadvisor
+%
+%\COadvisor{, ??Ph.D.??}{Luiz Antônio Pereira}{Neves}              %  Co-Orientador de sua Tese/Dissertaï¿½ï¿½o
+%############################################################################################################
+
+
+%% ################### OUTROS AVALIADORES DE SUA (BANCA DE JULGAMENTO) ##########################################
+\readerTwo{, Ph.D}{}{}% 2rd Avaliador do LNCC
+\readerThree{, D.Sc.}{}{} % 3rd Avaliador do LNCC
+\readerFour {, D.Sc.}{}{}               % 4rd Avaliador de Instituicao Externa
+%\readerFive {, Ph.D}{}{}               % 5rd Avaliador de Instituicao Externa
+
+%%%%% DESCOMENTAR CASO SEJA NECESSARIO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\readerSix{, Ph.D}{}{}                % 6th Avaliador de Instituicao Externa
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%############################## FICHA CATALOGRAFICA #########################################################
+%Catalography Index
+
+\catalography[Ficha Catalogr\'afica]{\OnePageChapter
+\familyname{Lira} \givenname{Celio Henrique Nogueira Larcher Junior}
+
+%NUMERO DE PAGINAS EM FORMATO ROMANO SAO OS NUMEROS INICIAIS EM ALGARISMO ROMANO
+%DEFINIDOS NAS PRIMEIRAS PAGINAS DE SUA TESE/DISSERTACAO
+
+%NUMERO DE PAGINAS EM FORMATO ARABICO SAO O TOTAL DE PAGINAS A PARTIR DA ULTIMA PAGINA
+%EM ALGARISMO ROMANO DE SUA TESE/DISSERTACAO
+
+%% xx = Total das Paginas iniciais em Algarismo Romano
+%% yy = Total de Paginas em Algarismo Arabico
+\numpages{xx, yy p.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%OBSERVACAO:: NO COMANDO \keyword A PALAVRA "ASSUNTO" DEVERA SER DEFINIDA JUNTO A
+%BIBLIOTECA DO LNCC, AO TERMINAR DE ESCREVER SUA TESE/DISSERTACAO E A MESMA FOR APROVADA
+%PELA COMISSAO DE AVALIACAO PARA A DEFESA, FAVOR DIRIJA-SE A BIBLIOTECA E PROCURE PELA
+%SRA. CRISTINA, PARA ORIENTA-LO.
+%RAMAL:6251 - mcris@lncc.br
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\keyword{1. . }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%OBSERVAAO::\codbib e \codtese - REPRESENTA O CODIGO QUE SUA TESE/DISSERTACAO TERA NOS
+%REGISTROS DE  NOSSA BIBLIOTECA, AO TERMINAR DE ESCREVER SUA TESE/DISSERTACAO E A MESMA
+%FOR APROVADA PELA COMISSAO DE AVALIACAO PARA A  DEFESA, FAVOR SE DIRIGIR A BIBLIOTECA E
+%PROCURAR PELA SRA.  CRISTINA, RAMAL:6251
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\codbib{CDD xxx.xxx} \codtese{XXXX} }
+
+%###########################################################################################
+
+
+
+%############################### RESUMO EM PORTUGUES #######################################
+%Abstract Page (Portuguese) - Type your text here
+%\abstract{  \OnePageChapter    % one page only
+%INCLUA O TEXTO AQUI
+\include{abstracts/abstract}
+%}
+%###########################################################################################
+
+
+%################################### RESUMO EM INGLES ######################################
+%Abstract Page (English) - Type your text here
+%INCLUDE THE TEXT HERE
+\include{abstracts/abstracteng}
+
+%###########################################################################################
+
+
+%#################################### EPIGRAFE ##############################################
+%Text that inspired your work
+%INCLUDE THE TEXT HERE
+\include{preamble/epigrafe}
+
+%############################################################################################
+
+
+%############################# DEDICATORIA ##################################################
+%Dedicate your thesis to something or sobody
+%INCLUDE THE TEXT HERE
+\include{preamble/dedicatory}
+
+%#############################################################################################
+
+
+%################################ AGRADECIMENTOS #############################################
+%Be thankful to someone
+%INCLUDE THE TEXT HERE
+\include{preamble/acknowledgements}
+
+%#############################################################################################
+
+
+%########################### LISTA DE SIGLAS E ABREVIATURAS ##################################
+\include{preamble/symbols}
+%#############################################################################################
+
+
+
+%################################ INDICES ####################################################
+%Insert Table of Contents (chapter, bibliography and apendix)
+\ToCisShort % a 1-page Table of Contents
+
+%Insert (or not) List of figures
+\LoFisShort % a 1-page List of Figures
+%\emptyLoF  % no List of Figures at all
+
+%Insert (or not) List of Tables
+\LoTisShort % a 1-page List of Tables
+%\emptyLoT  % no List of Tables at all
+%#############################################################################################
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%        BEGIN DOCUMENT          %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% ########################### CAPITULOS ########################################################
+\include{chapters/introduction/introduction}
+\include{chapters/medicalimages/medicalimages}
+\include{chapters/theoricfundamentation/theoricfundamentation}
+% -----------------------------------------------------------------
+
+%###################################### BIBLIOGRAFIA #########################################
+%Insert the bibliography page
+% --------------------------------------------------------------------------
+
+\bibliographystyle{bibliography/plainnat}
+\bibliography{bibliography/thesis}
+% --------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CASO NAO HAJA A NECESSIDADE DE INSERIR AS PAGINAS COM APENDICES COMENTE O CODIGO ABAIXO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\appendix % don't forget this line if you have appendices!
+
+%\input{appendices/appA.tex}      % Arquivo contendo o Apendice A
+%\input{appendices/appB.tex}      % Arquivo contendo o Apendice B
+% -----------------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%   END DOCUMENT   %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

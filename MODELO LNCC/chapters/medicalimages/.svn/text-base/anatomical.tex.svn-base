@@ -1,0 +1,73 @@
+\section{Modalidade Anatômica}
+
+Nesta modalidade, a densidade do tecido associado à estrutura de interesse é um dos principais fatores de
+decisão na escolha da técnica a ser aplicada. Na prática, raio-X e Ressonância Magnética (MRI) têm sido os mais
+bem sucedidos na captura de tecidos de alta (ossos e cartilagens) e baixa (pele e orgãos) densidades,
+respectivamente. Por este motivo, raio-X é muito utilizado em diagnósticos relacionados com fraturas ósseas e
+largamente usado por dentistas na análise da arcada dentária dos pacientes (Fig.
+\ref{fig:bitewing_panoramic_example}).
+
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=.4]{figures/interproximalORbitewing_example.jpg} &
+\includegraphics[scale=.45]{figures/panoramic_example.jpg}\\
+(a) & (b)\\
+\end{tabular}
+\caption{Exemplos de raio-X odontológico. (a) Raio-X Interproximal ou Bite-wing; (b) Raio-X panorâmico.}
+\label{fig:bitewing_panoramic_example}
+\end{figure}
+
+No raio-X, tecidos de baixa densidade são pouco visíveis (Fig. \ref{fig:mammography_lungxray_example}). Má
+formações neste tipo de tecido, como um tumor por exemplo, causam alterações locais de densidade e isso pode
+ser evidenciado em imagens de raio-X. A Mamografia é um exemplo deste tipo de aplicação que usa raio-X para
+identificação de câncer de mama. Outros tipos de câncer, como o de rim e de pulmão, também podem ser analisados
+através de raio-X.
+
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=.3]{figures/mammography_example.jpg} &
+\includegraphics[scale=.153]{figures/lungxray_example.jpg}\\
+(a) & (b)\\
+\end{tabular}
+\caption{Exemplos de raio-X. (a) Mamografia; (b) Raio-X de pulmão. (Fonte: \cite{ncbic})}
+\label{fig:mammography_lungxray_example}
+\end{figure}
+
+Equipamentos mais elaborados como os de Tomografia Computadorizada (CT) são projeções de raio-X em várias
+direções. Esta tecnologia permite a reconstrução e visualização tridimensional da estrutura de interesse ao
+invés de bidimensional, como é o caso do raio-X tradicional. Duas das principais técnicas de CT, Multislice e
+Cone-Beam, têm sido bastante citadas em estudos de comparação no sentido de obter boas imagens submetendo o
+paciente a baixos níveis de radiação (\cite{moura2009rapid,swennen2006three}).
+
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=.25]{figures/msct_reconstruction_example.png} &
+\includegraphics[scale=.25]{figures/cbct_reconstruction_example.png}\\
+(a) & (b)\\
+\end{tabular}
+\caption{Exemplos de reconstrução a partir de Tomografias Computadorizadas. (a) Reconstrução a partir de Tomografia Computadorizada Multislice (MSCT); (b) Reconstrução a partir de Tomografia Computadorizada Cone-beam (CBCT). (\cite{swennen2006three})}
+\label{fig:bitewing_panoramic_example}
+\end{figure}
+
+O uso de raio-X e Tomografia Computadorizada geram grandes discursões nas comunidades científica e médica a
+respeito dos efeitos das radiações nos pacientes. Estudos mostram que a absorção de tais radiações são
+equivalentes àquelas recebidas em exposições diretas ao sol durante 6 ou até 90 dias consecutivos
+(\cite{swennen2006three}). Por este motivo foram iniciadas pesquisas que impulsionaram técnicas favorecendo a
+diminuição destes níveis de radiação.
+
+
+Métodos pouco invasivos como Ultrasonografia e MRI são muito difundidos no estudo de tecidos flácidos do corpo
+como orgãos e sistema circulatório. Estes métodos, até então, não possuem efeitos colaterais conhecidos e não
+há limite para o número de aplicação como no raio-X, por exemplo. A Ultrassonografia, em especial, auxilia a
+investigação de superfícies internas do corpo e é muito utilizada na visualização do feto no útero por não
+provocar efeitos colaterais e ser de baixo custo. Assim como o MRI, a Ultrassonografia possui uma versão
+especializada para produzir imagens médicas em 3 dimensões. Porém, as frequências sonoras desta versão podem
+ser prejudicais ao feto o que torna um método não recocmandado para estes fins.
+
+

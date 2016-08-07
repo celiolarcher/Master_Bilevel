@@ -1,0 +1,58 @@
+\relax 
+\catcode`"\active
+\@writefile{lof}{\contentsline {part} {\figurenameToC }{\relax }}
+\@writefile{lot}{\contentsline {part} {\tablenameToC }{\relax }}
+\@writefile{toc}{\contentsline {part} {\chapternameToC }{\relax }}
+\select@language{brazil}
+\@writefile{toc}{\select@language{brazil}}
+\@writefile{lof}{\select@language{brazil}}
+\@writefile{lot}{\select@language{brazil}}
+\citation{ncbic}
+\citation{swennen2006three}
+\citation{fnih}
+\@input{chapters/introduction/introduction.aux}
+\@input{chapters/medicalimages/medicalimages.aux}
+\@input{chapters/theoricfundamentation/theoricfundamentation.aux}
+\@input{chapters/texture_classification/texture_classification.aux}
+\@input{chapters/developedmetodologies/developedmetodologies.aux}
+\@input{chapters/results/results.aux}
+\@input{chapters/analisys_discution/analisys_discution.aux}
+\@input{chapters/conclusion_futureworks/conclusion_futureworks.aux}
+\bibstyle{bibliography/plainnat}
+\bibdata{bibliography/thesis}
+\bibcite{bankman2008handbook}{{1}{2008}{{Bankman}}{{}}}
+\bibcite{bayraktar-image}{{2}{}{{Bayraktar et~al.}}{{Bayraktar, Bernas, Robinson, e Rajwa}}}
+\bibcite{blot2002synthesis}{{3}{2002}{{Blot e Zwiggelaar}}{{}}}
+\bibcite{bo-image}{{4}{}{{Bo et~al.}}{{Bo, Jian-zhong, Feng, Wen-qing, e Jing}}}
+\bibcite{cootes1994use}{{5}{1994}{{Cootes et~al.}}{{Cootes, Hill, Taylor, e Haslam}}}
+\bibcite{cootes2001statistical}{{6}{2001}{{Cootes e Taylor}}{{}}}
+\bibcite{dai1999feature}{{7}{1999}{{Dai e Khorram}}{{}}}
+\bibcite{drummond1998computed}{{8}{1998}{{Drummond}}{{}}}
+\bibcite{due1996feature}{{9}{1996}{{Due~Trier et~al.}}{{Due~Trier, Jain, e Taxt}}}
+\@writefile{toc}{\contentsline {part}{ \relax \fontsize  {12}{14.5}\selectfont  \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \normalfont  \bfseries  {Refer\^{e}ncias Bibliogr\'{a}ficas}\normalfont  }{24}}
+\bibcite{duncan2000medical}{{10}{2000}{{Duncan e Ayache}}{{}}}
+\bibcite{fnih}{{11}{}{{F.N.I.H.}}{{}}}
+\bibcite{Fukunaga:90}{{12}{1990}{{Fukunaga}}{{}}}
+\bibcite{giraldi2000t}{{13}{2000}{{Giraldi}}{{}}}
+\bibcite{giraldi1boundary}{{14}{}{{Giraldi et~al.}}{{Giraldi, Strauss, e Oliveira}}}
+\bibcite{godbole1995mathematical}{{15}{1995}{{Godbole e Amin}}{{}}}
+\bibcite{han2006data}{{16}{2006}{{Han e Kamber}}{{}}}
+\bibcite{haralick1983image}{{17}{1983}{{HARALICK}}{{}}}
+\bibcite{jain1999}{{18}{1999}{{Jain et~al.}}{{Jain, Murty, e Flynn}}}
+\bibcite{Jain:04}{{19}{2004}{{Jain e Chen}}{{}}}
+\bibcite{lehmann1999survey}{{20}{1999}{{Lehmann et~al.}}{{Lehmann, Gonner, Spitzer, et~al.}}}
+\bibcite{maintz1998survey}{{21}{1998}{{Maintz e Viergever}}{{}}}
+\bibcite{mcinerney1996deformable}{{22}{1996}{{McInerney e Terzopoulos}}{{}}}
+\bibcite{moura2009rapid}{{23}{2009}{{Moura et~al.}}{{Moura, Lima, Faria, e Gutfilen}}}
+\bibcite{murase95}{{24}{1995}{{Murase e Nayar}}{{}}}
+\bibcite{ncbic}{{25}{}{{N.C.I.}}{{}}}
+\bibcite{nomir2005shi}{{26}{2005}{{Nomir e Abdel-Mottaleb}}{{}}}
+\bibcite{pluim2003mutual}{{27}{2003}{{Pluim et~al.}}{{Pluim, Maintz, e Viergever}}}
+\bibcite{stratemann2008comparison}{{28}{2008}{{Stratemann et~al.}}{{Stratemann, Huang, Maki, Miller, e Hatcher}}}
+\bibcite{Suri:02}{{29}{2002}{{Suri et~al.}}{{Suri, Liu, Singh, Laxminarayan, Zeng, e Reden}}}
+\bibcite{Suri:05}{{30}{2005}{{Suri et~al.}}{{Suri, Wilson, e Laxminarayan}}}
+\bibcite{swennen2006three}{{31}{2006}{{Swennen e Schutyser}}{{}}}
+\bibcite{van2001computer}{{32}{2001}{{Van~Ginneken et~al.}}{{Van~Ginneken, ter Haar~Romeny, e Viergever}}}
+\bibcite{wood1995measurement}{{33}{1995}{{Wood et~al.}}{{Wood, Zerhouni, Hoford, Hoffman, e Mitzner}}}
+\bibcite{zana2001segmentation}{{34}{2001}{{Zana e Klein}}{{}}}
+\bibcite{zhou2005cbs}{{35}{2005}{{Zhou e Abdel-Mottaleb}}{{}}}

@@ -1,0 +1,22 @@
+\chapter{Fundamentação Teórica\label{theoricfundamentation}}
+
+Em PDI, geralmente, um método individual não é suficiente para tratar problemas complexos. Nestes
+casos, é construído um \textit{pipeline} composto por métodos de PDI onde cada um destes recebe de
+entrada a saída do método anterior. Neste fluxo, inputcada unidade de processamento (método) desempenha
+seu papel na resolução de problemas mais específicos. O resultado final é obtido ao término de todo o
+\textit{pipeline}.
+Imagens médicas comumente necessitam ser processadas através de \textit{pipeline} pois são passíveis de
+problemas como oclusão (falta de informação) e ruído (falha na informação). Além disso, técnicas de
+PDI em reconhecimento e segmentação costumam ter sucesso quando aplicadas em série para uma mesma
+finalidade.
+As imagens de raio-x, ao contrário da Tomografia Computadorizada, possui oclusão e muitas vezes até
+ruído proveniente do processo de aquisição. A oclusão é um problema natural de imagens bidimensionais
+no qual não se pode determinar corretamente objetos sobrepostos por outros. No caso da tomografia,
+este problema é praticamente nulo devido à visualização tridimensional da estrutura de interesse.
+
+Neste capítulo serão abordados os fundamentos das principais técnicas que foram utilizadas na formulação das
+metodologias deste trabalho. Modelos matemáticos e computacionais como morfologia matemática, modelos de forma,
+modelos deformáveis e filtragem serão descritos. Aliado a isso, serão apresentados resultados parciais
+correspondentes a cada método utilizando imagens médicas.
+
+\exinput{chapters/theoricfundamentation/mathematicalmorphology}		

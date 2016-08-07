@@ -1,0 +1,1262 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2015.10.18)  24 JUN 2016 15:26
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**thesis.tex
+(./thesis.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
+(./thesis.cls
+Document Class: thesis 2003/01/07
+
+-------------------------------------------------------------------
+ +---+ Thesis Style (thesis.cls) version 2.00, January 2005
+ +---+ for ABNT BSc, MSc, DSc and PhD thesis/dissertations.
+ +---+ Adapted by Capriles, P.V.S.Z. (Last Update: May 2007) from:
+ +---+ 
+ +---+ Thesis Style (thesis.cls) version 1.10, January 2003
+ +---+ for University of Colorado Ph.D. thesis/dissertations.
+ * Conforms to the University of Colorado at Boulder Graduate
+ * School "SPECIFICATIONS for Preparation of Master's Thesis
+ * and Doctoral Dissertations" (rev. February 2000).
+-------------------------------------------------------------------
+ URL: http://www.Colorado.EDU/ITS/docs/latex/ThesisClass
+
+
+Class thesis Warning: Option 'a4paper' not available for this class. on input l
+ine 185.
+
+(/usr/share/texmf/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/tools/indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+(/usr/share/texmf/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf/tex/generic/ulem/ulem.sty
+\UL@box=\box26
+\UL@hyphenbox=\box27
+\UL@skip=\skip43
+\UL@hook=\toks14
+\UL@height=\dimen103
+\UL@pe=\count88
+\UL@pixel=\dimen104
+\ULC@box=\box28
+Package: ulem 2012/05/18
+\ULdepth=\dimen105
+)
+(/usr/share/texmf/tex/latex/textcase/textcase.sty
+Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
+)
+(/usr/share/texmf/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+\c@th@SecNum=\count89
+\c@th@SectionSave=\count90
+\th@SubSubSecSpc=\skip44
+\c@th@storepage=\count91
+)
+(/usr/share/texmf/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texmf/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texmf/tex/latex/oberdiek/epstopdf.sty
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+(/usr/share/texmf/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texmf/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texmf/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texmf/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+
+(/usr/share/texmf/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)))
+(/usr/share/texmf/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/share/texmf/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texmf/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texmf/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/share/texmf/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+
+Package epstopdf Warning: No graphics package `graphic{s,x}' loaded.
+
+)) (/usr/share/texmf/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count92
+))
+(/usr/share/texmf/tex/latex/psfrag/psfrag.sty
+Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
+\pfg@pcount=\count93
+\pfg@scount=\count94
+\pfg@temp=\write3
+)
+(/usr/share/texmf/tex/generic/thumbpdf/thumbpdf.sty
+Package: thumbpdf 2012/04/18 v3.15 Inclusion of thumbnails (HO)
+
+
+Package thumbpdf Warning: Compressed PDF objects of PDF 1.5 are not supported.
+
+
+Package thumbpdf Warning: Thumbnail data file `thesis.tpt' not found.
+
+) (/usr/share/texmf/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texmf/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texmf/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen106
+\captionmargin@=\dimen107
+\captionwidth=\dimen108
+\caption@tempdima=\dimen109
+\caption@indent=\dimen110
+\caption@parindent=\dimen111
+\caption@hangindent=\dimen112
+)
+\c@ContinuedFloat=\count95
+)
+\c@KVtest=\count96
+\sf@farskip=\skip45
+\sf@captopadj=\dimen113
+\sf@capskip=\skip46
+\sf@nearskip=\skip47
+\c@subfigure=\count97
+\c@subfigure@save=\count98
+\c@lofdepth=\count99
+\c@subtable=\count100
+\c@subtable@save=\count101
+\c@lotdepth=\count102
+\sf@top=\skip48
+\sf@bottom=\skip49
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+\Gin@req@height=\dimen114
+\Gin@req@width=\dimen115
+)
+(/usr/share/texmf/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip50
+\bibsep=\skip51
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count103
+) (./sty/identfirst.sty
+
+LaTeX Warning: You have requested package `sty/identfirst',
+               but the package provides `indentfirst'.
+
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+) (./sty/datetime.sty
+
+LaTeX Warning: You have requested package `sty/datetime',
+               but the package provides `datetime'.
+
+Package: datetime 2002/10/30 Date Time Package version 2.0
+\@DT@modctr=\count104
+\@ordinalctr=\count105
+\@orgargctr=\count106
+\strctr=\count107
+\@dtctr=\count108
+\dayofyear=\count109
+\dayofweek=\count110
+\@day=\count111
+\@month=\count112
+\@year=\count113
+\@hours=\count114
+\@minutes=\count115
+) (./sty/ulem.sty) (./sty/rotating.sty
+
+LaTeX Warning: You have requested package `sty/rotating',
+               but the package provides `rotating'.
+
+Package: rotating 1995/08/22 2.10 Rotation package
+\r@tfl@t=\count116
+\rot@float@box=\box29
+) (/usr/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/share/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+(/usr/share/texmf/tex/latex/base/latin1.def
+File: latin1.def 2008/03/30 v1.1d Input encoding file
+))
+(/usr/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2013/05/16 v3.9f The Babel package
+
+(/usr/share/texmf/tex/generic/babel-portuges/portuges.ldf
+Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+
+(/usr/share/texmf/tex/generic/babel/babel.def
+File: babel.def 2013/05/16 v3.9f Babel common definitions
+\babel@savecnt=\count117
+\U@D=\dimen116
+)
+\l@brazil = a dialect from \language\l@portuges 
+Package babel Info: Making " an active character on input line 145.
+))
+(/usr/share/texmf/tex/latex/ae/ae.sty
+Package: ae 2001/02/12 1.3 Almost European Computer Modern
+
+(/usr/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+)
+LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
+
+(/usr/share/texmf/tex/latex/ae/t1aer.fd
+File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
+)))
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texmf/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/share/texmf/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+
+(/usr/share/texmf/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen117
+\extrarowheight=\dimen118
+\NC@list=\toks18
+\extratabsurround=\skip52
+\backup@length=\skip53
+)
+\everycr=\toks19
+\minrowclearance=\skip54
+)
+(/usr/share/texmf/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+(/usr/share/texmf/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box30
+\fn@width=\dimen119
+)
+(/usr/share/texmf/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks20
+\verbatim@line=\toks21
+\verbatim@in@stream=\read1
+)
+(/usr/share/texmf/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen120
+\epsfysize=\dimen121
+)
+(/usr/share/texmf/tex/latex/base/textcomp.sty
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+(/usr/share/texmf/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 311.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 312.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 313.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 314.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 315.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 316.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 317.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 318.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 319.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 320.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 321.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 322.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 323.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 324.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 326.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 327.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 328.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 329.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 330.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 331.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 332.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 333.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 334.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 335.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 336.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 337.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 338.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 339.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
+)
+(/usr/share/texmf/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texmf/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks22
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texmf/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip55
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks23
+\ex@=\dimen122
+))
+(/usr/share/texmf/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen123
+)
+(/usr/share/texmf/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count118
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count119
+\leftroot@=\count120
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count121
+\DOTSCASE@=\count122
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box31
+\strutbox@=\box32
+\big@size=\dimen124
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count123
+\c@MaxMatrixCols=\count124
+\dotsspace@=\muskip10
+\c@parentequation=\count125
+\dspbrk@lvl=\count126
+\tag@help=\toks24
+\row@=\count127
+\column@=\count128
+\maxfields@=\count129
+\andhelp@=\toks25
+\eqnshift@=\dimen125
+\alignsep@=\dimen126
+\tagshift@=\dimen127
+\tagwidth@=\dimen128
+\totwidth@=\dimen129
+\lineht@=\dimen130
+\@envbody=\toks26
+\multlinegap=\skip56
+\multlinetaggap=\skip57
+\mathdisplay@stack=\toks27
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+\@input{abstracts/abstract.aux}
+\openout2 = `abstracts/abstract.aux'.
+
+(./abstracts/abstract.tex)
+\@input{abstracts/abstracteng.aux}
+\openout2 = `abstracts/abstracteng.aux'.
+
+(./abstracts/abstracteng.tex)
+\@input{preamble/epigrafe.aux}
+\openout2 = `preamble/epigrafe.aux'.
+
+(./preamble/epigrafe.tex)
+\@input{preamble/dedicatory.aux}
+\openout2 = `preamble/dedicatory.aux'.
+
+(./preamble/dedicatory.tex)
+\@input{preamble/acknowledgements.aux}
+\openout2 = `preamble/acknowledgements.aux'.
+
+(./preamble/acknowledgements.tex)
+\@input{preamble/symbols.aux}
+\openout2 = `preamble/symbols.aux'.
+
+(./preamble/symbols.tex)
+Putting page number on short ToC
+Putting page number on short LoF
+Putting page number on short LoT
+(./thesis.aux (./chapters/introduction/introduction.aux)
+(./chapters/medicalimages/medicalimages.aux
+
+LaTeX Warning: Label `fig:bitewing_panoramic_example' multiply defined.
+
+) (./chapters/theoricfundamentation/theoricfundamentation.aux)
+No file chapters/texture_classification/texture_classification.aux.
+)
+\openout1 = `thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 270.
+LaTeX Font Info:    ... okay on input line 270.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 270.
+LaTeX Font Info:    ... okay on input line 270.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 270.
+LaTeX Font Info:    ... okay on input line 270.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 270.
+LaTeX Font Info:    ... okay on input line 270.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 270.
+LaTeX Font Info:    ... okay on input line 270.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 270.
+LaTeX Font Info:    ... okay on input line 270.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 270.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 270.
+
+ (/usr/share/texmf/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 270.
+
+(/usr/share/texmf/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count130
+\scratchdimen=\dimen131
+\scratchbox=\box33
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen132
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks29
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+Making Title Page
+<logo/lncc.png, id=1, 45.5301pt x 44.0847pt>
+File: logo/lncc.png Graphic file (type png)
+ <use logo/lncc.png>
+Package pdftex.def Info: logo/lncc.png used on input line 270.
+(pdftex.def)             Requested size: 45.52998pt x 44.08458pt.
+
+Making Approval Page
+[1
+Non-PDF special ignored!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo/lncc.png (PNG cop
+y)>]
+LaTeX Font Info:    Try loading font information for U+lasy on input line 270.
+ (/usr/share/texmf/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 270.
+
+(/usr/share/texmf/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 270.
+
+(/usr/share/texmf/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Making Catalography Page
+[2
+
+]
+Overfull \hbox (39.07227pt too wide) in paragraph at lines 270--270
+[][] 
+ []
+
+Making Inspiration Page
+[3
+
+]
+Making Dedication Page
+[4
+
+]
+Making Acknowledgement Page
+[5
+
+]
+Making the Portugues Abstract Page
+[6
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+
+ []
+
+Making the English Abstract Page
+[7
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+
+ []
+
+Making ToC Page
+Making Short ToC...
+[8
+
+]
+Short Chapter (page numbered)
+(./thesis.toc)
+\tf@toc=\write4
+\openout4 = `thesis.toc'.
+
+
+Making LoF Page
+Making Short LoF...
+[9
+
+]
+Short Chapter (page numbered)
+(./thesis.lof)
+\tf@lof=\write5
+\openout5 = `thesis.lof'.
+
+
+Making LoT Page
+Making Short LoT...
+[10
+
+]
+Short Chapter (page numbered)
+(./thesis.lot)
+\tf@lot=\write6
+\openout6 = `thesis.lot'.
+
+
+Making Symbols Page
+[11
+
+]
+Short Chapter (page numbered)
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 270.
+
+LaTeX Font Info:    No file TS1aer.fd. on input line 270.
+
+LaTeX Font Warning: Font shape `TS1/aer/m/n' undefined
+(Font)              using `TS1/cmr/m/n' instead
+(Font)              for symbol `textbullet' on input line 270.
+
+
+
+-------------------Beginning Body----------------------
+
+
+[12
+
+
+]
+\openout2 = `chapters/introduction/introduction.aux'.
+
+ (./chapters/introduction/introduction.tex
+Cap\'{\i }tulo \th@ChapterStyle 1.
+
+Package natbib Warning: Citation `van2001computer' on page 1 undefined on input
+ line 14.
+
+
+Package natbib Warning: Citation `lehmann1999survey' on page 1 undefined on inp
+ut line 14.
+
+
+Package natbib Warning: Citation `duncan2000medical' on page 1 undefined on inp
+ut line 14.
+
+
+Package natbib Warning: Citation `Suri:02' on page 1 undefined on input line 16
+.
+
+
+Package natbib Warning: Citation `Suri:05' on page 1 undefined on input line 16
+.
+
+
+Package natbib Warning: Citation `due1996feature' on page 1 undefined on input 
+line 16.
+
+
+Package natbib Warning: Citation `maintz1998survey' on page 1 undefined on inpu
+t line 16.
+
+
+Package natbib Warning: Citation `pluim2003mutual' on page 1 undefined on input
+ line 22.
+
+
+Package natbib Warning: Citation `godbole1995mathematical' on page 1 undefined 
+on input line 23.
+
+
+Package natbib Warning: Citation `zana2001segmentation' on page 1 undefined on 
+input line 23.
+
+
+Package natbib Warning: Citation `haralick1983image' on page 1 undefined on inp
+ut line 23.
+
+
+Package natbib Warning: Citation `blot2002synthesis' on page 1 undefined on inp
+ut line 23.
+
+
+Package natbib Warning: Citation `mcinerney1996deformable' on page 1 undefined 
+on input line 24.
+
+
+Package natbib Warning: Citation `giraldi2000t' on page 1 undefined on input li
+ne 24.
+
+
+Package natbib Warning: Citation `giraldi1boundary' on page 1 undefined on inpu
+t line 24.
+
+
+Package natbib Warning: Citation `cootes1994use' on page 1 undefined on input l
+ine 30.
+
+
+Package natbib Warning: Citation `cootes2001statistical' on page 1 undefined on
+ input line 30.
+
+
+Package natbib Warning: Citation `bo-image' on page 1 undefined on input line 3
+1.
+
+
+Package natbib Warning: Citation `dai1999feature' on page 1 undefined on input 
+line 31.
+
+
+Package natbib Warning: Citation `bayraktar-image' on page 1 undefined on input
+ line 31.
+
+
+Package natbib Warning: Citation `murase95' on page 1 undefined on input line 3
+1.
+
+[1
+
+
+
+]
+
+Package natbib Warning: Citation `jain1999' on page 2 undefined on input line 4
+0.
+
+
+Package natbib Warning: Citation `Fukunaga:90' on page 2 undefined on input lin
+e 40.
+
+
+Package natbib Warning: Citation `han2006data' on page 2 undefined on input lin
+e 40.
+
+
+Package natbib Warning: Citation `Jain:04' on page 2 undefined on input line 53
+.
+
+
+Package natbib Warning: Citation `nomir2005shi' on page 2 undefined on input li
+ne 53.
+
+
+Package natbib Warning: Citation `zhou2005cbs' on page 2 undefined on input lin
+e 53.
+
+
+Package natbib Warning: Citation `wood1995measurement' on page 2 undefined on i
+nput line 64.
+
+
+Package natbib Warning: Citation `drummond1998computed' on page 2 undefined on 
+input line 64.
+
+
+Package natbib Warning: Citation `swennen2006three' on page 2 undefined on inpu
+t line 65.
+
+
+Package natbib Warning: Citation `stratemann2008comparison' on page 2 undefined
+ on input line 65.
+
+[2]
+
+LaTeX Warning: Reference `texture_classification' on page 3 undefined on input 
+line 79.
+
+
+LaTeX Warning: Reference `developedmetodologies' on page 3 undefined on input l
+ine 80.
+
+
+LaTeX Warning: Reference `results' on page 3 undefined on input line 81.
+
+
+LaTeX Warning: Reference `analisys_discution' on page 3 undefined on input line
+ 82.
+
+
+LaTeX Warning: Reference `conclusion_futureworks' on page 3 undefined on input 
+line 83.
+
+) [3]
+\openout2 = `chapters/medicalimages/medicalimages.aux'.
+
+ (./chapters/medicalimages/medicalimages.tex
+Cap\'{\i }tulo \th@ChapterStyle 2.
+
+Package natbib Warning: Citation `bankman2008handbook' on page 4 undefined on i
+nput line 4.
+
+(./chapters/medicalimages/anatomical.tex
+<figures/interproximalORbitewing_example.jpg, id=57, 360.34625pt x 263.98625pt>
+File: figures/interproximalORbitewing_example.jpg Graphic file (type jpg)
+<use figures/interproximalORbitewing_example.jpg>
+Package pdftex.def Info: figures/interproximalORbitewing_example.jpg used on in
+put line 14.
+(pdftex.def)             Requested size: 144.13594pt x 105.59262pt.
+
+<figures/panoramic_example.jpg, id=58, 455.88925pt x 231.5161pt>
+File: figures/panoramic_example.jpg Graphic file (type jpg)
+
+<use figures/panoramic_example.jpg>
+Package pdftex.def Info: figures/panoramic_example.jpg used on input line 15.
+(pdftex.def)             Requested size: 205.14827pt x 104.18127pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4
+
+
+
+] <figures/mammography_example.jpg, id=62, 301.125pt x 351.3125pt>
+File: figures/mammography_example.jpg Graphic file (type jpg)
+
+<use figures/mammography_example.jpg>
+Package pdftex.def Info: figures/mammography_example.jpg used on input line 32.
+
+(pdftex.def)             Requested size: 90.33818pt x 105.39455pt.
+
+<figures/lungxray_example.jpg, id=63, 630.355pt x 690.58pt>
+File: figures/lungxray_example.jpg Graphic file (type jpg)
+
+<use figures/lungxray_example.jpg>
+Package pdftex.def Info: figures/lungxray_example.jpg used on input line 33.
+(pdftex.def)             Requested size: 96.444pt x 105.65839pt.
+
+
+Package natbib Warning: Citation `ncbic' on page 5 undefined on input line 36.
+
+
+Package natbib Warning: Citation `ncbic' on page 5 undefined on input line 36.
+
+
+Package natbib Warning: Citation `moura2009rapid' on page 5 undefined on input 
+line 44.
+
+
+Package natbib Warning: Citation `swennen2006three' on page 5 undefined on inpu
+t line 44.
+
+<figures/msct_reconstruction_example.png, id=64, 464.4853pt x 444.15938pt>
+File: figures/msct_reconstruction_example.png Graphic file (type png)
+
+<use figures/msct_reconstruction_example.png>
+Package pdftex.def Info: figures/msct_reconstruction_example.png used on input 
+line 50.
+(pdftex.def)             Requested size: 116.12103pt x 111.03957pt.
+
+<figures/cbct_reconstruction_example.png, id=65, 464.4853pt x 444.15938pt>
+File: figures/cbct_reconstruction_example.png Graphic file (type png)
+
+<use figures/cbct_reconstruction_example.png>
+Package pdftex.def Info: figures/cbct_reconstruction_example.png used on input 
+line 51.
+(pdftex.def)             Requested size: 116.12103pt x 111.03957pt.
+
+
+Package natbib Warning: Citation `swennen2006three' on page 5 undefined on inpu
+t line 54.
+
+
+Package natbib Warning: Citation `swennen2006three' on page 5 undefined on inpu
+t line 54.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Package natbib Warning: Citation `swennen2006three' on page 5 undefined on inpu
+t line 61.
+
+[5 <./figures/interproximalORbitewing_example.jpg> <./figures/panoramic_example
+.jpg> <./figures/mammography_example.jpg> <./figures/lungxray_example.jpg>])
+(./chapters/medicalimages/funcional.tex [6 <./figures/msct_reconstruction_examp
+le.png> <./figures/cbct_reconstruction_example.png>]
+<figures/pet_brain_example.jpg, id=74, 166.7028pt x 173.6889pt>
+File: figures/pet_brain_example.jpg Graphic file (type jpg)
+
+<use figures/pet_brain_example.jpg>
+Package pdftex.def Info: figures/pet_brain_example.jpg used on input line 21.
+(pdftex.def)             Requested size: 100.02243pt x 104.21414pt.
+
+
+Package natbib Warning: Citation `fnih' on page 7 undefined on input line 23.
+
+
+Package natbib Warning: Citation `fnih' on page 7 undefined on input line 23.
+
+)) [7 <./figures/pet_brain_example.jpg>]
+\openout2 = `chapters/theoricfundamentation/theoricfundamentation.aux'.
+
+
+(./chapters/theoricfundamentation/theoricfundamentation.tex
+Cap\'{\i }tulo \th@ChapterStyle 3.
+(./chapters/theoricfundamentation/mathematicalmorphology.tex [8
+
+
+
+] [9]
+<figures/sesquare.png, id=86, 402.303pt x 357.335pt>
+File: figures/sesquare.png Graphic file (type png)
+
+<use figures/sesquare.png>
+Package pdftex.def Info: figures/sesquare.png used on input line 37.
+(pdftex.def)             Requested size: 60.34283pt x 53.59793pt.
+ <figures/secross.png, id=87, 402.303pt x 357.335pt>
+File: figures/secross.png Graphic file (type png)
+
+<use figures/secross.png>
+Package pdftex.def Info: figures/secross.png used on input line 38.
+(pdftex.def)             Requested size: 60.34283pt x 53.59793pt.
+
+<figures/sehorizontal.png, id=88, 402.303pt x 357.335pt>
+File: figures/sehorizontal.png Graphic file (type png)
+
+<use figures/sehorizontal.png>
+Package pdftex.def Info: figures/sehorizontal.png used on input line 39.
+(pdftex.def)             Requested size: 60.34283pt x 53.59793pt.
+
+<figures/severtical.png, id=89, 402.303pt x 357.335pt>
+File: figures/severtical.png Graphic file (type png)
+
+<use figures/severtical.png>
+Package pdftex.def Info: figures/severtical.png used on input line 40.
+(pdftex.def)             Requested size: 60.34283pt x 53.59793pt.
+
+<figures/seoperation.png, id=90, 387.849pt x 375.804pt>
+File: figures/seoperation.png Graphic file (type png)
+
+<use figures/seoperation.png>
+Package pdftex.def Info: figures/seoperation.png used on input line 51.
+(pdftex.def)             Requested size: 155.13684pt x 150.31894pt.
+ [10 <./figures/sesquare.png> <./figures/secross.png> <./figures/sehorizontal.p
+ng> <./figures/severtical.png> <./figures/seoperation.png>] <figures/maskcross.
+png, id=100, 128.48pt x 118.041pt>
+File: figures/maskcross.png Graphic file (type png)
+
+<use figures/maskcross.png>
+Package pdftex.def Info: figures/maskcross.png used on input line 62.
+(pdftex.def)             Requested size: 38.54428pt x 35.41257pt.
+
+<figures/morphimagetest.png, id=101, 382.228pt x 350.911pt>
+File: figures/morphimagetest.png Graphic file (type png)
+
+<use figures/morphimagetest.png>
+Package pdftex.def Info: figures/morphimagetest.png used on input line 63.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphimagebufferstart.png, id=102, 382.228pt x 350.911pt>
+File: figures/morphimagebufferstart.png Graphic file (type png)
+
+<use figures/morphimagebufferstart.png>
+Package pdftex.def Info: figures/morphimagebufferstart.png used on input line 6
+5.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+ [11 <./figures/maskcross.png> <./figures/morphimagetest.png> <./figures/morphi
+magebufferstart.png>]
+<figures/morphdilatestep1.png, id=114, 382.228pt x 350.911pt>
+File: figures/morphdilatestep1.png Graphic file (type png)
+
+<use figures/morphdilatestep1.png>
+Package pdftex.def Info: figures/morphdilatestep1.png used on input line 98.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphdilateresult1.png, id=115, 382.228pt x 350.911pt>
+File: figures/morphdilateresult1.png Graphic file (type png)
+
+<use figures/morphdilateresult1.png>
+Package pdftex.def Info: figures/morphdilateresult1.png used on input line 99.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphdilatestep2.png, id=116, 382.228pt x 350.911pt>
+File: figures/morphdilatestep2.png Graphic file (type png)
+
+<use figures/morphdilatestep2.png>
+Package pdftex.def Info: figures/morphdilatestep2.png used on input line 100.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphdilateresult2.png, id=117, 382.228pt x 350.911pt>
+File: figures/morphdilateresult2.png Graphic file (type png)
+
+<use figures/morphdilateresult2.png>
+Package pdftex.def Info: figures/morphdilateresult2.png used on input line 101.
+
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphdilatestep3.png, id=118, 382.228pt x 350.911pt>
+File: figures/morphdilatestep3.png Graphic file (type png)
+
+<use figures/morphdilatestep3.png>
+Package pdftex.def Info: figures/morphdilatestep3.png used on input line 102.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphdilateresult3.png, id=119, 382.228pt x 350.911pt>
+File: figures/morphdilateresult3.png Graphic file (type png)
+
+<use figures/morphdilateresult3.png>
+Package pdftex.def Info: figures/morphdilateresult3.png used on input line 103.
+
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+File: figures/morphimagetest.png Graphic file (type png)
+ <use figures/morphimagetest.png>
+Package pdftex.def Info: figures/morphimagetest.png used on input line 104.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphdilateresultfinal.png, id=120, 383.834pt x 350.911pt>
+File: figures/morphdilateresultfinal.png Graphic file (type png)
+
+<use figures/morphdilateresultfinal.png>
+Package pdftex.def Info: figures/morphdilateresultfinal.png used on input line 
+105.
+(pdftex.def)             Requested size: 115.15108pt x 105.2741pt.
+ [12 <./figures/morphdilatestep1.png> <./figures/morphdilateresult1.png> <./fig
+ures/morphdilatestep2.png> <./figures/morphdilateresult2.png> <./figures/morphd
+ilatestep3.png> <./figures/morphdilateresult3.png> <./figures/morphdilateresult
+final.png>]
+<figures/morpherodestep1.png, id=131, 383.031pt x 350.911pt>
+File: figures/morpherodestep1.png Graphic file (type png)
+
+<use figures/morpherodestep1.png>
+Package pdftex.def Info: figures/morpherodestep1.png used on input line 140.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+
+<figures/morpheroderesult1.png, id=132, 383.031pt x 350.911pt>
+File: figures/morpheroderesult1.png Graphic file (type png)
+
+<use figures/morpheroderesult1.png>
+Package pdftex.def Info: figures/morpheroderesult1.png used on input line 141.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+
+<figures/morpherodestep2.png, id=133, 383.031pt x 350.911pt>
+File: figures/morpherodestep2.png Graphic file (type png)
+
+<use figures/morpherodestep2.png>
+Package pdftex.def Info: figures/morpherodestep2.png used on input line 142.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+
+<figures/morpheroderesult2.png, id=134, 383.031pt x 350.911pt>
+File: figures/morpheroderesult2.png Graphic file (type png)
+
+<use figures/morpheroderesult2.png>
+Package pdftex.def Info: figures/morpheroderesult2.png used on input line 143.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+
+<figures/morpherodestep3.png, id=135, 383.031pt x 350.911pt>
+File: figures/morpherodestep3.png Graphic file (type png)
+
+<use figures/morpherodestep3.png>
+Package pdftex.def Info: figures/morpherodestep3.png used on input line 144.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+
+<figures/morpheroderesult3.png, id=136, 383.031pt x 350.911pt>
+File: figures/morpheroderesult3.png Graphic file (type png)
+
+<use figures/morpheroderesult3.png>
+Package pdftex.def Info: figures/morpheroderesult3.png used on input line 145.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+File: figures/morphimagetest.png Graphic file (type png)
+ <use figures/morphimagetest.png>
+Package pdftex.def Info: figures/morphimagetest.png used on input line 146.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morpheroderesultfinal.png, id=137, 383.031pt x 350.911pt>
+File: figures/morpheroderesultfinal.png Graphic file (type png)
+
+<use figures/morpheroderesultfinal.png>
+Package pdftex.def Info: figures/morpheroderesultfinal.png used on input line 1
+47.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13] [14 <./figures/morpherodestep1.png> <./figures/morpheroderesult1.png> <./f
+igures/morpherodestep2.png> <./figures/morpheroderesult2.png> <./figures/morphe
+rodestep3.png> <./figures/morpheroderesult3.png> <./figures/morpheroderesultfin
+al.png>] <figures/hitmissse.png, id=152, 390.258pt x 357.335pt>
+File: figures/hitmissse.png Graphic file (type png)
+
+<use figures/hitmissse.png>
+Package pdftex.def Info: figures/hitmissse.png used on input line 197.
+(pdftex.def)             Requested size: 58.53616pt x 53.59793pt.
+
+<figures/hitmissse2.png, id=153, 390.258pt x 357.335pt>
+File: figures/hitmissse2.png Graphic file (type png)
+
+<use figures/hitmissse2.png>
+Package pdftex.def Info: figures/hitmissse2.png used on input line 198.
+(pdftex.def)             Requested size: 58.53616pt x 53.59793pt.
+
+<figures/hitmissse3.png, id=154, 390.258pt x 357.335pt>
+File: figures/hitmissse3.png Graphic file (type png)
+
+<use figures/hitmissse3.png>
+Package pdftex.def Info: figures/hitmissse3.png used on input line 199.
+(pdftex.def)             Requested size: 58.53616pt x 53.59793pt.
+
+<figures/hitmissse4.png, id=155, 390.258pt x 357.335pt>
+File: figures/hitmissse4.png Graphic file (type png)
+
+<use figures/hitmissse4.png>
+Package pdftex.def Info: figures/hitmissse4.png used on input line 200.
+(pdftex.def)             Requested size: 58.53616pt x 53.59793pt.
+ [15 <./figures/hitmissse.png> <./figures/hitmissse2.png> <./figures/hitmissse3
+.png> <./figures/hitmissse4.png>]
+File: figures/morphimagetest.png Graphic file (type png)
+
+<use figures/morphimagetest.png>
+Package pdftex.def Info: figures/morphimagetest.png used on input line 211.
+(pdftex.def)             Requested size: 114.66928pt x 105.2741pt.
+
+<figures/morphhitmissresultfinal.png, id=164, 383.031pt x 350.911pt>
+File: figures/morphhitmissresultfinal.png Graphic file (type png)
+
+<use figures/morphhitmissresultfinal.png>
+Package pdftex.def Info: figures/morphhitmissresultfinal.png used on input line
+ 212.
+(pdftex.def)             Requested size: 114.91019pt x 105.2741pt.
+ [16 <./figures/morphhitmissresultfinal.png>] [17] <figures/sethin1.png, id=172
+, 390.258pt x 357.335pt>
+File: figures/sethin1.png Graphic file (type png)
+
+<use figures/sethin1.png>
+Package pdftex.def Info: figures/sethin1.png used on input line 278.
+(pdftex.def)             Requested size: 58.53616pt x 53.59793pt.
+ <figures/sethin2.png, id=173, 390.258pt x 357.335pt>
+File: figures/sethin2.png Graphic file (type png)
+
+<use figures/sethin2.png>
+Package pdftex.def Info: figures/sethin2.png used on input line 279.
+(pdftex.def)             Requested size: 58.53616pt x 53.59793pt.
+
+Overfull \hbox (7.34294pt too wide) in paragraph at lines 288--291
+[]\T1/aer/m/n/12 Em ima-gens em tons de cinza, é muito co-mum uma etapa de pré-
+processamento
+ []
+
+[18 <./figures/sethin1.png> <./figures/sethin2.png>])) [19] (./thesis.bbl
+[20
+
+
+]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 70.
+ (/usr/share/texmf/tex/latex/ae/t1aett.fd
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+Underfull \hbox (badness 5667) in paragraph at lines 68--71
+[]\T1/aer/m/n/12 F.N.I.H.  Foun-da-tion for the Na-ti-o-nal Ins-ti-tu-tes of He
+-alth.  URL
+ []
+
+[21] [22])
+
+Package natbib Warning: There were undefined citations.
+
+[23] (./thesis.aux (./chapters/introduction/introduction.aux)
+(./chapters/medicalimages/medicalimages.aux)
+(./chapters/theoricfundamentation/theoricfundamentation.aux)
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ )
+(\end occurred when \iftrue on line 270 was incomplete) 
+Here is how much of TeX's memory you used:
+ 6463 strings out of 493315
+ 93892 string characters out of 6145892
+ 160231 words of memory out of 5000000
+ 9605 multiletter control sequences out of 15000+600000
+ 42430 words of font info for 89 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 44i,14n,53p,690b,505s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/
+enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></
+usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/amsfo
+nts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmti12.pfb></
+usr/share/texmf/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texmf/font
+s/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf/fonts/type1/public/amsf
+onts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.
+pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on thesis.pdf (35 pages, 2958911 bytes).
+PDF statistics:
+ 246 PDF objects out of 1000 (max. 8388607)
+ 125 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
+

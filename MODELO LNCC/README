@@ -1,0 +1,93 @@
+Arquivo ref. a confeccao de dissertaco / tese - LNCC
+---------------------------------------------------------------
+
+Os arquivos para a edicao de sua tese ou dissertacao estao descritos
+de acordo:
+
+DIRETORIOS:
+logo <DIR> - diretorio que contem logo da instituicao
+figures <DIR> -  diretorio que contem as figuras que serao utilizadas em sua tese/dissertacao.
+appendices <DIR> - diretorio que contem a inclusao de apendices, caso queira utilizar
+sty <DIR> - diretorio onde constam estilis utilizados na tese/dissertacao.
+abstracts <DIR> - diretorio onde constam os resumos de sua tese/dissertacao em portugues e ingles.
+preamble <DIR> - diretorio onde contem dedicatorias e epigrafe
+chapters <DIR> - diretorio onde contem os capitulos de sua tese/dissertacao
+bibliography <DIR> - diretorio onde contem os arquivos referentes ao estilo e bibliografia utilizadas.
+
+ARQUIVOS:
+thesis.tex -  arquivo fonte referente a sua tese/dissertacao.
+thesis.cls - arquivo que contem as configuracaoes para a confeccao de sua tese/dissertacao.
+makefile -  arquivo para a compilacao de sua tese/dissertacao no sistema linux/unix.
+
+COMPILANDO SEUS ARQUIVOS NO LINUX:
+-------------------------------------------------------------
+Para compilar seus arquivos no linux, e possivel compilar utilizando um makefile
+existente no diretorio corrente ou atraves de linha de comando:
+
+CASO PREFIRA UTILIZAR OS COMANDO VIA TERMINAL, UTILIZE:
+
+UTILIZANDO O PDFLATEX:
+pdflatex -shell-escape thesis.tex
+bibtex thesis
+pdflatex -shell-escape thesis.tex
+
+seu arquivo .PDF sera gerado automaticamente.
+
+UTILIZANDO LATEX:
+latex thesis.tex
+bibtex thesis
+latex thesis.tex
+dvips thesis.dvi
+ps2pdf thesis.ps
+
+um arquivo .PDF sera gerado ao final dessa sequencia de comandos.
+
+UTILZANDO O MAKEFILE:
+O makefile é um arquivo para configuração de compilação utilizado pelo
+programa Make, cuja idéia é simplificar e agilizar a compilação de programas.
+
+make clean 	: limpa todos os aquivos gerados na compilacao
+make all		: compila utilzando o comando pdflatex com as configuracoes definidas, gerando o arquivio thesis.pdf.
+make 				: compila utilzando o comando pdflatex com as configuracoes definidas, gerando o arquivio thesis.pdf.
+make latex	: compila utilzando o comando latex com as configuracoes definidas, gerando o arquivo thesis.dvi.
+make dvips	: compila utilzando o comando dvips com as configuracoes definidas, gerando o arquivo thesis.ps.
+make ps			: compila utilzando o comando ps2pdf com as configuracoes definidas, gerando o arquivio thesis.pdf.
+make bib		: compila utilzando o comando bibtex com as configuracoes definidas a fim de atualizar a bibliografia existente.
+		
+
+COMPILANDO SEU ARQUIVOS NO WINDOWS:
+-------------------------------------------------------------
+Para compilar seus arquivos no ms-windows, voce devera ter instalado
+o aplicativo MIKTEX, que pode ser adquirido em (http://www.miktex.org)
+e utilizar programas para a edicao dos arquivos de sua tese/dissertacao,
+tais como winedt ou texniccenter.
+
+Para compilar seus arquivos no windows voce podera utilizar um terminal de MS-DOS
+e digitar os segintes comando no diretorio corrente do arquivo thesis.tex.
+
+pdflatex -shell-escape thesis.tex
+bibtex thesis
+pdflatex -shell-escape thesis.tex
+
+Caso venha utilizar Winedt ou texniccenter, voce devera adicionar o parametro de compilacao
+-shell-escape ao comando PDFLATEX, senao o mesmo nao converter sua figuras .eps em .pdf.
+
+TROCANDO O PARAMETRO -shell-escape NO WINEDT
+--------------------------------------------
+Para trocar esse parametro no winedt, siga as instrucoes abaixo:
+
+1.Va no menu options -> Execution modes.
+2.No campo acessories: clique na opcao PDFLATEX
+3.Logo abaixo no campo Command Line, na opcao Parameters: coloque "%N%T"  -shel-escape
+4.Clique OK
+
+Feito isto, e so clicar o icone pdflatex para compilar seus arquivos, a partir do documento principal,
+thesis.tex.
+
+DUVIDAS:
+---------------------------------------------------------------------------------
+Leandro Gazoni - 6049
+gazoni@lncc.br
+16/5/2007 16:01
+
+

@@ -1,0 +1,17 @@
+\chapter{Imagens Médicas\label{medicalimages}}
+
+Os acontecimentos em Imagens Médicas nas últimas 4 décadas têm sido revolucionário
+(\cite{bankman2008handbook}). Neste período foram desenvolvidas tecnologias que permitiram a visualização de
+estruturas do corpo onde antes só poderia ser acessado cirurgicamente. Desde o início destes estudos essa área
+vem se incrementando no sentido de melhorar a qualidade das imagens e diminuir os efeitos colaterais nos
+pacientes devido ao processo de aquisição como é o caso da radiação no raio-X.
+É possível dividir Imagens Médicas em duas modalidades: anatômica e funcional. As técnicas responsáveis pela
+captura de tecidos orgânicos e estruturas físicas são de modalidade anatômica. Todavia, existem métodos que
+permitem analisar atividades metabólicas e funcionais do corpo humano. Tais tecnologias são denominadas de
+modalidade funcional.
+
+\exinput{chapters/medicalimages/anatomical}\exinput{chapters/medicalimages/funcional}
+ 
+Os avanços em Imagens Médicas discutidos até agora forçaram o desenvolvimento de inovações em Processamento
+Digital de Imagem com o objetivo de auxiliar os diagnósticos médicos. A principal intenção destes estudos é em
+automatizar parcial ou totalmente o processo de análise destas imagens.

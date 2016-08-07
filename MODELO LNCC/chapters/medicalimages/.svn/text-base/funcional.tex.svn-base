@@ -1,0 +1,33 @@
+\section{Modalidade Funcional}
+
+% Além de promover a visualização de estruturas físicas, há técnicas que permitem o estudo do metabolismo em
+% determinadas regiões do corpo.
+A Tomografia por Emissão de Pósitrons (PET) é um exemplo típico de modalidade funcional que é usado
+principalmente no monitoramento do crescimento de tumores e da atividade cerebral (Fig.
+\ref{fig:pet_brain_example}). Ao contrário do raio-X que utiliza emissões de radiação de fora para dentro do
+corpo humano, este tipo de tomografia emite radiação de dentro para fora do corpo a partir de substâncias
+injetadas na corrente sanguínea do paciente. Estas emissões são capturadas por outro aparelho e utilizadas para
+gerar a imagem correspondente. Frequentemente, os resultados advindos do PET são combinados com as imagens
+geradas por outros tipos de modalidade anatõmica como CT ou MRI. Isso ajuda a localizar, no corpo, as fontes
+das emissões.
+% Porém, até então, este tipo de tomografia tem contribuído principalmente com inovações em Visualização
+% Científica. %Neste caso, em particular, a visualização se tornou, na maioria dos casos, suficiente para os
+% especialistas devido ao pequeno número de detalhes que este tipo de tomografia possui.
+
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{c}
+\includegraphics[scale=.6]{figures/pet_brain_example.jpg}
+\end{tabular}
+\caption{Exemplo de imagem gerada a partir de PET. (Fonte: \cite{fnih})}
+\label{fig:pet_brain_example}
+\end{figure}
+
+Outro tipo de modalidade funcional muito conhecido é a Ressonância Magnética Funcional (fMRI). Este tipo de
+ressonância é considerado pouco invasiva e nada mais é que uma especialização do MRI tradicional. Assim como o
+MRI, sua utilização não possui efeitos colaterais e pode ser realizada no paciente sem contra-indicação. Como
+indício de atividade metabólica, o fMRI mede a resposta hemodinâmica (dinâmica sannguínea) combinada com a
+imagem gerada pela Ressonãncia Magnética. Usada principalmente em estudos do cérebro, esta ressonância deve ser
+cuidadosamente analisada devido a sua tendência a falso positivo. Isso é devido ao fato de que nem sempre há
+uma correlação direta entre o fluxo sanguíneo e a causa que se pretende analisar.

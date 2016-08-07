@@ -1,0 +1,17 @@
+\relax 
+\catcode`"\active
+\@writefile{lof}{\contentsline {part} {\figurenameToC }{\relax }}
+\@writefile{lot}{\contentsline {part} {\tablenameToC }{\relax }}
+\@writefile{toc}{\contentsline {part} {\chapternameToC }{\relax }}
+\select@language{brazil}
+\@writefile{toc}{\select@language{brazil}}
+\@writefile{lof}{\select@language{brazil}}
+\@writefile{lot}{\select@language{brazil}}
+\bibstyle{bibliography/plainnat}
+\bibdata{bibliography/thesis}
+\@writefile{toc}{\contentsline {chapter}{\numberline {\th@ChapterStyle  1}\relax \fontsize  {12}{14.5}\selectfont  \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \normalfont  Fundamenta\c c\~ao Te\'orica}{1}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{theoricfundamentation}{{\th@ChapterStyle  1}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {\th@SectionStyle  1.1}\relax \fontsize  {12}{14.5}\selectfont  \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \normalfont  Morfologia Matem\'atica}{2}}
+\@writefile{toc}{\contentsline {part}{ \relax \fontsize  {12}{14.5}\selectfont  \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \normalfont  \bfseries  {Refer\^{e}ncias Bibliogr\'{a}ficas}\normalfont  }{3}}

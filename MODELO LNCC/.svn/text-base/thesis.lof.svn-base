@@ -1,0 +1,22 @@
+\contentsline {part} {\figurenameToC }{\relax }
+\select@language {brazil}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Exemplos de raio-X odontol\'ogico. (a) Raio-X Interproximal ou Bite-wing; (b) Raio-X panor\^amico.}}{5}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Exemplos de raio-X. (a) Mamografia; (b) Raio-X de pulm\~ao. (Fonte: \cite {ncbic})}}{5}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Exemplos de reconstru\c c\~ao a partir de Tomografias Computadorizadas. (a) Reconstru\c c\~ao a partir de Tomografia Computadorizada Multislice (MSCT); (b) Reconstru\c c\~ao a partir de Tomografia Computadorizada Cone-beam (CBCT). (\cite {swennen2006three})}}{6}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Exemplo de imagem gerada a partir de PET. (Fonte: \cite {fnih})}}{7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Exemplo de Elementos Estruturantes 3x3 com \IeC {\'\i }ndice de origem em (2,2).}}{10}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Demonstra\c c\~ao abstrata de uma opera\c c\~ao morfol\'ogica local. $I$: imagem de entrada; $B$: Elemento Estruturante; $c$: \'Indice de origem.}}{10}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces (a) M\'ascara correspondente ao Elemento cruz (Fig. \ref {secross}); (b) Imagem de entrada; (c) Imagem de sa\IeC {\'\i }da inicializada.}}{11}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Exemplos de itera\c c\~ao com o operador dilata\c c\~ao em imagem bin\'aria. (a)-(c)-(e) Proje\c c\~ao do Elemento cruz na imagem; (b)-(d)-(f) Resultado das dilata\c c\~oes locais; (h) Resultado final de dilata\c c\~ao.}}{12}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Exemplos de itera\c c\~ao com o operador eros\~ao em imagem bin\'aria. (a)-(c)-(e) Proje\c c\~ao do Elemento cruz na imagem; (b)-(d)-(f) Resultado das eros\~oes locais; (h) Resultado final de eros\~ao.}}{14}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Exemplos do Elemento Estruturante \textit {corner} e suas rota\c c\~oes com 3 elementos vazio cada.}}{15}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Exemplo da aplica\c c\~ao do operador \textit {corner}. (a) Imagem Original; (b) Resultado.}}{16}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Elementos Estruturantes de \textit {hit-and-miss} comumente utilizados com suas rota\c c\~oes em $90^o$ para \textit {thinning}.}}{18}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

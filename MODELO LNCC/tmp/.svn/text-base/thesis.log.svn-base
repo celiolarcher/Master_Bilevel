@@ -1,0 +1,848 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.2.3)  1 MAR 2010 17:09
+entering extended mode
+**thesis.tex
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.cls
+Document Class: thesis 2003/01/07
+
+-------------------------------------------------------------------
+ +---+ Thesis Style (thesis.cls) version 2.00, January 2005
+ +---+ for ABNT BSc, MSc, DSc and PhD thesis/dissertations.
+ +---+ Adapted by Capriles, P.V.S.Z. (Last Update: May 2007) from:
+ +---+ 
+ +---+ Thesis Style (thesis.cls) version 1.10, January 2003
+ +---+ for University of Colorado Ph.D. thesis/dissertations.
+ * Conforms to the University of Colorado at Boulder Graduate
+ * School "SPECIFICATIONS for Preparation of Master's Thesis
+ * and Doctoral Dissertations" (rev. February 2000).
+-------------------------------------------------------------------
+ URL: http://www.Colorado.EDU/ITS/docs/latex/ThesisClass
+
+
+Class thesis Warning: Option 'a4paper' not available for this class. on input l
+ine 185.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\report.cls"
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\size12.clo"
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ltxmisc\ulem.sty"
+\UL@box=\box26
+\UL@hyphenbox=\box27
+\UL@skip=\skip43
+\UL@hook=\toks14
+\UL@pe=\count88
+\UL@pixel=\dimen103
+\ULC@box=\box28
+Package: ulem 2000/05/26
+\ULdepth=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\textcase\textcase.sty"
+Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\setspace\setspace.sty"
+Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
+
+Package: `setspace' 6.7 <2000/12/01>
+)
+\c@th@SecNum=\count89
+\c@th@SectionSave=\count90
+\th@SubSubSecSpc=\skip44
+\c@th@storepage=\count91
+) ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\psnfss\times.sty"
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\epstopdf.sty"
+Package: epstopdf 2009/10/17 v2.4 Conversion with epstopdf on the fly (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2009/10/17 v2.4 Base part for package epstopdf
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2007/09/30 v1.0 Managing graphics extensions (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)
+
+Package epstopdf Warning: No graphics package `graphic{s,x}' loaded.
+
+)) ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\latexsym.sty"
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
+\Gread@gobject=\count92
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\psfrag\psfrag.sty"
+Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
+\pfg@pcount=\count93
+\pfg@scount=\count94
+\pfg@temp=\write3
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ps4pdf\ps4pdf.sty"
+Package: ps4pdf 2005/02/11 v0.6i PS code for pdfTeX (RN/HO)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+\c@PSforPDF=\count95
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\tools\calc.sty"
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count96
+\calc@Bcount=\count97
+\calc@Adimen=\dimen105
+\calc@Bdimen=\dimen106
+\calc@Askip=\skip45
+\calc@Bskip=\skip46
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count98
+\calc@Cskip=\skip47
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\thumbpdf\thumbpdf.sty"
+Package: thumbpdf 2008/04/16 v3.10 Inclusion of thumbnails (HO)
+
+
+Package thumbpdf Warning: Thumbnail data file `thesis.tpt' not found.
+
+) ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+\Gin@req@height=\dimen107
+\Gin@req@width=\dimen108
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\natbib\natbib.sty"
+Package: natbib 2009/11/07 8.31a (PWD, AO)
+\bibhang=\skip48
+\bibsep=\skip49
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count99
+)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\sty/identfirst.sty
+
+LaTeX Warning: You have requested package `sty/identfirst',
+               but the package provides `indentfirst'.
+
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+) (C:\ppu\docz\_Inf-PRIORITY_\thesis\sty/datetime.sty
+
+LaTeX Warning: You have requested package `sty/datetime',
+               but the package provides `datetime'.
+
+Package: datetime 2002/10/30 Date Time Package version 2.0
+\@DT@modctr=\count100
+\@ordinalctr=\count101
+\@orgargctr=\count102
+\strctr=\count103
+\@dtctr=\count104
+\dayofyear=\count105
+\dayofweek=\count106
+\@day=\count107
+\@month=\count108
+\@year=\count109
+\@hours=\count110
+\@minutes=\count111
+) (C:\ppu\docz\_Inf-PRIORITY_\thesis\sty/ulem.sty)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\sty/rotating.sty
+
+LaTeX Warning: You have requested package `sty/rotating',
+               but the package provides `rotating'.
+
+Package: rotating 1995/08/22 2.10 Rotation package
+\r@tfl@t=\count112
+\rot@float@box=\box29
+) ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\fontenc.sty"
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\t1enc.def"
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\inputenc.sty"
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\latin1.def"
+File: latin1.def 2008/03/30 v1.1d Input encoding file
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\babel.sty"
+Package: babel 2008/07/06 v3.8l The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\portuges.ldf"
+Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\babel.def"
+File: babel.def 2008/07/06 v3.8l Babel common definitions
+\babel@savecnt=\count113
+\U@D=\dimen109
+)
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `Portuguese'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@portuges = a dialect from \language0
+\l@brazil = a dialect from \language\l@portuges 
+Package babel Info: Making " an active character on input line 145.
+)) ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ae\ae.sty"
+Package: ae 2001/02/12 1.3 Almost European Computer Modern
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\fontenc.sty"
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\t1enc.def"
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+)
+LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ae\t1aer.fd"
+File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
+)))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\colortbl\colortbl.sty"
+Package: colortbl 2001/02/13 v0.1j Color table columns (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\tools\array.sty"
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen110
+\extrarowheight=\dimen111
+\NC@list=\toks18
+\extratabsurround=\skip50
+\backup@length=\skip51
+)
+\everycr=\toks19
+\minrowclearance=\skip52
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\lscape.sty"
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\caption\caption.sty"
+Package: caption 2010/01/09 v3.1m Customizing captions (AR)
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\caption\caption3.sty"
+Package: caption3 2010/01/14 v3.1m caption3 kernel (AR)
+\captionmargin=\dimen112
+\captionmargin@=\dimen113
+\captionwidth=\dimen114
+\caption@indent=\dimen115
+\caption@parindent=\dimen116
+\caption@hangindent=\dimen117
+)
+\c@ContinuedFloat=\count114
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\mdwtools\footnote.sty"
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box30
+\fn@width=\dimen118
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\tools\verbatim.sty"
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks20
+\verbatim@line=\toks21
+\verbatim@in@stream=\read1
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\epsfig.sty"
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen119
+\epsfysize=\dimen120
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\textcomp.sty"
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\ts1enc.def"
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 311.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 312.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 313.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 314.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 315.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 316.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 317.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 318.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 319.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 320.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 321.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 322.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 323.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 324.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 326.
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2009/06/22 v3.00
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks22
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsmath.sty"
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip53
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks23
+\ex@=\dimen121
+))
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen122
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count115
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count116
+\leftroot@=\count117
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count118
+\DOTSCASE@=\count119
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box31
+\strutbox@=\box32
+\big@size=\dimen123
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count120
+\c@MaxMatrixCols=\count121
+\dotsspace@=\muskip10
+\c@parentequation=\count122
+\dspbrk@lvl=\count123
+\tag@help=\toks24
+\row@=\count124
+\column@=\count125
+\maxfields@=\count126
+\andhelp@=\toks25
+\eqnshift@=\dimen124
+\alignsep@=\dimen125
+\tagshift@=\dimen126
+\tagwidth@=\dimen127
+\totwidth@=\dimen128
+\lineht@=\dimen129
+\@envbody=\toks26
+\multlinegap=\skip54
+\multlinetaggap=\skip55
+\mathdisplay@stack=\toks27
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+\@input{abstracts/abstract.aux}
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\abstracts/abstract.tex)
+\@input{abstracts/abstracteng.aux}
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\abstracts/abstracteng.tex)
+\@input{preamble/epigrafe.aux}
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\preamble/epigrafe.tex)
+\@input{preamble/dedicatory.aux}
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\preamble/dedicatory.tex)
+\@input{preamble/acknowledgements.aux}
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\preamble/acknowledgements.tex)
+\@input{preamble/symbols.aux}
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\preamble/symbols.tex)
+Putting page number on short ToC
+Putting page number on short LoF
+Putting page number on short LoT
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.aux
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/introduction/introduction.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/medicalimages/medicalimages.aux
+
+LaTeX Warning: Label `fig:bitewing_panoramic_example' multiply defined.
+
+)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/theoricfundamentation/theoricfundam
+entation.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/texture_classification/texture_clas
+sification.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/developedmetodologies/developedmeto
+dologies.aux) (C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/results/results.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/analisys_discution/analisys_discuti
+on.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/conclusion_futureworks/conclusion_f
+utureworks.aux))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 263.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 263.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 263.
+
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\ts1cmr.fd"
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 263.
+("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count127
+\scratchdimen=\dimen130
+\scratchbox=\box33
+\nofMPsegments=\count128
+\nofMParguments=\count129
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count130
+\MPscratchDim=\dimen131
+\MPnumerator=\count131
+\everyMPtoPDFconversion=\toks29
+)
+
+Package ps4pdf Warning: Graphic container `thesis-pics.pdf' not found.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+Making Title Page
+<logo/lncc.png, id=1, 45.5301pt x 44.0847pt>
+File: logo/lncc.png Graphic file (type png)
+ <use logo/lncc.png>
+Making Approval Page
+[1
+Non-PDF special ignored!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map} <C:/ppu/docz/_Inf-PRIORITY
+_/thesis/logo/lncc.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for U+lasy on input line 263.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\ulasy.fd"
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 263.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 263.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+Making Catalography Page
+[2
+
+] [3]
+Overfull \hbox (39.07227pt too wide) in paragraph at lines 263--263
+[][] 
+ []
+
+Making Inspiration Page
+[4
+
+]
+Making Dedication Page
+[5
+
+]
+Making Acknowledgement Page
+[6
+
+]
+Making the Portugues Abstract Page
+[7
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 263--263
+
+ []
+
+Making the English Abstract Page
+[8
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 263--263
+
+ []
+
+Making ToC Page
+Making Short ToC...
+[9
+
+]
+Short Chapter (page numbered)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.toc)
+\tf@toc=\write4
+
+Making LoF Page
+Making Short LoF...
+[10
+
+]
+Short Chapter (page numbered)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.lof
+Overfull \hbox (0.30919pt too wide) in paragraph at lines 6--6
+ [][][] []\T1/aer/m/n/12 Exemplos de raio-X. (a) Mamo-grafia. (b) Raio-X de pul
+-mão. (Fonte: 
+ []
+
+
+Overfull \hbox (7.94252pt too wide) in paragraph at lines 7--7
+ [][][] []\T1/aer/m/n/12 Exemplos de re-con-strução a par-tir de To-mo-grafias 
+Com-puta-dorizadas. 
+ []
+
+)
+\tf@lof=\write5
+
+Making LoT Page
+Making Short LoT...
+[11
+
+]
+Short Chapter (page numbered)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.lot)
+\tf@lot=\write6
+
+Making Symbols Page
+[12
+
+]
+Short Chapter (page numbered)
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 263.
+
+LaTeX Font Info:    No file TS1aer.fd. on input line 263.
+
+LaTeX Font Warning: Font shape `TS1/aer/m/n' undefined
+(Font)              using `TS1/cmr/m/n' instead
+(Font)              for symbol `textbullet' on input line 263.
+
+
+
+-------------------Beginning Body----------------------
+
+
+[13
+
+
+] (C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/introduction/introduction.tex
+Cap\'{\i }tulo \th@ChapterStyle 1.
+[1
+
+
+
+] [2]) [3]
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/medicalimages/medicalimages.tex
+Cap\'{\i }tulo \th@ChapterStyle 2.
+
+<figures/interproximalORbitewing_example.jpg, id=59, 360.34625pt x 263.98625pt>
+File: figures/interproximalORbitewing_example.jpg Graphic file (type jpg)
+<use figures/interproximalORbitewing_example.jpg>
+<figures/panoramic_example.jpg, id=60, 455.88925pt x 231.5161pt>
+File: figures/panoramic_example.jpg Graphic file (type jpg)
+
+<use figures/panoramic_example.jpg>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4
+
+
+
+] <figures/mammography_example.jpg, id=64, 301.125pt x 351.3125pt>
+File: figures/mammography_example.jpg Graphic file (type jpg)
+
+<use figures/mammography_example.jpg>
+<figures/lungxray_example.jpg, id=65, 630.355pt x 690.58pt>
+File: figures/lungxray_example.jpg Graphic file (type jpg)
+
+<use figures/lungxray_example.jpg>
+<figures/msct_reconstruction_example.png, id=66, 464.4853pt x 444.15938pt>
+File: figures/msct_reconstruction_example.png Graphic file (type png)
+
+<use figures/msct_reconstruction_example.png>
+<figures/cbct_reconstruction_example.png, id=67, 464.4853pt x 444.15938pt>
+File: figures/cbct_reconstruction_example.png Graphic file (type png)
+
+<use figures/cbct_reconstruction_example.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5 <C:/ppu/docz/_Inf-PRIORITY_/thesis/figures/interproximalORbitewing_example.j
+pg> <C:/ppu/docz/_Inf-PRIORITY_/thesis/figures/panoramic_example.jpg> <C:/ppu/d
+ocz/_Inf-PRIORITY_/thesis/figures/mammography_example.jpg> <C:/ppu/docz/_Inf-PR
+IORITY_/thesis/figures/lungxray_example.jpg>] [6 <C:/ppu/docz/_Inf-PRIORITY_/th
+esis/figures/msct_reconstruction_example.png (PNG copy)> <C:/ppu/docz/_Inf-PRIO
+RITY_/thesis/figures/cbct_reconstruction_example.png>]
+<figures/pet_brain_example.jpg, id=77, 166.7028pt x 173.6889pt>
+File: figures/pet_brain_example.jpg Graphic file (type jpg)
+
+<use figures/pet_brain_example.jpg>) [7 <C:/ppu/docz/_Inf-PRIORITY_/thesis/figu
+res/pet_brain_example.jpg>]
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/theoricfundamentation/theoricfundam
+entation.tex
+Cap\'{\i }tulo \th@ChapterStyle 3.
+
+Overfull \hbox (5.1262pt too wide) in paragraph at lines 22--26
+\T1/aer/m/n/12 foram uti-lizadas na for-mu-lação das metodolo-gias deste tra-ba
+lho. Mod-e-los matemáti-
+ []
+
+
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/theoricfundamentation/mathematicalm
+orphology.tex)) [8
+
+
+
+] [9]
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/texture_classification/texture_clas
+sification.tex
+Cap\'{\i }tulo \th@ChapterStyle 4.
+) [10
+
+
+
+]
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/developedmetodologies/developedmeto
+dologies.tex
+Cap\'{\i }tulo \th@ChapterStyle 5.
+) [11
+
+
+
+] (C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/results/results.tex
+Cap\'{\i }tulo \th@ChapterStyle 6.
+) [12
+
+
+
+]
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/analisys_discution/analisys_discuti
+on.tex
+Cap\'{\i }tulo \th@ChapterStyle 7.
+) [13
+
+
+
+]
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/conclusion_futureworks/conclusion_f
+utureworks.tex
+Cap\'{\i }tulo \th@ChapterStyle 8.
+) [14
+
+
+
+] (C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.bbl [15
+
+
+]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 70.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ae\t1aett.fd"
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+Underfull \hbox (badness 5667) in paragraph at lines 68--71
+[][]\T1/aer/m/n/12 F.N.I.H.  Foun-da-tion for the Na-tional In-sti-tutes of Hea
+lth.  URL
+ []
+
+[16] [17])
+
+Package ps4pdf Warning: `thesis-pics.pdf' is no more valid.
+
+[18] (C:\ppu\docz\_Inf-PRIORITY_\thesis\thesis.aux
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/introduction/introduction.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/medicalimages/medicalimages.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/theoricfundamentation/theoricfundam
+entation.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/texture_classification/texture_clas
+sification.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/developedmetodologies/developedmeto
+dologies.aux) (C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/results/results.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/analisys_discution/analisys_discuti
+on.aux)
+(C:\ppu\docz\_Inf-PRIORITY_\thesis\chapters/conclusion_futureworks/conclusion_f
+utureworks.aux))
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ )
+(\end occurred when \iftrue on line 263 was incomplete) 
+Here is how much of TeX's memory you used:
+ 5912 strings out of 495285
+ 90211 string characters out of 3179870
+ 149679 words of memory out of 3000000
+ 8786 multiletter control sequences out of 15000+200000
+ 39953 words of font info for 86 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 41i,14n,44p,853b,505s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\pedrohml\AppD
+ata\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk> <C:\Users\
+pedrohml\AppData\Local\MiKTeX\2.8\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.p
+k><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
+/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on thesis.pdf (31 pages, 1465476 bytes).
+PDF statistics:
+ 142 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+

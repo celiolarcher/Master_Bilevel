@@ -1,0 +1,311 @@
+\section{Morfologia Matemática}
+
+Em PDI, para o reconhecimento de padrões são necessárias as representações topológicas dos objetos. A
+Morfologia Matemática é uma ferramenta que permite a identificação destas características. O conjunto dessas
+características compõe a representação topológica do objeto auxiliando em seu reconhecimento e/ou segmentação.
+Além disso, são fornecidas pela Morfologia Matemática ferramentas para filtragens em remoção de ruído e realce,
+as quais estão geralmente presentes em etapas de pré-processamento de imagem.
+
+Os resultados dessa área abrangem desde imagens binárias até imagens em cores. Contudo, o tipo de atuação da
+Morfologia nestes dois tipos de imagem costumam diferir na prática. Enquanto em imagens binárias ela é voltada
+principalmente a reconhecimento e segmentação, em imagens coloridas ou em tons de cinza a Morfologia é focada
+principalmente para remoção de ruído e realce.
+
+O processamento morfológico de imagens em cores é análogo ao das imagens em tons de cinza, uma vez que cada
+canal de imagens coloridas (por exemplo vermelho, verde, azul e alfa) se comportam como uma imagem em tons de
+cinza. Dessa forma, as operações morfológicas em imagens coloridas são realizadas canal a canal e depois
+compostos em uma nova imagem.
+
+É importante ressaltar que no caso de imagens binárias há a definição de \textit{pixels} ativos. Possui este
+nome, pois eles indicam a presença de um objeto na imagem. A cor que representa estes \textit{pixels} pode
+variar de um autor para outro. Nesta dissertação, em imagens binárias serão considerados como \textit{pixels}
+ativos os de cor branca, os quais possuem valor lógico \emph{verdadeiro}, e valor numérico igual a $1$. Por
+outro lado, os \textit{pixels} inativos serão considerados os de cor preta, com valor lógico e númerico iguais
+a \emph{falso} e 0, respectivamente.
+
+A seguir serão apresentadas as operações primitivas da Morfologia Matemática (erosão, dilatação e
+\textit{hit-and-miss}) assim como suas principais operações compostas, são elas: abertura, fechamento,
+\textit{thinning}, \textit{top-hat} e \textit{bottom-hat}.
+
+\subsection{Operações Básicas}
+
+Boa parte das definições em Morfologia Matemática são advindas da teoria dos conjuntos, da lógica e da
+aritmética. Com isso, é necessário a definição de operadores que suportem as operações realizadas nestas áreas.
+Para suprir esta necessidade e, ainda, viabilizar a implementação computacional surgiu a definição de Elemento
+Estruturante, determinado por uma matriz e um índice de origem (Fig. \ref{fig:se}).
+
+\begin{figure}[h!] \centering \subfloat[][Quadrado]{\includegraphics[scale=.15]{figures/sesquare.png} $\quad$}
+\subfloat[][Cruz\label{secross}]{\includegraphics[scale=.15]{figures/secross.png} $\quad$}
+\subfloat[][Horizontal]{\includegraphics[scale=.15]{figures/sehorizontal.png} $\quad$}
+\subfloat[][Vertical]{\includegraphics[scale=.15]{figures/severtical.png} $\quad$}
+\caption{Exemplo de Elementos Estruturantes 3x3 com índice de origem em (2,2).}
+\label{fig:se}
+\end{figure}
+
+Uma operação morfológica é determinada pela iteração de um dado Elemento Estruturante $B$ em uma imagem $I$. A
+cada iteração é realizada uma operação morfológica local na imagem com região de suporte igual às dimensões do
+Elemento Estruturante. O índice de origem $c$ indica na imagem o local a ser aplicado o resultado desta
+operação local. Ao final de todo este processo é obtida uma nova imagem $R$.
+
+\begin{figure}[h!] \centering
+\subfloat{\includegraphics[scale=.4]{figures/seoperation.png} $\quad$}
+\caption{Demonstração abstrata de uma operação morfológica local. $I$: imagem de entrada; $B$: Elemento
+Estruturante; $c$: Índice de origem.}
+\label{fig:seoperation}
+\end{figure}
+
+Computacionalmente, a imagem $R$ de saída é inicializada com \textit{pixels} inativos, ou seja, pretos. Os
+resultados das operações morfológicas locais são aplicados na imagem $R$, enquanto a imagem $I$ permanece
+intacta (Fig. \ref{fig:morphstart}). Caso contrário, uma operação morfológica local seria comprometida pelas
+anteriores.
+
+\begin{figure}[h!] \centering \subfloat[][Máscara]{\includegraphics[scale=.3]{figures/maskcross.png} $\quad$}
+\subfloat[][Imagem de entrada]{\includegraphics[scale=.3]{figures/morphimagetest.png} $\quad$}
+\subfloat[][imagem de saída inicializada]{\includegraphics[scale=.3]{figures/morphimagebufferstart.png}
+$\quad$} \caption{(a) Máscara correspondente ao Elemento cruz (Fig. \ref{secross}); (b) Imagem de entrada; (c)
+Imagem de saída inicializada.}
+\label{fig:morphstart}
+\end{figure}
+
+A seguir serão definidas as operações morfológicas básicas e suas propriedades.
+
+\subsubsection{Dilatação}
+
+A operação de dilatação é caracterizada por intuitivamente dilatar os objetos na imagem. Elas é definida da
+seguinte forma:
+
+\begin{description}
+  \item[Imagem binária]
+	\begin{equation}
+		R = I \oplus B = \{z | I \cap B_z \neq  \varnothing \}
+	\end{equation}
+  \item[Imagem tons de cinza]
+	\begin{align}
+		\nonumber R(z) &= I(z) \oplus B = \\
+		&\bigg\{\max\{B_z(x,y)I(z_1-x,z_2-y)\} | (x,y) \in D_B, (z_1-x,z_2-y) \in
+		D_I\bigg\}
+	\end{align}
+\end{description}
+Onde, $z$ representa a coordenada $(z_1, z_2)$ na imagem $I$/$R$, $B_z$ a translação do Elemento
+Estrurante $B$ para o ponto $z$, $D_B$ e $D_I$ os domínios de $B$ e $I$, respectivamente.
+
+Em imagens binárias, a dilatação gera um \textit{pixel} ativo na imagem $R$ se o resultado da operação
+lógica AND entre a imagem $I$ e os elementos correspondentes em $B_z$ obtiver pelo menos um valor
+\emph{verdadeiro}. Veja o exemplo (Fig. \ref{fig:dilate}).
+
+\begin{figure}[h!]
+\centering
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilatestep1.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilateresult1.png}$\quad$}\\
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilatestep2.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilateresult2.png}$\quad$}\\
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilatestep3.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilateresult3.png}$\quad$}\\
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphimagetest.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphdilateresultfinal.png}$\quad$}\\
+\caption{Exemplos de iteração com o operador dilatação em imagem binária. (a)-(c)-(e) Projeção do Elemento
+cruz na imagem; (b)-(d)-(f) Resultado das dilatações locais; (h) Resultado final de dilatação.}
+\label{fig:dilate}
+\end{figure}
+
+??exemplo dilatação em imagens tons de cinza??
+
+
+\subsubsection{Erosão}
+
+A erosão, como o próprio nome sugere, corrompe regiões que não obedeçam ao padrão indicado no Elemento
+Estruturante. A seguir sua definição matemática:
+
+\begin{description}
+  \item[Imagem binária]
+  	\begin{equation}
+		R = I \ominus B = \{z | I \subseteq (\hat{B})_z\}
+	\end{equation}
+  \item[Imagem tons de cinza]
+	\begin{align}
+		\nonumber R(z) &= I(z) \ominus B = \\
+		 &\bigg\{\min\{B_z(x,y)I(z_1-x,z_2-y)\} | (x,y) \in D_B, (z_1-x,z_2-y) \in
+		D_I\bigg\}
+	\end{align}
+\end{description}
+Onde, $z$ representa a coordenada $(z_1, z_2)$ na imagem $I$, $B_z$ a translação do Elemento
+Estrurante $B$ para o ponto $z$, $D_B$ e $D_I$ os domínios de $B$ e $I$, respectivamente.
+
+Como pode ser analisado, em imagens binárias, a erosão gera um \textit{pixel} ativo na imagem $R$ se o
+resultado da operação lógica AND entre os \textit{pixels} ativos de $B_z$ e a imagem $I$ contiver,
+exclusivamente, valores \emph{verdadeiro}. Veja o exemplo (Fig. \ref{fig:erode}).
+
+\begin{figure}[h!]
+\centering
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpherodestep1.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpheroderesult1.png}$\quad$}\\
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpherodestep2.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpheroderesult2.png}$\quad$}\\
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpherodestep3.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpheroderesult3.png}$\quad$}\\
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphimagetest.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morpheroderesultfinal.png}$\quad$}\\
+\caption{Exemplos de iteração com o operador erosão em imagem binária. (a)-(c)-(e) Projeção do Elemento cruz
+na imagem; (b)-(d)-(f) Resultado das erosões locais; (h) Resultado final de erosão.}
+\label{fig:erode}
+\end{figure}
+
+??exemplo erosão em imagens tons de cinza??
+
+\subsubsection{Propriedades}
+
+Dilatação e erosão possuem as seguintes propriedades:
+
+\begin{description}
+  \item[Invariante a translação]
+  \begin{eqnarray}
+  	\nonumber (I)_t \oplus B = (I \oplus B)_t\\
+  	\nonumber (I)_t \ominus B = (I \ominus B)_t
+  \end{eqnarray}
+  \item[Não inversível]
+  \begin{eqnarray}
+  	\nonumber (I \oplus B) \ominus B \neq I\\
+  	\nonumber (I \ominus B) \oplus B \neq I
+  \end{eqnarray}
+  \item[Distributividade] (somente em imagens binárias)
+  \begin{eqnarray}
+  	\nonumber I \oplus (B \cup B') = (I \oplus B) \cup (I \oplus B')\\
+  	\nonumber I \ominus (B \cup B') = (I \ominus B) \cap (I \ominus B')  	
+  \end{eqnarray}
+  \item[Dualidade] (somente em imagens binárias)
+  \begin{eqnarray}
+  	\nonumber I^c \oplus B = (I \ominus B)^c  	
+  \end{eqnarray}
+\end{description}
+
+\subsubsection{Hit-and-miss}
+
+Considerada a mais simples das operações morfológicas, \textit{hit-and-miss} pode derivar todas as outras
+operações, inclusive erosão e dilatação, e só pode ser aplicada em imagens binárias. Seu uso é simples, mas
+precisa de uma definição adicional para fins de praticidade. O Elemento Estruturante utilizado em operações de
+\textit{hit-and-miss} pode possuir o item vazio. O que indica que itens deste tipo não serão usados pelo
+operador, ou seja, o operador é indiferentee aos \textit{pixels} da imagem correspondentes ao(s) item(s) vazio
+do Elemento Estruturante. A operação de \textit{hit-and-miss} é denotada por:
+
+\begin{eqnarray}
+I \odot B
+\end{eqnarray}
+
+
+\begin{figure}[h!]
+\centering
+\subfloat[][]{\includegraphics[scale=.15]{figures/hitmissse.png} $\quad$}
+\subfloat[][]{\includegraphics[scale=.15]{figures/hitmissse2.png} $\quad$}
+\subfloat[][]{\includegraphics[scale=.15]{figures/hitmissse3.png} $\quad$}
+\subfloat[][]{\includegraphics[scale=.15]{figures/hitmissse4.png} $\quad$}
+\caption{Exemplos do Elemento Estruturante \textit{corner} e suas rotações com 3 elementos vazio cada.}
+\label{fig:cornerse}
+\end{figure}
+
+A função desta operação é localizar formas que podem ser representados por um Elemento Estruturante.
+Por exemplo, na figura \ref{fig:cornerse} são expostos Elementos Estruturantes utilizados para localizar
+cantos (quinas) de objetos em imagens binárias.
+
+\begin{figure}[h!]
+\centering
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphimagetest.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.3]{figures/morphhitmissresultfinal.png}$\quad$}\\
+\caption{Exemplo da aplicação do operador \textit{corner}. (a) Imagem Original; (b) Resultado.}
+\label{fig:hitmiss}
+\end{figure}
+
+Na figura \ref{fig:hitmiss} é apresentado um resultado composto pelos quatro Elementos Estruturantes
+da figura \ref{fig:cornerse}. Isso pode ser feito aplicando a operação lógica OR nas quatro imagens
+resultantes da operação com as rotações do elemento \textit{corner}.
+
+\subsection{Operações Compostas}
+
+%abertura, fechamento, \textit{thinning}, \textit{tophat} e \textit{bottomhat}
+Apesar de fornecer uma grande variedade de aplicações, as operações dilatação e erosão, não foram suficientes
+para a demanda de problemas em Processamento de Imagem e, em especial, na Morfologia Matemática. Com isto,
+outras operações foram tomando forma e complexidade a medida que ganhavam robustez na resolução de tarefas.
+
+Neste capítulo serão detalhadas as denominadas operações compostas: abertura, fechamento, esqueletonização,
+\textit{thinning}, \textit{top-hat} e \textit{bottom-hat}. Estas operações possuem hoje um papel fundamental e
+mais direto que dilatação e erosão em tarefas de realce, eliminação de ruído, reconhecimento e segmentação de
+objetos.
+
+\subsubsection{Abertura}
+Muitas vezes é necessário separar objetos unidos em uma imagem binária ou homogeneizar estruturas de
+interesse em uma imagem em tons de cinza. Para estas tarefas é muito usado o operador abertura. Além disso,
+este operador também contribui na eliminação de pontos isolados.
+	\begin{equation}
+    	I \circ B = (I \ominus B) \oplus B
+    \end{equation}
+
+\subsubsection{Fechamento}
+O fechamento auxilia na uniformização de bordas obedecendo o padrão do Elemento Estruturante. Adicionalmente,
+esta operação une estruturas que foram separadas indevidamente durante o processo de segmentação.
+	\begin{equation}
+    	I \bullet B = (I \oplus B) \ominus B
+    \end{equation}
+
+\subsubsection{Thinning}
+Também conhecido como afinamento, o \textit{thinning} é um tipo de esqueletonização. Sua maior utilidade é
+melhorar os resultados dos detectores de borda que muitas vezes as produzem com larguras variáveis. O
+\textit{thinning} assegura que as estruturas de uma imagem binária possuam largura de 1 \textit{pixel}. Apesar
+desta operação fornecer representações mais simples dos objetos, geralmente há muita perda de informação
+durante o processo e isso compromete o seu amplo uso para fins de reconhecimento de objetos complexos.
+
+Do ponto de vista da performance computacional, é uma operação cara pois para obter o resultado ideal é
+necessário aplicar o \textit{thinning} indefinidamente até que não haja nenhuma alteração na imagem de saída.
+Além disso, a cada iteração são processadas operações como a representada pela equação \ref{eq:thin1} ou,
+ainda mais comum, a equação \ref{eq:thin2} que suporta o uso de conjunto de Elementos Estruturantes. O \textit{thinning}
+convencional utiliza um conjunto de 8 Elementos Estruturantes, os da figura \ref{fig:sethin} e suas rotações
+de 90, 180 e 270 graus.
+
+
+%Além disso, a cada iteração são utilizados 8 Elementos Estruturantes (Fig. \ref{fig:sethin}) para
+%\textit{hit-and-miss} sendo o resultado da iteração a operação lógica OR entre estas 8 imagens
+%correspondentes utilizando posteriormente a equação \ref{eq:thin1}. 
+
+\begin{eqnarray}\label{eq:thin1}
+I \otimes B = I - (I \odot B)
+\end{eqnarray}
+ou
+\begin{eqnarray}\label{eq:thin2}
+I \otimes \dot{B} = I - ((I \odot B') \vee (I \odot B'') \vee \ldots)
+\end{eqnarray}
+Onde $\dot{B} = \{B',B'',\ldots\}$ e $\vee$ é o operador lógico OR.
+
+\begin{figure}[h!]
+\centering
+\subfloat[][]{\includegraphics[scale=.15]{figures/sethin1.png}$\quad$}
+\subfloat[][]{\includegraphics[scale=.15]{figures/sethin2.png}$\quad$}
+\caption{Elementos Estruturantes de \textit{hit-and-miss} comumente utilizados com suas rotações em $90^o$
+para \textit{thinning}.}
+\label{fig:sethin}
+\end{figure}
+
+?? exemplos de thinning ??
+
+\subsubsection{Top-hat}
+Em imagens em tons de cinza, é muito comum uma etapa de pré-processamento que realce a imagem aumentando
+assim a eficiência das operações seguintes. É usado o \textit{top-hat} quando é desejado dar ênfase a
+saliências que não pertencem ao \textit{background} (fundo da imagem). 
+\begin{equation}
+t_h(I, B) = I - (I \circ B) 
+\end{equation}
+Onde $I$ é a imagem de entrada, $B$ o Elemento Estruturante e $\circ$ a operação morfológica de abertura.
+
+?? exemplos de aplicação do top-hat ?? 
+
+\subsubsection{Bottom-hat}
+
+A homogeneidade de intensidade em imagens é um fator que atrapalha o desenvolvimento de metologias em PDI.
+Isto força a inserção de uma etapa de pré-processamento que contorne este tipo de problema.
+\texit{Bottom-hat} é uma operação que pode auxiliar neste sentido, removendo a atuação do \textit{background}
+entre os objetos de interesse e facilitando, assim, a execução de algoritmos para segmentação ou
+reconhecimento.
+
+\begin{equation}
+b_h(I, B) = I - (I \bullet B) 
+\end{equation}
+Onde $I$ é a imagem de entrada, $B$ o Elemento Estruturante e $\bullet$ a operação morfológica de fechamento.
+
+?? exemplos de aplicação do bottom-hat ??

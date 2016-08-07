@@ -1,0 +1,81 @@
+\symbols{	\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
+{\footnotesize
+\begin{itemize}
+\item CBCT: Cone-Beam Computed Tomography
+\item CT: Computed Tomography
+\item KL: Karhunen-Loève
+\item MRI: Magnetic Ressonance Imaging
+\item MSCT: Multislice Computed Tomography
+\item PDI: Processamento Digital de Imagem
+\item PI: Processamento de Imagem
+\item VC: Visão Computacional
+%\item 1ME4: cristal da cruzipaína 1, obtido do PDB
+%\item 1ME4m: modelo da cruzipaína 2, gerado a partir do cristal 1ME4
+%\item 24-SMT: 24-metiltransferase
+%\item 3D: Tridimensional
+%\item 9PAP: cristal da papaína, obtido do PDB
+%\item $\mathring{A}$: Angstroms
+%\item AK: Arginina cinase
+%\item ALA: Alanina
+%\item ARG: Arginina
+%\item ASN: Asparagina
+%\item ASP: Ácido aspártico
+%\item BATS: {\it BLAST Automatic Targeting for Structures}
+%\item BLAST: {\it Basic Local Alignment Search Tool}
+%\item C$_\alpha$: Carbono-$\alpha$
+%\item CDS: Sequência codificante
+%\item Cl$^-$: Íon Cloro
+%\item CSO: S-Hidroxicisteína
+%\item CYP51: Citocromo-P450 em {\it T. cruzi}
+%\item CYS: Cisteína
+%\item DM: Dinâmica Molecular
+%\item DNA (ou ADN): Ácido Desoxirribonucléico
+%\item EC: Classificação Enzimática
+%\item ED$_{50}$: Dose Média Efetiva
+%\item FTase: Farnesiltransferase
+%\item GLN: Glutamina
+%\item GLU: Ácido glutâmico
+%\item gp = GP: Glicoproteína
+%\item GPI: Glicosilfosfatidilinositol
+%\item GR: glutationa redutase
+%\item GRSI: {\it Gap Relative Strengh Index}
+%\item {\it H. sapiens} = {\it h} =  HSA: {\it Homo sapiens}
+%\item HIS: Histidina
+%\item IC$_{50}$: Concentração Média Inibitória
+%\item ID$_{50}$: Dose Média Inibitória
+%\item K$_i$: Constante de dissociação
+%\item KEGG: {\it Kyoto Encyclopedia of Genes and Genomes}
+%\item LC$_{50}$: Concentração Média Letal
+%\item LEU: Leucina
+%\item LIT: {\it Liver Infusion Tryptose}
+%\item LVI: {\it Lenght Variation Index}
+%\item LYS: Lisina
+%\item MET: Metionina
+%\item MIC: Concentração Mínima Inibitória
+%\item Na$^+$: Íon Sódio
+%\item NADH: estado reduzido da Nicotinamida Adenina Dinucleotídeo (NAD)
+%\item NC-IUBMB: {\it Nomenclature Committee
+%	 of the International Union of Biochemistry and Molecular
+%	 Biology} 
+%\item PDB: {\it Protein Data Bank}
+%\item PDF: Função Densidade de Probabilidade
+%\item PHE: Fenilalanina
+%\item PRO: Prolina
+%\item RMN: Ressonância Magnética Nuclear
+%\item RMSD: Desvio Médio Quadrático
+%\item Rx: Raios-X
+%\item SAS: Superfície Acessível ao Solvente
+%\item SER: Serina
+%\item SQS: Esqualeno sintase
+%\item S-S: Ligação dissulfídica
+%\item {\it T. cruzi} = {\it Tc} = TCR: {\it Trypanosoma cruzi}
+%\item TR: Tripanotiona redutase
+%\item TRP: Triptofano
+%\item TYR: Tirosina
+%\item TS: Trans-sialidase
+%\item T[SH]$_2$: Tripanotiona (N$^1$,N$^8$-bis(glutationil)spermidina) redutase
+%\item UNG: Uracil-DNA glicosilase
+%\item VAL: Valina
+\end{itemize}
+}
+}
