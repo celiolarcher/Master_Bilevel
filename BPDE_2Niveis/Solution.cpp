@@ -28,14 +28,17 @@ extern double TOL_NEQ_CONST=1e-4;
 	  vectorCharacters[i]=fRand(bounds[2*i],bounds[2*i+1]);
           }
           
+          
+          //vectorCharacters[0]=0.5;
       //    ,,,,0,10.6102,34.2204,1.22037
           
            //  vectorCharacters[4]=0;
           
           
-          
-            //vectorCharacters[0]=6.038;
-          //vectorCharacters[1]=2.957;
+          /*
+          vectorCharacters[0]=3;
+          vectorCharacters[1]=3;
+          vectorCharacters[2]=3;
       //     vectorCharacters[0]=3;
   /*
           vectorCharacters[0]=0.452808;

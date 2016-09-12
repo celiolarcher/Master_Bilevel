@@ -1,4 +1,4 @@
-#include "LemkeLW.h"
+#include "LemkeLWFillSolution.h"
 
 #include <cmath>
 #include <iostream>
@@ -12,7 +12,7 @@ extern double TOL_NEQ_CONST;
 
 extern bool InfeasibleAvaliation;
 
-    int LemkeLW::initInstance(InputFunction *function){
+    int LemkeLWFillSolution::initInstance(InputFunction *function){
 	this->function=function;
 
 	solutionSize=function->getDimensionUP()+function->getDimensionLW();
@@ -31,8 +31,8 @@ extern bool InfeasibleAvaliation;
 
 	return 1;
     }
-
-    int LemkeLW::decodifySolution(Solution *sol){
+#include "DifferentialEvolution.h"
+    int LemkeLWFillSolution::decodifySolution(Solution *sol){
       
           sol->feasible=1;
 	  sol->completeSolution=1;
@@ -52,14 +52,34 @@ extern bool InfeasibleAvaliation;
 	  if(sol->constraintValues[offset]>TOL_EQ_CONST){ 
 		sol->completeSolution=0;
 		sol->feasible=0;
-		/*
-			        for(int i=0;i<function->getDimensionUP();i++)
-	          cout<<sol->vectorCharacters[i]<<"\t";
-	          
-	        cout<<"\n";*/
 	  }
           
-	  if(sol->completeSolution){
+	  if(!sol->completeSolution){  //Preenche solução não completa
+	    /*  double avg[sol->sizeVec];
+	      if(!DifferentialEvolution::averagePopulation(avg)){
+	      
+	      //if(!DifferentialEvolution::findClosePopulation(avg,sol)){
+
+	          for(int i=0;i<constraintsNumber;i++)sol->constraintValues[i]=0;
+	          
+	          if(constraintsNumber>0){
+		  for(int i=0;i<function->getDimensionUP();i++){
+		      if(sol->vectorCharacters[i]<function->bounds[2*i])
+		          sol->constraintValues[0]+=function->bounds[2*i]-sol->vectorCharacters[i];
+		      
+		      if(sol->vectorCharacters[i]>function->bounds[2*i+1])
+		          sol->constraintValues[0]+=sol->vectorCharacters[i]-function->bounds[2*i+1];
+		  }
+	          }
+	        
+	          return 1;
+	      }
+	    */
+	      for(int i=0;i<function->getDimensionLW();i++)
+	        sol->vectorCharacters[i+function->getDimensionUP()]=(function->bounds[2*(i+function->getDimensionUP())]+function->bounds[2*(i+function->getDimensionUP())+1])/2.0;//avg[i+function->getDimensionUP()];
+	  }
+	  
+	  
 		  if(function->getNEQConstraintNumberUP()>0){
 			  function->constraintsValueNEQUP(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP(),sol->constraintValues+offset);
 			  for(int i=offset;i<offset+function->getNEQConstraintNumberUP();i++){
@@ -106,19 +126,11 @@ extern bool InfeasibleAvaliation;
 
 		  if(sol->feasible)// || InfeasibleAvaliation)
 		 	sol->upLevelFunction=function->getUPLevelFunction(sol->vectorCharacters,sol->vectorCharacters+function->getDimensionUP());
+		  
+		 /* 
 	  }else{
 		for(int i=0;i<constraintsNumber;i++)sol->constraintValues[i]=0;
-		
-		if(constraintsNumber>0){
-		    for(int i=0;i<function->getDimensionUP();i++){
-		        if(sol->vectorCharacters[i]<function->bounds[2*i])
-			sol->constraintValues[0]+=function->bounds[2*i]-sol->vectorCharacters[i];
-		        
-		        if(sol->vectorCharacters[i]>function->bounds[2*i+1])
-			sol->constraintValues[0]+=sol->vectorCharacters[i]-function->bounds[2*i+1];
-		    }
-		}
-	  }
+	  }*/
 
           return 1;
     }
@@ -126,7 +138,7 @@ extern bool InfeasibleAvaliation;
 #include <iostream>
 #include <iomanip>      // std::setprecision
 using namespace std;
-     int LemkeLW::getYLemke(double x[], double y[], double *opt){
+     int LemkeLWFillSolution::getYLemke(double x[], double y[], double *opt){
        		
 		int countNegativeVar=0;
 		for(int i=0;i<function->getDimensionLW();i++){

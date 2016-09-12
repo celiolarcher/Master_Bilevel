@@ -41,6 +41,11 @@ class Solution{
         if(countConstraint>0)
           constraintValues=new double[countConstraint];
         else constraintValues=NULL;
+        
+        completeSolution=0;
+        feasible=0;
+        upLevelFunction=0;
+        score=0;
     }
     
     ~Solution(){

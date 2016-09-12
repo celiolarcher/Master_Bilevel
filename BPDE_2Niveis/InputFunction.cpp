@@ -156,6 +156,7 @@
     }
     
     double InputFunction::getLWLevelFunction(double x[], double y[]){
+        lwSimplexCalls++;
         return (*objFuncLWLevel)(x,y);
     }
 

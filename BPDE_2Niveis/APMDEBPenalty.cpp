@@ -55,10 +55,10 @@ using namespace std;
           }
 //cout<<"\n";
           
-        if(newPopulation)
-          levelUPMean/=(2*sizePop);
-	else
-	  levelUPMean/=(sizePop);
+          if(newPopulation)
+	levelUPMean/=(2*sizePop);
+          else
+	levelUPMean/=(sizePop);
           
           for(int j=0;j<population[0]->countConstraint;j++){
 //	     kWeight[j]=(violationMean[j]*fabs(levelUPMean))/violationSumSquare;
@@ -72,9 +72,9 @@ using namespace std;
      }
 
      int APMDEBPenalty::compareSolutions(Solution *sol1, Solution *sol2, SolutionDecoder *decoder){   //1 se sol1 melhor que sol2, 0 caso contrário
-	  if(!sol1->completeSolution) return 0;
-	  if(!sol2->completeSolution) return 1;
-
+          if(!sol1->completeSolution && sol2->completeSolution) return 0;
+          if(sol1->completeSolution && !sol2->completeSolution) return 1;
+          
           if(sol1->feasible) sol1->score=sol1->upLevelFunction;
           else{
 	    sol1->score=0;
@@ -89,9 +89,10 @@ using namespace std;
 
 	    //if(sol1->upLevelFunction>levelUPMean)sol1->score+=sol1->upLevelFunction;
 	    //else sol1->score+=levelUPMean;
-	    sol1->score+=sol1->penaltyValue;
           }
           
+      //    sol1->score+=fabs(levelUPMean)*sol1->penaltyValue; PENALIDADE DESATIVADA
+
       
           if(sol2->feasible) sol2->score=sol2->upLevelFunction;
           else{
@@ -107,11 +108,12 @@ using namespace std;
 
 	    //if(sol2->upLevelFunction>levelUPMean)sol2->score+=sol2->upLevelFunction;
 	    //else sol2->score+=levelUPMean;
-	    sol2->score+=sol2->penaltyValue;
           }
+          
+        //  sol2->score+=fabs(levelUPMean)*sol2->penaltyValue;  //PENALIDADE DESATIVADA
 
-	  if(sol1->feasible && !sol2->feasible) return 1;
-	  if(!sol1->feasible && sol2->feasible) return 0;
+          if(sol1->feasible && !sol2->feasible) return 1;
+          if(!sol1->feasible && sol2->feasible) return 0;
 
 	
           if(sol1->score < sol2->score) return 1;

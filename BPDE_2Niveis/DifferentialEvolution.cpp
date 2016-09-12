@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+/*
       Solution **DifferentialEvolution::Population;
       Solution **DifferentialEvolution::nextPopulation;
       Solution *DifferentialEvolution::best=NULL;
@@ -12,7 +13,57 @@ using namespace std;
       int DifferentialEvolution::LWLevelSimplexCallsBest;
       int DifferentialEvolution::sizePopulation;
       SolutionDecoder *DifferentialEvolution::decoder;
-      PenaltySolution *DifferentialEvolution::penalty;
+      PenaltySolution *DifferentialEvolution::penalty;*/
+
+      DifferentialEvolution::DifferentialEvolution(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop){
+	this->Population=new Solution*[sizePop];
+	this->nextPopulation=new Solution*[sizePop];
+	this->sizePopulation=sizePop;
+	this->decoder=decoder;
+	this->penalty=penalty;
+	best=NULL;
+	
+	for(int i=0;i<sizePopulation; Population[i]=new Solution(decoder->solutionSize,decoder->constraintsNumber), nextPopulation[i]=new Solution(decoder->solutionSize,decoder->constraintsNumber), Population[i++]->initRandom(decoder->boundAttributes)); 
+        
+	
+	for(int i=0;i<sizePopulation;i++){
+	    decoder->decodifySolution(Population[i]);
+	}
+	
+	penalty->updatePenalty(Population,NULL,sizePopulation,0,decoder);
+	for(int i=0;i<sizePopulation;i++){
+		//cout<<*Population[i];
+	    if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
+	        if(best) delete best;
+	        best=Population[i]->clone();
+		UPLevelCallsBest=decoder->function->getUPLevelCalls();
+		LWLevelSimplexCallsBest=decoder->function->getLWLevelSimplexCalls();
+	    }
+	}
+      }
+      
+      int DifferentialEvolution::resetPopulation(){	
+	for(int i=0;i<sizePopulation;Population[i++]->initRandom(decoder->boundAttributes)); 
+	if(best) delete best;
+	best=NULL;
+	
+	for(int i=0;i<sizePopulation;i++){
+	    decoder->decodifySolution(Population[i]);
+	}
+	
+	penalty->updatePenalty(Population,NULL,sizePopulation,0,decoder);
+	for(int i=0;i<sizePopulation;i++){
+		//cout<<*Population[i];
+	    if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
+	        if(best) delete best;
+	        best=Population[i]->clone();
+		UPLevelCallsBest=decoder->function->getUPLevelCalls();
+		LWLevelSimplexCallsBest=decoder->function->getLWLevelSimplexCalls();
+	    }
+	}
+	
+	return 1;
+      }
 
 
       int DifferentialEvolution::initPopulation(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop){
@@ -33,7 +84,7 @@ using namespace std;
 	for(int i=0;i<sizePopulation;i++){
 		//cout<<*Population[i];
 	    if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
-	        if(!best) delete best;
+	        if(best) delete best;
 	        best=Population[i]->clone();
 		UPLevelCallsBest=decoder->function->getUPLevelCalls();
 		LWLevelSimplexCallsBest=decoder->function->getLWLevelSimplexCalls();
@@ -43,9 +94,58 @@ using namespace std;
 	return 1;
       }
       
-    /*
       
-      void quickSortSolution(Solution *eliteSet[], int left, int right, SolutionDecoder *decoder){  //Utilizado para ordenar as soluções por melhor score.
+      
+      int DifferentialEvolution::averagePopulation(double average[]){
+          if(best==NULL || !best->completeSolution) return 0;
+        
+          for(int j=0;j<Population[0]->sizeVec;j++)average[j]=0;
+          
+          for(int i=0;i<sizePopulation;i++){
+	  if(Population[i]->completeSolution){
+	      for(int j=0;j<Population[i]->sizeVec;j++){
+	          average[j]+=Population[i]->vectorCharacters[j];
+	      }
+	  }
+          }
+          
+          return 1;
+      }
+      
+      
+      int DifferentialEvolution::findClosePopulation(double close[],Solution *sol){
+          if(best==NULL || !best->completeSolution) return 0;
+        
+          
+          double moreClose=-1;
+          int pos=-1;
+          
+          for(int i=0;i<sizePopulation;i++){
+	  if(Population[i]->completeSolution){
+	        double aux=Population[i]->diffSquareSolution(sol);
+	        
+	        if(pos==-1 || moreClose>aux){
+		pos=i;
+		moreClose=aux;
+	        }
+	  }
+          }
+          
+          if(pos!=-1){
+	  for(int j=0;j<Population[pos]->sizeVec;j++){
+	      close[j]=Population[pos]->vectorCharacters[j];
+	  } 
+	  
+	  return 1;
+          }
+
+          return 0;          
+          
+      }
+      
+    
+      
+      void quickSortSolution(DifferentialEvolution *de,Solution *eliteSet[], int left, int right, SolutionDecoder *decoder){  //Utilizado para ordenar as soluções por melhor score.
           int i, j;
           Solution *y;
           Solution *x;
@@ -53,8 +153,8 @@ using namespace std;
           j = right;
           x = eliteSet[(left + right) / 2];
           while(i <= j){
-	  while(DifferentialEvolution::penalty->compareSolutions(eliteSet[i],x,decoder) && i < right)  i++;
-	  while(DifferentialEvolution::penalty->compareSolutions(x,eliteSet[j],decoder) && j > left)   j--;
+	  while(de->penalty->compareSolutions(eliteSet[i],x,decoder) && i < right)  i++;
+	  while(de->penalty->compareSolutions(x,eliteSet[j],decoder) && j > left)   j--;
 	  if(i <= j){
 	      y = eliteSet[i];
 	      eliteSet[i] = eliteSet[j];
@@ -63,12 +163,12 @@ using namespace std;
 	      j--;
 	  }
           }
-          if(j > left)  quickSortSolution(eliteSet, left, j,decoder);
-          if(i < right) quickSortSolution(eliteSet,  i, right,decoder);
+          if(j > left)  quickSortSolution(de,eliteSet, left, j,decoder);
+          if(i < right) quickSortSolution(de,eliteSet,  i, right,decoder);
       }
 
       
-      
+  /*    
       int DifferentialEvolution::initPopulationNelderMeadMethod(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop){  //Não Atualiazado
 	double alpha=1, gama=2, theta=0.5;
         
@@ -281,7 +381,7 @@ using namespace std;
       extern bool InfeasibleAvaliation;
 
       
-      int DifferentialEvolution::improveInitSetSimilarity(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest){
+      int DifferentialEvolution::improveInitSetSimilarity(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest,int intervalAddDE){
 		int MIN_POP=6;
         
 		Solution **populationNew=new Solution *[sizePopNextStep+sizeBest];
@@ -306,7 +406,7 @@ using namespace std;
 		cout<<"\n----------------------------------------------------------\n";
 		*/
 		int factor=25;
-		for(int i=0;i<1e6 && decoder->function->getLWLevelSimplexCalls()<5e6 && feasibleSolutions<sizePopNextStep && sizePopulation>=MIN_POP; i++){
+		for(int i=0;i<1e6 && decoder->function->getUPLevelCalls()< 6000/5  && decoder->function->getLWLevelSimplexCalls()<5e6 && feasibleSolutions<sizePopNextStep && sizePopulation>=MIN_POP; i++){
 			double rd= ((double) rand()/ RAND_MAX) * (find2);
 		  
 			/*
@@ -365,6 +465,68 @@ using namespace std;
 			
 			DifferentialEvolution::selectPopulation();
 
+
+
+
+
+
+
+			if((i+1)%intervalAddDE==0 && best->completeSolution){//IDEIA RANKEAR ANTES DE COLETAR?????  Coletar após intervalAddDE iterações
+			      quickSortSolution(this,Population,0,sizePopulation-1,decoder); 
+
+			      for(int j=0;j<sizePopulation && feasibleSolutions<sizePopNextStep;j++){
+
+			          //   if(Population[j]->feasible){
+					  populationNew[feasibleSolutions]=Population[j];
+					//  Population[j]=Population[sizePopulation-1];
+					  Population[j]=NULL;
+					//  sizePopulation--;
+					  feasibleSolutions++;
+
+					  
+					  //for(int del=0;del<sizePopSearch/factor && sizePopulation>MIN_POP;del++){
+					  for(int del=0;del<sizePopSearch/sizePopNextStep-1 && sizePopulation>MIN_POP;del++){
+					      double minDiff=1e6;
+					      int deleted=0;
+					      for(int k=0;k<sizePopulation;k++){
+					          if(Population[k]){
+						double aux=populationNew[feasibleSolutions-1]->diffSquareSolution(Population[k]);
+
+					          // double aux=populationNew[feasibleSolutions-1]->diffMaxSolution(Population[k]);
+					        
+						if(aux<minDiff){
+						    minDiff=aux;
+						    deleted=k;
+						}
+					          }
+					      }
+					      if(Population[deleted]){	        
+					          delete Population[deleted];
+					        //  Population[deleted]=Population[sizePopulation-1];
+					          Population[deleted]=NULL;
+					          //sizePopulation--;
+					      }
+					  }
+					  
+					  int nullPop=0;
+					  for(int k=0, index=0;k<sizePopulation;k++){ //Desloca soluções para não ter que reordenar
+					        if(Population[k]){
+						Population[index]=Population[k];
+						index++;
+					        }
+					        else nullPop++;
+					  }
+					  sizePopulation-=nullPop;
+					  
+				// }
+			      }
+			}
+
+
+
+
+
+/*
 			for(int j=0;j<sizePopulation && feasibleSolutions<sizePopNextStep;j++){
 				if(Population[j]->feasible){
 					populationNew[feasibleSolutions]=Population[j];
@@ -424,6 +586,8 @@ using namespace std;
 
 					
 					//for(int del=0;del<sizePopSearch/factor && sizePopulation>MIN_POP;del++){
+					
+					/*
 					for(int del=0;del<sizePopSearch/sizePopNextStep-1 && sizePopulation>MIN_POP;del++){
 					    double minDiff=1e6;
 					    int deleted=0;
@@ -501,13 +665,13 @@ using namespace std;
 					      cout<<"\t"<<Population[i]->score<<"\n";
 					  }
 					  cout<<"\n----------------------------------------------------------\n";*/
-				}
+			//	}
 				
 				//if(factor<sizePopulation)
 				  //factor=factor*1;
 				
 				//cout<<factor<<"\t";
-			}
+			//}
 		}
 		/*
 				cout<<feasibleSolutions<<"\n";
@@ -518,7 +682,11 @@ using namespace std;
 		    cout<<"\t"<<Population[i]->score<<"\n";
 		}
 		cout<<"\n----------------------------------------------------------\n";
+		
 */
+		
+//		cout<<"\n"<<feasibleSolutions<<"\t"<<decoder->function->getUPLevelCalls()<<"AAA \n";
+
 		for(int j=feasibleSolutions;j<sizePopNextStep && (j-feasibleSolutions)<sizePopulation;j++) populationNew[j]=Population[j-feasibleSolutions];
 		
 		for(int j=feasibleSolutions + sizePopulation;j<sizePopNextStep;j++){
@@ -581,7 +749,7 @@ using namespace std;
       }
       
       
-      int DifferentialEvolution::improveInitSetDispersion(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest){
+      int DifferentialEvolution::improveInitSetDispersion(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest, int intervalAddDE){
 	        int MIN_POP=6;
     
 	        Solution **populationNew=new Solution *[sizePopNextStep+sizeBest];
@@ -597,7 +765,7 @@ using namespace std;
 
 	        int noFeas=0;
 	        
-	        for(int i=0;i<1e6 && decoder->function->getLWLevelSimplexCalls()<5e6 && feasibleSolutions<sizePopNextStep && sizePopulation>=MIN_POP; i++){
+	        for(int i=0;i<1e6 && decoder->function->getUPLevelCalls()<6000/5 && decoder->function->getLWLevelSimplexCalls()<5e6 && feasibleSolutions<sizePopNextStep && sizePopulation>=MIN_POP; i++){
 		        double rd= ((double) rand()/ RAND_MAX) * (find2);
 	          
 		        /*
@@ -660,13 +828,20 @@ using namespace std;
 			Population[j]->penaltyValue=0;
 			for(int k=0;k<feasibleSolutions;k++){
 			    double aux=0;
-			    for(int l=0;l<Population[j]->sizeVec;l++){
-			        aux+=(Population[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])*(Population[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])/(decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1])*(decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1]);
+			    
+			    for(int l=decoder->editBegin;l<decoder->editBegin+decoder->editSize;l++){    
+			  //  for(int l=0;l<Population[j]->sizeVec;l++){
+			        aux+=(Population[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])*(Population[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])/((decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1])*(decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1]));
 			    }
 			    
-			    //if(aux<normSpace/4)
-			    Population[j]->penaltyValue+=1/exp(aux);
+			    aux/=decoder->editSize;
+			    
+			    //if(aux<0.5)
+			      Population[j]->penaltyValue+=(1-sqrt(aux));
 			}
+			
+			Population[j]->penaltyValue/=feasibleSolutions;
+			
 			//Population[j]->penaltyValue=penalty;
 //			if(feasibleSolutions>0)
 //			cout<<Population[j]->penaltyValue<<"\t";
@@ -677,13 +852,19 @@ using namespace std;
 			nextPopulation[j]->penaltyValue=0;
 			for(int k=0;k<feasibleSolutions;k++){
 			    double aux=0;
-			    for(int l=0;l<nextPopulation[j]->sizeVec;l++){
-			        aux+=(nextPopulation[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])*(nextPopulation[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])/(decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1])*(decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1]);
+			    for(int l=decoder->editBegin;l<decoder->editBegin+decoder->editSize;l++){    
+			        aux+=(nextPopulation[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])*(nextPopulation[j]->vectorCharacters[l]-populationNew[k]->vectorCharacters[l])/((decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1])*(decoder->boundAttributes[2*l]-decoder->boundAttributes[2*l+1]));
 			    }
-			    
-			    //if(aux<normSpace/4)
-			      nextPopulation[j]->penaltyValue+=1/exp(aux);
+			    aux/=decoder->editSize;
+			   
+			 //   if(aux<0.5)
+			      nextPopulation[j]->penaltyValue+=(1-sqrt(aux));
+			   // }
 			}
+			
+			nextPopulation[j]->penaltyValue/=feasibleSolutions;
+			
+			//cout<<nextPopulation[j]->penaltyValue<<"\n";
 			
 			//cout<<feasibleSolutions<<"\t"<<nextPopulation[j]->penaltyValue<<"\n";;
 			
@@ -730,8 +911,31 @@ using namespace std;
 		        
 		        DifferentialEvolution::selectPopulation();
 		        noFeas++;
+		        
+		        
+		        
+		        if((i+1)%intervalAddDE==0){  //Coletar a cada intervalAddDE iterações (IDEIA INICIAL)
+		        
+		          int bestFeas=-1;
+		          
+		          for(int j=0;j<sizePopulation && feasibleSolutions<sizePopNextStep;j++){
+			          if( (bestFeas==-1 || penalty->compareSolutions(Population[j],Population[bestFeas],decoder))){
+				    bestFeas=j;
+			          }
+			          
+
+		          }	  
+		          if(bestFeas>=0){
+			  populationNew[feasibleSolutions]=Population[bestFeas];
+			  Population[bestFeas]=Population[sizePopulation-1];
+			  sizePopulation--;
+			  feasibleSolutions++;	      
+		          }	
+		        }
+		        
 		      //  cout<<*Population[0]<<"\n";
 		        //cout<<decoder->function->getLWLevelFunction(Population[0]->vectorCharacters,Population[0]->vectorCharacters+decoder->function->getDimensionUP());
+		        /*
 		        for(int j=0;j<sizePopulation && feasibleSolutions<sizePopNextStep;j++){
 			     //   if(Population[j]->feasible || noFeas > (5e6-decoder->function->getLWLevelSimplexCalls())/(sizePopNextStep)){
 			          if(Population[j]->feasible){
@@ -812,13 +1016,13 @@ using namespace std;
 					Population[deleted]=Population[sizePopulation-1];
 					sizePopulation--;
 				        }*/
-			        }
+			  //      }
 			        
 			        //if(factor<sizePopulation)
 			          //factor=factor*1;
 			        
 			        //cout<<factor<<"\t";
-		        }
+		       // }
 	        }
 	        /*
 			        cout<<feasibleSolutions<<"\n";
@@ -831,6 +1035,8 @@ using namespace std;
 	        cout<<"\n----------------------------------------------------------\n";
 */
 // 	        cout<<"fes"<<feasibleSolutions<<"\t"<<sizePopNextStep<<"\n";
+
+	        //cout<<feasibleSolutions<<"\t"<<decoder->function->getUPLevelCalls()<<"AAA \n";
 
 	        
 	          for(int j=feasibleSolutions;j<sizePopNextStep && (j-feasibleSolutions)<sizePopulation;j++){
@@ -923,6 +1129,7 @@ using namespace std;
 		Population[i]->penaltyValue=0;
 		
 	        }
+	        
 	        
 	        return 1;
       }
@@ -1808,6 +2015,47 @@ using namespace std;
 	return 1;
       }
             
+            
+      int DifferentialEvolution::mutatePopulation_TargetToRand_1_Wall(double F1, double F2, int begin, int end){
+	for(int i=begin;i<end;i++){    
+	    int r1=rand() % (sizePopulation-1);
+	    if(r1>=i) r1++;
+	    
+	    int r2=rand() % (sizePopulation-2);
+	    if(r2>=i) r2++;
+	    if(r2>=r1) r2++;
+	    
+	    int r3=rand() % (sizePopulation-3);
+	    if(r3>=i) r3++;
+	    if(r3>=r1) r3++;
+	    if(r3>=r2) r3++;
+	     
+		//cout<<r1<<"\t"<<r2<<"\t"<<r3<<"\n";
+
+	    double minF=1;
+
+	    for(int j=decoder->editBegin;j<decoder->editBegin+decoder->editSize;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=F1*(Population[r1]->vectorCharacters[j] - Population[i]->vectorCharacters[j])+F2*(Population[r2]->vectorCharacters[j] - Population[r3]->vectorCharacters[j]);
+	    }
+	    
+	    for(int j=decoder->editBegin;j<decoder->editBegin+decoder->editSize;j++){    
+	        nextPopulation[i]->vectorCharacters[j]=Population[i]->vectorCharacters[j] + minF*nextPopulation[i]->vectorCharacters[j];
+	        
+	        if(nextPopulation[i]->vectorCharacters[j]<decoder->boundAttributes[2*j]) nextPopulation[i]->vectorCharacters[j]=decoder->boundAttributes[2*j];//Population[r1]->vectorCharacters[j];
+	        if(nextPopulation[i]->vectorCharacters[j]>decoder->boundAttributes[2*j+1]) nextPopulation[i]->vectorCharacters[j]=decoder->boundAttributes[2*j+1];//Population[r1]->vectorCharacters[j];
+
+	    }
+
+
+	}
+	
+	return 1;
+      }
+      
+            
+            
+            
+            
       int DifferentialEvolution::recombinePopulation(double CR ,int begin, int end){
 	CR*=100;
 	for(int i=begin;i<end;i++){
@@ -1935,7 +2183,7 @@ int c=0;
 			//cout<<*Population[i];
 		if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
 		//      cout<<decoder->function->getUPLevelCalls()<<"\t"<<best->score<<"\t"<<Population[i]->score<<"\t"<<best->diffSquareSolution(Population[i])<<"\n";
-		      if(!best) delete best;
+		      if(best) delete best;
 		      best=Population[i]->clone();
 		      UPLevelCallsBest=decoder->function->getUPLevelCalls();
 		      LWLevelSimplexCallsBest=decoder->function->getLWLevelSimplexCalls();

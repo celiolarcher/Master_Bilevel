@@ -11,8 +11,8 @@ using namespace std;
      }
 
      int DEBPenalty::compareSolutions(Solution *sol1, Solution *sol2, SolutionDecoder *decoder){   //1 se sol1 melhor que sol2, 0 caso contrário
-	  if(!sol1->completeSolution) return 0;
-	  if(!sol2->completeSolution) return 1;
+          if(!sol1->completeSolution && sol2->completeSolution) return 0;
+          if(sol1->completeSolution && !sol2->completeSolution) return 1;
 
           if(sol1->feasible && (!sol2->feasible || sol1->upLevelFunction < sol2->upLevelFunction)) return 1;
           else{

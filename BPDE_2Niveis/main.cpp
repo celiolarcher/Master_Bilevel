@@ -3,9 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fstream>
+#include <time.h>
 #include "DefaultParameters.h"
 
 #define PENALTY_VALUE 1e4
+using namespace std;
+
+#include "DELowerLevel.h"
+ofstream out; // out é uma variavel.
 
 void parseOptions(double *options, int dim[], int argc,char *argv[],char **file,long int *seed){ //Traduz os parâmetros recebidos pelo programa
     int i=0;
@@ -76,6 +81,9 @@ void parseOptions(double *options, int dim[], int argc,char *argv[],char **file,
         }else if(!strcmp(argv[i],"--crossRateSearch")){
             options[16]=atof(argv[i+1]);
             i+=2;
+        }else if(!strcmp(argv[i],"--intervalSearchDE")){  //Intervalo de coleta de soluções ou do processo de evolução no aprimoramento da população inicial
+            options[17]=atoi(argv[i+1]);
+            i+=2;
         }else if(!strcmp(argv[i],"--dim")){
             dim[0]=atoi(argv[i+1]);
 	dim[1]=atoi(argv[i+2]);
@@ -100,8 +108,9 @@ extern double TOL_EQ_CONST;
 extern double TOL_NEQ_CONST;
 bool InfeasibleAvaliation;
 
-using namespace std;
 int main(int argc, char *argv[]){
+  
+  /*
       if(argc<2){
           srand(8990192031);
           InputFunction *function=new InputFunction("funcSMD1",3,2,2,0);
@@ -115,7 +124,7 @@ int main(int argc, char *argv[]){
          // DifferentialEvolution::initPopulationNelderMeadMethod(decoder,penalty,popSize);   //FALTA FINALIZAR
           
           //DifferentialEvolution::improveInitSet(popSize,25, 0.53,0.23);
-          DifferentialEvolution::improveInitSetSimilarity(popSize,25, 0.53,0.23,2,0.6,2,0);
+          DifferentialEvolution::improveInitSetSimilarity(popSize,25, 0.53,0.23,2,0.6,2,0,20);
 
           for(int i=0;i<50000 && function->getUPLevelCalls()<6000;i++){      
 	//    DifferentialEvolution::mutatePopulationBestBounded(0.8,0.8);
@@ -146,7 +155,7 @@ int main(int argc, char *argv[]){
 */
 	//    DifferentialEvolution::recombinePopulation(0.9);	   
 //	    	DifferentialEvolution::recombinePopulationExp();
-	    	DifferentialEvolution::selectPopulation();
+	    	/*DifferentialEvolution::selectPopulation();
           }
 	    
           if (DifferentialEvolution::best!=NULL){ 
@@ -166,33 +175,59 @@ int main(int argc, char *argv[]){
 
 
 
-      }else{
+      }else{*/
 
+          out.open("exec",ios::app); // o arquivo que será criado;
 
           double *options=new double[COUNTPARAMETERS];
           for(int i=0;i<COUNTPARAMETERS;i++)options[i]=-1;
 
           long int seed=911123193131;
+          //long int seed=time(NULL);
           char *file;
           int dim[4]={-1,-1,-1,-1};
           
+       //   int dim[4]={0,0,3,0};
+          
           
           parseOptions(options,dim,argc,argv,&file,&seed);
+
+          out<<file<<"\t";
+          
+          for(int i=0;i<COUNTPARAMETERS;i++) out<<options[i]<<"\t";
+
+          out<<"\n";
+          
           for(int i=0;i<COUNTPARAMETERS;i++){
 	        if(options[i]==-1)options[i]=defaultParameters[i];
           }
 
+          
+          
+          
+       /*   out<<file;
+          out<<dim[2]<<endl;  // saida de uma variavel
+          out.close(); // nã oesqueça de fechar...*/
+          
           srand(seed);
           
           InputFunction *function;
+          
+         
           if(dim[0]<0)
 	function=new InputFunction(file);
           else
 	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
           
+         /*
+          if(!strstr(file,"SMD"))
+	function=new InputFunction(file);
+          else
+	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
+          */
 
           SolutionDecoder *decoder=new LemkeLW();
-          PenaltySolution *penalty=new APMDEBPenalty();
+          PenaltySolution *penalty=new DEBPenalty();
           decoder->initInstance(function);
 
           TOL_EQ_CONST=1e-4;
@@ -200,15 +235,17 @@ int main(int argc, char *argv[]){
           
           InfeasibleAvaliation=0;
           
+          DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[1]);  
+          
           //DifferentialEvolution::initPopulation(decoder,penalty,options[0]);  
           
-          DifferentialEvolution::initPopulation(decoder,penalty,options[1]);  //Versão sem aprimoramento inicial
+       //   DifferentialEvolution::initPopulation(decoder,penalty,options[1]);  //Versão sem aprimoramento inicial
           
           //DifferentialEvolution::initPopulationNelderMeadMethod(decoder,penalty,options[0]);
           
           
-       //   DifferentialEvolution::improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11]);          
-        //  DifferentialEvolution::improveInitSetDispersion(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11]);
+          //DifferentialEvolution::improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);          
+        //  DifferentialEvolution::improveInitSetDispersion(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);
 
          // TOL_EQ_CONST=1e-4;
 //          // TOL_NEQ_CONST=1e-4;
@@ -217,7 +254,8 @@ int main(int argc, char *argv[]){
                     
 //          DifferentialEvolution::decodifyPopulation();
           
-          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<1e7;i++){      
+          //cout<<"parte 2\t"<<function->getUPLevelCalls()<<"\t"<<function->getLWLevelSimplexCalls()<<"\n";
+          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){      
 	  /*
 	          if(function->getUPLevelCalls()>1500){
 		  //TOL_EQ_CONST=1e-4;
@@ -235,38 +273,41 @@ int main(int argc, char *argv[]){
 	
 		double rd=fRand2(0,options[4]);	
 
-	
+	/*
 		if(options[13]==1)
-		  DifferentialEvolution::mutatePopulation_TargetToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_TargetToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
 		else if(options[13]==2)
-		  DifferentialEvolution::mutatePopulation_TargetToRand_1(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_TargetToRand_1(options[3]+rd,options[3]+rd,0,options[1]);
 		else if(options[13]==3)
-		  DifferentialEvolution::mutatePopulation_Target_1(options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Target_1(options[3]+rd,0,options[1]);
 		else if(options[13]==4)
-		  DifferentialEvolution::mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
 		else if(options[13]==5)
-		  DifferentialEvolution::mutatePopulation_Rand_1(options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Rand_1(options[3]+rd,0,options[1]);
 		else if(options[13]==6)
-		  DifferentialEvolution::mutatePopulation_Rand_2(options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Rand_2(options[3]+rd,0,options[1]);
 		else if(options[13]==7)  
-		  DifferentialEvolution::mutatePopulation_Target_2(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Target_2(options[3]+rd,options[3]+rd,0,options[1]);
 		
 		//versão bounded 
 		else if(options[13]==8)
-		  DifferentialEvolution::mutatePopulation_TargetToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]); 
+		  DE->mutatePopulation_TargetToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]); 
 		else if(options[13]==9)
-		  DifferentialEvolution::mutatePopulation_TargetToRand_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_TargetToRand_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
 		else if(options[13]==10)
-		  DifferentialEvolution::mutatePopulation_Target_1_Bounded(options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Target_1_Bounded(options[3]+rd,0,options[1]);
 		else if(options[13]==11)
-		  DifferentialEvolution::mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
 		else if(options[13]==12)
-		  DifferentialEvolution::mutatePopulation_Rand_1_Bounded(options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Rand_1_Bounded(options[3]+rd,0,options[1]);
 		else if(options[13]==13)
-		  DifferentialEvolution::mutatePopulation_Rand_2_Bounded(options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Rand_2_Bounded(options[3]+rd,0,options[1]);
 		else if(options[13]==14)  
-		  DifferentialEvolution::mutatePopulation_Target_2_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
+		  DE->mutatePopulation_Target_2_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
+	*/
 		
+		DE->mutatePopulation_TargetToRand_1_Wall(options[3]+rd,options[3]+rd,0,options[1]);
+
 	/*
 		if(options[13]==1)
 		  DifferentialEvolution::mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
@@ -284,20 +325,20 @@ int main(int argc, char *argv[]){
 	
 	
 		if(options[12]==1)
-		  DifferentialEvolution::mutatePopulation_BestToRand_1(options[9],options[10],options[1],options[1]+options[11]);
+		  DE->mutatePopulation_BestToRand_1(options[9],options[10],options[1],options[1]+options[11]);
 		if(options[12]==2)
-		  DifferentialEvolution::mutatePopulation_Best_1(options[9],options[1],options[1]+options[11]);
+		  DE->mutatePopulation_Best_1(options[9],options[1],options[1]+options[11]);
 		if(options[12]==3)
-		  DifferentialEvolution::mutatePopulation_Best_2(options[9],options[10],options[1],options[1]+options[11]);
+		  DE->mutatePopulation_Best_2(options[9],options[10],options[1],options[1]+options[11]);
 
 		if(options[14]==1)
-		      DifferentialEvolution::recombinePopulationSwap(0,options[1]);
+		      DE->recombinePopulationSwap(0,options[1]);
 		else if(options[14]==2)
-		      DifferentialEvolution::recombinePopulation(options[7],0,options[1]);
+		      DE->recombinePopulation(options[7],0,options[1]);
 		else if(options[14]==4)
-		      DifferentialEvolution::recombinePopulationExp(options[7],0,options[1]);
+		      DE->recombinePopulationExp(options[7],0,options[1]);
 		
-		DifferentialEvolution::selectPopulation();
+		DE->selectPopulation();
 		/*
 		if(bestTurn->diffMaxSolution(DifferentialEvolution::best)>1e-4){
 		    cout<<"it "<<i<<"\n";
@@ -315,16 +356,19 @@ int main(int argc, char *argv[]){
 		    cout<<"\n\n";
 		  
 		}*/
-		
+		//cout<<function->getLWLevelSimplexCalls()<<"\t"<<function->getUPLevelCalls()<<"\n"<<*(DE->best);
           }
 	    
 
-          if (DifferentialEvolution::best!=NULL && DifferentialEvolution::best->feasible){ 
-		    cout<<DifferentialEvolution::best->upLevelFunction<<"\t"<<DifferentialEvolution::UPLevelCallsBest<<"\t"<<DifferentialEvolution::LWLevelSimplexCallsBest<<"\t"<<function->getLWLevelFunction(DifferentialEvolution::best->vectorCharacters,DifferentialEvolution::best->vectorCharacters+function->getDimensionUP());
+          if (DE->best!=NULL && DE->best->feasible){ 
+		    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
 		    cout<<"\t(";
-		    for(int j=0;j<DifferentialEvolution::best->sizeVec-1;j++)
-		        cout<<DifferentialEvolution::best->vectorCharacters[j]<<",";
-		    cout<<DifferentialEvolution::best->vectorCharacters[DifferentialEvolution::best->sizeVec-1]<<")";
+		    for(int j=0;j<DE->best->sizeVec-1;j++)
+		        cout<<DE->best->vectorCharacters[j]<<",";
+		    cout<<DE->best->vectorCharacters[DE->best->sizeVec-1]<<")";
+		    
+		    
+		    out<<DE->best->upLevelFunction<<endl;
 		    
 		    		//cout<<*DifferentialEvolution::best;
 		//		cout<<"UP Level \t"<<function->getUPLevelFunction(DifferentialEvolution::best->vectorCharacters,DifferentialEvolution::best->vectorCharacters+function->getDimensionUP())<<"\n";
@@ -332,6 +376,8 @@ int main(int argc, char *argv[]){
 
           }else{
 		cout<<PENALTY_VALUE;
+		
+		out<<PENALTY_VALUE<<endl;
 		//cout<<*DifferentialEvolution::best;
 		//		cout<<"UP Level \t"<<function->getUPLevelFunction(DifferentialEvolution::best->vectorCharacters,DifferentialEvolution::best->vectorCharacters+function->getDimensionUP())<<"\n";
 		//cout<<"Lower Level \t"<<function->getLWLevelFunction(DifferentialEvolution::best->vectorCharacters,DifferentialEvolution::best->vectorCharacters+function->getDimensionUP())<<"\n";
@@ -339,13 +385,18 @@ int main(int argc, char *argv[]){
 //		  cout<<"no feasible solution";
           }
 
-          DifferentialEvolution::clearPopulation();
+          DE->clearPopulation();
+          
+          delete DE;
         
           delete function;
           delete decoder;
           delete penalty;
+          
+          
+          out.close();
         
-      }
+    //  }
       
       
       return 1;

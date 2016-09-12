@@ -1,6 +1,6 @@
 #ifndef LISTFUNCTIONSMD_INCLUDED
 #define LISTFUNCTIONSMD_INCLUDED  
-#define DEFINEfunctionListSizeSMD 8
+#define DEFINEfunctionListSizeSMD 9
 #define EPSILON 1e-16
 #include <float.h>
 #include <cmath>
@@ -425,9 +425,9 @@ inline int funcSMD6SimplexTableauKKT(double x[], double y[], double tableau[]){ 
         
         
         if(i==inputQ+inputS-1)
-          tableau[i]=-(2*(y[i]-y[i-1]));
+          tableau[i*(2*(inputQ+inputS+inputR)+1) + 2*(inputQ+inputS+inputR)]=-(2*(y[i]-y[i-1]));
         else if(i==inputQ)
-          tableau[i]=-(2*(y[i+1]-y[i])*(-1));
+          tableau[i*(2*(inputQ+inputS+inputR)+1) + 2*(inputQ+inputS+inputR)]=-(2*(y[i+1]-y[i])*(-1));
         else
           tableau[i*(2*(inputQ+inputS+inputR)+1) + 2*(inputQ+inputS+inputR)]=-(2*(y[i+1]-y[i])*(-1) + 2*(y[i]-y[i-1]));
         
@@ -550,6 +550,233 @@ inline int setFuncSMD6(FunctionSMD **ret){
     
     return 1;
 }
+
+
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Função SMD1 MOD*/
+
+inline double funcSMD11UP(double x[], double y[]){  //F(x,y)
+  double F1=0;
+  
+  for(int i=0;i<inputP;i++) F1+=x[i]*x[i];
+  
+  double F2=0;
+  
+  for(int i=0;i<inputQ;i++) F2+=y[i]*y[i];
+  
+  F2-=F2;
+  
+  double F3=0;
+  for(int i=0;i<inputR;i++) F3+=(x[i+inputP]*x[i+inputP])-(x[i+inputP]-log(y[i+inputQ]))*(x[i+inputP]-log(y[i+inputQ]));
+  
+  
+  return F1+F2+F3;
+}
+
+inline double funcSMD11LW(double x[], double y[]){  //f(x,y)
+  double f1=0;
+  
+  for(int i=0;i<inputP;i++) f1+=x[i]*x[i];
+  
+  double f2=0;
+  
+  for(int i=0;i<inputQ;i++) f2+=y[i]*y[i];
+  
+  double f3=0;
+  for(int i=0;i<inputR;i++) f3+=(x[i+inputP]-log(y[i+inputQ]))*(x[i+inputP]-log(y[i+inputQ]));//MODIFICADO
+  
+  
+  return f1+f2+f3;
+}
+
+inline int funcSMD11CTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcSMD11CTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0  
+  for(int i=0;i<inputP;i++){
+      constraintValuesListReturn[2*i]=-x[i]-5;
+      constraintValuesListReturn[2*i+1]=x[i]-10;
+  }
+  
+  for(int i=inputP;i<inputP+inputR;i++){
+      constraintValuesListReturn[2*i]=-x[i]-1;
+      constraintValuesListReturn[2*i+1]=x[i]-1;
+  }
+    
+  for(int i=0;i<inputR;i++){
+      constraintValuesListReturn[2*(inputP+inputR) + i]=1.0/sqrt(inputR)+log(y[i+inputQ])-x[i+inputP];
+  }
+    
+  return 1;
+}
+
+inline int funcSMD11CTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcSMD11CTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0    
+    for(int i=0;i<inputQ;i++){
+        constraintValuesListReturn[2*i]=-y[i]-5;
+        constraintValuesListReturn[2*i+1]=y[i]-10;
+    }
+    
+    for(int i=inputQ;i<inputQ+inputR;i++){
+        constraintValuesListReturn[2*i]=-y[i]+1/EulerConstant; 
+        constraintValuesListReturn[2*i+1]=y[i]-EulerConstant; 
+    }
+    
+    constraintValuesListReturn[2*(inputP+inputR)]=1;
+    for(int i=0;i<inputR;i++){
+        constraintValuesListReturn[2*(inputP+inputR)]-=(x[i+inputP]-log(y[i+inputQ]))*(x[i+inputP]-log(y[i+inputQ]));
+    }
+    
+    return 1;
+}
+
+/*
+inline int funcSMD11CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)   
+    for(int i=0;i<inputQ;i++){
+        constraintValuesListReturn[i]=2*y[i];
+       
+        constraintValuesListReturn[i]-=dualNeq[2*i];
+        constraintValuesListReturn[i]+=dualNeq[2*i+1];
+    }
+  
+  
+    for(int i=inputQ;i<inputQ+inputR;i++){
+        
+        constraintValuesListReturn[i]=2*(y[i]-tan(x[i-inputQ+inputP]));
+       
+        constraintValuesListReturn[i]-=dualNeq[2*i];
+        constraintValuesListReturn[i]+=dualNeq[2*i+1];
+    }
+    
+    return 1;						
+}
+
+inline int funcSMD11SimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = - grad(f(x,y))
+    for(int i=0;i<inputQ;i++){
+      
+        for(int j=0;j<2*(inputQ+inputR);j++) tableau[i*(2*(inputQ+inputR)+1)+j]=0;
+        
+        tableau[i*(2*(inputQ+inputR)+1) + 2*i]=-1;
+        tableau[i*(2*(inputQ+inputR)+1) + 2*i + 1]=1;
+        
+        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-2*y[i];
+        
+    }
+    
+    for(int i=inputQ;i<inputQ+inputR;i++){
+      
+        for(int j=0;j<2*(inputQ+inputR);j++) tableau[i*(2*(inputQ+inputR)+1)+j]=0;
+        
+        tableau[i*(2*(inputQ+inputR)+1) + 2*i]=-1;
+        tableau[i*(2*(inputQ+inputR)+1) + 2*i + 1]=1;
+        
+        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-tan(x[i-inputQ+inputP])));
+        
+    }
+
+    return 1;
+}
+
+
+inline int funcSMD11LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+								 					//(f)  - (-A  0 )(l1)= (-b)  
+     
+      for(int i=0;i<inputQ+inputR;i++){
+      
+          for(int j=0;j<(inputQ+inputR);j++) matrixQ[i*(inputQ+inputR)+j]=0;
+          
+          matrixQ[i*(inputQ+inputR) + i]=2;
+      }  
+
+      
+      for(int i=0;i<(inputQ+inputR);i++){
+        for(int j=0;j<inputQ+inputR;j++){
+	    matrixA[2*i*(inputQ+inputR)+j]=0;
+	    matrixA[(2*i+1)*(inputQ+inputR)+j]=0;
+	}
+	matrixA[2*i*(inputQ+inputR) + i]=-1;
+	matrixA[(2*i+1)*(inputQ+inputR) + i]=1;
+      }
+      
+      for(int i=0;i<inputQ;i++){
+          matrixCB[i]=0; 
+      }
+    
+      for(int i=inputQ;i<inputQ+inputR;i++){
+          matrixCB[i]=-2*tan(x[i-inputQ+inputP]); 
+      }
+           
+      for(int i=0;i<(inputQ+inputR);i++){           
+          matrixCB[2*i+inputQ+inputR]=5; 
+          matrixCB[2*i+inputQ+inputR +1]=10; 
+      }
+
+
+      
+      return 1;
+}*/
+
+
+inline int setFuncSMD11(FunctionSMD **ret){
+    FunctionSMD *func=(FunctionSMD *)malloc(sizeof(FunctionSMD));
+  
+    func->funcUP=funcSMD11UP;
+    func->funcLW=funcSMD11LW;
+    func->funcCTREQUP=funcSMD11CTREQUP;
+    func->funcCTRNEQUP=funcSMD11CTRNEQUP;
+    func->funcCTREQLW=funcSMD11CTREQLW;
+    func->funcCTRNEQLW=funcSMD11CTRNEQLW;
+    //func->funcCTRKKT=funcSMD11CTKKT;
+    func->funcCTRKKT=NULL;
+    func->dimensionUP=inputP+inputR;
+    func->dimensionLW=inputQ+inputR;
+    func->numEqConstrUP=0;
+    func->numNeqConstrUP=2*(inputP+inputR) + inputR;
+    func->numEqConstrLW=0;
+    func->numNeqConstrLW=2*(inputQ+inputR) + 1;
+    
+    double *boundSMD11=new double[2*(func->dimensionUP+func->dimensionLW)];
+    
+    for(int i=0;i<inputP;i++){
+        boundSMD11[2*i]=-5;
+        boundSMD11[2*i+1]=10;
+    }
+
+    for(int i=inputP;i<inputP+inputR;i++){
+        boundSMD11[2*i]=-1;
+        boundSMD11[2*i+1]=1;
+    }
+
+    for(int i=inputP+inputR;i<inputP+inputR+inputQ;i++){
+        boundSMD11[2*i]=-5;
+        boundSMD11[2*i+1]=10;
+    }
+    
+    for(int i=inputP+inputR+inputQ;i<func->dimensionUP+func->dimensionLW;i++){
+        boundSMD11[2*i]=1/EulerConstant;
+        boundSMD11[2*i+1]=EulerConstant;
+    }
+    
+    func->boundsVar=boundSMD11;
+    //func->funcSimplexTableauKKT=funcSMD11SimplexTableauKKT;
+    func->funcSimplexTableauKKT=NULL;
+    //func->funcLemkeMatrix=funcSMD11LemkeMatrix;
+    func->funcLemkeMatrix=NULL;
+    
+    (*ret)=func;
+    
+    return 1;
+}
+
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -773,7 +1000,7 @@ inline double funcSMD2MODUP(double x[], double y[]){  //F(x,y)
   F2=-F2;
   
   double F3=0;
-  for(int i=0;i<inputR;i++) F3+=(x[i+inputP]*x[i+inputP])-(y[i+inputQ]-log(x[i+inputP]+1))*(y[i+inputQ]-log(x[i+inputP]+1)); //MODIFICADO
+  for(int i=0;i<inputR;i++) F3+=(x[i+inputP]-1)*(x[i+inputP]-1)-(y[i+inputQ]-log(x[i+inputP]))*(y[i+inputQ]-log(x[i+inputP])); //MODIFICADO
   
   
   return F1+F2+F3;
@@ -789,7 +1016,7 @@ inline double funcSMD2MODLW(double x[], double y[]){  //f(x,y)
   for(int i=0;i<inputQ;i++) f2+=y[i]*y[i];
   
   double f3=0;
-  for(int i=0;i<inputR;i++) f3+=(y[i+inputQ]-log(x[i+inputP]+1))*(y[i+inputQ]-log(x[i+inputP]+1));
+  for(int i=0;i<inputR;i++) f3+=(y[i+inputQ]-log(x[i+inputP]))*(y[i+inputQ]-log(x[i+inputP]));
   
   
   return f1+f2+f3;
@@ -806,7 +1033,7 @@ inline int funcSMD2MODCTRNEQUP(double x[], double y[], double constraintValuesLi
   }
   
   for(int i=inputP;i<inputP+inputR;i++){
-      constraintValuesListReturn[2*i]=-x[i];//MODIFICADO
+      constraintValuesListReturn[2*i]=-x[i]+1.0/EulerConstant;//MODIFICADO
       constraintValuesListReturn[2*i+1]=x[i]-EulerConstant;//MODIFICADO
   }
     
@@ -844,7 +1071,7 @@ inline int funcSMD2MODCTKKT(double x[], double y[], double dualEq[], double  dua
   
     for(int i=inputQ;i<inputQ+inputR;i++){
         
-        constraintValuesListReturn[i]=2*(y[i]-log(x[i-inputQ+inputP]+1));
+        constraintValuesListReturn[i]=2*(y[i]-log(x[i-inputQ+inputP]));
        
         constraintValuesListReturn[i]-=dualNeq[2*i];
         constraintValuesListReturn[i]+=dualNeq[2*i+1];
@@ -872,7 +1099,7 @@ inline int funcSMD2MODSimplexTableauKKT(double x[], double y[], double tableau[]
         tableau[i*(2*(inputQ+inputR)+1) + 2*i]=-1;
         tableau[i*(2*(inputQ+inputR)+1) + 2*i + 1]=1;
         
-        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-log(x[i-inputQ+inputP]+1)));
+        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-log(x[i-inputQ+inputP])));
         
     }
 
@@ -905,7 +1132,7 @@ inline int funcSMD2MODLemkeMatrix(double x[], double matrixQ[], double matrixA[]
       }
     
       for(int i=inputQ;i<inputQ+inputR;i++){
-          matrixCB[i]=-2*log(x[i-inputQ+inputP]+1); 
+          matrixCB[i]=-2*log(x[i-inputQ+inputP]); 
       }
            
       for(int i=0;i<(inputQ);i++){           
@@ -948,7 +1175,7 @@ inline int setFuncSMD2MOD(FunctionSMD **ret){
     }
 
     for(int i=inputP;i<inputP+inputR;i++){
-        boundSMD2MOD[2*i]=0;
+        boundSMD2MOD[2*i]=1.0/EulerConstant;
         boundSMD2MOD[2*i+1]=EulerConstant;
     }
 
@@ -1058,7 +1285,7 @@ inline int funcSMD3MODCTKKT(double x[], double y[], double dualEq[], double  dua
   
     for(int i=inputQ;i<inputQ+inputR;i++){
         
-        constraintValuesListReturn[i]=2*(y[i]-tan(sqrt(x[i+i-inputQ+inputP])));
+        constraintValuesListReturn[i]=2*(y[i]-tan(sqrt(x[i-inputQ+inputP])));
        
         constraintValuesListReturn[i]-=dualNeq[2*i];
         constraintValuesListReturn[i]+=dualNeq[2*i+1];
@@ -1086,7 +1313,7 @@ inline int funcSMD3MODSimplexTableauKKT(double x[], double y[], double tableau[]
         tableau[i*(2*(inputQ+inputR)+1) + 2*i]=-1;
         tableau[i*(2*(inputQ+inputR)+1) + 2*i + 1]=1;
         
-        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-tan(sqrt(x[i+i-inputQ+inputP]))));
+        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-tan(sqrt(x[i-inputQ+inputP]))));
         
     }
 
@@ -1119,7 +1346,7 @@ inline int funcSMD3MODLemkeMatrix(double x[], double matrixQ[], double matrixA[]
       }
     
       for(int i=inputQ;i<inputQ+inputR;i++){
-          matrixCB[i]=-2*tan(sqrt(x[i+i-inputQ+inputP])); 
+          matrixCB[i]=-2*tan(sqrt(x[i-inputQ+inputP])); 
       }
            
       for(int i=0;i<(inputQ);i++){           
@@ -1274,7 +1501,7 @@ inline int funcSMD4MODCTKKT(double x[], double y[], double dualEq[], double  dua
   
     for(int i=inputQ;i<inputQ+inputR;i++){
         
-        constraintValuesListReturn[i]=2*(y[i]-log(1+x[i+inputP]));
+        constraintValuesListReturn[i]=2*(y[i]-log(1+x[i-inputQ+inputP]));
        
         constraintValuesListReturn[i]-=dualNeq[2*i];
         constraintValuesListReturn[i]+=dualNeq[2*i+1];
@@ -1302,7 +1529,7 @@ inline int funcSMD4MODSimplexTableauKKT(double x[], double y[], double tableau[]
         tableau[i*(2*(inputQ+inputR)+1) + 2*i]=-1;
         tableau[i*(2*(inputQ+inputR)+1) + 2*i + 1]=1;
         
-        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-log(1+x[i+inputP])));
+        tableau[i*(2*(inputQ+inputR)+1) + 2*(inputQ+inputR)]=-(2*(y[i]-log(1+x[i-inputQ+inputP])));
         
     }
 
@@ -1335,7 +1562,7 @@ inline int funcSMD4MODLemkeMatrix(double x[], double matrixQ[], double matrixA[]
       }
     
       for(int i=inputQ;i<inputQ+inputR;i++){
-          matrixCB[i]=-2*log(1+x[i+inputP]); 
+          matrixCB[i]=-2*log(1+x[i-inputQ+inputP]); 
       }
            
       for(int i=0;i<(inputQ);i++){           
@@ -1583,7 +1810,9 @@ inline int funcSMD5MODLemkeMatrix(double x[], double matrixQ[], double matrixA[]
       for(int i=0;i<inputQ-1;i++){
           matrixCB[i]=-2; 
       }
-      matrixCB[inputQ-1]=0; 
+      
+      if(inputQ>0)
+          matrixCB[inputQ-1]=0; 
 
       for(int i=inputQ;i<inputQ+inputR;i++){
           matrixCB[i]=-2*(sqrt(x[i-inputQ+inputP])); 
@@ -1889,6 +2118,7 @@ const FunctionSMD listFunctionSMD[DEFINEfunctionListSizeSMD]={{5,4,0,10,0,8,boun
 const FunctionSMDIndex listFunctionSMD[DEFINEfunctionListSizeSMD]={{NULL,"funcSMD1"},
 					       {NULL,"funcSMD2"},
 					       {setFuncSMD6,"funcSMD6"},
+					       {setFuncSMD11,"funcSMD11"},
 					       {setFuncSMD1MOD,"funcSMD1MOD"},
 					       {setFuncSMD2MOD,"funcSMD2MOD"},
 					       {setFuncSMD3MOD,"funcSMD3MOD"},
