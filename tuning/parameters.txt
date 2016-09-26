@@ -26,15 +26,15 @@
 ##    condition is satisfied, FALSE otherwise.
 
 # 1:           			 	2:          	3: 		4:     		 5:
-PopulationSearch       			"--populationSearch "	i   	(150, 300) 
+PopulationSearch       			"--populationSearch "	i   	(100, 300) 
 PopulationImprov       			"--populationImprov "	i   	(15, 80) 
 mutImprov1	       			"--mutImprov1 "	r           (0, 1)	
-mutImprov2   			"--mutImprov2 "       	r   	(0, 1)	
+#mutImprov2   			"--mutImprov2 "       	r   	(0, 1)	
 #mutBest1    			"--mutBest1 "	r   	(0, 1)
 #mutBest2				"--mutBest2 "	r   	(0, 1)	| mutOptBest %in% c(1,3)
 #mutBestSize			"--mutBestSize "	i	(0,15)
 mutFind1   				"--mutFind1 "       	r   	(0, 1)
-mutFind2   				"--mutFind2 "       	r   	(0, 1)
+#mutFind2   				"--mutFind2 "       	r   	(0, 1)
 mutOptSearch			"--mutOptSearch "	i	(1,2)
 #mutOptBest				"--mutOptBest "	i	(1,3)
 mutOptImprov			"--mutOptImprov "	i	(1,7)

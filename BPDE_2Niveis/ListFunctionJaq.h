@@ -183,7 +183,9 @@ inline int funcJ2LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundJ2[8]={-1e3,1e3,-1e3,15,0,10,0,10};  //Bounds x, y
+//const double boundJ2[8]={-1e2,1e2,-1e2,15,0,10,0,10};  //Bounds x, y
+const double boundJ2[8]={0,20,5,15,0,10,0,10};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -326,7 +328,8 @@ inline int funcJ3LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundJ3[10]={0,1e3,0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ3[10]={0,1e2,0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundJ3[10]={0,0.75,0,1.5,0,1e3,0,1.5,0,2};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -396,7 +399,9 @@ inline int funcJ4SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
-const double boundJ4[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ4[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundJ4[8]={0,2,0,2,0,5.5,0,8};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -616,7 +621,9 @@ inline int funcJ6LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
 
 
 
-const double boundJ6[8]={0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ6[8]={0,1e2,0,1e2};  //Bounds x, y
+const double boundJ6[8]={0,5,0,4.5};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -726,7 +733,9 @@ inline int funcJ7LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
 }
 
 
-const double boundJ7[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ7[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundJ7[8]={0,2,0,2,0,6,0,4};  //Bounds x, y Aproximadamente
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -787,7 +796,9 @@ inline int funcJ8SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	return 1;
 }
 
-const double boundJ8[4]={0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ8[4]={0,1e2,0,1e2};  //Bounds x, y
+const double boundJ8[4]={0,16,0,14};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -901,7 +912,9 @@ inline int funcJ9LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundJ9[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ9[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundJ9[6]={0,2,0,2,0,1};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -967,7 +980,7 @@ inline int funcJ10SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	return 1;
 }
 
-const double boundJ10[8]={0,1e3,0,1e3,0.5,1.5,0.5,1.5};  //Bounds x, y
+const double boundJ10[8]={0,1e2,0,1e2,0.5,1.5,0.5,1.5};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1021,7 +1034,9 @@ inline int funcJ11SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	return 1;
 }
 
-const double boundJ11[4]={0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ11[4]={0,1e2,0,1e2};  //Bounds x, y
+const double boundJ11[4]={0,12.5,0,25};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1079,7 +1094,8 @@ inline int funcJ12SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	return 1;
 }
 
-const double boundJ12[4]={0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ12[4]={0,1e2,0,1e2};  //Bounds x, y
+const double boundJ12[4]={0,4,0,6};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1137,7 +1153,8 @@ inline int funcJ13SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	return 1;
 }
 
-const double boundJ13[4]={0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ13[4]={0,1e2,0,1e2};  //Bounds x, y
+const double boundJ13[4]={0,7.2,0,3.6};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1203,7 +1220,7 @@ inline int funcJ14LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundJ14[4]={0,1e3,0,1e3};  //Bounds x, y
+const double boundJ14[4]={0,1e2,0,1e2};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1383,7 +1400,9 @@ inline int funcJ16SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	return 1;
 }
 
-const double boundJ16[4]={0,8,0,1e3};  //Bounds x, y
+//const double boundJ16[4]={0,8,0,1e2};  //Bounds x, y
+const double boundJ16[4]={0,8,0,5.8};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1439,7 +1458,9 @@ inline int funcJ17SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	return 1;
 }
 
-const double boundJ17[4]={0,8,0,1e3};  //Bounds x, y
+//const double boundJ17[4]={0,8,0,1e2};  //Bounds x, y
+const double boundJ17[4]={0,8,0,5.8};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1471,7 +1492,7 @@ inline int funcJ18CTRNEQLW(double x[], double y[], double constraintValuesListRe
   constraintValuesListReturn[0]=x[0]-2*y[0]-4;
   constraintValuesListReturn[1]=2*x[0]-y[0]-24;
   constraintValuesListReturn[2]=3*x[0]+4*y[0]-96;
-  constraintValuesListReturn[3]=x[0]+4*y[0]-126;
+  constraintValuesListReturn[3]=x[0]+7*y[0]-126;//constraintValuesListReturn[3]=x[0]+4*y[0]-126;
   constraintValuesListReturn[4]=-4*x[0]+5*y[0]-65;
   constraintValuesListReturn[5]=-(x[0]+4*y[0]-8);
   constraintValuesListReturn[6]=-x[0];
@@ -1513,7 +1534,7 @@ inline int funcJ18LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       
       matrixA[2]=4;
       
-      matrixA[3]=4;
+      matrixA[3]=7;//matrixA[3]=4;
       
       matrixA[4]=5;
       
@@ -1539,8 +1560,8 @@ inline int funcJ18LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-//const double boundJ18[4]={-1e3,0,-1e3,0};  //Bounds x, y
-const double boundJ18[4]={0,1e3,0,1e3};  //Bounds x, y
+//const double boundJ18[4]={-1e2,0,-1e2,0};  //Bounds x, y
+const double boundJ18[4]={0,18,0,18};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 

@@ -10,6 +10,6 @@
 ##
 ## Examples of valid logical operators are: ==  !=  >=  <=  >  <  &  |  !  %in%
 
-mutImprov1+mutImprov2>1
+#mutImprov1+mutImprov2>1
 
 #mutFind1+mutFind2>1

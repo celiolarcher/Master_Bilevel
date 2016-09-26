@@ -1,7 +1,7 @@
 flag=-O2
 
 all: BPDE_2Niveis
-BPDE_2Niveis: InputFunction.o Solution.o DifferentialEvolution.o  LagrangeMultp.o LagrangeMultpSimplex.o LagrangeMultpSmooth.o APMPenalty.o APMDEBPenalty.o DEBPenalty.o LemkeLW.o LemkeLWFillSolution.o DELowerLevel.o main.o 
+BPDE_2Niveis: InputFunction.o Solution.o DifferentialEvolution.o LagrangeMultp.o LagrangeMultpSimplex.o LagrangeMultpSmooth.o APMPenalty.o APMDEBPenalty.o DEBPenalty.o LemkeLW.o LemkeLWFillSolution.o DELowerLevel.o main.o 
 	g++ -o BPDE_2Niveis main.o Solution.o InputFunction.o LagrangeMultp.o LagrangeMultpSimplex.o LagrangeMultpSmooth.o DifferentialEvolution.o APMPenalty.o APMDEBPenalty.o LemkeLW.o LemkeLWFillSolution.o DELowerLevel.o DEBPenalty.o  $(flag)
 
 Solution.o: Solution.cpp Solution.h 
@@ -12,7 +12,7 @@ InputFunction.o: InputFunction.cpp InputFunction.h ListFunction.h ListFunctionSM
 
 DifferentialEvolution.o: DifferentialEvolution.cpp DifferentialEvolution.h
 	g++ -c DifferentialEvolution.cpp $(flag)
-
+	
 main.o: main.cpp DefaultParameters.h
 	g++ -c main.cpp $(flag)
 

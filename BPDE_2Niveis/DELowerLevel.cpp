@@ -78,9 +78,14 @@ extern bool InfeasibleAvaliation;
 	}
 	
 	for(int i=0;i<100;i++){
-	        DELW->mutatePopulation_TargetToRand_1_Wall(0.7,0.7,0,30);
-	        DELW->recombinePopulation(0.9,0,30);
-	        DELW->selectPopulation();
+	    for(int p=0;p<30;p++)
+	        DELW->mutatePopulation_TargetToRand_1_Wall(0.7,0.7,p);
+	    
+	    for(int p=0;p<30;p++)
+	        DELW->recombinePopulation(0.9,p);
+	    
+	    for(int p=0;p<30;p++)
+	        DELW->selectPopulation(p);
 	}
 	for(int j=this->LW->editBegin;j<this->LW->editBegin+this->LW->editSize;j++)sol->vectorCharacters[j]=0;
 

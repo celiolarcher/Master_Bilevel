@@ -185,9 +185,9 @@ int main(int argc, char *argv[]){
           long int seed=911123193131;
           //long int seed=time(NULL);
           char *file;
-          int dim[4]={-1,-1,-1,-1};
+      //    int dim[4]={-1,-1,-1,-1};
           
-       //   int dim[4]={0,0,3,0};
+          int dim[4]={0,0,5,0};
           
           
           parseOptions(options,dim,argc,argv,&file,&seed);
@@ -213,21 +213,21 @@ int main(int argc, char *argv[]){
           
           InputFunction *function;
           
-         
+        /* 
           if(dim[0]<0)
 	function=new InputFunction(file);
           else
 	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
-          
-         /*
+          */
+         
           if(!strstr(file,"SMD"))
 	function=new InputFunction(file);
           else
 	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
-          */
+          
 
           SolutionDecoder *decoder=new LemkeLW();
-          PenaltySolution *penalty=new DEBPenalty();
+          PenaltySolution *penalty=new APMDEBPenalty();
           decoder->initInstance(function);
 
           TOL_EQ_CONST=1e-4;
@@ -235,17 +235,12 @@ int main(int argc, char *argv[]){
           
           InfeasibleAvaliation=0;
           
-          DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[1]);  
+	//  DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[1]);
+	  
+	  DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[0]);  
+	  DE->improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);          
+	//  DE->improveInitSetDispersion(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);
           
-          //DifferentialEvolution::initPopulation(decoder,penalty,options[0]);  
-          
-       //   DifferentialEvolution::initPopulation(decoder,penalty,options[1]);  //Versão sem aprimoramento inicial
-          
-          //DifferentialEvolution::initPopulationNelderMeadMethod(decoder,penalty,options[0]);
-          
-          
-          //DifferentialEvolution::improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);          
-        //  DifferentialEvolution::improveInitSetDispersion(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);
 
          // TOL_EQ_CONST=1e-4;
 //          // TOL_NEQ_CONST=1e-4;
@@ -253,92 +248,86 @@ int main(int argc, char *argv[]){
          // Solution *bestTurn=DifferentialEvolution::best->clone();
                     
 //          DifferentialEvolution::decodifyPopulation();
-          
-          //cout<<"parte 2\t"<<function->getUPLevelCalls()<<"\t"<<function->getLWLevelSimplexCalls()<<"\n";
-          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){      
-	  /*
-	          if(function->getUPLevelCalls()>1500){
-		  //TOL_EQ_CONST=1e-4;
-		  TOL_NEQ_CONST=1e-4;
-		  DifferentialEvolution::decodifyPopulation();
-	          }
-	
-	/*
-	          if(function->getUPLevelCalls()>2500){
-		  TOL_EQ_CONST=1e-4;
-		  TOL_NEQ_CONST=1e-4;
-		  DifferentialEvolution::decodifyPopulation();
-	          }*/
 	          
-	
+          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){      
+
+
 		double rd=fRand2(0,options[4]);	
+	          
+		for(int p=0;p<options[1];p++){
 
-	/*
-		if(options[13]==1)
-		  DE->mutatePopulation_TargetToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
-		else if(options[13]==2)
-		  DE->mutatePopulation_TargetToRand_1(options[3]+rd,options[3]+rd,0,options[1]);
-		else if(options[13]==3)
-		  DE->mutatePopulation_Target_1(options[3]+rd,0,options[1]);
-		else if(options[13]==4)
-		  DE->mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
-		else if(options[13]==5)
-		  DE->mutatePopulation_Rand_1(options[3]+rd,0,options[1]);
-		else if(options[13]==6)
-		  DE->mutatePopulation_Rand_2(options[3]+rd,0,options[1]);
-		else if(options[13]==7)  
-		  DE->mutatePopulation_Target_2(options[3]+rd,options[3]+rd,0,options[1]);
-		
-		//versão bounded 
-		else if(options[13]==8)
-		  DE->mutatePopulation_TargetToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]); 
-		else if(options[13]==9)
-		  DE->mutatePopulation_TargetToRand_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
-		else if(options[13]==10)
-		  DE->mutatePopulation_Target_1_Bounded(options[3]+rd,0,options[1]);
-		else if(options[13]==11)
-		  DE->mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
-		else if(options[13]==12)
-		  DE->mutatePopulation_Rand_1_Bounded(options[3]+rd,0,options[1]);
-		else if(options[13]==13)
-		  DE->mutatePopulation_Rand_2_Bounded(options[3]+rd,0,options[1]);
-		else if(options[13]==14)  
-		  DE->mutatePopulation_Target_2_Bounded(options[3]+rd,options[3]+rd,0,options[1]);
-	*/
-		
-		DE->mutatePopulation_TargetToRand_1_Wall(options[3]+rd,options[3]+rd,0,options[1]);
+	  
+		  if(options[13]==1)
+		    DE->mutatePopulation_TargetToBest_1(options[3]+rd,options[3]+rd,p);
+		  else if(options[13]==2)
+		    DE->mutatePopulation_TargetToRand_1(options[3]+rd,options[3]+rd,p);
+		  else if(options[13]==3)
+		    DE->mutatePopulation_Target_1(options[3]+rd,p);
+		  else if(options[13]==4)
+		    DE->mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,p);
+		  else if(options[13]==5)
+		    DE->mutatePopulation_Rand_1(options[3]+rd,p);
+		  else if(options[13]==6)
+		    DE->mutatePopulation_Rand_2(options[3]+rd,p);
+		  else if(options[13]==7)  
+		    DE->mutatePopulation_Target_2(options[3]+rd,options[3]+rd,p);
+		  
+		  //versão bounded 
+		  else if(options[13]==8)
+		    DE->mutatePopulation_TargetToBest_1_Bounded(options[3]+rd,options[3]+rd,p); 
+		  else if(options[13]==9)
+		    DE->mutatePopulation_TargetToRand_1_Bounded(options[3]+rd,options[3]+rd,p);
+		  else if(options[13]==10)
+		    DE->mutatePopulation_Target_1_Bounded(options[3]+rd,p);
+		  else if(options[13]==11)
+		    DE->mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3]+rd,p);
+		  else if(options[13]==12)
+		    DE->mutatePopulation_Rand_1_Bounded(options[3]+rd,p);
+		  else if(options[13]==13)
+		    DE->mutatePopulation_Rand_2_Bounded(options[3]+rd,p);
+		  else if(options[13]==14)  
+		    DE->mutatePopulation_Target_2_Bounded(options[3]+rd,options[3]+rd,p);
+	  
+		  
+	//	  DE->mutatePopulation_TargetToRand_1_Wall(options[3]+rd,options[3]+rd,p);
+	  }
+	  /*
+		  if(options[13]==1)
+		    DifferentialEvolution::mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
+		  else if(options[13]==2)
+		    DifferentialEvolution::mutatePopulation_Rand_1(options[3]+rd,0,options[1]);
+		  else if(options[13]==3)
+		    DifferentialEvolution::mutatePopulation_Rand_2(options[3]+rd,0,options[1]);
+		  else if(options[13]==4)
+		    DifferentialEvolution::mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3],0,options[1]);
+		  else if(options[13]==5)
+		    DifferentialEvolution::mutatePopulation_Rand_1_Bounded(options[3]+rd,0,options[1]);
+		  else if(options[13]==6)
+		    DifferentialEvolution::mutatePopulation_Rand_2_Bounded(options[3]+rd,0,options[1]);
+	  */
+	  
+	  /*
+		  if(options[12]==1)
+		    DE->mutatePopulation_BestToRand_1(options[9],options[10],options[1],options[1]+options[11]);
+		  if(options[12]==2)
+		    DE->mutatePopulation_Best_1(options[9],options[1],options[1]+options[11]);
+		  if(options[12]==3)
+		    DE->mutatePopulation_Best_2(options[9],options[10],options[1],options[1]+options[11]);
+*/
+		for(int p=0;p<options[1];p++){
+		  if(options[14]==1)
+			DE->recombinePopulationSwap(p);
+		  else if(options[14]==2)
+			DE->recombinePopulation(options[7],p);
+		  else if(options[14]==4)
+			DE->recombinePopulationExp(options[7],p);
+		}
+		for(int p=0;p<options[1];p++){
 
-	/*
-		if(options[13]==1)
-		  DifferentialEvolution::mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
-		else if(options[13]==2)
-		  DifferentialEvolution::mutatePopulation_Rand_1(options[3]+rd,0,options[1]);
-		else if(options[13]==3)
-		  DifferentialEvolution::mutatePopulation_Rand_2(options[3]+rd,0,options[1]);
-		else if(options[13]==4)
-		  DifferentialEvolution::mutatePopulation_RandToBest_1_Bounded(options[3]+rd,options[3],0,options[1]);
-		else if(options[13]==5)
-		  DifferentialEvolution::mutatePopulation_Rand_1_Bounded(options[3]+rd,0,options[1]);
-		else if(options[13]==6)
-		  DifferentialEvolution::mutatePopulation_Rand_2_Bounded(options[3]+rd,0,options[1]);
-	*/
-	
-	
-		if(options[12]==1)
-		  DE->mutatePopulation_BestToRand_1(options[9],options[10],options[1],options[1]+options[11]);
-		if(options[12]==2)
-		  DE->mutatePopulation_Best_1(options[9],options[1],options[1]+options[11]);
-		if(options[12]==3)
-		  DE->mutatePopulation_Best_2(options[9],options[10],options[1],options[1]+options[11]);
-
-		if(options[14]==1)
-		      DE->recombinePopulationSwap(0,options[1]);
-		else if(options[14]==2)
-		      DE->recombinePopulation(options[7],0,options[1]);
-		else if(options[14]==4)
-		      DE->recombinePopulationExp(options[7],0,options[1]);
-		
-		DE->selectPopulation();
+		    DE->selectPopulation(p);
+				  
+		}
+	  }
 		/*
 		if(bestTurn->diffMaxSolution(DifferentialEvolution::best)>1e-4){
 		    cout<<"it "<<i<<"\n";
@@ -357,7 +346,10 @@ int main(int argc, char *argv[]){
 		  
 		}*/
 		//cout<<function->getLWLevelSimplexCalls()<<"\t"<<function->getUPLevelCalls()<<"\n"<<*(DE->best);
-          }
+        //  }
+	    
+	
+
 	    
 
           if (DE->best!=NULL && DE->best->feasible){ 

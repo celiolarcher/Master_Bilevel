@@ -1,0 +1,53 @@
+maxCalls=6000
+
+    for F in {"funcO6","funcO7","funcO8","funcO9","funcO10","funcO11","funcO1","funcO2","funcO3","funcO4","funcO5","funcJ2","funcJ7","funcB3","funcJ14","funcJ1","funcJ9","funcO16","funcO12","funcO13","funcJ6","funcJ3","funcA7","funcB7","funcB8","funcB9","funcJ15","funcJ18","funcO18","funcO19","funcO20","funcO21"}
+    do
+    	echo $F >> ${1}-${3}.out
+	for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+	do
+	    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F >> ${1}-${3}.out
+	    echo >> ${1}-${3}.out
+	done
+    done
+ 
+#    for F in {"funcSMD6"}
+    F="funcSMD6"
+  #  do
+	for size in {"3 1 2 2","6 2 4 4","9 3 6 6"}#,"12 4 8 8","15 5 10 10","18 6 12 12"}
+	do
+    		echo $F >> ${1}-${3}_SMD.out
+		for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+		do
+		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out
+		    echo >> ${1}-${3}_SMD.out
+		done
+	done
+ #   done
+
+
+
+    for F in {"funcSMD1MOD","funcSMD2MOD","funcSMD3MOD","funcSMD4MOD","funcSMD5MOD"}
+    do
+	for size in {"3 3 2 0","6 6 4 0","9 9 6 0"}#,"12 12 8 0","15 15 10 0","18 18 12 0"}
+	do
+    		echo $F >> ${1}-${3}_SMD.out
+		for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+		do
+		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out
+		    echo >> ${1}-${3}_SMD.out
+		done
+	done
+    done
+
+   for F in {"funcSMDNew1","funcSMDNew2","funcSMDNew3"}
+    do
+	for size in {"0 0 5 0","0 0 10 0","0 0 15 0"}
+	do
+    		echo $F >> ${1}-${3}_SMD.out
+		for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+		do
+		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out
+		    echo >> ${1}-${3}_SMD.out
+		done
+	done
+    done

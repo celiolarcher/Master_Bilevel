@@ -28,39 +28,39 @@ class DifferentialEvolution{
       public: int initPopulationNelderMeadMethod(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop); 
 
       
-      public: int mutatePopulation_Rand_1(double F, int begin, int end);
-      public: int mutatePopulation_Rand_2(double F, int begin, int end);
-      public: int mutatePopulation_RandToBest_1(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_Rand_1_Bounded(double F, int begin, int end);      
-      public: int mutatePopulation_Rand_2_Bounded(double F, int begin, int end);      
-      public: int mutatePopulation_RandToBest_1_Bounded(double F1, double F2, int begin, int end);
+      public: int mutatePopulation_Rand_1(double F, int popElm);
+      public: int mutatePopulation_Rand_2(double F, int popElm);
+      public: int mutatePopulation_RandToBest_1(double F1, double F2, int popElm);
+      public: int mutatePopulation_Rand_1_Bounded(double F, int popElm);      
+      public: int mutatePopulation_Rand_2_Bounded(double F, int popElm);      
+      public: int mutatePopulation_RandToBest_1_Bounded(double F1, double F2, int popElm);
 
       
-      public: int mutatePopulation_TargetToRand_1(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_TargetToBest_1(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_Target_1(double F1, int begin, int end);
-      public: int mutatePopulation_Target_2(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_TargetToRand_1_Bounded(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_TargetToBest_1_Bounded(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_Target_1_Bounded(double F1, int begin, int end);
-      public: int mutatePopulation_Target_2_Bounded(double F1, double F2, int begin, int end);
+      public: int mutatePopulation_TargetToRand_1(double F1, double F2, int popElm);
+      public: int mutatePopulation_TargetToBest_1(double F1, double F2, int popElm);
+      public: int mutatePopulation_Target_1(double F1, int popElm);
+      public: int mutatePopulation_Target_2(double F1, double F2, int popElm);
+      public: int mutatePopulation_TargetToRand_1_Bounded(double F1, double F2, int popElm);
+      public: int mutatePopulation_TargetToBest_1_Bounded(double F1, double F2, int popElm);
+      public: int mutatePopulation_Target_1_Bounded(double F1, int popElm);
+      public: int mutatePopulation_Target_2_Bounded(double F1, double F2, int popElm);
 
-      public: int mutatePopulation_TargetToRand_1_Wall(double F1, double F2, int begin, int end);
+      public: int mutatePopulation_TargetToRand_1_Wall(double F1, double F2, int popElm);
 
       
       
       
-      public: int mutatePopulation_BestToRand_1(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_Best_1(double F1, int begin, int end);
-      public: int mutatePopulation_Best_2(double F1, double F2, int begin, int end);      
-      public: int mutatePopulation_BestToRand_1_Bounded(double F1, double F2, int begin, int end);
-      public: int mutatePopulation_Best_1_Bounded(double F1, int begin, int end);
-      public: int mutatePopulation_Best_2_Bounded(double F1, double F2, int begin, int end);
+      public: int mutatePopulation_BestToRand_1(double F1, double F2, int popElm);
+      public: int mutatePopulation_Best_1(double F1, int popElm);
+      public: int mutatePopulation_Best_2(double F1, double F2, int popElm);      
+      public: int mutatePopulation_BestToRand_1_Bounded(double F1, double F2, int popElm);
+      public: int mutatePopulation_Best_1_Bounded(double F1, int popElm);
+      public: int mutatePopulation_Best_2_Bounded(double F1, double F2, int popElm);
       
-      public: int recombinePopulation(double CR, int begin, int end);
-      public: int recombinePopulationExp(double CR,int begin, int end);
-      public: int recombinePopulationSwap(int begin, int end);
-      public: int selectPopulation();     
+      public: int recombinePopulation(double CR, int popElm);
+      public: int recombinePopulationExp(double CR,int popElm);
+      public: int recombinePopulationSwap(int popElm);
+      public: int selectPopulation(int popElm);     
       
 
       public: int improveInitSet(int sizePopSearch, int sizePopNextStep, double find1, double find2);

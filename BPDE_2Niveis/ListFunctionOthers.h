@@ -121,7 +121,8 @@ inline int funcO1LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
 }
 
 
-const double boundO1[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO1[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO1[8]={0,1e2,0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -221,7 +222,8 @@ inline int funcO2LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
 
 
 
-const double boundO2[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO2[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO2[8]={0,1e2,0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -322,7 +324,8 @@ inline int funcO3LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
 
 
 
-const double boundO3[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO3[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO3[8]={0,1e2,0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -421,7 +424,8 @@ inline int funcO4LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundO4[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO4[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO4[8]={0,1e2,0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -521,7 +525,9 @@ inline int funcO5LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
 }
 
 
-const double boundO5[8]={0,1e3,0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO5[8]={0,1e2,0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO5[8]={0,1e2,0,1e2,0,3,0,3};  //Bounds x, y
+
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -620,7 +626,8 @@ inline int funcO6LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundO6[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO6[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO6[6]={0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -717,7 +724,8 @@ inline int funcO7LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundO7[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO7[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO7[6]={0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -814,7 +822,8 @@ inline int funcO8LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundO8[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO8[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO8[6]={0,1e2,0,3,0,3};  //Bounds x, y
 
 
 
@@ -911,7 +920,7 @@ inline int funcO9LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       return 1;
 }
 
-const double boundO9[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+const double boundO9[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y Sem limitação aparentemente
 
 
 
@@ -1008,7 +1017,7 @@ inline int funcO10LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO10[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+const double boundO10[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y  Sem limitação aparentemente
 
 
 
@@ -1105,7 +1114,8 @@ inline int funcO11LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO11[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO11[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO11[6]={0,20,0,4,0,4};  //Bounds x, y Aproximadamente
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1114,7 +1124,7 @@ const double boundO11[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
 
 //Solving convex quadratic bilevel programming problems using an enumeration
 
-/*Função 2.1*/
+/*Função 2.1 Semelhante ao problema J9*/
 
 inline double funcO12UP(double x[], double y[]){  //F(x,y)  
   return (x[0]-1)*(x[0]-1)+2*y[0]*y[0]-2*x[0];
@@ -1223,7 +1233,8 @@ inline int funcO12LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO12[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+//const double boundO12[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y
+const double boundO12[6]={0,2,0,2,0,1};  //Bounds x, y
 
 
 
@@ -1321,7 +1332,7 @@ inline int funcO13LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO13[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+const double boundO13[8]={0,15,0,15,0,15,0,15};  //Bounds x, y
 
 
 
@@ -1437,7 +1448,7 @@ inline int funcO14LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO14[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+const double boundO14[10]={0,1,0,1,0,1e2,0,1e2,0,1e2};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -1499,7 +1510,7 @@ inline int funcO15LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO15[6]={0,1e3,0,1e3,0,1e3};  //Bounds x, y
+const double boundO15[6]={0,1e2,0,1e2,0,1e2};  //Bounds x, y  FUNÇÂO COM PROBLEMAS
 
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1593,7 +1604,9 @@ inline int funcO16LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       return 1;
 }
 
-const double boundO16[8]={-1e3,1e3,-1e3,15,0,10,0,10};  //Bounds x, y
+//const double boundO16[8]={-1e2,1e2,-1e2,15,0,10,0,10};  //Bounds x, y
+const double boundO16[8]={0,20,5,15,0,10,0,10};  //Bounds x, y
+
 
 
 
@@ -1836,8 +1849,8 @@ inline int funcO18LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
 }
 
 
-const double boundO18[8]={0,8,0,4,-1e3,1e3};  //Bounds x, y
-
+//const double boundO18[8]={0,8,0,4,-1e2,1e2};  //Bounds x, y
+const double boundO18[8]={0,8,0,4,0,8};  //Bounds x, y
 
 
 /* Função Example 2*/
@@ -1913,7 +1926,8 @@ inline int funcO19LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
 }
 
 
-const double boundO19[8]={0,8,-1e3,1e3};  //Bounds x, y
+//const double boundO19[8]={0,8,-1e2,1e2};  //Bounds x, y
+const double boundO19[8]={0,8,1,5.8};  //Bounds x, y
 
 
 
@@ -1976,7 +1990,8 @@ inline int funcO20LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
 }
 
 
-const double boundO20[8]={0,8,-1e3,1e3};  //Bounds x, y
+//const double boundO20[8]={0,8,-1e2,1e2};  //Bounds x, y
+const double boundO20[8]={0,8,1,5.8};  //Bounds x, y
 
 
 

@@ -1,0 +1,14 @@
+DEB+LEMKE
+--populationImprov 27 --mutImprov1 0.9 --mutOptImprov 4 --crossRateImprov 0.9 --crossOptImprov 2
+APMDEB+LEMKE
+--populationImprov 55 --mutImprov1 0.7 --mutOptImprov 1 --crossOptImprov 3
+DEB+LEMKE_SS
+--populationImprov 27 --mutImprov1 0.8 --mutOptImprov 4 --crossRateImprov 0.7 --crossOptImprov 4
+APMDEB+LEMKE_SS
+--populationImprov 32 --mutImprov1 0.9 --mutOptImprov 1 --crossRateImprov 0.9 --crossOptImprov 2
+APMDEB+LEMKE_INITSim
+--populationSearch 263 --populationImprov 34 --mutImprov1 0.8 --mutFind1 0.7 --mutOptSearch 4 --mutOptImprov 4 --crossRateSearch 0.1 --crossRateImprov 0.9 --crossOptSearch 4 --crossOptImprov 2 --intervalSearchDE 22
+DEB+LEMKE_INITSim
+--populationSearch 166 --populationImprov 31 --mutImprov1 0.8 --mutFind1 0.9 --mutOptSearch 1 --mutOptImprov 4 --crossRateImprov 0.8 --crossOptSearch 1 --crossOptImprov 2 --intervalSearchDE 38
+DEB+LEMKE_SimFilter
+--populationSearch 223 --populationImprov 22 --mutImprov1 0.8 --mutOptImprov 1 --crossRateImprov 0.9 --crossOptImprov 4
