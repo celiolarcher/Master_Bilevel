@@ -31,6 +31,7 @@
 	    bounds=listFunction[i].boundsVar;
 	    simplexTableauKKT=listFunction[i].funcSimplexTableauKKT;
 	    lemkeMatrix=listFunction[i].funcLemkeMatrix;
+	    funcUPLiteratureValue=listFunction[i].optUPLiterature;
 	    return 1;
 	}
       }
@@ -53,6 +54,7 @@
 	    bounds=listFunctionJaq[i].boundsVar;
 	    simplexTableauKKT=listFunctionJaq[i].funcSimplexTableauKKT;
 	    lemkeMatrix=listFunctionJaq[i].funcLemkeMatrix;
+	    funcUPLiteratureValue=listFunctionJaq[i].optUPLiterature;
 	    return 1;
 	}
       }
@@ -75,6 +77,7 @@
 	    bounds=listFunctionOthers[i].boundsVar;
 	    simplexTableauKKT=listFunctionOthers[i].funcSimplexTableauKKT;
 	    lemkeMatrix=listFunctionOthers[i].funcLemkeMatrix;
+	    funcUPLiteratureValue=listFunctionOthers[i].optUPLiterature;
 	    return 1;
 	}
       }
@@ -109,6 +112,7 @@
 	    bounds=functionSelected->boundsVar;
 	    simplexTableauKKT=functionSelected->funcSimplexTableauKKT;
 	    lemkeMatrix=functionSelected->funcLemkeMatrix;
+	    funcUPLiteratureValue=functionSelected->optUPLiterature;
 
 	    delete functionSelected;
 	    
@@ -140,6 +144,7 @@
 	    bounds=functionSelected->boundsVar;
 	    simplexTableauKKT=functionSelected->funcSimplexTableauKKT;
 	    lemkeMatrix=functionSelected->funcLemkeMatrix;
+	    funcUPLiteratureValue=functionSelected->optUPLiterature;
 
 	    delete functionSelected;
 	    
@@ -189,7 +194,7 @@
     
     
     int InputFunction::getLemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){
-        lwSimplexCalls++;
+        //lwSimplexCalls++;  TESTE DE+DE
         return (*lemkeMatrix)(x,matrixQ,matrixA,matrixCB);
     }
     

@@ -1,0 +1,20 @@
+Ideias Resultados
+
+6.1 Seção com custo de chamada do Lemke
+
+6.2 Seção com comparação do DEB+Lemke e DEB+DEB com foco em qual o custo beneficio de se usar algoritmo exato
+
+6.3 Seção com desempenho do DEB+Lemke e opção de reinicialização?
+
+
+
+
+Apresentar os valores mínimos encontrados para cada caso, comparando com a literatura. (Verificar capacidade de encontrar os ótimos)
+
+Apresentar número de vezes capaz de encontrar o melhor valor, MAX MIN e mediana dos resultados. (verificar robustez)
+
+Apresentar com tolerância o número de avaliações necessárias para se encontrar o melhor valor da literatura. (verificar convergência)
+
+Comentários acerca da escolha da mutação rand-to-best... verificar Jaqueline
+
+Propor opção de reinicialização?

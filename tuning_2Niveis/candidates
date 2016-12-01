@@ -12,5 +12,15 @@
 ## are not enabled for a given configuration) and, if given, the
 ## constraints that describe forbidden configurations.
 
-PopulationSearch    PopulationImprov 	mutImprov1		mutFind1	mutOptSearch	mutOptImprov	crossRateSearch	crossRateImprov	crossOptSearch	crossOptImprov	intervalSearchDE
-200 		34		0.7		0.5 	2		4		0.5			0.6	4		2		8
+#PopulationSearch    PopulationImprov 	mutImprov1		mutFind1	mutOptSearch	mutOptImprov	crossRateSearch	crossRateImprov	crossOptSearch	crossOptImprov	intervalSearchDE
+#200 		34		0.7		0.5 	2		4		0.5			0.6	4		2		8
+
+#PopulationImprov mutImprov1	mutImprov2 mutOptImprov crossRateImprov crossOptImprov factorExpandPopInit	mutBest1	mutBest2	mutOptBest	mutBestSize
+#30 			0.7	0		4		0.7		2		4		NA		NA		NA		0
+#15 			0.7	0		4		0.6		2		10		NA		NA		NA		0
+#22			0.6	0.2		4		0.7		2		4		NA		NA		NA		0
+
+
+PopulationImprov mutImprov1	mutOptImprov crossRateImprov crossOptImprov 	
+15 			0.7		4		0.7		2	
+20			0.7		4		0.7		2	

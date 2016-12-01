@@ -17,6 +17,7 @@ typedef struct functionPrototype{
     int (*funcCTRKKT)(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]);
     int (*funcSimplexTableauKKT)(double x[], double y[],double tableau[]);
     int (*funcLemkeMatrix)(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
+    double optUPLiterature;
     char name[10];
 } Function;
 
@@ -969,6 +970,47 @@ inline int funcB1SimplexTableauKKT(double x[], double y[], double tableau[]){  /
     return 1;
 }
 
+
+inline int funcB1LemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){  //(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=2;							  //(f)  - (-A  0 )(l1)= (-b)  
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=2;
+
+      
+      matrixA[0]=2;
+      matrixA[1]=0;
+      
+      matrixA[2]=0;
+      matrixA[3]=2;
+             
+      matrixA[4]=-1;
+      matrixA[5]=0;
+      
+      matrixA[6]=1;
+      matrixA[7]=0;
+      
+      matrixA[8]=0;
+      matrixA[9]=-1;
+      
+      matrixA[10]=0;
+      matrixA[11]=1;
+      
+      
+      matrixCB[0]=2*(-x[0]+20);
+      matrixCB[1]=2*(-x[1]+20);
+      matrixCB[2]=x[0]-10;
+      matrixCB[3]=x[1]-10;
+      matrixCB[4]=10;
+      matrixCB[5]=20;
+      matrixCB[6]=10;
+      matrixCB[7]=20;
+      
+      
+      return 1;
+}
+
+
 const double boundB1[8]={0,50,0,50,-10,20,-10,20};  //Bounds x, y
 
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1827,23 +1869,23 @@ const double boundB9[6]={0,2,0,2,0,1};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
-const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,boundA1,funcA1UP,funcA1LW,funcA1CTREQUP,funcA1CTRNEQUP, funcA1CTREQLW,funcA1CTRNEQLW,funcA1CTKKT,funcA1SimplexTableauKKT,funcA1LemkeMatrix,"funcA1"},
-				    {1,1,0,0,0,7,boundA2,funcA2UP,funcA2LW,funcA2CTREQUP,funcA2CTRNEQUP, funcA2CTREQLW,funcA2CTRNEQLW,funcA2CTKKT,funcA2SimplexTableauKKT,NULL,"funcA2"},
-				    {1,1,0,0,0,8,boundA3,funcA3UP,funcA3LW,funcA3CTREQUP,funcA3CTRNEQUP, funcA3CTREQLW,funcA3CTRNEQLW,funcA3CTKKT,funcA3SimplexTableauKKT,NULL,"funcA3"},
-				    {2,3,0,2,0,6,boundA4,funcA4UP,funcA4LW,funcA4CTREQUP,funcA4CTRNEQUP, funcA4CTREQLW,funcA4CTRNEQLW,funcA4CTKKT,funcA4SimplexTableauKKT,funcA4LemkeMatrix,"funcA4"},
-				    {1,2,0,2,0,5,boundA5,funcA5UP,funcA5LW,funcA5CTREQUP,funcA5CTRNEQUP, funcA5CTREQLW,funcA5CTRNEQLW,funcA5CTKKT,funcA5SimplexTableauKKT,NULL,"funcA5"},
-				    {2,2,0,3,0,4,boundA6,funcA6UP,funcA6LW,funcA6CTREQUP,funcA6CTRNEQUP, funcA6CTREQLW,funcA6CTRNEQLW,funcA6CTKKT,funcA6SimplexTableauKKT,NULL,"funcA6"},
-				    {2,3,0,3,0,6,boundA7,funcA7UP,funcA7LW,funcA7CTREQUP,funcA7CTRNEQUP, funcA7CTREQLW,funcA7CTRNEQLW,funcA7CTKKT,funcA7SimplexTableauKKT,funcA7LemkeMatrix,"funcA7"},
-				    {4,2,0,10,0,6,boundA8,funcA8UP,funcA8LW,funcA8CTREQUP,funcA8CTRNEQUP, funcA8CTREQLW,funcA8CTRNEQLW,funcA8CTKKT,funcA8SimplexTableauKKT,funcA8LemkeMatrix,"funcA8"},
-				    {10,6,0,22,0,19,boundA9,funcA9UP,funcA9LW,funcA9CTREQUP,funcA9CTRNEQUP, funcA9CTREQLW,funcA9CTRNEQLW,funcA9CTKKT,funcA9SimplexTableauKKT,funcA9LemkeMatrix,"funcA9"},
-				    {2,2,0,5,0,6,boundB1,funcB1UP,funcB1LW,funcB1CTREQUP,funcB1CTRNEQUP, funcB1CTREQLW,funcB1CTRNEQLW,funcB1CTKKT,funcB1SimplexTableauKKT,NULL,"funcB1"},
-				    {2,2,0,3,0,4,boundB2,funcB2UP,funcB2LW,funcB2CTREQUP,funcB2CTRNEQUP, funcB2CTREQLW,funcB2CTRNEQLW,funcB2CTKKT,funcB2SimplexTableauKKT,NULL,"funcB2"},
-				    {4,4,0,9,0,12,boundB3,funcB3UP,funcB3LW,funcB3CTREQUP,funcB3CTRNEQUP, funcB3CTREQLW,funcB3CTRNEQLW,funcB3CTKKT,funcB3SimplexTableauKKT,funcB3LemkeMatrix,"funcB3"},
-				    {3,6,0,4,0,9,boundB4,funcB4UP,funcB4LW,funcB4CTREQUP,funcB4CTRNEQUP, funcB4CTREQLW,funcB4CTRNEQLW,funcB4CTKKT,funcB4SimplexTableauKKT,NULL,"funcB4"},
-				    {2,2,0,3,0,4,boundB5,funcB5UP,funcB5LW,funcB5CTREQUP,funcB5CTRNEQUP, funcB5CTREQLW,funcB5CTRNEQLW,funcB5CTKKT,funcB5SimplexTableauKKT,NULL,"funcB5"},
-				    {2,2,0,5,0,6,boundB7,funcB7UP,funcB7LW,funcB7CTREQUP,funcB7CTRNEQUP, funcB7CTREQLW,funcB7CTRNEQLW,funcB7CTKKT,funcB7SimplexTableauKKT,funcB7LemkeMatrix,"funcB7"},
-				    {2,2,0,3,0,4,boundB8,funcB8UP,funcB8LW,funcB8CTREQUP,funcB8CTRNEQUP, funcB8CTREQLW,funcB8CTRNEQLW,funcB8CTKKT,funcB8SimplexTableauKKT,funcB8LemkeMatrix,"funcB8"},
-				    {1,2,0,1,0,6,boundB9,funcB9UP,funcB9LW,funcB9CTREQUP,funcB9CTRNEQUP, funcB9CTREQLW,funcB9CTRNEQLW,funcB9CTKKT,funcB9SimplexTableauKKT,funcB9LemkeMatrix,"funcB9"}
+const Function listFunction[DEFINEfunctionListSize]={{1,1,0,1,0,4,boundA1,funcA1UP,funcA1LW,funcA1CTREQUP,funcA1CTRNEQUP, funcA1CTREQLW,funcA1CTRNEQLW,funcA1CTKKT,funcA1SimplexTableauKKT,funcA1LemkeMatrix,-37,"funcA1"},
+				    {1,1,0,0,0,7,boundA2,funcA2UP,funcA2LW,funcA2CTREQUP,funcA2CTRNEQUP, funcA2CTREQLW,funcA2CTRNEQLW,funcA2CTKKT,funcA2SimplexTableauKKT,NULL,-49,"funcA2"},
+				    {1,1,0,0,0,8,boundA3,funcA3UP,funcA3LW,funcA3CTREQUP,funcA3CTRNEQUP, funcA3CTREQLW,funcA3CTRNEQLW,funcA3CTKKT,funcA3SimplexTableauKKT,NULL,-85.09,"funcA3"},
+				    {2,3,0,2,0,6,boundA4,funcA4UP,funcA4LW,funcA4CTREQUP,funcA4CTRNEQUP, funcA4CTREQLW,funcA4CTRNEQLW,funcA4CTKKT,funcA4SimplexTableauKKT,funcA4LemkeMatrix,-29.2,"funcA4"},
+				    {1,2,0,2,0,5,boundA5,funcA5UP,funcA5LW,funcA5CTREQUP,funcA5CTRNEQUP, funcA5CTREQLW,funcA5CTRNEQLW,funcA5CTKKT,funcA5SimplexTableauKKT,NULL,-19,"funcA5"},
+				    {2,2,0,3,0,4,boundA6,funcA6UP,funcA6LW,funcA6CTREQUP,funcA6CTRNEQUP, funcA6CTREQLW,funcA6CTRNEQLW,funcA6CTKKT,funcA6SimplexTableauKKT,NULL,-3.25,"funcA6"},
+				    {2,3,0,3,0,6,boundA7,funcA7UP,funcA7LW,funcA7CTREQUP,funcA7CTRNEQUP, funcA7CTREQLW,funcA7CTRNEQLW,funcA7CTKKT,funcA7SimplexTableauKKT,funcA7LemkeMatrix,-18.4,"funcA7"},
+				    {4,2,0,10,0,6,boundA8,funcA8UP,funcA8LW,funcA8CTREQUP,funcA8CTRNEQUP, funcA8CTREQLW,funcA8CTRNEQLW,funcA8CTKKT,funcA8SimplexTableauKKT,funcA8LemkeMatrix,14.99,"funcA8"},
+				    {10,6,0,22,0,19,boundA9,funcA9UP,funcA9LW,funcA9CTREQUP,funcA9CTRNEQUP, funcA9CTREQLW,funcA9CTRNEQLW,funcA9CTKKT,funcA9SimplexTableauKKT,funcA9LemkeMatrix,-453.61,"funcA9"},
+				    {2,2,0,5,0,6,boundB1,funcB1UP,funcB1LW,funcB1CTREQUP,funcB1CTRNEQUP, funcB1CTREQLW,funcB1CTRNEQLW,funcB1CTKKT,funcB1SimplexTableauKKT,funcB1LemkeMatrix,0,"funcB1"},
+				    {2,2,0,3,0,4,boundB2,funcB2UP,funcB2LW,funcB2CTREQUP,funcB2CTRNEQUP, funcB2CTREQLW,funcB2CTRNEQLW,funcB2CTKKT,funcB2SimplexTableauKKT,NULL,-12.68,"funcB2"},
+				    {4,4,0,9,0,12,boundB3,funcB3UP,funcB3LW,funcB3CTREQUP,funcB3CTRNEQUP, funcB3CTREQLW,funcB3CTRNEQLW,funcB3CTKKT,funcB3SimplexTableauKKT,funcB3LemkeMatrix,-6600,"funcB3"},
+				    {3,6,0,4,0,9,boundB4,funcB4UP,funcB4LW,funcB4CTREQUP,funcB4CTRNEQUP, funcB4CTREQLW,funcB4CTRNEQLW,funcB4CTKKT,funcB4SimplexTableauKKT,NULL,-9.56,"funcB4"},
+				    {2,2,0,3,0,4,boundB5,funcB5UP,funcB5LW,funcB5CTREQUP,funcB5CTRNEQUP, funcB5CTREQLW,funcB5CTRNEQLW,funcB5CTKKT,funcB5SimplexTableauKKT,NULL,-1.98,"funcB5"},
+				    {2,2,0,5,0,6,boundB7,funcB7UP,funcB7LW,funcB7CTREQUP,funcB7CTRNEQUP, funcB7CTREQLW,funcB7CTRNEQLW,funcB7CTKKT,funcB7SimplexTableauKKT,funcB7LemkeMatrix,0,"funcB7"},
+				    {2,2,0,3,0,4,boundB8,funcB8UP,funcB8LW,funcB8CTREQUP,funcB8CTRNEQUP, funcB8CTREQLW,funcB8CTRNEQLW,funcB8CTKKT,funcB8SimplexTableauKKT,funcB8LemkeMatrix,0,"funcB8"},
+				    {1,2,0,1,0,6,boundB9,funcB9UP,funcB9LW,funcB9CTREQUP,funcB9CTRNEQUP, funcB9CTREQLW,funcB9CTRNEQLW,funcB9CTKKT,funcB9SimplexTableauKKT,funcB9LemkeMatrix,0,"funcB9"}
 };
 
 

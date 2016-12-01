@@ -1,0 +1,16 @@
+set grid
+set xrange [0.95:18.1]
+set yrange [-0.3:22] 
+set title "Operações de Pivoteamento (Grupo SMDquad)"
+ set xlabel "Casos de Teste" 
+ #set ylabel "" 
+#plot  "data" index 9 u 1:2 t "Best" with lines 
+#plot  "data" every :1 u 1:2 t "Best" with lines 
+#plot  "data" u 2 t "Best" with points
+set xtics rotate
+plot "SMDPivot.csv" using 0:5:6:4:xticlabels(1) t "Operações Pivo" with yerrorbars
+replot "SMDPivot.csv" using 0:2:xticlabels(1) t "Dimensão (Líder/Seguidor)" with lines 
+#replot "SMDPivot.csv" using 0:3:xticlabels(1) t "Dimensão (Seguidor)" with lines 
+set terminal png
+set output 'SMDPivot.png'
+replot

@@ -1,0 +1,36 @@
+funcJ2	ok
+funcJ4  
+funcJ5
+funcJ6	ok
+funcJ7	ok
+funcJ9	ok
+funcJ14	ok
+funcJ16  
+funcA4
+funcA7	ok
+funcA8
+funcA9
+funcB3	ok
+funcB7	ok
+funcB9	ok
+funcO5	ok
+funcO9	ok
+func011	ok
+funcO21	ok
+
+
+
+
+
+funcO12
+funcJ3
+funcJ1
+funcO16
+funcO13
+
+
+
+
+
+funcO6  DESCARTADA
+funcO3	DESCARTADA

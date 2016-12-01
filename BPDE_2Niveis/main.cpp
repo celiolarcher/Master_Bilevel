@@ -84,12 +84,16 @@ void parseOptions(double *options, int dim[], int argc,char *argv[],char **file,
         }else if(!strcmp(argv[i],"--intervalSearchDE")){  //Intervalo de coleta de soluções ou do processo de evolução no aprimoramento da população inicial
             options[17]=atoi(argv[i+1]);
             i+=2;
-        }else if(!strcmp(argv[i],"--dim")){
+        }else if(!strcmp(argv[i],"--factorExpandPopInit")){  //Intervalo de coleta de soluções ou do processo de evolução no aprimoramento da população inicial
+            options[18]=atoi(argv[i+1]);
+            i+=2;
+        }
+        else if(!strcmp(argv[i],"--dim")){
             dim[0]=atoi(argv[i+1]);
-	dim[1]=atoi(argv[i+2]);
-	dim[2]=atoi(argv[i+3]);
-	dim[3]=atoi(argv[i+4]);
-            i+=5;
+	    dim[1]=atoi(argv[i+2]);
+	    dim[2]=atoi(argv[i+3]);
+	    dim[3]=atoi(argv[i+4]);
+	    i+=5;
         }
         
         else i++;
@@ -182,12 +186,12 @@ int main(int argc, char *argv[]){
           double *options=new double[COUNTPARAMETERS];
           for(int i=0;i<COUNTPARAMETERS;i++)options[i]=-1;
 
-          long int seed=911123193131;
-          //long int seed=time(NULL);
+        //  long int seed=911123193131;
+          long int seed=time(NULL);
           char *file;
-      //    int dim[4]={-1,-1,-1,-1};
+          int dim[4]={-1,-1,-1,-1};
           
-          int dim[4]={0,0,5,0};
+        //  int dim[4]={0,0,5,0};
           
           
           parseOptions(options,dim,argc,argv,&file,&seed);
@@ -213,21 +217,28 @@ int main(int argc, char *argv[]){
           
           InputFunction *function;
           
-        /* 
+        
           if(dim[0]<0)
 	function=new InputFunction(file);
           else
 	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
-          */
-         
-          if(!strstr(file,"SMD"))
-	function=new InputFunction(file);
-          else
-	function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
           
+        /* 
+        if(!strstr(file,"SMD"))
+	  function=new InputFunction(file);
+        else{
+	  if(strstr(file,"New"))
+	   // function=new InputFunction(file,0,0,10,0);
+	     function=new InputFunction(file,0,0,15,0);
+	  else
+	    //function=new InputFunction(file,6,6,4,0);
+	    function=new InputFunction(file,9,9,6,0);
+	  //function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
+	}*/
 
-          SolutionDecoder *decoder=new LemkeLW();
-          PenaltySolution *penalty=new APMDEBPenalty();
+          //SolutionDecoder *decoder=new LemkeLW();
+          SolutionDecoder *decoder=new DELowerLevel();
+          PenaltySolution *penalty=new DEBPenalty();
           decoder->initInstance(function);
 
           TOL_EQ_CONST=1e-4;
@@ -235,11 +246,15 @@ int main(int argc, char *argv[]){
           
           InfeasibleAvaliation=0;
           
-	//  DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[1]);
+	  DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[1],0);
 	  
-	  DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[0]);  
-	  DE->improveInitSetSimilarity(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);          
-	//  DE->improveInitSetDispersion(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);
+	  //DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[0]);  
+	//  DE->improveInitSetSimilarityDE(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);          
+	//  DE->improveInitSetDispersionDE(options[0],options[1],options[5],options[6],options[8],options[16],options[15],options[11],options[17]);
+	  
+	//  DifferentialEvolution *DE=new DifferentialEvolution(decoder,penalty,options[1]*options[18], options[11]);  
+	//  DE->improveInitSetSimilarity(options[1]*options[18], options[1]);
+
           
 
          // TOL_EQ_CONST=1e-4;
@@ -249,11 +264,14 @@ int main(int argc, char *argv[]){
                     
 //          DifferentialEvolution::decodifyPopulation();
 	          
-          for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){      
-
+          //for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){
+//	  for(in-t i=0;i<100000 && function->getUPLevelCalls()<options[2] && LemkeLW::pivotNumber<18e6;i++){
+	  
+	  for(int i=0;i<1e5 && function->getUPLevelCalls()<10000 && (fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(fabs(function->getOptLeaderLitValue())+1))>1e-2 || !DE->best->feasible);i++){      
+	  cout<<DE->best->upLevelFunction<<"\t"<<fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(function->getOptLeaderLitValue()))<<"\n";	
 
 		double rd=fRand2(0,options[4]);	
-	          
+
 		for(int p=0;p<options[1];p++){
 
 	  
@@ -288,9 +306,23 @@ int main(int argc, char *argv[]){
 		  else if(options[13]==14)  
 		    DE->mutatePopulation_Target_2_Bounded(options[3]+rd,options[3]+rd,p);
 	  
+	
 		  
 	//	  DE->mutatePopulation_TargetToRand_1_Wall(options[3]+rd,options[3]+rd,p);
 	  }
+	/*  
+	  rd=fRand2(0,options[10]);	
+	  for(int p=options[1];p<options[1]+options[11];p++){
+	    
+	      if(options[12]==1)
+		    DE->mutatePopulation_BestToRand_1(options[9]+rd,options[9]+rd,p);
+	      if(options[12]==2)
+		DE->mutatePopulation_Best_1(options[9]+rd,p);
+	      if(options[12]==3)
+		  DE->mutatePopulation_Best_2(options[9]+rd,options[9]+rd,p);
+	      if(options[12]==4)
+		DE->mutatePopulation_TargetToBest_1(options[9]+rd,options[9]+rd,p);
+	  }*/
 	  /*
 		  if(options[13]==1)
 		    DifferentialEvolution::mutatePopulation_RandToBest_1(options[3]+rd,options[3]+rd,0,options[1]);
@@ -327,6 +359,10 @@ int main(int argc, char *argv[]){
 		    DE->selectPopulation(p);
 				  
 		}
+		/*
+		for(int p=options[1];p<options[1]+options[11];p++){
+		    DE->selectPopulationBestPath(p);
+		}*/
 	  }
 		/*
 		if(bestTurn->diffMaxSolution(DifferentialEvolution::best)>1e-4){
@@ -353,7 +389,9 @@ int main(int argc, char *argv[]){
 	    
 
           if (DE->best!=NULL && DE->best->feasible){ 
-		    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<LemkeLW::pivotNumber<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		    //cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		    
 		    cout<<"\t(";
 		    for(int j=0;j<DE->best->sizeVec-1;j++)
 		        cout<<DE->best->vectorCharacters[j]<<",";

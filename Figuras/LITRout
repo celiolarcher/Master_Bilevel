@@ -1,0 +1,28 @@
+set grid
+set xrange [0.95:19.1]
+set yrange [-0.3:45] 
+set title "Operações de Pivoteamento (Grupo Literatura)"
+ set xlabel "Casos de Teste" 
+ #set ylabel "" 
+set xtics rotate
+plot "LitrPivot.csv" using 0:9:10:8:xticlabels(1) t "Operações Pivo" with yerrorbars
+replot "LitrPivot.csv" using 0:2:xticlabels(1) t "Dimensão (Líder)" with lines
+#replot "LitrPivot.csv" using 0:5:xticlabels(1) t "Dimensão (Seguidor)" with lines
+replot "LitrPivot.csv" using 0:3:xticlabels(1) t "Restrições (Líder)" with lines
+#replot "LitrPivot.csv" using 0:6:xticlabels(1) t "Restrições (Seguidor)" with lines
+#replot "LitrPivot.csv" using 0:7:xticlabels(1) t "Restrições (Seguidor)" with lines 
+set terminal png
+set output 'LitrPivotLider.png'
+replot
+
+
+plot "LitrPivot.csv" using 0:9:10:8:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "LitrPivot.csv" using 0:2:xticlabels(1) t "Dimensão (Líder)" with lines
+replot "LitrPivot.csv" using 0:5:xticlabels(1) t "Dimensão (Seguidor)" with lines
+#replot "LitrPivot.csv" using 0:3:xticlabels(1) t "Restrições (Líder)" with lines
+replot "LitrPivot.csv" using 0:6:xticlabels(1) t "Restrições (Seguidor)" with lines
+#replot "LitrPivot.csv" using 0:7:xticlabels(1) t "Restrições (Seguidor)" with lines 
+set terminal png
+set output 'LitrPivotSeguidor.png'
+replot
+

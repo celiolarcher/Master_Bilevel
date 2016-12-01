@@ -24,6 +24,7 @@ class InputFunction{
 	 int countNeqConstraintLW;
 	 int upLevelCalls;
 	 int lwSimplexCalls;
+	 double funcUPLiteratureValue;
     public: const double *bounds;
     
     public: InputFunction(char *funcName);
@@ -79,6 +80,11 @@ class InputFunction{
     
     public: inline int getLWLevelSimplexCalls(){  //Dimensão do KKT equivale ao número de variáveis na função em baixo nivel
         return lwSimplexCalls;
+    }
+    
+        
+    public: inline double getOptLeaderLitValue(){  //Valor ótimo do líder encontrado na literatura
+        return funcUPLiteratureValue;
     }
 };
 

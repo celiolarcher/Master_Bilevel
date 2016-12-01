@@ -1,6 +1,6 @@
 #ifndef DEFAULTPARAMETERS_H
 #define DEFAULTPARAMETERS_H
-#define COUNTPARAMETERS 18
+#define COUNTPARAMETERS 19
 
 const double defaultParameters[COUNTPARAMETERS]={
 	100,  //defaultParameters[0]=
@@ -20,7 +20,8 @@ const double defaultParameters[COUNTPARAMETERS]={
 	2,    //defaultParameters[14]=
 	1,    //defaultParameters[15]=
 	0.6,   //defaultParameters[16]=
-	10     //defaultParameters[17]=
+	10 ,    //defaultParameters[17]=
+	1     //defaultParameters[17]=
 };
 
 

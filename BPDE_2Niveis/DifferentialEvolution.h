@@ -12,6 +12,7 @@
 //#include "DELowerLevel.h"
 #include "DEBPenalty.h"
 
+
 class DifferentialEvolution{
       public: Solution **Population;
       public: Solution **nextPopulation;
@@ -21,16 +22,19 @@ class DifferentialEvolution{
       private: int sizePopulation;
       public: SolutionDecoder *decoder;
       public: PenaltySolution *penalty;
+      public: int bestSizePop;
       
-      public: DifferentialEvolution(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop);
+      public: DifferentialEvolution(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop, int bestSizePop);
 
-      public: int initPopulation(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop);
       public: int initPopulationNelderMeadMethod(SolutionDecoder *decoder, PenaltySolution *penalty,int sizePop); 
 
       
       public: int mutatePopulation_Rand_1(double F, int popElm);
       public: int mutatePopulation_Rand_2(double F, int popElm);
       public: int mutatePopulation_RandToBest_1(double F1, double F2, int popElm);
+      public: int mutatePopulation_Rand_1_Wall(double F, int popElm);
+      public: int mutatePopulation_Rand_2_Wall(double F, int popElm);
+      public: int mutatePopulation_RandToBest_1_Wall(double F1, double F2, int popElm);
       public: int mutatePopulation_Rand_1_Bounded(double F, int popElm);      
       public: int mutatePopulation_Rand_2_Bounded(double F, int popElm);      
       public: int mutatePopulation_RandToBest_1_Bounded(double F1, double F2, int popElm);
@@ -40,12 +44,14 @@ class DifferentialEvolution{
       public: int mutatePopulation_TargetToBest_1(double F1, double F2, int popElm);
       public: int mutatePopulation_Target_1(double F1, int popElm);
       public: int mutatePopulation_Target_2(double F1, double F2, int popElm);
+      public: int mutatePopulation_TargetToRand_1_Wall(double F1, double F2, int popElm);
+      public: int mutatePopulation_TargetToBest_1_Wall(double F1, double F2, int popElm);
+      public: int mutatePopulation_Target_1_Wall(double F1, int popElm);
+      public: int mutatePopulation_Target_2_Wall(double F1, double F2, int popElm);
       public: int mutatePopulation_TargetToRand_1_Bounded(double F1, double F2, int popElm);
       public: int mutatePopulation_TargetToBest_1_Bounded(double F1, double F2, int popElm);
       public: int mutatePopulation_Target_1_Bounded(double F1, int popElm);
       public: int mutatePopulation_Target_2_Bounded(double F1, double F2, int popElm);
-
-      public: int mutatePopulation_TargetToRand_1_Wall(double F1, double F2, int popElm);
 
       
       
@@ -53,6 +59,9 @@ class DifferentialEvolution{
       public: int mutatePopulation_BestToRand_1(double F1, double F2, int popElm);
       public: int mutatePopulation_Best_1(double F1, int popElm);
       public: int mutatePopulation_Best_2(double F1, double F2, int popElm);      
+      public: int mutatePopulation_BestToRand_1_Wall(double F1, double F2, int popElm);
+      public: int mutatePopulation_Best_1_Wall(double F1, int popElm);
+      public: int mutatePopulation_Best_2_Wall(double F1, double F2, int popElm);      
       public: int mutatePopulation_BestToRand_1_Bounded(double F1, double F2, int popElm);
       public: int mutatePopulation_Best_1_Bounded(double F1, int popElm);
       public: int mutatePopulation_Best_2_Bounded(double F1, double F2, int popElm);
@@ -61,12 +70,14 @@ class DifferentialEvolution{
       public: int recombinePopulationExp(double CR,int popElm);
       public: int recombinePopulationSwap(int popElm);
       public: int selectPopulation(int popElm);     
-      
+      public: int selectPopulationBestPath(int popElm);
 
-      public: int improveInitSet(int sizePopSearch, int sizePopNextStep, double find1, double find2);
-      public: int improveInitSetSimilarity(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest, int intervalAddDE);
+      public: int improveInitSetDE(int sizePopSearch, int sizePopNextStep, double find1, double find2);
+      public: int improveInitSetSimilarityDE(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest, int intervalAddDE);
       
-      public: int improveInitSetDispersion(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest, int intervalAddDE);
+      public: int improveInitSetDispersionDE(int sizePopSearch, int sizePopNextStep, double find1, double find2, int mutOption, double crossRate,int crossOpt, int sizeBest, int intervalAddDE);
+
+      public: int improveInitSetSimilarity(int sizePopSearch, int sizePopNextStep);
       
       
       
@@ -79,6 +90,10 @@ class DifferentialEvolution{
       
       
       public: int decodifyPopulation();
+      
+      
+      public: int printPopulation();
+
 };
 
 

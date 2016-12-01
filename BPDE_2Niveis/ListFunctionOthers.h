@@ -1,6 +1,6 @@
 #ifndef LISTFUNCTIONOTHERS_INCLUDED
 #define LISTFUNCTIONOTHERS_INCLUDED  
-#define DEFINEfunctionListSizeOthers 21
+#define DEFINEfunctionListSizeOthers 22
 #include <float.h>
 #include <cmath>
 #include <stdlib.h>
@@ -18,7 +18,8 @@ typedef struct functionPrototypeOthers{
     int (*funcCTRKKT)(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]);
     int (*funcSimplexTableauKKT)(double x[], double y[],double tableau[]);
     int (*funcLemkeMatrix)(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
-    char name[10];
+    double optUPLiterature;
+    char name[15];
 } FunctionOthers;
 
 //Function listFunction[DEFINEfunctionListSize];
@@ -857,6 +858,8 @@ inline int funcO9CTRNEQLW(double x[], double y[], double constraintValuesListRet
   constraintValuesListReturn[1]=y[0]+(-0.333-0.1*x[0])*y[1]-2;
   constraintValuesListReturn[2]=-y[0];
   constraintValuesListReturn[3]=-y[1];
+  constraintValuesListReturn[4]=-x[0];
+
   return 1;
 }
 
@@ -864,8 +867,8 @@ inline int funcO9CTRNEQLW(double x[], double y[], double constraintValuesListRet
 inline int funcO9CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
     double H[2][2]={{1,0},{0,1}};
 
-    constraintValuesListReturn[0]=(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0])) + (dualNeq[0]*(-0.333+0.1*x[0]) + dualNeq[1]*(1) + dualNeq[2]*(-1) + dualNeq[3]*(0));
-    constraintValuesListReturn[1]=(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0])) + (dualNeq[0]*(1) + dualNeq[1]*(-0.333-0.1*x[0]) + dualNeq[2]*(0) + dualNeq[3]*(-1));
+    constraintValuesListReturn[0]=(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0])) + (dualNeq[0]*(-0.333+0.1*x[0]) + dualNeq[1]*(1) + dualNeq[2]*(-1) + dualNeq[3]*(0) + dualNeq[4]*(0));
+    constraintValuesListReturn[1]=(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0])) + (dualNeq[0]*(1) + dualNeq[1]*(-0.333-0.1*x[0]) + dualNeq[2]*(0) + dualNeq[3]*(-1) + dualNeq[4]*(0));
     return 1;						
 }
 
@@ -876,13 +879,15 @@ inline int funcO9SimplexTableauKKT(double x[], double y[], double tableau[]){  /
 	tableau[1]=1;
 	tableau[2]=-1;
 	tableau[3]=0;
-	tableau[4]=-(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0]));
+	tableau[4]=0;
+	tableau[5]=-(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0]));
 	
-	tableau[5]=1;
-	tableau[6]=-0.333-0.1*x[0];
-	tableau[7]=0;
-	tableau[8]=-1;
-	tableau[9]=-(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0]));
+	tableau[6]=1;
+	tableau[7]=-0.333-0.1*x[0];
+	tableau[8]=0;
+	tableau[9]=-1;
+	tableau[10]=0;
+	tableau[11]=-(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0]));
 	return 1;
 }
 
@@ -907,6 +912,9 @@ inline int funcO9LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       
       matrixA[6]=0;
       matrixA[7]=-1;
+      
+      matrixA[8]=0;
+      matrixA[9]=0;
 
       
       matrixCB[0]=-(3+1.333*x[0]);  
@@ -915,6 +923,7 @@ inline int funcO9LemkeMatrix(double x[], double matrixQ[], double matrixA[], dou
       matrixCB[3]=2;
       matrixCB[4]=0;
       matrixCB[5]=0;
+      matrixCB[6]=0;
       
       
       return 1;
@@ -1051,6 +1060,7 @@ inline int funcO11CTRNEQLW(double x[], double y[], double constraintValuesListRe
   constraintValuesListReturn[1]=y[0]+(-0.333-0.1*x[0])*y[1]-2+0.1*x[0];
   constraintValuesListReturn[2]=-y[0];
   constraintValuesListReturn[3]=-y[1];
+  constraintValuesListReturn[4]=-x[0];
   return 1;
 }
 
@@ -1058,8 +1068,8 @@ inline int funcO11CTRNEQLW(double x[], double y[], double constraintValuesListRe
 inline int funcO11CTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y)
     double H[2][2]={{1+0.2*x[0],0},{0,1+0.1*x[0]}};
 
-    constraintValuesListReturn[0]=(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0])) + (dualNeq[0]*(-0.333+0.1*x[0]) + dualNeq[1]*(1) + dualNeq[2]*(-1) + dualNeq[3]*(0));
-    constraintValuesListReturn[1]=(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0])) + (dualNeq[0]*(1) + dualNeq[1]*(-0.333-0.1*x[0]) + dualNeq[2]*(0) + dualNeq[3]*(-1));
+    constraintValuesListReturn[0]=(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0])) + (dualNeq[0]*(-0.333+0.1*x[0]) + dualNeq[1]*(1) + dualNeq[2]*(-1) + dualNeq[3]*(0) + dualNeq[4]*(0));
+    constraintValuesListReturn[1]=(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0])) + (dualNeq[0]*(1) + dualNeq[1]*(-0.333-0.1*x[0]) + dualNeq[2]*(0) + dualNeq[3]*(-1) + dualNeq[4]*(0));
     return 1;						
 }
 
@@ -1070,13 +1080,15 @@ inline int funcO11SimplexTableauKKT(double x[], double y[], double tableau[]){  
 	tableau[1]=1;
 	tableau[2]=-1;
 	tableau[3]=0;
-	tableau[4]=-(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0]));
+	tableau[4]=0;
+	tableau[5]=-(0.5*(2*y[0]*H[0][0] + y[1]*H[1][0] + y[1]*H[0][1]) - (3+1.333*x[0]));
 	
-	tableau[5]=1;
-	tableau[6]=-0.333-0.1*x[0];
-	tableau[7]=0;
-	tableau[8]=-1;
-	tableau[9]=-(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0]));
+	tableau[6]=1;
+	tableau[7]=-0.333-0.1*x[0];
+	tableau[8]=0;
+	tableau[9]=-1;
+	tableau[10]=0;
+	tableau[11]=-(0.5*(y[0]*H[1][0] + y[0]*H[0][1] + 2*y[1]*H[1][1]) - (x[0]));
 	return 1;
 }
 
@@ -1101,6 +1113,9 @@ inline int funcO11LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       
       matrixA[6]=0;
       matrixA[7]=-1;
+      
+      matrixA[8]=0;
+      matrixA[9]=0;
 
       
       matrixCB[0]=-(3+1.333*x[0]);  
@@ -1109,6 +1124,7 @@ inline int funcO11LemkeMatrix(double x[], double matrixQ[], double matrixA[], do
       matrixCB[3]=2-0.1*x[0];
       matrixCB[4]=0;
       matrixCB[5]=0;
+      matrixCB[6]=0;
       
       
       return 1;
@@ -2105,28 +2121,181 @@ const double boundO21[8]={0,10,0,10,0,1,0,1};  //Bounds x, y
 /* --------------------------------------------------------------------------------------------------------------------------------------*/
 
 
+/* Caso Teste*/
 
-const FunctionOthers listFunctionOthers[DEFINEfunctionListSizeOthers]={{2,2,0,0,0,4,boundO1,funcO1UP,funcO1LW,funcO1CTREQUP,funcO1CTRNEQUP, funcO1CTREQLW,funcO1CTRNEQLW,funcO1CTKKT,funcO1SimplexTableauKKT,funcO1LemkeMatrix,"funcO1"},
-					           {2,2,0,0,0,4,boundO2,funcO2UP,funcO2LW,funcO2CTREQUP,funcO2CTRNEQUP, funcO2CTREQLW,funcO2CTRNEQLW,funcO2CTKKT,funcO2SimplexTableauKKT,funcO2LemkeMatrix,"funcO2"},
-					           {2,2,0,0,0,4,boundO3,funcO3UP,funcO3LW,funcO3CTREQUP,funcO3CTRNEQUP, funcO3CTREQLW,funcO3CTRNEQLW,funcO3CTKKT,funcO3SimplexTableauKKT,funcO3LemkeMatrix,"funcO3"},
-					           {2,2,0,0,0,4,boundO4,funcO4UP,funcO4LW,funcO4CTREQUP,funcO4CTRNEQUP, funcO4CTREQLW,funcO4CTRNEQLW,funcO4CTKKT,funcO4SimplexTableauKKT,funcO4LemkeMatrix,"funcO4"},
-					           {2,2,0,0,0,4,boundO5,funcO5UP,funcO5LW,funcO5CTREQUP,funcO5CTRNEQUP, funcO5CTREQLW,funcO5CTRNEQLW,funcO5CTKKT,funcO5SimplexTableauKKT,funcO5LemkeMatrix,"funcO5"},
-					           {1,2,0,0,0,4,boundO6,funcO6UP,funcO6LW,funcO6CTREQUP,funcO6CTRNEQUP, funcO6CTREQLW,funcO6CTRNEQLW,funcO6CTKKT,funcO6SimplexTableauKKT,funcO6LemkeMatrix,"funcO6"},
-					           {1,2,0,0,0,4,boundO7,funcO7UP,funcO7LW,funcO7CTREQUP,funcO7CTRNEQUP, funcO7CTREQLW,funcO7CTRNEQLW,funcO7CTKKT,funcO7SimplexTableauKKT,funcO7LemkeMatrix,"funcO7"},
-					           {1,2,0,0,0,4,boundO8,funcO8UP,funcO8LW,funcO8CTREQUP,funcO8CTRNEQUP, funcO8CTREQLW,funcO8CTRNEQLW,funcO8CTKKT,funcO8SimplexTableauKKT,funcO8LemkeMatrix,"funcO8"},
-					           {1,2,0,0,0,4,boundO9,funcO9UP,funcO9LW,funcO9CTREQUP,funcO9CTRNEQUP, funcO9CTREQLW,funcO9CTRNEQLW,funcO9CTKKT,funcO9SimplexTableauKKT,funcO9LemkeMatrix,"funcO9"},
-					           {1,2,0,0,0,4,boundO10,funcO10UP,funcO10LW,funcO10CTREQUP,funcO10CTRNEQUP, funcO10CTREQLW,funcO10CTRNEQLW,funcO10CTKKT,funcO10SimplexTableauKKT,funcO10LemkeMatrix,"funcO10"},
-					           {1,2,0,0,0,4,boundO11,funcO11UP,funcO11LW,funcO11CTREQUP,funcO11CTRNEQUP, funcO11CTREQLW,funcO11CTRNEQLW,funcO11CTKKT,funcO11SimplexTableauKKT,funcO11LemkeMatrix,"funcO11"},
-					           {1,2,0,0,0,7,boundO12,funcO12UP,funcO12LW,funcO12CTREQUP,funcO12CTRNEQUP, funcO12CTREQLW,funcO12CTRNEQLW,funcO12CTKKT,funcO12SimplexTableauKKT,funcO12LemkeMatrix,"funcO12"},
-					           {2,2,0,6,0,4,boundO13,funcO13UP,funcO13LW,funcO13CTREQUP,funcO13CTRNEQUP, funcO13CTREQLW,funcO13CTRNEQLW,funcO13CTKKT,funcO13SimplexTableauKKT,funcO13LemkeMatrix,"funcO13"},
-					           {2,3,0,3,0,4,boundO14,funcO14UP,funcO14LW,funcO14CTREQUP,funcO14CTRNEQUP, funcO14CTREQLW,funcO14CTRNEQLW,funcO14CTKKT,funcO14SimplexTableauKKT,funcO14LemkeMatrix,"funcO14"},
-					           {1,1,0,0,0,1,boundO15,funcO15UP,funcO15LW,funcO15CTREQUP,funcO15CTRNEQUP, funcO15CTREQLW,funcO15CTRNEQLW,funcO15CTKKT,funcO15SimplexTableauKKT,funcO15LemkeMatrix,"funcO15"},
-					           {2,2,0,3,0,4,boundO16,funcO16UP,funcO16LW,funcO16CTREQUP,funcO16CTRNEQUP, funcO16CTREQLW,funcO16CTRNEQLW,funcO16CTKKT,funcO16SimplexTableauKKT,funcO16LemkeMatrix,"funcO16"},
-					           {2,2,0,1,0,10,boundO17,funcO17UP,funcO17LW,funcO17CTREQUP,funcO17CTRNEQUP, funcO17CTREQLW,funcO17CTRNEQLW,funcO17CTKKT,funcO17SimplexTableauKKT,funcO17LemkeMatrix,"funcO17"},
-					           {1,2,0,2,0,5,boundO18,funcO18UP,funcO18LW,funcO18CTREQUP,funcO18CTRNEQUP, funcO18CTREQLW,funcO18CTRNEQLW,funcO18CTKKT,funcO18SimplexTableauKKT,funcO18LemkeMatrix,"funcO18"},
-					           {1,1,0,2,0,3,boundO19,funcO19UP,funcO19LW,funcO19CTREQUP,funcO19CTRNEQUP, funcO19CTREQLW,funcO19CTRNEQLW,funcO19CTKKT,funcO19SimplexTableauKKT,funcO19LemkeMatrix,"funcO19"},
-					           {1,1,0,5,0,0,boundO20,funcO20UP,funcO20LW,funcO20CTREQUP,funcO20CTRNEQUP, funcO20CTREQLW,funcO20CTRNEQLW,funcO20CTKKT,funcO20SimplexTableauKKT,funcO20LemkeMatrix,"funcO20"},
-					           {2,2,0,4,0,5,boundO21,funcO21UP,funcO21LW,funcO21CTREQUP,funcO21CTRNEQUP, funcO21CTREQLW,funcO21CTRNEQLW,funcO21CTKKT,funcO21SimplexTableauKKT,funcO21LemkeMatrix,"funcO21"}
+
+inline double funcCasoTesteUP(double x[], double y[]){  //F(x,y) MAX
+  return -(60*x[0] + 80*x[1] + 70*x[2] + 50*x[3] + 40*x[4] -2*x[0]*x[0] -3*x[1]*x[1] -2*x[2]*x[2] - x[0]*y[0] -2*x[1]*y[2] -2*x[3]*x[3] -2*x[4]*x[4] -x[3]*y[3]);
+}
+
+inline double funcCasoTesteLW(double x[], double y[]){  //f(x,y) MAX
+  return -(20*y[0] + 40*y[1] +50*y[2] +30*y[3] +20*y[4] - y[0]*y[0] -2*y[1]*y[1] -2*y[2]*y[2] - x[0]*y[1] -x[1]*y[2] -3*y[3]*y[3] -2*y[4]*y[4] -x[4]*y[4]);
+}
+
+inline int funcCasoTesteCTREQUP(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+inline int funcCasoTesteCTRNEQUP(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=x[0]+x[1]-22;
+  constraintValuesListReturn[1]=x[1]+x[2]-25;
+  constraintValuesListReturn[2]=x[3]+x[4]-20;
+  constraintValuesListReturn[3]=-x[0];
+  constraintValuesListReturn[4]=-x[1];
+  constraintValuesListReturn[5]=-x[2];
+  constraintValuesListReturn[6]=-x[3];
+  constraintValuesListReturn[7]=-x[4];
+  constraintValuesListReturn[8]=y[0]-20;
+  constraintValuesListReturn[9]=y[1]-20;
+  constraintValuesListReturn[10]=y[2]-20;
+  constraintValuesListReturn[11]=y[3]-20;
+  constraintValuesListReturn[12]=y[4]-20;
+ 
+
+  return 1;
+}
+
+inline int funcCasoTesteCTREQLW(double x[], double y[], double constraintValuesListReturn[]){ //g(x,y)=0
+    return 1;
+}
+
+
+inline int funcCasoTesteCTRNEQLW(double x[], double y[], double constraintValuesListReturn[]){  //g(x,y)<=0
+  constraintValuesListReturn[0]=y[0]+y[1]-15;
+  constraintValuesListReturn[1]=y[1]+y[2]-16;
+  constraintValuesListReturn[2]=y[3]+y[4]-10;
+  
+  
+  return 1;
+}
+
+
+inline int funcCasoTesteCTKKT(double x[], double y[], double dualEq[], double  dualNeq[], double constraintValuesListReturn[]){ //grad Lagrangeano(x,y) MAX
+    constraintValuesListReturn[0]=( (x[0]*x[0]*x[1]*x[1] + 8*x[1]*x[1]*x[1] - 14*x[0]*x[0] - 5*x[1])*y[1] + (-x[0]*x[1]*x[1] + 5*x[0]*x[1] + 4*x[1])*y[1]*(-1) + 8*x[0]*(1-y[1]) ) - (dualNeq[0]*(-1) + dualNeq[1]*(-1) + dualNeq[2]*(1) + dualNeq[3]*(0) + dualNeq[4]*(0));
+    constraintValuesListReturn[1]=( (x[0]*x[0]*x[1]*x[1] + 8*x[1]*x[1]*x[1] - 14*x[0]*x[0] - 5*x[1])*y[0] + (-x[0]*x[1]*x[1] + 5*x[0]*x[1] + 4*x[1])*(1-y[0]) + 8*x[0]*y[0]*(-1) ) - (dualNeq[0]*(-1) + dualNeq[1]*(0) + dualNeq[2]*(0) + dualNeq[3]*(-1) + dualNeq[4]*(1));
+
+    return 1;						
+}
+
+inline int funcCasoTesteSimplexTableauKKT(double x[], double y[], double tableau[]){  //grad(h(x,y)) \lambda = grad(f(x,y))  MAX
+	tableau[0]=-1;
+	tableau[1]=-1;
+	tableau[2]=1;
+	tableau[3]=0;
+	tableau[4]=0;
+	tableau[5]=(x[0]*x[0]*x[1]*x[1] + 8*x[1]*x[1]*x[1] - 14*x[0]*x[0] - 5*x[1])*y[1] + (-x[0]*x[1]*x[1] + 5*x[0]*x[1] + 4*x[1])*y[1]*(-1) + 8*x[0]*(1-y[1]);
+	
+	tableau[6]=-1;
+	tableau[7]=0;
+	tableau[8]=0;
+	tableau[9]=-1;
+	tableau[10]=1;
+	tableau[11]=(x[0]*x[0]*x[1]*x[1] + 8*x[1]*x[1]*x[1] - 14*x[0]*x[0] - 5*x[1])*y[0] + (-x[0]*x[1]*x[1] + 5*x[0]*x[1] + 4*x[1])*(1-y[0]) + 8*x[0]*y[0]*(-1);
+
+	
+	return 1;
+}
+
+
+
+inline int funcCasoTesteLemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){//(l2) - (Q  A^T)(y) = (c)
+      matrixQ[0]=2;							//(f)  - (-A  0 )(l1)= (-b)
+      matrixQ[1]=0;
+      matrixQ[2]=0;
+      matrixQ[3]=0;
+      matrixQ[4]=0;
+      
+      matrixQ[5]=0;
+      matrixQ[6]=4;
+      matrixQ[7]=0;
+      matrixQ[8]=0;
+      matrixQ[9]=0;
+     
+      matrixQ[10]=0;
+      matrixQ[11]=0;
+      matrixQ[12]=4;
+      matrixQ[13]=0;
+      matrixQ[14]=0;
+     
+      matrixQ[15]=0;
+      matrixQ[16]=0;
+      matrixQ[17]=0;
+      matrixQ[18]=6;
+      matrixQ[19]=0;
+     
+      matrixQ[20]=0;
+      matrixQ[21]=0;
+      matrixQ[22]=0;
+      matrixQ[23]=0;
+      matrixQ[24]=4;
+     
+      
+      
+      matrixA[0]=1;
+      matrixA[1]=1;
+      matrixA[2]=0;
+      matrixA[3]=0;
+      matrixA[4]=0;
+      
+      matrixA[5]=0;
+      matrixA[6]=1;
+      matrixA[7]=1;
+      matrixA[8]=0;
+      matrixA[9]=0;
+
+      matrixA[10]=0;
+      matrixA[11]=0;
+      matrixA[12]=0;
+      matrixA[13]=1;
+      matrixA[14]=1;
+      
+      
+   
+      matrixCB[0]=-(20);  
+      matrixCB[1]=-(40-x[0]);
+      matrixCB[2]=-(50-x[1]);
+      matrixCB[3]=-(30);
+      matrixCB[4]=-(20-x[4]);
+      
+      matrixCB[5]=15;
+      matrixCB[6]=16;
+      matrixCB[7]=10;
+      
+      
+      
+      return 1;
+}
+
+
+const double boundCasoTeste[20]={0,50,0,50,0,50,0,50,0,50,0,20,0,20,0,20,0,20,0,20};  //Bounds x, y
+
+/* --------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+const FunctionOthers listFunctionOthers[DEFINEfunctionListSizeOthers]={{2,2,0,0,0,4,boundO1,funcO1UP,funcO1LW,funcO1CTREQUP,funcO1CTRNEQUP, funcO1CTREQLW,funcO1CTRNEQLW,funcO1CTKKT,funcO1SimplexTableauKKT,funcO1LemkeMatrix,-8.92,"funcO1"},
+					           {2,2,0,0,0,4,boundO2,funcO2UP,funcO2LW,funcO2CTREQUP,funcO2CTRNEQUP, funcO2CTREQLW,funcO2CTRNEQLW,funcO2CTKKT,funcO2SimplexTableauKKT,funcO2LemkeMatrix,-7.56,"funcO2"},
+					           {2,2,0,0,0,4,boundO3,funcO3UP,funcO3LW,funcO3CTREQUP,funcO3CTRNEQUP, funcO3CTREQLW,funcO3CTRNEQLW,funcO3CTKKT,funcO3SimplexTableauKKT,funcO3LemkeMatrix,-12,"funcO3"},
+					           {2,2,0,0,0,4,boundO4,funcO4UP,funcO4LW,funcO4CTREQUP,funcO4CTRNEQUP, funcO4CTREQLW,funcO4CTRNEQLW,funcO4CTKKT,funcO4SimplexTableauKKT,funcO4LemkeMatrix,-3.6,"funcO4"},
+					           {2,2,0,0,0,4,boundO5,funcO5UP,funcO5LW,funcO5CTREQUP,funcO5CTRNEQUP, funcO5CTREQLW,funcO5CTRNEQLW,funcO5CTKKT,funcO5SimplexTableauKKT,funcO5LemkeMatrix,-3.92,"funcO5"},
+					           {1,2,0,0,0,4,boundO6,funcO6UP,funcO6LW,funcO6CTREQUP,funcO6CTRNEQUP, funcO6CTREQLW,funcO6CTRNEQLW,funcO6CTKKT,funcO6SimplexTableauKKT,funcO6LemkeMatrix,0.5,"funcO6"},
+					           {1,2,0,0,0,4,boundO7,funcO7UP,funcO7LW,funcO7CTREQUP,funcO7CTRNEQUP, funcO7CTREQLW,funcO7CTRNEQLW,funcO7CTKKT,funcO7SimplexTableauKKT,funcO7LemkeMatrix,0.5,"funcO7"},
+					           {1,2,0,0,0,4,boundO8,funcO8UP,funcO8LW,funcO8CTREQUP,funcO8CTRNEQUP, funcO8CTREQLW,funcO8CTRNEQLW,funcO8CTKKT,funcO8SimplexTableauKKT,funcO8LemkeMatrix,1.859,"funcO8"},
+					           {1,2,0,0,0,5,boundO9,funcO9UP,funcO9LW,funcO9CTREQUP,funcO9CTRNEQUP, funcO9CTREQLW,funcO9CTRNEQLW,funcO9CTKKT,funcO9SimplexTableauKKT,funcO9LemkeMatrix,0.8485,"funcO9"},
+					           {1,2,0,0,0,4,boundO10,funcO10UP,funcO10LW,funcO10CTREQUP,funcO10CTRNEQUP, funcO10CTREQLW,funcO10CTRNEQLW,funcO10CTKKT,funcO10SimplexTableauKKT,funcO10LemkeMatrix,0.8975,"funcO10"},
+					           {1,2,0,0,0,5,boundO11,funcO11UP,funcO11LW,funcO11CTREQUP,funcO11CTRNEQUP, funcO11CTREQLW,funcO11CTRNEQLW,funcO11CTKKT,funcO11SimplexTableauKKT,funcO11LemkeMatrix,1.5629,"funcO11"},
+					           {1,2,0,0,0,7,boundO12,funcO12UP,funcO12LW,funcO12CTREQUP,funcO12CTRNEQUP, funcO12CTREQLW,funcO12CTRNEQLW,funcO12CTKKT,funcO12SimplexTableauKKT,funcO12LemkeMatrix,-1.6509,"funcO12"},
+					           {2,2,0,6,0,4,boundO13,funcO13UP,funcO13LW,funcO13CTREQUP,funcO13CTRNEQUP, funcO13CTREQLW,funcO13CTRNEQLW,funcO13CTKKT,funcO13SimplexTableauKKT,funcO13LemkeMatrix,231.25,"funcO13"},
+					           {2,3,0,3,0,4,boundO14,funcO14UP,funcO14LW,funcO14CTREQUP,funcO14CTRNEQUP, funcO14CTREQLW,funcO14CTRNEQLW,funcO14CTKKT,funcO14SimplexTableauKKT,funcO14LemkeMatrix,-1e10,"funcO14"}, //Função com problema na FO UP
+					           {1,1,0,0,0,1,boundO15,funcO15UP,funcO15LW,funcO15CTREQUP,funcO15CTRNEQUP, funcO15CTREQLW,funcO15CTRNEQLW,funcO15CTKKT,funcO15SimplexTableauKKT,funcO15LemkeMatrix,-1e10,"funcO15"}, //Função estranha
+					           {2,2,0,3,0,4,boundO16,funcO16UP,funcO16LW,funcO16CTREQUP,funcO16CTRNEQUP, funcO16CTREQLW,funcO16CTRNEQLW,funcO16CTKKT,funcO16SimplexTableauKKT,funcO16LemkeMatrix,0,"funcO16"},
+					           {2,2,0,1,0,10,boundO17,funcO17UP,funcO17LW,funcO17CTREQUP,funcO17CTRNEQUP, funcO17CTREQLW,funcO17CTRNEQLW,funcO17CTKKT,funcO17SimplexTableauKKT,funcO17LemkeMatrix,0,"funcO17"},
+					           {1,2,0,2,0,5,boundO18,funcO18UP,funcO18LW,funcO18CTREQUP,funcO18CTRNEQUP, funcO18CTREQLW,funcO18CTRNEQLW,funcO18CTKKT,funcO18SimplexTableauKKT,funcO18LemkeMatrix,-13,"funcO18"},
+					           {1,1,0,2,0,3,boundO19,funcO19UP,funcO19LW,funcO19CTREQUP,funcO19CTRNEQUP, funcO19CTREQLW,funcO19CTRNEQLW,funcO19CTKKT,funcO19SimplexTableauKKT,funcO19LemkeMatrix,5,"funcO19"},
+					           {1,1,0,5,0,0,boundO20,funcO20UP,funcO20LW,funcO20CTREQUP,funcO20CTRNEQUP, funcO20CTREQLW,funcO20CTRNEQLW,funcO20CTKKT,funcO20SimplexTableauKKT,funcO20LemkeMatrix,9,"funcO20"},
+					           {2,2,0,4,0,5,boundO21,funcO21UP,funcO21LW,funcO21CTREQUP,funcO21CTRNEQUP, funcO21CTREQLW,funcO21CTRNEQLW,funcO21CTKKT,funcO21SimplexTableauKKT,funcO21LemkeMatrix,-297.584,"funcO21"},
+						   {5,5,0,13,0,3,boundCasoTeste,funcCasoTesteUP,funcCasoTesteLW,funcCasoTesteCTREQUP,funcCasoTesteCTRNEQUP, funcCasoTesteCTREQLW,funcCasoTesteCTRNEQLW,funcCasoTesteCTKKT,funcCasoTesteSimplexTableauKKT,funcCasoTesteLemkeMatrix,-1684.10,"funcCasoTeste"}
 						  
 };
 

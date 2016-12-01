@@ -26,7 +26,7 @@ instanceDir <- "./Instances"
 
 ## A file containing a list of initial candidates. 
 ## If empty or NULL, do not use a file.
-#candidatesFile <- "./candidates"
+candidatesFile <- "./candidates"
 
 ## The script called for each candidate that launches the program to be tuned. 
 ## See templates/hook-run.tmpl

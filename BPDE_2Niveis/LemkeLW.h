@@ -10,6 +10,7 @@ class LemkeLW: public SolutionDecoder{
 	int initInstance(InputFunction *function);
 	int decodifySolution(Solution *sol);
 	int getYLemke(double x[], double y[], double *opt);
+	static int pivotNumber;
 };
 
 #endif

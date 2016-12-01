@@ -1,11 +1,19 @@
 maxCalls=6000
+#seedList=("1231832128283" "88391299319231" "9329139192312" "8413274712441" "76413264126423" "84813494120842184" "7735732757357235" "3232482498239842948" "949194194184" "852385825823852")
+seedList=("1231832128283" "88391299319231" "9329139192312" "8413274712441" "76413264126423" "84813494120842184" "7735732757357235" "3232482498239842948" "949194194184" "852385825823852"
+	  "61916870" "86321457" "71513820" "57247171" "79298826" "65171585" "88978491" "53995951" "14491994" "45772130"
+	  "83878657" "77443817" "74436009" "73574119" "56956255" "38353436" "50982028" "10657870" "26790302" "69187650"
+	  "77737987" "91008404" "54460727" "95977909" "38984870" "79448612" "98683459" "19064359" "67674207" "74302367"
+	  "18882195" "74092567" "55209528" "71019602" "29148835" "91381318" "40121486" "30065631" "68463641" "20561379")
 
-    for F in {"funcO6","funcO7","funcO8","funcO9","funcO10","funcO11","funcO1","funcO2","funcO3","funcO4","funcO5","funcJ2","funcJ7","funcB3","funcJ14","funcJ1","funcJ9","funcO16","funcO12","funcO13","funcJ6","funcJ3","funcA7","funcB7","funcB8","funcB9","funcJ15","funcJ18","funcO18","funcO19","funcO20","funcO21"}
+
+    for F in {"funcJ2","funcJ4","funcJ5","funcJ6","funcJ7","funcJ9","funcJ14","funcJ16","funcA4","funcA7","funcA8","funcA9","funcB3","funcB7","funcB9","funcO5","funcO9","funcO11","funcO21"}
     do
     	echo $F >> ${1}-${3}.out
-	for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+	for seed in ${seedList[@]}
 	do
-	    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F >> ${1}-${3}.out
+	    echo Seed: $seed >> LemkeInfo/${1}-${3}_$F.out
+	    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F >> ${1}-${3}.out 2>> LemkeInfo/${1}-${3}_$F.out
 	    echo >> ${1}-${3}.out
 	done
     done
@@ -13,12 +21,14 @@ maxCalls=6000
 #    for F in {"funcSMD6"}
     F="funcSMD6"
   #  do
-	for size in {"3 1 2 2","6 2 4 4","9 3 6 6"}#,"12 4 8 8","15 5 10 10","18 6 12 12"}
+	for size in {"3 1 2 2","6 2 4 4","9 3 6 6"}
+	#,"12 4 8 8","15 5 10 10","18 6 12 12"}
 	do
     		echo $F >> ${1}-${3}_SMD.out
-		for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+		for seed in ${seedList[@]}
 		do
-		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out
+		    echo Seed: $seed >> LemkeInfo/${1}-${3}_$F"($size)".out
+		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out 2>> LemkeInfo/${1}-${3}_$F"($size)".out
 		    echo >> ${1}-${3}_SMD.out
 		done
 	done
@@ -28,26 +38,33 @@ maxCalls=6000
 
     for F in {"funcSMD1MOD","funcSMD2MOD","funcSMD3MOD","funcSMD4MOD","funcSMD5MOD"}
     do
-	for size in {"3 3 2 0","6 6 4 0","9 9 6 0"}#,"12 12 8 0","15 15 10 0","18 18 12 0"}
+	for size in {"3 3 2 0","6 6 4 0","9 9 6 0"}
+	#,"12 12 8 0","15 15 10 0","18 18 12 0"}
 	do
     		echo $F >> ${1}-${3}_SMD.out
-		for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+		for seed in ${seedList[@]}
 		do
-		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out
+		    echo Seed: $seed >> LemkeInfo/${1}-${3}_$F"($size)".out
+		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out 2>> LemkeInfo/${1}-${3}_$F"($size)".out
 		    echo >> ${1}-${3}_SMD.out
 		done
 	done
     done
 
-   for F in {"funcSMDNew1","funcSMDNew2","funcSMDNew3"}
+   for F in {"funcSMDNew1","funcSMDNew2","funcSMDNew3","funcSMDNew4"}
     do
 	for size in {"0 0 5 0","0 0 10 0","0 0 15 0"}
 	do
     		echo $F >> ${1}-${3}_SMD.out
-		for seed in {1231832128283,88391299319231,9329139192312,8413274712441,76413264126423,84813494120842184,7735732757357235,3232482498239842948,949194194184,852385825823852}
+		for seed in ${seedList[@]}
 		do
-		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out
+		    echo Seed: $seed >> LemkeInfo/${1}-${3}_$F"($size)".out
+		    ./${1}  ${2} --seed $seed --maxUPCalls $maxCalls -i $F --dim $size >> ${1}-${3}_SMD.out 2>> LemkeInfo/${1}-${3}_$F"($size)".out
 		    echo >> ${1}-${3}_SMD.out
 		done
 	done
     done
+
+    
+    
+ 

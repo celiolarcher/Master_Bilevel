@@ -1,0 +1,30 @@
+#./scriptTestes DEB+LEMKE  "--populationImprov 15 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.5 --crossOptImprov 2"  C1
+#./scriptTestes DEB+LEMKE  "--populationImprov 15 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.5 --crossOptImprov 2"  C2
+#./scriptTestes DEB+LEMKE  "--populationImprov 16 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.5 --crossOptImprov 2"  C3
+#./scriptTestes DEB+LEMKE  "--populationImprov 20 --mutImprov1 0.6 --mutOptImprov 4 --crossRateImprov 0.4 --crossOptImprov 2"  C4
+#./scriptTestes DEB+LEMKE_SimFilterFactorV2  "--populationImprov 20 --mutImprov1 0.6 --mutImprov2 0.1 --mutBest1 0.6 --mutBest2 0.7 --mutBestSize 1 --mutOptBest 4 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 5"  C5
+
+#./scriptTestes DEB+LEMKE_SimFilterFactorRandV2_BestSearch  "--populationImprov 20 --mutImprov1 0.6 --mutImprov2 0.4 --mutBest1 0.8 --mutBest2 0.4 --mutBestSize 1 --mutOptBest 4 --mutOptImprov 1 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 4"  C6
+
+#./scriptTestes DEB+LEMKE_SimFilterFactorRandV2  "--populationImprov 20 --mutImprov1 0.7 --mutImprov2 0.3 --mutOptImprov 4 --crossRateImprov 0.7 --crossOptImprov 2 --factorExpandPopInit 4"  C5
+
+
+
+
+
+#./scriptTestes Teste  "--populationImprov 27 --mutImprov1 0.8 --mutOptImprov 4 --crossRateImprov 0.7 --crossOptImprov 2 --factorExpandPopInit 1"  C6
+
+
+#./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 1"  C1
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 2"  C2
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 4"  C3
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 8"  C4
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 10"  C5
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 12"  C6
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 15"  C7
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 20"  C8
+./scriptTestes DEB+LEMKE_SimFilterFactor  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2 --factorExpandPopInit 6"  C9
+
+
+
+

@@ -21,6 +21,7 @@ typedef struct functionPrototypeNewSMD{
     int (*funcSimplexTableauKKT)(double x[], double y[],double tableau[]);
     int (*funcLemkeMatrix)(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
     char name[15];
+    double optUPLiterature;
 } FunctionNewSMD;
 
 typedef struct functionPrototypeNewSMDIndex{
@@ -250,6 +251,7 @@ inline int setFuncSMD1NEWMOD(FunctionNewSMD **ret){
     func->boundsVar=boundSMD1NEWMOD;
     func->funcSimplexTableauKKT=funcSMD1NEWMODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD1NEWMODLemkeMatrix;
+    func->optUPLiterature=-1;
     
     (*ret)=func;
     
@@ -492,6 +494,7 @@ inline int setFuncSMD2NEWMOD(FunctionNewSMD **ret){
     func->boundsVar=boundSMD2NEWMOD;
     func->funcSimplexTableauKKT=funcSMD2NEWMODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD2NEWMODLemkeMatrix;
+    func->optUPLiterature=-2;
     
     (*ret)=func;
     
@@ -756,6 +759,8 @@ inline int setFuncSMD3NEWMOD(FunctionNewSMD **ret){
     func->funcSimplexTableauKKT=funcSMD3NEWMODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD3NEWMODLemkeMatrix;
     
+    func->optUPLiterature=-14;
+    
     (*ret)=func;
     
     return 1;
@@ -779,7 +784,7 @@ inline double funcSMD4NEWMODUP(double x[], double y[]){  //F(x,y)
   for(int i=0;i<inputQ;i++) F2+=0;
   
   double F3=0;
-  for(int i=0;i<inputR;i++) F3+=(y[i+inputQ]*y[i+inputQ] + x[i+inputP]*x[i+inputP])/inputR; 
+  for(int i=0;i<inputR;i++) F3+=(10*fabs(y[i+inputQ]) + fabs(x[i+inputP]))/inputR; 
   
   
   return F1+F2+F3;
@@ -831,14 +836,14 @@ inline int funcSMD4NEWMODCTRNEQLW(double x[], double y[], double constraintValue
     }
     
     for(int i=inputQ;i<inputQ+inputR;i++){
-        constraintValuesListReturn[2*i]=-y[i];
+        constraintValuesListReturn[2*i]=-y[i]-1;
         constraintValuesListReturn[2*i+1]=y[i]-1;
     }
      
      
      for(int i=0;i<inputR;i++){
-        constraintValuesListReturn[2*i+2*(inputQ+inputR)]=y[i+inputQ]-sin((x[i+inputP])*M_PI)+1.0/2.0;
-        constraintValuesListReturn[2*i+1+2*(inputQ+inputR)]=y[i+inputQ]-sin((x[i+inputP]-1.0/3.0)*M_PI)+1.0/2.0;
+        constraintValuesListReturn[2*i+2*(inputQ+inputR)]=y[i+inputQ]-sin(1.0/2.0*(x[i+inputP]-1)*M_PI);
+        constraintValuesListReturn[2*i+1+2*(inputQ+inputR)]=y[i+inputQ]-sin(2*(x[i+inputP]+1.0/2.0)*M_PI);
      }
     
     return 1;
@@ -947,13 +952,13 @@ inline int funcSMD4NEWMODLemkeMatrix(double x[], double matrixQ[], double matrix
           matrixCB[2*i+inputQ+inputR +1]=10; 
       }
       for(int i=inputQ;i<(inputQ+inputR);i++){           
-          matrixCB[2*i+inputQ+inputR]=0; 
+          matrixCB[2*i+inputQ+inputR]=1; 
           matrixCB[2*i+inputQ+inputR +1]=1;
       }
       
       for(int i=0;i<inputR;i++){
-	matrixCB[2*(inputQ+inputR)+inputQ+inputR+2*i]=-(-sin((x[i+inputP])*M_PI)+1.0/2.0);
-	matrixCB[2*(inputQ+inputR)+inputQ+inputR+2*i+1]=-(-sin((x[i+inputP]-1.0/3.0)*M_PI)+1.0/2.0);
+	matrixCB[2*(inputQ+inputR)+inputQ+inputR+2*i]=-(-sin(1.0/2.0*(x[i+inputP]-1)*M_PI));
+	matrixCB[2*(inputQ+inputR)+inputQ+inputR+2*i+1]=-(-sin(2*(x[i+inputP]+1.0/2.0)*M_PI));
       }
       
             
@@ -996,13 +1001,15 @@ inline int setFuncSMD4NEWMOD(FunctionNewSMD **ret){
     }
     
     for(int i=inputP+inputR+inputQ;i<func->dimensionUP+func->dimensionLW;i++){
-        boundSMD4NEWMOD[2*i]=0;
+        boundSMD4NEWMOD[2*i]=-1;
         boundSMD4NEWMOD[2*i+1]=1;
     }
 
     func->boundsVar=boundSMD4NEWMOD;
     func->funcSimplexTableauKKT=funcSMD4NEWMODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD4NEWMODLemkeMatrix;
+    
+    func->optUPLiterature=1;
     
     (*ret)=func;
     

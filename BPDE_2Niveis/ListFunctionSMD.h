@@ -22,6 +22,8 @@ typedef struct functionPrototypeSMD{
     int (*funcSimplexTableauKKT)(double x[], double y[],double tableau[]);
     int (*funcLemkeMatrix)(double x[], double matrixQ[], double matrixA[], double matrixCB[]);
     char name[15];
+    double optUPLiterature;
+    
 } FunctionSMD;
 
 typedef struct functionPrototypeSMDIndex{
@@ -546,6 +548,8 @@ inline int setFuncSMD6(FunctionSMD **ret){
     func->funcSimplexTableauKKT=funcSMD6SimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD6LemkeMatrix;
     
+    func->optUPLiterature=0;
+    
     (*ret)=func;
     
     return 1;
@@ -772,6 +776,8 @@ inline int setFuncSMD11(FunctionSMD **ret){
     //func->funcLemkeMatrix=funcSMD11LemkeMatrix;
     func->funcLemkeMatrix=NULL;
     
+    func->optUPLiterature=0;
+    
     (*ret)=func;
     
     return 1;
@@ -977,6 +983,8 @@ inline int setFuncSMD1MOD(FunctionSMD **ret){
     func->boundsVar=boundSMD1MOD;
     func->funcSimplexTableauKKT=funcSMD1MODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD1MODLemkeMatrix;
+    
+    func->optUPLiterature=0;
     
     (*ret)=func;
     
@@ -1193,6 +1201,8 @@ inline int setFuncSMD2MOD(FunctionSMD **ret){
     func->funcSimplexTableauKKT=funcSMD2MODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD2MODLemkeMatrix;
     
+    func->optUPLiterature=0;
+    
     (*ret)=func;
     
     return 1;
@@ -1406,6 +1416,8 @@ inline int setFuncSMD3MOD(FunctionSMD **ret){
     func->boundsVar=boundSMD3MOD;
     func->funcSimplexTableauKKT=funcSMD3MODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD3MODLemkeMatrix;
+    
+    func->optUPLiterature=0;
     
     (*ret)=func;
     
@@ -1622,6 +1634,8 @@ inline int setFuncSMD4MOD(FunctionSMD **ret){
     func->boundsVar=boundSMD4MOD;
     func->funcSimplexTableauKKT=funcSMD4MODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD4MODLemkeMatrix;
+    
+    func->optUPLiterature=0;
     
     (*ret)=func;
     
@@ -1875,6 +1889,8 @@ inline int setFuncSMD5MOD(FunctionSMD **ret){
     func->boundsVar=boundSMD5MOD;
     func->funcSimplexTableauKKT=funcSMD5MODSimplexTableauKKT;
     func->funcLemkeMatrix=funcSMD5MODLemkeMatrix;
+    
+    func->optUPLiterature=0;
     
     (*ret)=func;
     

@@ -11,6 +11,8 @@ extern double TOL_EQ_CONST;
 extern double TOL_NEQ_CONST;
 
 extern bool InfeasibleAvaliation;
+    int LemkeLW::pivotNumber=0;
+
 
     int LemkeLW::initInstance(InputFunction *function){
 	this->function=function;
@@ -127,7 +129,9 @@ extern bool InfeasibleAvaliation;
 #include <iomanip>      // std::setprecision
 using namespace std;
      int LemkeLW::getYLemke(double x[], double y[], double *opt){
-       		
+		int pivotOp=0;
+       
+       
 		int countNegativeVar=0;
 		for(int i=0;i<function->getDimensionLW();i++){
 		    if(function->bounds[2*i+2*function->getDimensionUP()]<0)countNegativeVar++;
@@ -378,8 +382,9 @@ using namespace std;
 		
 		
 		while(loop++){
-		  
-		        outBase=0;
+			pivotOp++;
+		        
+			outBase=0;
 		        for(int i=0;i<sizeLine;i++){
 			if(matrix[sizeCol*i+inBase]>TOL_LEQ_CONST && (matrix[sizeCol*outBase+inBase]<TOL_LEQ_CONST || matrix[sizeCol*i+sizeCol-1]/matrix[sizeCol*i+inBase]<=matrix[sizeCol*outBase+sizeCol-1]/matrix[sizeCol*outBase+inBase])){
 			    if(matrix[sizeCol*outBase+inBase]<TOL_LEQ_CONST || matrix[sizeCol*i+sizeCol-1]/matrix[sizeCol*i+inBase]+TOL_LEQ_CONST<matrix[sizeCol*outBase+sizeCol-1]/matrix[sizeCol*outBase+inBase] || baseVector[i]==2*(function->getNEQConstraintNumberLW()+function->getDimensionLW()+countNegativeVar))
@@ -469,6 +474,13 @@ using namespace std;
 	  cout<<"y:|"<<y[0]<<"|\n";
 	  for(int i=1;i<function->getDimensionLW();i++)cout<<"  |"<<y[i]<<"|\n";
 	*/
+	  
+	  clog<<pivotOp<<"\n";
+	  
+//	  cout<<pivotOp<<"\t";
+	  
+	  pivotNumber+=pivotOp;
+
 	  return 1;
      }
 
