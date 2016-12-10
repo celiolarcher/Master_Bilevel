@@ -91,6 +91,9 @@ class DifferentialEvolution{
       
       public: int decodifyPopulation();
       
+      public: int calcVariance(double variance[]);
+
+      
       
       public: int printPopulation();
 

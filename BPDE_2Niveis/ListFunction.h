@@ -805,8 +805,8 @@ inline int funcA9CTRNEQLW(double x[], double y[], double constraintValuesListRet
   }
 
   for(int i=0;i<6;i++){
-	constraintValuesListReturn[2*i+2]=-y[i];
-	constraintValuesListReturn[2*i+3]=y[i]-10;
+	constraintValuesListReturn[2*i+7]=-y[i];
+	constraintValuesListReturn[2*i+8]=y[i]-10;
   }
 
   return 1;

@@ -12,6 +12,9 @@ class DELowerLevel: public SolutionDecoder{
 	 DifferentialEvolution *DELW;
   
     public:
+	int DEmiss;
+	long long int DEsolution;
+	int DECall;
 	int initInstance(InputFunction *function);
 	int decodifySolution(Solution *sol);
 };

@@ -2743,6 +2743,18 @@ using namespace std;
       int DifferentialEvolution::decodifyPopulation(){
 	  for(int i=0;i<sizePopulation;i++) decoder->decodifySolution(Population[i]);
 	  decoder->decodifySolution(best);
+	  
+	  penalty->updatePenalty(Population,NULL,sizePopulation,0,decoder);
+	  for(int i=0;i<sizePopulation;i++){
+		  //cout<<*Population[i];
+	      if((best==NULL || penalty->compareSolutions(Population[i],best,decoder))){
+		  if(best) delete best;
+		  best=Population[i]->clone();
+		  UPLevelCallsBest=decoder->function->getUPLevelCalls();
+		  LWLevelSimplexCallsBest=decoder->function->getLWLevelSimplexCalls();
+	      }
+	  }
+	  
 	  return 1;
       }
 
@@ -2765,3 +2777,42 @@ using namespace std;
           
           return 1;
       }
+      
+      int DifferentialEvolution::calcVariance(double variance[]){
+	  double xAvg[decoder->editSize];
+	  double xAvgSquare[decoder->editSize];
+	  
+	  
+	  for(int i=0;i<decoder->editSize;i++){
+	      xAvg[i]=0;
+	      xAvgSquare[i]=0;
+	      variance[i]=0;
+	  }
+	  
+
+          for(int i=0;i<sizePopulation;i++){
+	      for(int j=decoder->editBegin;j<decoder->editBegin+decoder->editSize;j++){
+		  xAvg[j-decoder->editBegin]+=Population[i]->vectorCharacters[j];
+		  xAvgSquare[j-decoder->editBegin]+=(Population[i]->vectorCharacters[j]*Population[i]->vectorCharacters[j]);
+	      }
+	  }        
+	  /*
+	  for(int i=0;i<sizePopulation;i++){
+	      for(int j=decoder->editBegin;j<decoder->editBegin+decoder->editSize;j++){
+		    variance[j-decoder->editBegin]+=(Population[i]->vectorCharacters[j]-xAvg[j-decoder->editBegin]/sizePopulation)*(Population[i]->vectorCharacters[j]-xAvg[j-decoder->editBegin]/sizePopulation);
+	      }
+	  } */      
+	  
+	  for(int i=0;i<decoder->editSize;i++){
+	  //    cout<<variance[i]/sizePopulation<<"\t";
+	  //    cout<<xAvg[i]<<"\t"<<xAvgSquare[i]/decoder->editSize<<"\t";
+	      variance[i]=((xAvgSquare[i])-(xAvg[i])*(xAvg[i])/sizePopulation)/sizePopulation;
+	  //    cout<<variance[i]<<"\n";
+	  }
+	 // cout<<"\n";
+	  
+
+          
+          return 1;
+      }
+      

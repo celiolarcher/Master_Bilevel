@@ -29,4 +29,8 @@
 
 ./scriptTestes DEB+LEMKE_STOP10-2  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2"  C1
 
+#./scriptTestes DE+DE_Lider+SeguidorSTOP10e-2  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2"  C1
+
+#./scriptTestes DE+DE_Lider+LiderSTOP10e-2  "--populationImprov 20 --mutImprov1 0.7 --mutOptImprov 4 --crossRateImprov 0.6 --crossOptImprov 2"  C1
+
 

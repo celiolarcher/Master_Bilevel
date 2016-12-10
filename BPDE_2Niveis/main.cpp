@@ -236,7 +236,7 @@ int main(int argc, char *argv[]){
 	  //function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
 	}*/
 
-          //SolutionDecoder *decoder=new LemkeLW();
+         // SolutionDecoder *decoder=new LemkeLW();
           SolutionDecoder *decoder=new DELowerLevel();
           PenaltySolution *penalty=new DEBPenalty();
           decoder->initInstance(function);
@@ -265,10 +265,10 @@ int main(int argc, char *argv[]){
 //          DifferentialEvolution::decodifyPopulation();
 	          
           //for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){
-//	  for(in-t i=0;i<100000 && function->getUPLevelCalls()<options[2] && LemkeLW::pivotNumber<18e6;i++){
-	  
+	//  for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && LemkeLW::pivotNumber<18e6;i++){
+	  	  
 	  for(int i=0;i<1e5 && function->getUPLevelCalls()<10000 && (fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(fabs(function->getOptLeaderLitValue())+1))>1e-2 || !DE->best->feasible);i++){      
-	  cout<<DE->best->upLevelFunction<<"\t"<<fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(function->getOptLeaderLitValue()))<<"\n";	
+	  //cout<<DE->best->upLevelFunction<<"\t"<<fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(function->getOptLeaderLitValue()))<<"\n";	
 
 		double rd=fRand2(0,options[4]);	
 
@@ -389,8 +389,15 @@ int main(int argc, char *argv[]){
 	    
 
           if (DE->best!=NULL && DE->best->feasible){ 
-		    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<LemkeLW::pivotNumber<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
-		    //cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		    //DE+DE Impressão
+		 //   cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<((DELowerLevel*)decoder)->DEsolution<<"\t"<<((DELowerLevel*)decoder)->DECall<<"\t"<<((DELowerLevel*)decoder)->DEmiss<<"\t"<<LemkeLW::pivotNumber<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+	    
+		    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<((DELowerLevel*)decoder)->DEsolution<<"\t"<<((DELowerLevel*)decoder)->DECall<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		
+	    
+		    //DE+Lemke Impressão
+		//    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<LemkeLW::pivotNumber<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		    
 		    
 		    cout<<"\t(";
 		    for(int j=0;j<DE->best->sizeVec-1;j++)

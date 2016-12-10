@@ -194,7 +194,7 @@
     
     
     int InputFunction::getLemkeMatrix(double x[], double matrixQ[], double matrixA[], double matrixCB[]){
-        //lwSimplexCalls++;  TESTE DE+DE
+        lwSimplexCalls++;  
         return (*lemkeMatrix)(x,matrixQ,matrixA,matrixCB);
     }
     
