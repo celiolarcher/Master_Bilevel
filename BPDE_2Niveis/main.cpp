@@ -236,7 +236,7 @@ int main(int argc, char *argv[]){
 	  //function=new InputFunction(file,dim[0],dim[1],dim[2],dim[3]);
 	}*/
 
-         // SolutionDecoder *decoder=new LemkeLW();
+          //SolutionDecoder *decoder=new LemkeLW();
           SolutionDecoder *decoder=new DELowerLevel();
           PenaltySolution *penalty=new DEBPenalty();
           decoder->initInstance(function);
@@ -265,10 +265,19 @@ int main(int argc, char *argv[]){
 //          DifferentialEvolution::decodifyPopulation();
 	          
           //for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && function->getLWLevelSimplexCalls()<18e6;i++){
-	//  for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && LemkeLW::pivotNumber<18e6;i++){
+	  
+	  double varianceInit[decoder->editSize];
+	  DE->calcVariance(varianceInit);
+	  
+	//  Solution *best=DE->best->clone();
+	  
+//	  for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] && LemkeLW::pivotNumber<18e6;i++){
+   	  for(int i=0;i<100000 && function->getUPLevelCalls()<options[2] & ((DELowerLevel*)decoder)->DEsolution<1e9;i++){
+
 	  	  
-	  for(int i=0;i<1e5 && function->getUPLevelCalls()<10000 && (fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(fabs(function->getOptLeaderLitValue())+1))>1e-2 || !DE->best->feasible);i++){      
+	  //for(int i=0;i<1e5 && function->getUPLevelCalls()<10000 && (fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(fabs(function->getOptLeaderLitValue())+1))>1e-2 || !DE->best->feasible);i++){      
 	  //cout<<DE->best->upLevelFunction<<"\t"<<fabs((DE->best->upLevelFunction-function->getOptLeaderLitValue())/(function->getOptLeaderLitValue()))<<"\n";	
+	 //   cout<<i<<"\t"<<function->getUPLevelCalls()<<"\n";
 
 		double rd=fRand2(0,options[4]);	
 
@@ -359,6 +368,33 @@ int main(int argc, char *argv[]){
 		    DE->selectPopulation(p);
 				  
 		}
+		
+		/*
+		
+		double varianceG[decoder->editSize];
+		DE->calcVariance(varianceG);
+		
+		double alpha=0;
+		for(int j=0;j<decoder->editSize;j++){
+		    alpha+=(varianceG[j]/varianceInit[j]);
+		}*/
+		/*
+		if(alpha<1e-5){
+		    Solution *bestBK=DE->best->clone();
+		    DE->resetPopulation();
+		    
+		    if(penalty->compareSolutions(bestBK,DE->best,decoder)){
+		      delete DE->best;
+		      DE->best=bestBK;
+		    }
+		    /*
+		    if(penalty->compareSolutions(bestBK,best,decoder)){
+		      delete best;
+		      best=bestBK;
+		    }
+		    */
+		//}
+		
 		/*
 		for(int p=options[1];p<options[1]+options[11];p++){
 		    DE->selectPopulationBestPath(p);
@@ -386,7 +422,7 @@ int main(int argc, char *argv[]){
 	    
 	
 
-	    
+	//  DE->best=best;
 
           if (DE->best!=NULL && DE->best->feasible){ 
 		    //DE+DE Impressão
@@ -396,7 +432,7 @@ int main(int argc, char *argv[]){
 		
 	    
 		    //DE+Lemke Impressão
-		//    cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<LemkeLW::pivotNumber<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
+		  //  cout<<DE->best->upLevelFunction<<"\t"<<DE->UPLevelCallsBest<<"\t"<<DE->LWLevelSimplexCallsBest<<"\t"<<LemkeLW::pivotNumber<<"\t"<<function->getLWLevelFunction(DE->best->vectorCharacters,DE->best->vectorCharacters+function->getDimensionUP());
 		    
 		    
 		    cout<<"\t(";

@@ -6,7 +6,7 @@ set title "Operações de Pivoteamento (Grupo Literatura)"
  #set ylabel "" 
 set xtics rotate
 plot "LitrPivot.csv" using 0:9:10:8:xticlabels(1) t "Operações Pivo" with yerrorbars
-replot "LitrPivot.csv" using 0:12:xticlabels(1) t "Restrições (Seguidor)" with lines 
+replot "LitrPivot.csv" using 0:12:xticlabels(1) t "Tamanho Matriz (Lemke)" with lines 
 set terminal png
 set output 'PivotLemkeLit.png'
 replot
@@ -19,7 +19,7 @@ set title "Operações de Pivoteamento (Grupo SMDquad)"
  set xlabel "Casos de Teste" 
 set xtics rotate
 plot "SMDPivot.csv" using 0:5:6:4:xticlabels(1) t "Operações Pivo" with yerrorbars
-replot "SMDPivot.csv" using 0:8:xticlabels(1) t "Dimensão (Líder/Seguidor)" with lines 
+replot "SMDPivot.csv" using 0:8:xticlabels(1) t "Tamanho Matriz (Lemke)" with lines 
 set terminal png
 set output 'PivotLemkeSMD.png'
 replot
@@ -30,12 +30,12 @@ reset
 set grid
 set xrange [0.95:12.1]
 set yrange [-0.3:95] 
-set title "Operações de Pivoteamento (Grupo RESTRquad)"
+set title "Operações de Pivoteamento (Grupo Cquad)"
  set xlabel "Casos de Teste" 
 set xtics rotate
-plot "RESTRPivot.csv" using 0:7:8:6:xticlabels(1) t "Operações Pivo" with yerrorbars
-replot "RESTRPivot.csv" using 0:10:xticlabels(1) t "Dimensão (Líder/Seguidor)" with lines
+plot "CquadPivot.csv" using 0:7:8:6:xticlabels(1) t "Operações Pivo" with yerrorbars
+replot "CquadPivot.csv" using 0:10:xticlabels(1) t "Tamanho Matriz (Lemke)" with lines
 set terminal png
-set output 'PivotLemkeRestr.png'
+set output 'PivotLemkeCquad.png'
 replot
 

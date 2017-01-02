@@ -1,0 +1,32 @@
+set style data lines
+set ylabel '{/Symbol r}({/Symbol t})'
+set xlabel '{/Symbol t}'
+set term postscript eps enhanced color
+set output 'perfProf.eps'
+set key right bottom
+set xrange [1:12.612288704999997]
+set yrange [0:1.01]
+plot 'out_DE+DE_perfProf.dat' u ($1):($2)  title 'DE+DE' lw 10 lt 0 , 'out_DE+LEMKE_perfProf.dat' u ($1):($2)  title 'DE+LEMKE' lw 10 lt 1 , 'out_R-DE+LEMKE_perfProf.dat' u ($1):($2)  title 'R-DE+LEMKE' lw 10 lt 2
+
+set style data lines
+set ylabel '{/Symbol r}({/Symbol t})'
+set xlabel '{/Symbol t}'
+set term postscript eps enhanced color
+set output 'perfProfTau2.eps'
+set key right bottom
+set xrange [1:2]
+set yrange [0:1.01]
+plot 'out_DE+DE_perfProf.dat' u ($1):($2)  title 'DE+DE' lw 10 lt 0 , 'out_DE+LEMKE_perfProf.dat' u ($1):($2)  title 'DE+LEMKE' lw 10 lt 1 , 'out_R-DE+LEMKE_perfProf.dat' u ($1):($2)  title 'R-DE+LEMKE' lw 10 lt 2
+
+set output 'perfProf_bar.eps'
+unset key
+set ylabel 'Area'
+set xlabel 'Algorithm'
+set autoscale
+unset logscale x
+set boxwidth 0.8
+set style fill solid border -1
+set xrange [1:7]
+set yrange [0.5:1.005]
+set xtics ('DE+DE' 2, 'DE+LEMKE' 4, 'R-DE+LEMKE' 6)
+plot 'out_perfProf.dat' usi (2):1 title 'DE+DE' w boxes lt 0, 'out_perfProf.dat' usi (4):2 title 'DE+LEMKE' w boxes lt 1, 'out_perfProf.dat' usi (6):3 title 'R-DE+LEMKE' w boxes lt 2
