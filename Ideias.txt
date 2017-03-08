@@ -1,1 +1,0 @@
-Verificar para resolução das KKT "chutar" restrições como ativas.

@@ -1,0 +1,11 @@
+The study of bilevel optimization problems arouses particular interest 
+given their ability to represent hierarchical decision structures, but the challenges in their resolution require the development of appropriate computational techniques. This work aims at the solution of a class of bilevel problems where the objective function in the follower agent is linear or quadratic in the follower variables and linear constraints may be present.
+
+  
+
+With the use of the Karush-Kuhn-Tucker conditions, it was verified the possibility of solving the follower level as a linear complementarity problem, giving rise to a nested approach.
+ In this approach, the follower response is obtained by Lemke's algorithm, while the leader level is treated with the differential evolution metaheuristic, in view of its good results and great generality.
+  
+  
+
+The proposed technique is submitted to a test-set using instances from the literature, as well as others, proposed in this work, with the intent of validating the use of Lemke's algorithm in the follower level, and study its computational performance.

@@ -1,0 +1,17 @@
+set grid
+set xrange [0.95:12.1]
+set yrange [-0.3:75] 
+set title "Pivot Operation (Cquad Instances)"
+ set xlabel "Instances" 
+ #set ylabel "" 
+#plot  "data" index 9 u 1:2 t "Best" with lines 
+#plot  "data" every :1 u 1:2 t "Best" with lines 
+#plot  "data" u 2 t "Best" with points
+set xtics rotate
+plot "CquadPivot.csv" using 0:7:8:6:xticlabels(1) t "Pivot Operation" with yerrorbars
+replot "CquadPivot.csv" using 0:2:xticlabels(1) t "Dimension (Leader/Follower)" with lines
+replot "CquadPivot.csv" using 0:3:xticlabels(1) t "Constraints (Leader)" with lines
+replot "CquadPivot.csv" using 0:5:xticlabels(1) t "Constraints (Follower)" with lines
+set terminal png
+set output 'CquadPivot.png'
+replot

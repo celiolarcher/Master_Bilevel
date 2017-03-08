@@ -1,0 +1,109 @@
+set grid
+set title "Convergência ao ótimo"
+ #set ylabel "" 
+set xtics rotate
+
+set key at 19.2,113
+set style fill   solid 1.00 border lt -1
+
+set xrange [0.5:18.8]
+set yrange [-0.1:101] 
+
+set style data histogram
+
+plot 'DExLEMKESeguidorLIT.csv' using 4:xticlabels(1) ti "DE+LEMKE", 'DExLEMKESeguidorLIT.csv' using 6 ti "DE+DE"
+
+
+set terminal png
+set output 'DExLemkeAcertoLit.png'
+replot
+
+
+reset
+
+set grid
+set title "Avaliações do Líder"
+ #set ylabel "" 
+set xtics rotate
+
+#set key at 19.2,113
+set style fill   solid 1.00 border lt -1
+
+set xrange [0.5:18.8]
+set yrange [-0.1:5500] 
+
+set style data histogram
+
+plot 'DExLEMKESeguidorLIT.csv' using 5:xticlabels(1) ti "DE+LEMKE", 'DExLEMKESeguidorLIT.csv' using 7 ti "DE+DE"
+
+
+set terminal png
+set output 'DExLemkeAvalUPLit.png'
+replot
+
+reset
+
+set grid
+set title "Execuções sem sucesso - DE"
+ #set ylabel "" 
+set xtics rotate
+
+#set key at 16,9000
+set style fill   solid 1.00 border lt -1
+
+set xrange [0.5:18.8]
+set yrange [-0.1:100] 
+
+set style data histogram
+
+plot 'DExLEMKESeguidorLIT.csv' using 2:xticlabels(1) ti "Falha (%)"
+
+
+set terminal png
+set output 'DExLemkeDEFalhaLit.png'
+replot
+
+
+reset
+
+set grid
+set title "Comparação Custo - DE x Lemke"
+ #set ylabel "" 
+set xtics rotate
+
+#set key at 16,9000
+set style fill   solid 1.00 border lt -1
+
+set xrange [0.5:18.8]
+set yrange [-0.1:280000] 
+
+set style data histogram
+
+plot 'DExLEMKESeguidorLIT.csv' using 3:xticlabels(1) ti "Soluções/OP Pivo"
+
+
+set terminal png
+set output 'DExLemkeCustoLit.png'
+replot
+
+reset
+
+set grid
+set title "Comparação Custo - DE x Lemke"
+ #set ylabel "" 
+set xtics rotate
+
+#set key at 16,9000
+set style fill   solid 1.00 border lt -1
+
+set xrange [0.5:18.8]
+set yrange [-0.1:5000] 
+
+set style data histogram
+
+plot 'DExLEMKESeguidorLIT.csv' using 3:xticlabels(1) ti "Soluções/OP Pivo"
+
+
+set terminal png
+set output 'DExLemkeCustoLit_5000.png'
+replot

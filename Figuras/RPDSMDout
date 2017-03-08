@@ -1,0 +1,44 @@
+set grid
+set title "Desempenho - Escaláveis SMD (RPD)"
+ #set ylabel "" 
+set xtics rotate
+
+set xrange [0.5:72.1]
+set yrange [-150:3100] 
+
+
+
+#plot "RPDSMD.csv" using (4*($0-1)+1):3:2:5 t "DE+LEMKE"  w errorbars, "RPDSMD.csv" using (4*($0-1)+2):7:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDSMD.csv" using (4*($0-1)+3):11:10:13 t "DE+DE" with errorbars pt 1
+
+plot "RPDSMD.csv" using (4*($0-1)+1):4:2:5 t "DE+LEMKE"  w errorbars, "RPDSMD.csv" using (4*($0-1)+2):8:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDSMD.csv" using (4*($0-1)+3):12:10:13 t "DE+DE" with errorbars pt 1  #MEDIANA
+
+#plot "RPD.csv" using 0:3:2:4:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPD.csv" using 0:6:5:7:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPD.csv" using 0:9:8:10:xticlabels(1) t "Operações Pivo" with yerrorbars
+
+
+
+set terminal png
+set output 'RPDSMD.png'
+replot
+
+
+
+set xrange [0.5:72.1]
+set yrange [-140:100] 
+
+
+
+#plot "RPDSMD.csv" using (4*($0-1)+1):3:2:5 t "DE+LEMKE"  w errorbars, "RPDSMD.csv" using (4*($0-1)+2):7:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDSMD.csv" using (4*($0-1)+3):11:10:13 t "DE+DE" with errorbars pt 1
+
+plot "RPDSMD.csv" using (4*($0-1)+1):4:2:5 t "DE+LEMKE"  w errorbars, "RPDSMD.csv" using (4*($0-1)+2):8:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDSMD.csv" using (4*($0-1)+3):12:10:13 t "DE+DE" with errorbars pt 1  #MEDIANA
+
+#plot "RPD.csv" using 0:3:2:4:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPD.csv" using 0:6:5:7:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPD.csv" using 0:9:8:10:xticlabels(1) t "Operações Pivo" with yerrorbars
+
+
+
+set terminal png
+set output 'RPDSMD_100.png'
+replot

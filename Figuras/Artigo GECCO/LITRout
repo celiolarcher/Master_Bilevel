@@ -1,0 +1,22 @@
+set grid
+set xrange [0.95:18.1]
+set yrange [-0.3:45] 
+set title "Pivot Operation (Literature Instances)"
+ set xlabel "Instances" 
+ #set ylabel "" 
+set xtics rotate
+plot "LitrPivot.csv" using 0:9:10:8:xticlabels(1) t "Pivot Operation" with yerrorbars
+replot "LitrPivot.csv" using 0:2:xticlabels(1) t "Dimension (Leader)" with lines 
+replot "LitrPivot.csv" using 0:3:xticlabels(1) t "Constraints (Leader)" with lines 
+set terminal png
+set output 'LitrPivotLider.png'
+replot
+
+
+plot "LitrPivot.csv" using 0:9:10:8:xticlabels(1) t "Pivot Operation" with yerrorbars
+replot "LitrPivot.csv" using 0:5:xticlabels(1) t "Dimension (Follower)" with lines
+replot "LitrPivot.csv" using 0:6:xticlabels(1) t "Constraints (Follower)" with lines
+set terminal png
+set output 'LitrPivotSeguidor.png'
+replot
+

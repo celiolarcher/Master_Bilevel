@@ -1,0 +1,11 @@
+O estudo do problema de otimização em dois níveis desperta particular interesse dada sua capacidade de representar estruturas hierárquicas de decisão, mas as dificuldades na sua resolução exigem o desenvolvimento de técnicas computacionais adequadas. Este trabalho tem como foco a solução de uma classe  de problemas em dois níveis onde a função objetivo do agente seguidor é linear ou quadrática nas variáveis do
+ seguidor e com restrições lineares. 
+  
+  
+
+Utilizando-se então as condições de Karush-Kuhn-Tucker, verificou-se a possibilidade de resolução do nível do seguidor como um problema de complementaridade linear, dando origem a uma abordagem aninhada. Nesta, a resposta do seguidor é obtida pelo algoritmo de Lemke, enquanto o nível do líder é tratado pela metaheurística evolução diferencial, tendo em vista os bons resultados desta e sua grande generalidade.
+  
+  
+
+A técnica proposta é submetida a um conjunto de testes utilizando instâncias da literatura bem como outras, propostas neste trabalho, com o objetivo de validar a utilização do algoritmo 
+de Lemke e estudar seu desempenho computacional.
