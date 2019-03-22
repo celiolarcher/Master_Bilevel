@@ -1,0 +1,50 @@
+set grid
+set title "Performance (RPD)"
+ #set ylabel "" 
+set xtics rotate
+
+set xrange [0.5:72.1]
+set yrange [-50:600] 
+
+
+
+#plot "RPDLIT.csv" using (4*($0-1)+1):3:2:5 t "DE+LEMKE"  w errorbars, "RPDLIT.csv" using (4*($0-1)+2):7:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDLIT.csv" using (4*($0-1)+3):11:10:13 t "DE+DE" with errorbars pt 1
+
+#plot "RPDLIT.csv" using (4*($0-1)+1):4:2:5 t "DE+LEMKE"  w errorbars, "RPDLIT.csv" using (4*($0-1)+2):8:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDLIT.csv" using (4*($0-1)+3):12:10:13 t "DE+DE" with errorbars pt 1  #MEDIANA
+
+plot "RPDLIT.csv" using (4*($0-1)+1):4:2:5:xticlabels(1) t "DE+LEMKE"  w errorbars lt rgb "red", "RPDLIT.csv" using (4*($0-1)+3):12:10:13 t "DE+DE" with errorbars pt 1 lt rgb "green" #MEDIANA
+
+
+#plot "RPDLIT.csv" using 0:3:2:4:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPDLIT.csv" using 0:6:5:7:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPDLIT.csv" using 0:9:8:10:xticlabels(1) t "Operações Pivo" with yerrorbars
+
+
+
+set terminal png
+set output 'RPDLIT.png'
+replot
+
+
+
+set xrange [0.5:72.1]
+set yrange [-50:60] 
+
+
+
+#plot "RPDLIT.csv" using (4*($0-1)+1):3:2:5 t "DE+LEMKE"  w errorbars, "RPDLIT.csv" using (4*($0-1)+2):7:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDLIT.csv" using (4*($0-1)+3):11:10:13 t "DE+DE" with errorbars pt 1
+
+#plot "RPDLIT.csv" using (4*($0-1)+1):4:2:5 t "DE+LEMKE"  w errorbars, "RPDLIT.csv" using (4*($0-1)+2):8:6:9:xticlabels(1) t "R-DE+LEMKE" w errorbars pt 1, "RPDLIT.csv" using (4*($0-1)+3):12:10:13 t "DE+DE" with errorbars pt 1  #MEDIANA
+
+plot "RPDLIT.csv" using (4*($0-1)+1):4:2:5:xticlabels(1) t "DE+LEMKE"  w errorbars, "RPDLIT.csv" using (4*($0-1)+3):12:10:13 t "DE+DE" with errorbars pt 1  #MEDIANA
+
+
+#plot "RPDLIT.csv" using 0:3:2:4:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPDLIT.csv" using 0:6:5:7:xticlabels(1) t "Operações Pivo" with yerrorbars
+#replot "RPDLIT.csv" using 0:9:8:10:xticlabels(1) t "Operações Pivo" with yerrorbars
+
+
+
+set terminal png
+set output 'RPDLIT_60.png'
+replot

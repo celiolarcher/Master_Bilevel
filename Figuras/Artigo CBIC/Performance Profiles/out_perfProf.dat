@@ -1,0 +1,21 @@
+set style data lines
+set ylabel '{/Symbol r}({/Symbol t})'
+set xlabel '{/Symbol t}'
+set term postscript eps enhanced color
+set output 'out_perfProf.dat.eps'
+set key right bottom
+set xrange [1:1.2863285907623039]
+set yrange [0:1.01]
+plot 'out_DE+LEMKE_out_perfProf.dat.dat' u ($1):($2)  title 'DE+LEMKE' lw 6 lt rgb "red", 'out_DE+DE_out_perfProf.dat.dat' u ($1):($2)  title 'DE+DE' lw 6 lt rgb "green"
+set output 'out_perfProf.dat_bar.eps'
+unset key
+set ylabel 'Area'
+set xlabel 'Algorithm'
+set autoscale
+unset logscale x
+set boxwidth 0.8
+set style fill solid border -1
+set xrange [1:5]
+set yrange [0.5:1.005]
+set xtics ('DE+DE' 2, 'DE+LEMKE' 4)
+plot 'out_out_perfProf.dat.dat' usi (4):2 title 'DE+LEMKE' w boxes lt rgb "red", 'out_out_perfProf.dat.dat' usi (2):1 title 'DE+DE' w boxes lt rgb "green"
