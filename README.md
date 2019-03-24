@@ -6,6 +6,6 @@
 
 
 
-# Tese de Metrado - A Evolução Diferencial e o Algoritmo de Lemke na Resolução de Problemas de Otimização em Dois Níveis
+# Tese de Mestrado - A Evolução Diferencial e o Algoritmo de Lemke na Resolução de Problemas de Otimização em Dois Níveis
 
 ### Repositório com todo código de minha tese de mestrado, texto da dissertação e artigo publicado no CBIC. 
